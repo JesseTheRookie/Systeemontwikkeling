@@ -1,0 +1,78 @@
+h1{
+    color: white;
+}
+h1 span{
+    color: green;
+}
+#mainHeader{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 500px;
+}
+#mainHeader section:nth-child(1){
+    background-color: purple;
+}
+#mainHeader section:nth-child(2){
+    background-color: black;
+}
+#artiesten{
+    height: 500px;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    background-color: purple;
+}
+#artiesten article h1{
+    text-align: center;
+    text-transform: capitalize;
+}
+#ticketOverzicht{
+    height: 1000px;
+    width: 100%;
+    background-color: purple;
+}
+#ticketOverzicht header{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-bottom: 90px;
+}
+#ticketOverzicht header section h1{
+    text-transform: capitalize;
+}
+#ticketOverzicht header section p{
+    color: green;
+}
+#ticketOverzicht section{
+    margin: 0 auto;
+}
+#ticketItems article{
+    display: grid;
+    grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
+    margin-top: 20px;
+}
+#ticketItems article p{
+    text-align: center;
+}
+#ticketItems article input[type=text]{
+    width: 50px;
+    height: 35px;
+    text-align: center;
+}
+#ticketItems article button{
+    margin-left: -48%;
+}
+.smallButton{
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid white;
+    width: 84px;
+    height: 35px;
+    background-color:rgba(0, 0, 0, 0);
+}
+.normalButton{
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid white;
+    width: 135px;
+    height: 42px;
+    background-color:rgba(0, 0, 0, 0);
+}
