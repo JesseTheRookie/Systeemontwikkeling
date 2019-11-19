@@ -1,34 +1,83 @@
-h1{
+h1, p{
     color: white;
 }
 h1 span{
-    color: green;
+    color: #2CD398;
 }
 #mainHeader{
     display: grid;
     grid-template-columns: 50% 50%;
     height: 500px;
 }
+#mainHeader section:nth-child(2) h1{
+    font-size: 100px;
+    text-transform: uppercase;
+    margin: 50px 0 0 5%;
+}
 #mainHeader section:nth-child(1){
-    background-color: purple;
+    background-color: #551A75;
+    background-image: url("../img/purplebb.png");
 }
 #mainHeader section:nth-child(2){
     background-color: black;
+    position: relative;
+    display: block;
+}
+#mainHeader section:nth-child(2) p{
+    font-size: 57px;
+    text-transform: capitalize;
+}
+.overlay{
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: 0;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.95);
+}
+#mainHeader section:nth-child(2) button{
+    margin: 150px 0 0 5%;
+    margin-left: 5%;
 }
 #artiesten{
     height: 500px;
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    background-color: purple;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%);  
 }
 #artiesten article h1{
     text-align: center;
     text-transform: capitalize;
+    font-size: 80px;
+    margin: 35px;
+}
+#artiesten article p{
+    font-size: 40px;
+    text-align: center;  
+    width: 60%;  
+    text-transform: capitalize;  
+    margin-left: 20%;
+    padding-top: 30px;
+}
+#artiesten article p span{
+    color:#2CD398;
+}
+#artiesten button{
+    margin: 80px 0 0 45%;
+}
+#allPerformers{
+    display: none;
+}
+#lineup{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
 }
 #ticketOverzicht{
     height: 1000px;
     width: 100%;
-    background-color: purple;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%); 
 }
 #ticketOverzicht header{
     display: grid;
@@ -37,9 +86,14 @@ h1 span{
 }
 #ticketOverzicht header section h1{
     text-transform: capitalize;
+    font-size: 60px;
+    margin-bottom: 10px;
 }
 #ticketOverzicht header section p{
-    color: green;
+    color: #2CD398;
+    font-size: 20px;
+    font-style: bold;
+    margin-bottom: 15px;
 }
 #ticketOverzicht section{
     margin: 0 auto;
@@ -48,6 +102,7 @@ h1 span{
     display: grid;
     grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
     margin-top: 20px;
+    margin-left: 10%;
 }
 #ticketItems article p{
     text-align: center;
@@ -59,6 +114,9 @@ h1 span{
 }
 #ticketItems article button{
     margin-left: -48%;
+}
+#ticketItems article div p span{
+    color: #2CD398;
 }
 .smallButton{
     text-transform: uppercase;
@@ -76,3 +134,17 @@ h1 span{
     height: 42px;
     background-color:rgba(0, 0, 0, 0);
 }
+.bigButton{
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid white;
+    width: 205px;
+    height: 50px;
+    background-color:rgba(0, 0, 0, 0);
+}
+button:hover{
+    border: 1px solid #2CD398;
+    color: #2CD398;
+    cursor: pointer;
+}
+
