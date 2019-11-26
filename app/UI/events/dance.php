@@ -1,8 +1,8 @@
 <?php
-    require APPROOT . '/views/inc/header.php';
+    require APPROOT . '/ui/inc/header.php';
 ?>
 <?php
-    require APPROOT . '/views/inc/navigation.php';
+    require APPROOT . '/ui/inc/navigation.php';
 ?>
 
     <div id="section-dance-header">
@@ -136,5 +136,33 @@
     </div>
 </div>
 <?php
-    require APPROOT . '/views/inc/footer.php';
+    require APPROOT . '/ui/inc/footer.php';
 ?>
+
+
+<style>
+.content-dance-header h3
+{
+    color: #ffffff;
+    font-size: 70px;
+    padding: 80px 0px 40px 0px;
+}
+#section-artists-dance h2
+{
+    font-size: 60px;
+    color: #ffffff;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0px 0px 0px;
+}
+#section-artists-dance > div
+{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0px 0px 100px 0px
+}
+</style>
