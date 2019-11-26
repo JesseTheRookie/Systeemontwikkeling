@@ -9,7 +9,7 @@
   define('APPROOT', dirname(dirname(__FILE__)));
 
   // URL Root
-  define('URLROOT', 'http://localhost/Systeemontwikkeling');
+  define('URLROOT', 'http://localhost/Systeemontwikkeling/Systeemontwikkeling');
 
   // Site Name
   define('SITENAME', 'Haarlem Festival');

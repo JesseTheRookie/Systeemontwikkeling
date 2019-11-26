@@ -1,13 +1,13 @@
 <?php
-class JazzTicketDAO{
+class DanceTicketDAO{
     private $db;
 
     public function __construct(){
       $this->db = new Database;
     }
 
-    public function getAllJazzTickets(){
-        $this->db->query("SELECT * FROM jazzticket");
+    public function getAllDanceTickets(){
+        $this->db->query("SELECT * FROM danceticket");
         return $this->db->resultSet();
     }
 }
