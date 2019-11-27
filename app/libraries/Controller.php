@@ -13,6 +13,15 @@
       return new $model();
     }
 
+        // Load DAL
+    public function dal($dal){
+      // Require dal file
+      require_once '../app/dal/' . $dal . '.php';
+
+      // Instatiate dal
+      return new $dal();
+    }
+
     // Load view
     public function ui($ui, $data = []){
       // Check for ui file

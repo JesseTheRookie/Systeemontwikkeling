@@ -24,12 +24,12 @@
         </li>
       </ul>
 
-      <a href=""
+      <a href="<?php echo URLROOT; ?>/pages/tickets"
          class="buttonStyle">
         Tickets
       </a>
 
-       <a href=""
+       <a href="<?php echo URLROOT; ?>/pages/about"
           class="buttonStyle">
         Program
       </a>
@@ -87,7 +87,7 @@
 
   <div class="content-events">
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/jazz">
         <img
             src="./img/frontpage-jazz.png"
             alt=""
@@ -106,7 +106,7 @@
     </div>
 
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/dance">
         <img
             src="./img/frontpage-dance.png"
             alt=""
@@ -125,7 +125,7 @@
     </div>
 
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/historic">
         <img
             src="./img/frontpage-historic.png"
             alt=""
@@ -144,7 +144,7 @@
     </div>
 
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/food">
         <img
             src="./img/frontpage-food.png"
             alt=""
@@ -163,7 +163,7 @@
     </div>
 
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/kids">
         <img
             src="./img/frontpage-kids.png"
             alt=""
