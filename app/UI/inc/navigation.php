@@ -81,8 +81,7 @@
               </li>
 
               <li>
-                <a href=""
-                   class="buttonStyle">
+                <a href="<?php echo URLROOT; ?>/users/login" class="buttonStyle">
                   Login
                 </a>
               </li>
