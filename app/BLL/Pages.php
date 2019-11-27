@@ -17,9 +17,11 @@
 
     public function dance(){
       $tickets = $this->danceDal->getAllDanceTickets();
+      $artistInfo = $this->danceDal->getArtistInfo($tickets);
       $data = [
         'title' => 'Dance Page',
-        'tickets' => $tickets
+        'tickets' => $tickets,
+        'artists' => $artistInfo
       ];
 
       $this->ui('events/dance', $data);
