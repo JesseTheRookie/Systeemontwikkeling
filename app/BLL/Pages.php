@@ -12,7 +12,6 @@
         'title' => 'Welcome',
         'posts' => $posts
       ];
-
       $this->ui('pages/index', $data);
     }
 
@@ -32,5 +31,30 @@
       ];
 
       $this->ui('pages/shoppingcart', $data);
+    }
+
+    //Pages created for "Information" section
+      public function rules(){
+      $data = [
+        'title' => 'Event Rules'
+      ];
+
+      $this->ui('information/rules', $data);
+    }
+
+    public function faq(){
+      $data = [
+        'title' => 'Event FAQ'
+      ];
+
+      $this->ui('information/faq', $data);
+    }
+
+      public function travel(){
+      $data = [
+        'title' => 'Event Travel'
+      ];
+
+      $this->ui('information/travel', $data);
     }
   }
