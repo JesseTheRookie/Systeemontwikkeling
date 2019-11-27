@@ -2,6 +2,7 @@
   class Pages extends Controller {
     public function __construct(){
       $this->postModel = $this->model('Post');
+      $this->danceDal = $this->dal('DanceTicketDao');
     }
 
     public function index(){
@@ -16,8 +17,10 @@
     }
 
     public function dance(){
+      $tickets = $this->danceDal->getAllDanceTickets();
       $data = [
-        'title' => 'Dance Page'
+        'title' => 'Dance Page',
+        'tickets' => $tickets
       ];
 
       $this->ui('events/dance', $data);
