@@ -1,8 +1,8 @@
 <?php
-    require APPROOT . '/views/inc/header.php';
+    require APPROOT . '/UI/inc/header.php';
 ?>
 <?php
-    require APPROOT . '/views/inc/navigation.php';
+    require APPROOT . '/UI/inc/navigation.php';
 ?>
 
     <div id="section-dance-header">

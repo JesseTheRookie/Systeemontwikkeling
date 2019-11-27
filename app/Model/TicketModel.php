@@ -1,9 +1,9 @@
 <?php
 abstract class Ticket{
-    protected int userId;
-    protected string startDateTime;
-    protected string endDateTime;
-    protected int status;
-    protected int ticketQuantity;
-    protected double price;
+    protected $userId;
+    protected $startDateTime;
+    protected $endDateTime;
+    protected $status;
+    protected $ticketQuantity;
+    protected $price;
 }

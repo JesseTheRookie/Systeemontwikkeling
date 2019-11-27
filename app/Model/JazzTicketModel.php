@@ -1,6 +1,10 @@
 <?php
-abstract class JazzTicket extends TicketModel{
-    protected int jazzTicketId;
-    protected string jazzTicketLocation;
-    protected string jazzTicketHall;
+class JazzTicket extends TicketModel{
+    protected $jazzTicketId;
+    protected $jazzTicketLocation;
+    protected $jazzTicketHall;
+
+    public function setJazzTicketId($id){
+        $this->jazzTicketId = $id;
+    }
 }

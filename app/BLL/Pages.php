@@ -30,4 +30,13 @@
 
       $this->ui('pages/shoppingcart', $data);
     }
+
+      public function jazz(){
+          $data = [
+              'title' => 'Jazz Page'
+          ];
+
+          $this->ui('events/jazz', $data);
+      }
+
   }

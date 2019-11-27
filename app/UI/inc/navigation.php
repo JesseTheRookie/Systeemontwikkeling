@@ -39,7 +39,7 @@
                           <a href="">
                               Jazz
                           </a>
-                          <a href="">
+                          <a href="<?php echo URLROOT; ?>/app/UI/events/dance">
                               Dance
                           </a>
                           <a href="">
