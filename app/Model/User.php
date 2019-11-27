@@ -6,6 +6,21 @@
             $this->db = new Database;
         }
 
+        // Login user
+        public function login($email, $password){
+            $this->db->query('SELECT * FROM userinlog WHERE userEmail = :email');
+            $this->db->bind(':email', $email);
+
+            $row = $this->db->single();
+
+            $hashedPassword = $row->userPassword;
+            if(password_verify($password, $hashedPassword)){
+                return $row;
+            } else {
+                return false;
+            }
+        }
+
         //Register user
         public function register($data){
             //Insert into table user
@@ -24,7 +39,7 @@
                 $userReg = true;
             } else {
                 $userReg = false;
-            }
+            }            
 
             //Insert into table userInlog
 
@@ -49,9 +64,9 @@
 
         //Find user by email
         public function findUserByEmail($data){
-            $this->db->query('SELECT * FROM user WHERE userMail = :email');
+            $this->db->query('SELECT * FROM userInlog WHERE userEmail = :email');
             //Bind values
-            $this->db->bind(':email', $data['email']); 
+            $this->db->bind(':email', $data['email']);  
 
             $row = $this->db->single();
 

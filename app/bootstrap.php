@@ -4,6 +4,7 @@
 
   //Load helpers
   require_once 'helpers/urlHelper.php';
+  require_once 'helpers/sessionHelper.php';
 
   // Autoload Core Libraries
   spl_autoload_register(function($className){

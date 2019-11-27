@@ -53,6 +53,12 @@
 				text-align: center;
 			}
 
+			.success
+			{
+				background: light green;
+				border; 1px solid green;
+			}
+
 		</style>
 
 
@@ -64,6 +70,9 @@
 	?>
 		<br><br><br>		<br><br><br>
 		<div id="content">
+
+			<?php flash('registerSuccess'); ?>
+
 			<h1 class="center" id="loginHeader">
 				Login
 			</h1>
@@ -76,7 +85,7 @@
 			<br>
 
 			<form action="login" id="inlog" method="POST">
-				<input class="input" type="text" name="email" placeholder="Email" <?php echo (!empty($data['emailError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['email']; ?>"> <br>
+				<input class="input" type="email" name="email" placeholder="Email" <?php echo (!empty($data['emailError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['email']; ?>"> <br>
 				<span class="invalidFeedback"><?php echo $data['emailError'] ?></span>
 				<input class="input" type="password" name="password" placeholder="Password" <?php echo (!empty($data['passwordError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['password']; ?>"> <br>
 				<span class="invalidFeedback"><?php echo $data['passwordError'] ?></span>

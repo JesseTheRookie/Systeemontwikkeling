@@ -80,11 +80,23 @@
                 </a>
               </li>
 
+              <?php if(isset($_SESSION['userId'])) : ?>
+
+                <li>
+                <a href="<?php echo URLROOT; ?>/users/logout" class="buttonStyle">
+                  Logout
+                </a>
+              </li>
+
+              <?php else : ?>
+
               <li>
                 <a href="<?php echo URLROOT; ?>/users/login" class="buttonStyle">
                   Login
                 </a>
               </li>
+
+              <?php endif; ?>
 
               <li>
                 <a href="<?php echo URLROOT; ?>/shoppingcart/shopping-cart">
