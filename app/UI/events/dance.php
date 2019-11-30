@@ -31,109 +31,26 @@
     </h2>
 
     <hr>
-
     <div class="content-artists-dance">
+          <?php foreach($data['artists'] as $artist) : ?>
         <div>
-            <img src="../img/Tiesto.jpg" alt="">
-            <button class="myBtn">Tiesto</button>
+            <img src="<?php echo URLROOT; ?>/<?php echo $artist->imgUrl ?>" alt="">
+            <button class="myBtn"><?php echo $artist->artistName ?></button>
 
             <div id="myModal" class="modal">
                 <article class="modal-content">
                         <article class="modal-header">
                             <span class="close">×</span>
-                            <h2>Modal Header</h2>
+                            <h1><?php echo $artist->artistName ?></h1>
                         </article>
                     <article class="modal-body">
-                        <p>Some text in the Modal Body</p>
+                        <p><?php echo $artist->artistBio ?></p>
                     </article>
                 </article>
             </div>
         </div>
+<?php endforeach; ?>
 
-        <div>
-            <img src="../img/Nicky.jpg" alt="">
-            <button class="myBtn">Nicky Romero</button>
-
-            <div id="myModal" class="modal">
-                <article class="modal-content">
-                        <article class="modal-header">
-                            <span class="close">×</span>
-                            <h2>Modal Header</h2>
-                        </article>
-                    <article class="modal-body">
-                        <p>Some text in the Modal Body</p>
-                    </article>
-                </article>
-            </div>
-        </div>
-
-        <div>
-            <img src="../img/hardwell.jpg" alt="">
-            <button class="myBtn">Hardwell</button>
-
-            <div id="myModal" class="modal">
-                <article class="modal-content">
-                        <article class="modal-header">
-                            <span class="close">×</span>
-                            <h2>Modal Header</h2>
-                        </article>
-                    <article class="modal-body">
-                        <p>Some text in the Modal Body</p>
-                    </article>
-                </article>
-            </div>
-        </div>
-
-        <div>
-            <img src="../img/armin.png" alt="">
-            <button class="myBtn">Armin van Buuren</button>
-
-            <div id="myModal" class="modal">
-                <article class="modal-content">
-                        <article class="modal-header">
-                            <span class="close">×</span>
-                            <h2>Modal Header</h2>
-                        </article>
-                    <article class="modal-body">
-                        <p>Some text in the Modal Body</p>
-                    </article>
-                </article>
-            </div>
-        </div>
-
-        <div>
-            <img src="../img/martin.jpeg" alt="">
-            <button class="myBtn">Martin Garrix</button>
-
-            <div id="myModal" class="modal">
-                <article class="modal-content">
-                        <article class="modal-header">
-                            <span class="close">×</span>
-                            <h2>Modal Header</h2>
-                        </article>
-                    <article class="modal-body">
-                        <p>Some text in the Modal Body</p>
-                    </article>
-                </article>
-            </div>
-        </div>
-
-        <div>
-            <img src="../img/afrojack.jpg" alt="">
-            <button class="myBtn">Afrojack</button>
-
-            <div id="myModal" class="modal">
-                <article class="modal-content">
-                        <article class="modal-header">
-                            <span class="close">×</span>
-                            <h2>Modal Header</h2>
-                        </article>
-                    <article class="modal-body">
-                        <p>Some text in the Modal Body</p>
-                    </article>
-                </article>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -152,7 +69,10 @@
         <p>
             27th July
         </p>
-        <a href="" class="ticket-days-dance">Tickets</a>
+        <form action="<?php echo URLROOT; ?>DanceTicketService/searchByDay" method="post" role="form">
+                <input type="text" name="name" id="name" value="<?php echo $data['name'] ?>">
+                <input type="submit" name="submit">
+        </form>
     </div>
 
     <div>
@@ -162,8 +82,10 @@
         <p>
             28th July
         </p>
-        <a href="" class="ticket-days-dance">Tickets</a>
-    </div>
+        <form action="<?php echo URLROOT; ?>DanceTicketService/searchByDay" method="post" role="form">
+                <input type="text" name="artistName" id="name" value="dateTicketsFri">
+                <input type="submit" name="name" value="dateTickets">
+        </form>    </div>
 
     <div>
         <h2>
@@ -194,6 +116,7 @@
   </tr>
 </table>
 <?php endforeach; ?>
+
 </div>
 <?php
     require APPROOT . '/ui/inc/footer.php';
