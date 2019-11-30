@@ -25,6 +25,21 @@
         href="<?php echo URLROOT; ?>/css/style.css?version=3.2"
     />
     <link
+            rel="stylesheet"
+            type="text/css"
+            href="<?php echo URLROOT; ?>/css/generic.css?version=3.2"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="<?php echo URLROOT; ?>/css/jazz.css?version=3.2"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="<?php echo URLROOT; ?>/css/reset.css?version=3.2"
+    />
+    <link
         rel="stylesheet"
         type="text/js"
         href="<?php echo URLROOT; ?>/js/main.js"

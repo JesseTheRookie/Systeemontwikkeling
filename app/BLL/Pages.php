@@ -15,15 +15,44 @@
       $this->ui('pages/index', $data);
     }
 
+
+    //Event pages
     public function dance(){
       $tickets = $this->danceDal->getAllDanceTickets();
+      $artistInfo = $this->danceDal->getArtistInfo($tickets);
       $data = [
         'title' => 'Dance Page',
-        'tickets' => $tickets
+        'tickets' => $tickets,
+        'artists' => $artistInfo
       ];
 
       $this->ui('events/dance', $data);
     }
+
+    public function historic(){
+      $data = [
+        'title' => 'Historic Page',
+      ];
+
+      $this->ui('events/historic', $data);
+    }
+
+    //Login, register and shopping cart pages
+    /*public function register(){
+      $data = [
+        'title' => 'Registration Page',
+      ];
+
+      $this->ui('pages/registreren', $data);
+    }
+
+    public function login(){
+      $data = [
+        'title' => 'Login Page',
+      ];
+
+      $this->ui('pages/inloggen', $data);
+    }*/
 
     public function shoppingcart(){
       $data = [
@@ -57,4 +86,13 @@
 
       $this->ui('information/travel', $data);
     }
+
+      public function jazz(){
+          $data = [
+              'title' => 'Jazz Page'
+          ];
+
+          $this->ui('events/jazz', $data);
+      }
+
   }
