@@ -16,7 +16,7 @@
         // Load DAL
     public function dal($dal){
       // Require dal file
-      require_once '../app/dal/' . $dal . '.php';
+      require_once '../app/DAL/' . $dal . '.php';
 
       // Instatiate dal
       return new $dal();

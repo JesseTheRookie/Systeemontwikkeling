@@ -1,5 +1,7 @@
 <?php
-class JazzTicket extends Ticket{
+require('TicketModel.php');
+require('ArtistModel.php');
+class JazzTicketModel extends TicketModel {
     protected $jazzTicketId;
     protected $jazzTicketLocation;
     protected $jazzTicketHall;
@@ -20,8 +22,8 @@ class JazzTicket extends Ticket{
     public function setJazzTicketHall($hall){
         $this->jazzTicketHall = $hall;
     }
-    public function setArtists($artists){
-        $this->artists = $artists;
+    public function addArtist($artist){
+        array_push($this->artists, $artist);
     }
     public function getArtists(){
         return $this->artists;

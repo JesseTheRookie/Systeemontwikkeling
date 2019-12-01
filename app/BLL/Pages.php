@@ -1,5 +1,6 @@
 <?php
   class Pages extends Controller {
+
     public function __construct(){
       $this->postModel = $this->model('Post');
       $this->danceDal = $this->dal('DanceTicketDao');
@@ -86,13 +87,4 @@
 
       $this->ui('information/travel', $data);
     }
-
-      public function jazz(){
-          $data = [
-              'title' => 'Jazz Page'
-          ];
-
-          $this->ui('events/jazz', $data);
-      }
-
   }
