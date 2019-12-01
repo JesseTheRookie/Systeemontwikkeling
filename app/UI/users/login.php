@@ -59,6 +59,12 @@
 				border; 1px solid green;
 			}
 
+			.invalidFeedback 
+			{
+				color: red;
+				font-weight: normal;				
+			}
+
 		</style>
 
 

@@ -112,6 +112,12 @@
 				border: none;
 			}
 
+			.invalidFeedback 
+			{
+				color: red;
+				font-weight: normal;				
+			}
+
 		</style>
 
 	<?php
