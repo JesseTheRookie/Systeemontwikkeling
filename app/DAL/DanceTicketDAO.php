@@ -4,6 +4,7 @@ class DanceTicketDAO{
 
     public function __construct(){
       $this->db = new Database;
+      $this->danceT
     }
 
     public function getAllDanceTickets(){

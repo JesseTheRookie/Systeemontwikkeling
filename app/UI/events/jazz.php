@@ -57,7 +57,7 @@ require APPROOT . '/UI/inc/navigation.php';
                 <button class="normalButton">see tickets</button>
             </section>
         </header>
-        
+
         <p><?php echo print_r($data);  ?></p>
         <section id="ticketItems">
             <?php foreach($data['tickets'] as $ticket) : ?>

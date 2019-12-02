@@ -16,7 +16,6 @@
       $this->ui('pages/index', $data);
     }
 
-
     //Event pages
     public function dance(){
       $tickets = $this->danceDal->getAllDanceTickets();
