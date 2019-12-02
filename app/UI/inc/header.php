@@ -40,9 +40,19 @@
             href="<?php echo URLROOT; ?>/css/reset.css?version=3.2"
     />
     <link
-        rel="stylesheet"
-        type="text/js"
-        href="<?php echo URLROOT; ?>/js/main.js"
+            rel="stylesheet"
+            type="text/css"
+            href="<?php echo URLROOT; ?>/css/custom.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href='https://fonts.googleapis.com/css?family=Lato:300,400,700'
     />
     <link
         rel="stylesheet"
@@ -54,5 +64,10 @@
         href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap"
         rel="stylesheet"
     />
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/main.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/validator.js"></script>
+    <script src="<?php echo URLROOT; ?>/js/contact.js"></script>
 </head>
 <body>
