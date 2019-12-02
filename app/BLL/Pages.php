@@ -55,6 +55,11 @@
       $this->ui('pages/inloggen', $data);
     }*/
 
+    public function dashboard(){
+      $data = "lol";
+      $this->ui('pages/dashboard', $data);
+    }
+
     public function shoppingcart(){
       $data = [
         'title' => 'Shopping Cart'

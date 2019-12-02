@@ -213,8 +213,14 @@
 
         public function createUserSession($user){
             $_SESSION['userId'] = $user->userInlogId;
-            $_SESSION['useremail'] = $user->userInlogId;
+            $_SESSION['useremail'] = $user->userEmail;
+            $_SESSION['userType'] = $user->userType;
+
+            if($_SESSION['userType'] == 1){
+                redirect('cms/dashboard');
+            } else {
             redirect('pages/index');
+            }
         }
 
         public function logout(){
