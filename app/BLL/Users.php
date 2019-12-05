@@ -2,6 +2,7 @@
     class Users EXTENDS Controller{
         public function __construct(){
             $this->userModel = $this->model('User');
+            $this->userDAO = $this->dal('UserDAO');
         }
 
         public function register(){
@@ -9,15 +10,20 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //Process form
 
-                //Sanitize POST data
+                //Sanitize POST data and determine validation regex
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
+                $nameValidation = "/^[a-zA-Z ]*$/";
+                $streetValidation = "/^[a-zA-Z ]*$/";
+                $phoneValidation = "/^[-0-9]*$/";
+                $houseValidation = "/^[0-9]*$/";
 
                 //Init data
                 $data = [
                     'name' => trim($_POST['name']),
                     'lastName' => trim($_POST['lastName']),
                     'email' => trim($_POST['email']),
-                    'address' => trim($_POST['address']),
+                    'street' => trim($_POST['street']),
                     'house' => trim($_POST['house']),
                     'phone' => trim($_POST['phone']),
                     'gender' => trim($_POST['gender']),
@@ -26,7 +32,7 @@
                     'nameError' => '',
                     'lastNameError' => '',
                     'emailError' => '',
-                    'addressError' => '',
+                    'streetError' => '',
                     'houseError' => '',
                     'zipError' => '',
                     'phoneError' => '',
@@ -37,9 +43,9 @@
                 //Validate email not empty
                 if(empty($data['email'])){
                     $data['emailError'] = 'Please enter email';
-                } else {
+                }else {
                     //Check if email already exists
-                    if($this->userModel->findUserByEmail($data)){
+                    if($this->userDAO->findUserByEmail($data)){
                         $data['emailError'] = 'Email is already taken';
                     }
                 }
@@ -47,25 +53,36 @@
                 //Validate Name not empty
                 if(empty($data['name'])){
                     $data['nameError'] = 'Please enter name';
+                } elseif(!preg_match($nameValidation, $data['name'])){
+                    $data['nameError'] = 'Name can only contain letters and whitespace';
                 }
 
                 //Validate lastName not empty
                 if(empty($data['lastName'])){
                     $data['lastNameError'] = 'Please enter last name';
+                } elseif(!preg_match($nameValidation, $data['lastName'])){
+                    $data['lastNameError'] = 'Name can only contain letters and whitespace';
                 }
+
                 //Validate phone not empty
                 if(empty($data['phone'])){
                     $data['phoneError'] = 'Please enter phone number';
+                } elseif(!preg_match($phoneValidation, $data['phone'])){
+                    $data['phoneError'] = 'Phone can only contain numbers and -';
                 }
 
-                //Validate Address not empty
-                if(empty($data['address'])){
-                    $data['addressError'] = 'Please enter address';
+                //Validate street not empty
+                if(empty($data['street'])){
+                    $data['streetError'] = 'Please enter street';
+                } elseif(!preg_match($streetValidation, $data['street'])){
+                    $data['streetError'] = 'Street can only contain letters and whitespace';
                 }
 
                 //Validate House Number not empty
                 if(empty($data['house'])){
                     $data['houseError'] = 'Please enter house number';
+                } elseif(!preg_match($houseValidation, $data['house'])){
+                    $data['houseError'] = 'House number can only contain numbers';
                 }
 
                 //Validate Password not empty
@@ -73,6 +90,8 @@
                     $data['passwordError'] = 'Please enter password';
                 } elseif(strlen($data['password']) < 6) {
                     $data['passwordError'] = 'Password must be at least 6 characters long';
+                } elseif(!preg_match($passwordValidation, $data['password'])){
+                    $data['passwordError'] = 'Password must have at least one numeric value, one uppercase character and one lowercase character';
                 }
 
                  //Validate password confirmation
@@ -99,7 +118,7 @@
                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
                 
                     //Register user
-                    if($this->userModel->register($data)){
+                    if($this->userDAO->register($data)){
                         flash('registerSuccess', 'You are now registered');
                         redirect('users/login');
                     } else {
@@ -111,16 +130,13 @@
                     $this->ui('users/register', $data);
                 }
 
-
-
-
             } else {
                 //Init data
                 $data = [
                     'name' => '',
                     'lastName' => '',
                     'email' => '',
-                    'address' => '',
+                    'street' => '',
                     'house' => '',
                     'phone' => '',
                     'gender' => '',
@@ -129,7 +145,7 @@
                     'nameError' => '',
                     'lastNameError' => '',
                     'emailError' => '',
-                    'addressError' => '',
+                    'streetError' => '',
                     'houseError' => '',
                     'zipError' => '',
                     'phoneError' => '',
@@ -168,7 +184,7 @@
 
                 //Check user by email
                 if(!empty($data['email'])){
-                    if($this->userModel->findUserByEmail($data)){
+                    if($this->userDAO->findUserByEmail($data)){
                         //User found
                     } else{
                         //User not found
@@ -180,7 +196,7 @@
                 if(empty($data['emailError']) && empty($data['passwordError'])){
                     //Validated
                     //Check and login
-                    $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+                    $loggedInUser = $this->userDAO->login($data['email'], $data['password']);
 
                     if($loggedInUser){
                         //Create Session

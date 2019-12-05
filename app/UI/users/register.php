@@ -1,6 +1,6 @@
 
 		<title> 
-			<?php echo $data['title']; ?>
+			Register
 		</title>
 
 		<link rel="stylesheet" type="text/css" href="style.css"> <!--algemeen stylesheet-->
@@ -45,17 +45,6 @@
 			.cleanForm {
 			    width: 60%;
 			    margin: auto;
-			}
-
-			.addressInput 
-			{
-				width: 18em;
-				font-weight: bold;
-			}
-
-			#houseInput
-			{
-				width: 4em;
 			}
 
 			.inputHeader 
@@ -181,14 +170,14 @@
 						<span class="invalidFeedback"><?php echo $data['phoneError'] ?></span>
 			        </label>
 
-			        <label class="addressInput" class="inputHeader">
-			        	Address *
-			        	<input class="addressInput" type="text" name="address" <?php echo (!empty($data['addressError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['address']; ?>">
-			        	<span class="invalidFeedback"><?php echo $data['addressError'] ?></span>
+			        <label class="inputHeader">
+			        	Street *
+			        	<input class="streetInput" type="text" name="street" <?php echo (!empty($data['streetError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['street']; ?>">
+			        	<span class="invalidFeedback"><?php echo $data['streetError'] ?></span>
 					</label>
 
 			        <label class="inputHeader">
-			        	Number *
+			        	House Number *
 			        	<input id="houseInput" type="number" name="house" <?php echo (!empty($data['houseError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['house']; ?>">
 			        	<span class="invalidFeedback"><?php echo $data['houseError'] ?></span>
 					</label>
