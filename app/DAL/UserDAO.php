@@ -6,17 +6,17 @@ class UserDAO{
         $this->db = new Database;
     }
 
-    public function register($data){
+    public function register($user){
         //Insert into table user
         $this->db->query('INSERT INTO user (userName, userLastName, userMail, userAddress, userHouseNum, userPhone, userGender) VALUES (:name, :lastName, :email, :street, :house, :phone, :gender)');
         //Bind values
-        $this->db->bind(':name', $data['name']);      
-        $this->db->bind(':lastName', $data['lastName']);        
-        $this->db->bind(':email', $data['email']); 
-        $this->db->bind(':street', $data['street']); 
-        $this->db->bind(':house', $data['house']); 
-        $this->db->bind(':phone', $data['phone']); 
-        $this->db->bind(':gender', $data['gender']);
+        $this->db->bind(':name', $user->getUserName());      
+        $this->db->bind(':lastName', $user->getUserLastname());        
+        $this->db->bind(':email', $user->getEmail()); 
+        $this->db->bind(':street', $user->getStreet()); 
+        $this->db->bind(':house', $user->getHouse()); 
+        $this->db->bind(':phone', $user->getPhone()); 
+        $this->db->bind(':gender', $user->getGender());
         
         //Execute
         if($this->db->execute()){
@@ -28,8 +28,8 @@ class UserDAO{
         //Insert into table userInlog
         $this->db->query('INSERT INTO userinlog (userEmail, userPassword) VALUES (:email, :password)');
         //Bind values        
-        $this->db->bind(':email', $data['email']); 
-        $this->db->bind(':password', $data['password']); 
+        $this->db->bind(':email', $user->getEmail()); 
+        $this->db->bind(':password', $user->getPassword()); 
         
         //Execute
         if($this->db->execute()){
@@ -46,14 +46,14 @@ class UserDAO{
     }
 
     // Login user
-    public function login($email, $password){
+    public function login($user){
         $this->db->query('SELECT * FROM userinlog WHERE userEmail = :email');
-        $this->db->bind(':email', $email);
+        $this->db->bind(':email', $user->getEmail());
 
         $row = $this->db->single();
 
         $hashedPassword = $row->userPassword;
-        if(password_verify($password, $hashedPassword)){
+        if(password_verify($user->getPassword(), $hashedPassword)){
             return $row;
         } else {
             return false;
@@ -61,10 +61,10 @@ class UserDAO{
     }
 
     //Find user by email
-    public function findUserByEmail($data){
+    public function findUserByEmail($user){
         $this->db->query('SELECT * FROM userInlog WHERE userEmail = :email');
         //Bind values
-        $this->db->bind(':email', $data['email']);  
+        $this->db->bind(':email', $user->getEmail());  
 
         $row = $this->db->single();
 
