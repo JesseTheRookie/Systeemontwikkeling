@@ -12,6 +12,7 @@
 
                 //Sanitize POST data and determine validation regex
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $_POST['email'] = filter_input(FILTER_SANITIZE_EMAIL);
                 $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
                 $nameValidation = "/^[a-zA-Z ]*$/";
                 $streetValidation = "/^[a-zA-Z ]*$/";
@@ -22,7 +23,7 @@
                 $user = new User();
                 $user->setUserName(trim($_POST['name']));
                 $user->setUserLastName(trim($_POST['lastName']));
-                $user->setEmail(trim($_POST['email']));
+                $user->setEmail(trim(($_POST['email'])));
                 $user->setStreet(trim($_POST['street']));
                 $user->setHouse(trim($_POST['house']));
                 $user->setPhone(trim($_POST['phone']));
