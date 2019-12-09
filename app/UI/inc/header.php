@@ -18,7 +18,6 @@
             echo SITENAME;
         ?>
     </title>
-
     <link
         rel="stylesheet"
         type="text/css"
@@ -39,16 +38,20 @@
             type="text/css"
             href="<?php echo URLROOT; ?>/css/reset.css?version=3.2"
     />
+    <!--
     <link
             rel="stylesheet"
             type="text/css"
             href="<?php echo URLROOT; ?>/css/custom.css"
     />
+    -->
+    <!--
     <link
             rel="stylesheet"
             type="text/css"
             href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
     />
+    -->
     <link
             rel="stylesheet"
             type="text/css"
