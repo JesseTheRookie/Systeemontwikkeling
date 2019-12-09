@@ -4,6 +4,7 @@ abstract class DanceTicket extends TicketModel{
     protected  $danceTicketLocation;
     protected  $danceTicketArtist;
     protected  $danceTicketSession;
+    protected $artists = array();
 
     //GET AND SET FOR Dance ticket location
     public function setDanceTicketLocation($danceTicketLocation){
@@ -25,10 +26,9 @@ abstract class DanceTicket extends TicketModel{
     public function setDanceTicketSession($danceTicketSession){
         $this->danceTicketSession = $danceTicketSession;
     }
+
     public function getDanceTicketSession(){
         return $this->danceTicketSession;
     }
 }
-
-
 ?>

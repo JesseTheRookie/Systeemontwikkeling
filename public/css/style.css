@@ -453,12 +453,6 @@ height: 200px;
     margin: 0 auto;
 }
 
-.content-dance-header h3
-{
-    color: #ffffff;
-    font-size: 90px;
-    padding: 0px 0px 40px 0px;
-}
 
 .content-dance-header a
 {
@@ -758,7 +752,8 @@ td
 {
     color: #ffffff;
     font-size: 70px;
-    padding: 80px 0px 40px 0px;
+    padding: 30px 0px 40px 0px;
+    text-align: left;
 }
 #layout-header-dance
 {
@@ -833,6 +828,14 @@ padding: 8px 20px;
 text-transform: uppercase;
 }
 
+.content-header-dance a:hover
+{
+    color: #000000;
+    background: #ffffff;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+}
+
 .table-tickets-dance
 {
     width: 70%;
@@ -842,6 +845,10 @@ text-transform: uppercase;
     margin: 0 auto;
 }
 
+.table-tickets-dance tr
+{
+    height: 100px;
+}
 
 .table-tickets-dance td
 {
@@ -865,4 +872,12 @@ text-transform: uppercase;
     padding: 12px 20px;
     text-decoration: none;
     text-transform: uppercase;
+}
+
+.button-add-dance:hover
+{
+    background: white;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+    color: #000000;
 }

@@ -8,7 +8,7 @@
     <div id="section-dance-header">
         <div class="content-dance-header">
             <div>
-            <img src="../img/banner-dance.jpg" alt="">
+            <img src="./img/banner-dance.jpg" alt="">
             </div>
             <div class="content-dance-right">
                 <h3>
@@ -75,35 +75,15 @@
         </form>
     </div>
 
-    <div>
-        <h2>
-            Sat.
-        </h2>
-        <p>
-            28th July
-        </p>
-        <form action="<?php echo URLROOT; ?>DanceTicketService/searchByDay" method="post" role="form">
-                <input type="text" name="artistName" id="name" value="dateTicketsFri">
-                <input type="submit" name="name" value="dateTickets">
-        </form>    </div>
 
-    <div>
-        <h2>
-            Sun.
-        </h2>
-        <p>
-            29th July
-        </p>
-        <a href="" class="ticket-days-dance">Tickets</a>
-    </div>
   </div>
   <?php foreach($data['tickets'] as $tickets) : ?>
 <table class="table-tickets-dance">
   <tr>
-    <td>    <?php echo $tickets->danceTicketArtist; ?></td>
-    <td>    <?php echo $tickets->startTijd; ?></td>
+    <td>    <?php echo $tickets->artistName; ?></td>
+    <td>    <?php echo $tickets->startDateTime - $tickets->endDateTime; ?></td>
     <td>    <?php echo $tickets->danceTicketLocation; ?></td>
-    <td>   € <?php echo $tickets->Price; ?></td>
+    <td>   € <?php echo $tickets->price; ?></td>
     <td>    <select class="select-dance">
                     <option value="Quantity">Quantity</option>
                     <option value="1">1</option>

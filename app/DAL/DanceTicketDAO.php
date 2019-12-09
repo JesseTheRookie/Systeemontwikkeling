@@ -7,13 +7,16 @@ class DanceTicketDAO{
     }
 
     public function getAllDanceTickets(){
-        $this->db->query("SELECT * FROM danceticket");
+        $danceTicketArray = array();
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.status, t.ticketQuantity, t.price, d.danceTicketLocation
+                FROM tickets AS t
+                INNER JOIN danceticket AS d
+                ON t.ticketId = d.ticketId
+                ");
 
-     // $this->db->bind(':artistName', $artistName);
- //    $row = $this->db->single();
-$result = $this->db->resultSet();
-return $result;
-      // return $row;
+        $danceTickets = $this->db->resultSet();
+
+
     }
 
     public function getArtistInfo() {
