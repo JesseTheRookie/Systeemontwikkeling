@@ -12,7 +12,6 @@
 
                 //Sanitize POST data and determine validation regex
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $_POST['email'] = filter_input(FILTER_SANITIZE_EMAIL);
                 $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
                 $nameValidation = "/^[a-zA-Z ]*$/";
                 $streetValidation = "/^[a-zA-Z ]*$/";
