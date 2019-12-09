@@ -1,11 +1,11 @@
 <?php
 abstract class TicketModel{
-    protected $ticketId;
-    protected $startDateTime;
-    protected $endDateTime;
-    protected $status;
-    protected $ticketQuantity;
-    protected $price;
+    private $ticketId;
+    private $startDateTime;
+    private $endDateTime;
+    private $status;
+    private $ticketQuantity;
+    private $price;
 
     public function setTicketId($id){
         $this->ticketId = $id;

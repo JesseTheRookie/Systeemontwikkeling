@@ -21,7 +21,7 @@ require APPROOT . '/UI/inc/navigation.php';
             <?php foreach($data['artists'] as $artist) :
                 $counter = 0;
                 ?>
-                <article><h1><?php echo $artist->artistName ?><span>.</span></h1></article>
+                <article><h1><?php echo $artist->getArtistName(); ?><span>.</span></h1></article>
             <?php
                 $counter++;
                 if($counter >= 4){
@@ -30,7 +30,11 @@ require APPROOT . '/UI/inc/navigation.php';
             endforeach; ?>
          </div>
         <article id="allPerformers">
-            <p>gumbo kings<span>.</span> evolve<span>.</span> ntjam rosie<span>.</span> wicked jazz sounds<span>.</span> tom assemble<span>.</span> jonna frazer<span>.</span> fox & the mayors<span>.</span> unclu sue<span>.</span> chris allen<span>.</span> myles sanko<span>.</span>ruis soundsystem<span>.</span> the family XL<span>.</span> gare du nord<span>.</span> rilan & the bombardiers<span>.</span> soul six<span>.</span> han bennink<span>.</span> the nordanians<span>.</span> lilith merlot<span>.</span></p>
+            <p>
+            <?php foreach($data['artists'] as $artist) :
+                echo $artist->getArtistName() + "<span>.</span>";
+            endforeach; ?>
+            </p>
         </article>
         <button id="performersButton" class="bigButton">see all performers</button>
     </section>
@@ -58,14 +62,19 @@ require APPROOT . '/UI/inc/navigation.php';
             </section>
         </header>
 
-        <p><?php echo print_r($data);  ?></p>
         <section id="ticketItems">
-            <?php foreach($data['tickets'] as $ticket) : ?>
+            <?php
+            foreach($data['tickets'] as $ticket) : ?>
                 <article>
-                    <div><p><?php echo $ticket->artistName ?></p></div>
-                    <div><p><?php $ticket->startDateTime ?> - <?php $ticket->endDateTime ?></p></div>
-                    <div><p><?php echo $ticket->jazzTicketLocation ?><br/><span><?php echo $ticket->jazzTicketHall?></span></p></div>
-                    <div><p>&#8364; <?php echo $ticket->price ?></p></div>
+                    <?php $artists = $ticket->getArtists();
+
+                    foreach($artists as $artist) : ?>
+                        <div><p><?php echo $artist->getArtistName(); ?></p></div>
+                    <?php endforeach; ?>
+
+                    <div><p><?php echo $ticket->getStartDateTime(); ?> - <?php echo $ticket->getEndDateTime() ?></p></div>
+                    <div><p><?php echo $ticket->getJazzTicketLocation(); ?><br/><span><?php echo $ticket->getJazzTicketHall();?></span></p></div>
+                    <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
                     <div><input type="text" id="" name="quantity" placeholder="0"></div>
                     <div><button class="smallButton">add</button></div>
                 </article>

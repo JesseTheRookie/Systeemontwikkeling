@@ -1,81 +1,84 @@
 <?php   
     class User {
-        private $db;
+        public $userName;
+        protected $userLastName;
+        protected $email;
+        protected $street;
+        protected $house;
+        protected $phone;
+        protected $gender;
+        protected $password;
+        protected $passwordConfirm;
 
-        public function __construct(){
-            $this->db = new Database;
+        //Get and Set for userName
+        public function setUserName($userName){
+            $this->userName = $userName;
+        }
+        public function getUserName(){
+            return $this->userName;
         }
 
-        // Login user
-        public function login($email, $password){
-            $this->db->query('SELECT * FROM userinlog WHERE userEmail = :email');
-            $this->db->bind(':email', $email);
-
-            $row = $this->db->single();
-
-            $hashedPassword = $row->userPassword;
-            if(password_verify($password, $hashedPassword)){
-                return $row;
-            } else {
-                return false;
-            }
+        //Get and Set for userLastName
+        public function setUserLastName($userLastName){
+            $this->userLastName = $userLastName;
+        }
+        public function getUserLastName(){
+            return $this->userLastName;
         }
 
-        //Register user
-        public function register($data){
-            //Insert into table user
-            $this->db->query('INSERT INTO user (userName, userLastName, userMail, userAddress, userHouseNum, userPhone, userGender) VALUES (:name, :lastName, :email, :address, :house, :phone, :gender)');
-            //Bind values
-            $this->db->bind(':name', $data['name']);      
-            $this->db->bind(':lastName', $data['lastName']);        
-            $this->db->bind(':email', $data['email']); 
-            $this->db->bind(':address', $data['address']); 
-            $this->db->bind(':house', $data['house']); 
-            $this->db->bind(':phone', $data['phone']); 
-            $this->db->bind(':gender', $data['gender']);
-            
-            //Execute
-            if($this->db->execute()){
-                $userReg = true;
-            } else {
-                $userReg = false;
-            }            
-
-            //Insert into table userInlog
-
-            $this->db->query('INSERT INTO userinlog (userEmail, userPassword) VALUES (:email, :password)');
-            //Bind values        
-            $this->db->bind(':email', $data['email']); 
-            $this->db->bind(':password', $data['password']); 
-            
-            //Execute
-            if($this->db->execute()){
-                $userInlogReg = true;
-            } else {
-                $userInlogReg = false;
-            }
-
-            if(($userReg == TRUE) && ($userInlogReg == TRUE)){
-                return true;
-            } else {
-                return false;
-            }
+        //Get and Set for email
+        public function setEmail($email){
+            $this->email = $email;
+        }
+        public function getEmail(){
+            return $this->email;
         }
 
-        //Find user by email
-        public function findUserByEmail($data){
-            $this->db->query('SELECT * FROM userInlog WHERE userEmail = :email');
-            //Bind values
-            $this->db->bind(':email', $data['email']);  
+        //Get and Set for street
+        public function setStreet($street){
+            $this->street = $street;
+        }
+        public function getStreet(){
+            return $this->street;
+        }
 
-            $row = $this->db->single();
+        //Get and Set for house
+        public function setHouse($house){
+            $this->house = $house;
+        }
+        public function getHouse(){
+            return $this->house;
+        }
 
-            //Check row
-            if($this->db->rowCount() > 0){
-                return true;
-            } else {
-                return false;
-            }
+        //Get and Set for phone
+        public function setPhone($phone){
+            $this->phone = $phone;
+        }
+        public function getPhone(){
+            return $this->phone;
+        }
 
+        //Get and Set for gender
+        public function setGender($gender){
+            $this->gender = $gender;
+        }
+        public function getGender(){
+            return $this->gender;
+        }
+
+        //Get and Set for password
+        public function setPassword($password){
+            $this->password = $password;
+        }
+        public function getPassword(){
+            return $this->password;
+        }
+
+        //Get and Set for passwordConfirm
+        public function setPasswordConfirm($passwordConfirm){
+            $this->passwordConfirm = $passwordConfirm;
+        }
+        public function getPasswordConfirm(){
+            return $this->passwordConfirm;
         }
     }
