@@ -22,7 +22,8 @@ header {
   width: 100%;
   margin-left: 0px;
   padding-left: 0px;
-  background-color: #c21616;
+  background: rgb(122,125,125);
+  background: linear-gradient(90deg, rgba(122,125,125,1) 15%, rgba(129,7,7,1) 75%);
 }
 
 nav {
@@ -30,7 +31,8 @@ nav {
   top: 0px;
   width: 200px;
   height: 100%;
-  background-color: #544f4f;
+  background: rgb(55,51,51);
+  background: linear-gradient(0deg, rgba(55,51,51,1) 31%, rgba(122,125,125,1) 80%);
 }
 
 h1 {
@@ -39,6 +41,15 @@ h1 {
   left: 6%;
   font-size: 32px;
   font-family: Lato, sans-serif;
+}
+
+.logoutlink {
+  position: relative;
+  top: 20%;
+  left: 93%;
+  font-size: 24px;
+  font-family: Lato, sans-serif;
+  color: #e1d9d9;
 }
 
 .list {

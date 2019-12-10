@@ -17,6 +17,18 @@
         $totalTicketSold = $this->CmsDao->GetTotalTicketsSold();
         $totalReservations = 3;
         $totalUsers = $this->CmsDao->GetTotalUniqueUsers();
+
+        $userName = "";
+        $userLastName = "";
+                
+        if($_SESSION["userType"] == 2)
+        {
+          $userType = "Super Admin";
+        }
+        else
+        {
+          $userType = "Admin";
+        }
         
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
@@ -28,6 +40,9 @@
 
           $data = [
             'title' => $title,
+            'UserName' => $userName,
+            'UserLastName' => $userLastName,
+            'UserType' => $userType,
             'TotalRev' => $totalRev->totalrev,
             'TotalTicketSold' => $totalTicketSold->totaltickets,
             'TotalReservations' => $totalReservations,
@@ -40,6 +55,9 @@
         {
           $data = [
             'title' => $title,
+            'UserName' => $userName,
+            'UserLastName' => $userLastName,
+            'UserType' => $userType,
             'TotalRev' => $totalRev->totalrev,
             'TotalTicketSold' => $totalTicketSold->totaltickets,
             'TotalReservations' => $totalReservations,
@@ -55,9 +73,14 @@
         $data = array();
 
         $title = "Change program";
+        $explanation = "Click the checkbox next to the row you wish to edit";
 
         $data = [
-          'title' => $title
+          'title' => $title,
+          'explanation' => $explanation,
+          'UserName' => $userName,
+          'UserLastName' => $userLastName,
+          'UserType' => $userType
         ];
         
         $this->ui('cms/changeprogram', $data);

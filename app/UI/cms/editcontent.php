@@ -8,11 +8,13 @@
   <meta charset="utf-8">
   <title>Project</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <link href="<?php echo URLROOT; ?>/css/DashboardStyle.css" rel="stylesheet" type="text/css">
+  <link href="<?php echo URLROOT; ?>/css/EditContentStyle.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-  <header class="header"></header>
+  <header class="header">
+    <a class="logoutlink" href="<?php echo URLROOT; ?>/users/logout" class="link">Logout</a>
+  </header>
 
   <nav class="nav">
     <div class="usercontainer w-container"><img src="images/icon.svg" width="100" alt="" class="image">

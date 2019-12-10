@@ -1,3 +1,12 @@
+<?php
+
+  if(!isset($_SESSION)) 
+  { 
+    session_start(); 
+  } 
+
+?>
+
 <!DOCTYPE html>
 
 <html data-wf-page="5dd41b797030aa6e3b82fe70" data-wf-site="5dd41b797030aa19e682fe6f">
@@ -12,11 +21,13 @@
 </head>
 
 <body>
-  <header class="header"></header>
+  <header class="header">
+    <a class="logoutlink" href="<?php echo URLROOT; ?>/users/logout" class="link">Logout</a>
+  </header>
 
   <nav class="nav">
     <div class="usercontainer w-container"><img src="images/icon.svg" width="100" alt="" class="image">
-      <div class="nameAndFunction">Jelle Spreij - Admin</div>
+      <div class="nameAndFunction"><?php echo $data['UserName'] . ' ' . $data['UserLastName'] . ' - ' . $data['UserType']; ?></div>
     </div>
     <ul class="list list-2 w-list-unstyled">
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/dashboard" class="link">Dashboard</a></li>
@@ -26,8 +37,7 @@
   </nav>
 
   <div class="section">
-
-    <h1><?php echo $data['title'] ?></h1>
+    <h1><u><?php echo $data['title'] ?></u></h1>
     <div class="datablocks">
       <div class="revenue">
         <h1 class="importantdata"><?php echo $data['TotalRev']; ?></h1>
