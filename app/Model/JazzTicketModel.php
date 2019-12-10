@@ -2,17 +2,10 @@
 require('TicketModel.php');
 require('ArtistModel.php');
 class JazzTicketModel extends TicketModel {
-    protected $jazzTicketId;
-    protected $jazzTicketLocation;
-    protected $jazzTicketHall;
-    protected $artists = array();
+    private $jazzTicketLocation;
+    private $jazzTicketHall;
+    private $artists = array();
 
-    public function setJazzTicketId($id){
-        $this->jazzTicketId = $id;
-    }
-    public function getJazzTicketId(){
-        return $this->jazzTicketId;
-    }
     public function setJazzTicketLocation($location){
         $this->jazzTicketLocation = $location;
     }
@@ -21,6 +14,9 @@ class JazzTicketModel extends TicketModel {
     }
     public function setJazzTicketHall($hall){
         $this->jazzTicketHall = $hall;
+    }
+    public function getJazzTicketHall(){
+        return $this->jazzTicketHall;
     }
     public function addArtist($artist){
         array_push($this->artists, $artist);

@@ -1,11 +1,18 @@
 <?php
 class ArtistModel
 {
-    protected $artistId;
-    protected $artistName;
-    protected $artistBio;
-    protected $eventType;
+    private $artistId;
+    private $artistName;
+    private $artistBio;
+    private $ticketId;
+    private $eventType;
 
+    public function setTicketId($id){
+        $this->ticketId = $id;
+    }
+    public function getTicketId(){
+        return $this->ticketId;
+    }
     public function setArtistId($id){
         $this->artistId = $id;
     }
