@@ -1,6 +1,6 @@
 <?php   
     class User {
-        public $userName;
+        protected $userName;
         protected $userLastName;
         protected $email;
         protected $street;
