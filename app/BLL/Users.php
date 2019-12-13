@@ -229,8 +229,15 @@
 
         public function createUserSession($loggedInUser){
             $_SESSION['userId'] = $loggedInUser->userInlogId;
-            $_SESSION['useremail'] = $loggedInUser->getUserEmail;
+            $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
             $_SESSION['userType'] = $loggedInUser->userType;
+            $_SESSION['userName'] = $loggedInUser->userName;
+            $_SESSION['userLastName'] = $loggedInUser->userLastName;
+            $_SESSION['userStreet'] = $loggedInUser->userStreet;
+            $_SESSION['userHouse'] = $loggedInUser->userHouse;
+            $_SESSION['userPhone'] = $loggedInUser->userPhoneStreet;
+            $_SESSION['userGender'] = $loggedInUser->userGender;
+
 
             if($_SESSION['userType'] == 1){
                 redirect('cms/dashboard');
@@ -254,4 +261,7 @@
             }
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop

@@ -47,7 +47,7 @@ class UserDAO{
 
     // Login user
     public function login($user){
-        $this->db->query('SELECT * FROM userinlog WHERE userEmail = :email');
+        $this->db->query('SELECT userinlog.*, user.* FROM userinlog INNER JOIN user ON userinlog.userInlogId = user.userId WHERE userEmail = :email');
         $this->db->bind(':email', $user->getEmail());
 
         $row = $this->db->single();

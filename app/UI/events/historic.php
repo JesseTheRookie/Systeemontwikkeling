@@ -68,6 +68,7 @@
 			  	grid-template-columns: auto auto;
 				background-color: #f7f7f7;
 				padding: 0px;
+				grid-gap: 0px;
 			}
 
 			.contentItem
