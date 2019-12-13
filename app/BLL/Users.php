@@ -1,4 +1,4 @@
-<?php   
+<?php
     class Users EXTENDS Controller{
         public function __construct(){
             $this->userModel = $this->model('User');
@@ -118,13 +118,13 @@
 
                     //Hash password
                     $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
-                
+
                     //Register user
                     if($this->userDAO->register($user)){
                         flash('registerSuccess', 'You are now registered');
                         redirect('users/login');
                     } else {
-                        die('Something went wrong'); 
+                        die('Something went wrong');
                     }
 
                 } else {
@@ -189,9 +189,9 @@
                         //User found
                     } else{
                         //User not found
-                        $data['emailError'] = 'No user found!';                        
+                        $data['emailError'] = 'No user found!';
                     }
-                }                
+                }
 
                 //Make sure errors are empty
                 if(empty($data['emailError']) && empty($data['passwordError'])){
@@ -201,7 +201,7 @@
 
                     if($loggedInUser){
                         //Create Session
-                        $this->createUserSession($loggedInUser); 
+                        $this->createUserSession($loggedInUser);
                     } else {
                         $data['passwordError'] = 'Password incorrect';
                         $data['emailError'] = '';
@@ -255,4 +255,3 @@
         }
     }
 
-   

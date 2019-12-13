@@ -2,14 +2,17 @@
   class Pages extends Controller {
 
     public function __construct(){
-      $this->danceDal = $this->dal('DanceTicketDao');
+        $this->danceDal = $this->dal('DanceTicketDao');
+        $this->homeDal = $this->dal('HomeDAO');
+        $this->homeModel = $this->model('HomeModel');
     }
 
     public function index(){
 
       $data = [
         'title' => 'Welcome',
-        'posts' => $posts
+        'informations' => $eventInformation = $this->homeDal->eventInformation(),
+        'dates' => $eventDates = $this->homeDal->eventDates()
       ];
       $this->ui('pages/index', $data);
     }
