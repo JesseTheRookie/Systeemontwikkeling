@@ -100,7 +100,7 @@
 
 			<p class="options">
 				Not registered yet? <a href="<?php echo URLROOT; ?>/users/register" >Create an account </a> <br>
-				<a href="wwvergeten">Forgot password?</a>
+				<a href="<?php echo URLROOT; ?>/users/forgot">Forgot password?</a>
 			</p>			
 	
 		</div>
