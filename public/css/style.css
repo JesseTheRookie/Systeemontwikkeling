@@ -901,3 +901,217 @@ text-transform: uppercase;
     transition: 0.2s ease-in;
     color: #000000;
 }
+
+#section-restaurant-header>div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    background-color: black;
+}
+
+.content-restaurant-header img {
+    width: 100%;
+}
+
+.content-food-right {
+    position: relative;
+    top: 10%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+.content-restaurant-header h3 {
+    color: #ffffff;
+    font-size: 90px;
+    padding: 0px 0px 40px 0px;
+}
+
+.content-restaurant-header a {
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 8px 28px 8px 28px;
+    text-decoration: none;
+    margin: 0px 40px 0px 0px;
+    font-size: 20px;
+}
+
+.content-restaurant-header a:hover {
+    color: #ffffff;
+    border: 1px solid #666;
+    background-color: #666;
+    transition: 0.25s ease;
+}
+
+#section-artists-dance>div {
+    display: grid;
+    grid-template-columns: 100%;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+
+}
+
+hr {
+    width: 300px;
+    text-align: center;
+    margin: 30px auto;
+}
+
+#section-restaurant-food {
+    background: rgb(39, 14, 7);
+    background: linear-gradient(90deg, rgba(39, 14, 7, 1) 0%, rgba(39, 14, 7, 1) 100%);
+}
+
+
+#section-restaurant-food h2 {
+    font-size: 40px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    color: white;
+
+}
+
+#section-restaurant-food h3 {
+    font-size: 20px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 0px 20px 0px;
+    color: white;
+}
+
+.content-restaurant-food img {
+    width: 300px;
+    height: 180px;
+}
+
+#section-reservation-food>div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: relative;
+    width: 97%;
+    margin: 20px 50px;
+    background-color: white;
+}
+
+.content-food-header img {
+    width: 60%;
+    padding: 20px 0px 20px 0px;
+}
+
+.content-food-header a {
+    color: grey;
+    font-size: 20px;
+}
+
+.content-food-header p {
+    display: inline-block;
+    width: 600px;
+    height: 0px 0px 0px 0px;
+}
+
+.content-food-header hr {
+    display: inline-block;
+    width: 600px;
+    border-top: 1px solid grey;
+
+}
+
+.content-food-header h3 {
+    font-size: 17px;
+}
+
+#section-information-food>div {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: relative;
+    width: 65%;
+    margin: 0px 0px;
+    background-color: white;
+}
+
+}
+
+.content-information-food img {
+    width: 100%;
+}
+
+.content-information-right {
+    position: relative;
+    top: 10%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.content-information-food h1 {
+    display: inline-block;
+
+    width: 600px;
+
+    font-size: 16px;
+    text-align: left;
+}
+
+.content-information-food a {
+
+    font-size: 15px;
+    color: black;
+}
+
+
+.button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white;
+    color: #835C3B;
+    border: 2px solid #835C3B;
+    padding: 1px 20px;
+}
+
+.button1:hover {
+    background-color: #835C3B;
+    color: white;
+}
+
+.button2 {
+    background-color: white;
+    color: #835C3B;
+    border: 2px solid #835C3B;
+    padding: 1px 20px;
+}
+
+.button2:hover {
+    background-color: #835C3B;
+    color: white;
+}
+
+.button3 {
+    background-color: white;
+    color: #835C3B;
+    border: 2px solid #835C3B;
+    padding: 1px 20px;
+}
+
+.button3:hover {
+    background-color: #835C3B;
+    color: white;
+}

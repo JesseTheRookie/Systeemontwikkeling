@@ -33,8 +33,6 @@ class DanceTicketModel extends TicketModel {
         return $this->danceTicketSession;
     }
 
-
-
     //GET and SET if you want to add artists
     public function addArtist($artist) {
         array_push($this->artists, $artist);

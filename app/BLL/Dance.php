@@ -15,7 +15,6 @@ class Dance Extends Controller{
         'days' => $days = $this->danceDal->getDifferentDays(),
         'tickets' => $tickets = $this->danceDal->getAllDanceTickets(),
         'artists' => $artistInfo = $this->danceDal->getArtists($tickets),
-        'ticketDate' => trim($_POST['ticketDate'])
       ];
 
       $this->ui('events/dance', $data);

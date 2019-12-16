@@ -166,7 +166,4 @@
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
-<!-- At the top of my webpage -->
-<script>
-</script>
 

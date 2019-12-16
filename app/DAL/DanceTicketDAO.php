@@ -10,14 +10,12 @@ class DanceTicketDAO{
     public function getAllDanceTickets(){
         $danceTicketArray = array();
 
-        $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.status, t.ticketQuantity, t.price, d.danceTicketLocation, d.danceTicketSession, a.artistName
+        $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession, l.stad
                 FROM tickets AS t
                 INNER JOIN danceticket AS d
                 ON t.ticketId = d.ticketId
-                INNER JOIN performancedance AS p
-                ON d.ticketId = p.danceTicketId
-                INNER JOIN artist AS a
-                ON p.danceArtistId = a.artistId
+                INNER JOIN locations AS l
+                ON d.locationId = l.locationId
                 ORDER BY t.startDateTime ASC
                 ");
 
@@ -27,14 +25,12 @@ class DanceTicketDAO{
           $danceTicketModel = new DanceTicketModel();
 
           $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
-          $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
           $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
           $danceTicketModel->setDanceTicketArtist($danceTicket->artistName);
           $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
           $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
           $danceTicketModel->setPrice($danceTicket->price);
-          $danceTicketModel->setDanceTicketLocation($danceTicket->danceTicketLocation);
-          $danceTicketModel->setDanceTicketArtist($danceTicket->artistName);
+          $danceTicketModel->setDanceTicketLocation($danceTicket->stad);
 
           //Add objects into array
           array_push($danceTicketArray, $danceTicketModel);
@@ -46,7 +42,7 @@ class DanceTicketDAO{
     public function getArtists() {
       $danceArtistArray = array();
 
-      $this->db->query("SELECT p.DanceTicketId, a.artistName, a.artistBio, a.eventType, a.artistId, a.imgUrl
+      $this->db->query("SELECT p.DanceTicketId, a.artistName, a.artistBio, a.artistId
                 FROM performancedance AS p
                 INNER JOIN artist AS a
                 ON p.DanceArtistId = a.artistId"
@@ -61,8 +57,6 @@ class DanceTicketDAO{
             $danceArtistModel->setArtistBio($danceArtist->artistBio);
             $danceArtistModel->setArtistId($danceArtist->artistId);
             $danceArtistModel->setArtistName($danceArtist->artistName);
-            $danceArtistModel->setEventType($danceArtist->eventType);
-            $danceArtistModel->setImgUrl($danceArtist->imgUrl);
 
           array_push($danceArtistArray, $danceArtistModel);
         }
