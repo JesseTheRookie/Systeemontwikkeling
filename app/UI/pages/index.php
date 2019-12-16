@@ -1,8 +1,8 @@
 <?php
-    require APPROOT . '/ui/inc/header.php';
+    require APPROOT . '/UI/inc/header.php';
 ?>
 <?php
-    require APPROOT . '/ui/inc/navigation.php';
+    require APPROOT . '/UI/inc/navigation.php';
 ?>
 
 
@@ -13,23 +13,35 @@
       </h1>
 
       <ul>
+
+    <?php foreach($data['dates'] as $date) : ?>
         <li>
           Haarlem
         </li>
         <li>
-          26TH - 29TH JULY
+          <?php
+                $startDate = $date->getEventStartDate();
+                $endDate = $date->getEventEndDate();
+                echo date("jS", strtotime($startDate)) . " - " . date("jS F", strtotime($endDate));
+          ?>
         </li>
+
         <li>
-          2019
+          <?php
+                $endDate = $date->getEventEndDate();
+                echo date("Y", strtotime($endDate));
+          ?>
         </li>
+    <?php endforeach; ?>
+
       </ul>
 
-      <a href=""
+      <a href="<?php echo URLROOT; ?>/pages/tickets"
          class="buttonStyle">
         Tickets
       </a>
 
-       <a href=""
+       <a href="<?php echo URLROOT; ?>/pages/about"
           class="buttonStyle">
         Program
       </a>
@@ -44,21 +56,23 @@
     <hr>
 
   <div class="content-festival-info">
-    <div>
-      25
-    </div>
+    <?php foreach($data['informations'] as $information) : ?>
+      <div>
+        <?php echo $information->getTotalArtists(); ?>
+      </div>
 
-    <div>
-      19
-    </div>
+      <div>
+        <?php echo $information->getTotalLocations(); ?>
+      </div>
 
-    <div>
-      15291
-    </div>
+      <div>
+        <?php echo $information->getTotalTickets(); ?>
+      </div>
 
-    <div>
-      4
-    </div>
+      <div>
+        <?php echo $information->getTotalEvents(); ?>
+      </div>
+    <?php endforeach; ?>
 
     <div>
       Artists
@@ -87,7 +101,7 @@
 
   <div class="content-events">
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/jazz">
         <img
             src="./img/frontpage-jazz.png"
             alt=""
@@ -106,7 +120,7 @@
     </div>
 
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/dance">
         <img
             src="./img/frontpage-dance.png"
             alt=""
@@ -125,7 +139,7 @@
     </div>
 
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/historic">
         <img
             src="./img/frontpage-historic.png"
             alt=""
@@ -144,7 +158,7 @@
     </div>
 
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/food">
         <img
             src="./img/frontpage-food.png"
             alt=""
@@ -163,7 +177,7 @@
     </div>
 
     <div class="eventContainer">
-      <a href="">
+      <a href="<?php echo URLROOT; ?>/events/kids">
         <img
             src="./img/frontpage-kids.png"
             alt=""
@@ -206,7 +220,7 @@
 </div>
 
 <?php
-    require APPROOT . '/views/inc/footer.php';
+    require APPROOT . '/UI/inc/footer.php';
 ?>
 
 <?php /*require APPROOT . '/views/inc/header.php'; ?>
