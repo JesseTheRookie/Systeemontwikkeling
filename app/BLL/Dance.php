@@ -1,5 +1,3 @@
-
-//Comment
 <?php
 class Dance Extends Controller{
 
