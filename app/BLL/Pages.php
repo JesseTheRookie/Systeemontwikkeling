@@ -25,22 +25,13 @@
       $this->ui('events/historic', $data);
     }
 
-    //Login, register and shopping cart pages
-    /*public function register(){
+    public function historicVenues(){
       $data = [
-        'title' => 'Registration Page',
+          'title' => 'Historic Venues'
       ];
 
-      $this->ui('pages/registreren', $data);
-    }
-
-    public function login(){
-      $data = [
-        'title' => 'Login Page',
-      ];
-
-      $this->ui('pages/inloggen', $data);
-    }*/
+      $this->ui('events/historicVenues', $data);
+  }
 
     public function dashboard(){
       $data = "lol";
