@@ -7,7 +7,7 @@ class DanceTicketDAO{
     }
 
     //Get all dance tickets with artist names
-    public function getAllDanceTickets($ticketDate = 'Jopenkerk'){
+    public function getAllDanceTickets(){
         $danceTicketArray = array();
 
         $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.status, t.ticketQuantity, t.price, d.danceTicketLocation, d.danceTicketSession, a.artistName
@@ -18,18 +18,18 @@ class DanceTicketDAO{
                 ON d.ticketId = p.danceTicketId
                 INNER JOIN artist AS a
                 ON p.danceArtistId = a.artistId
-                WHERE d.danceTicketLocation = :ticketDate
                 ORDER BY t.startDateTime ASC
                 ");
 
-      $this->db->bind(':ticketDate', $ticketDate);
       $danceTickets = $this->db->resultSet();
 
         foreach ($danceTickets as $danceTicket) {
           $danceTicketModel = new DanceTicketModel();
 
           $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
+          $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
           $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
+          $danceTicketModel->setDanceTicketArtist($danceTicket->artistName);
           $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
           $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
           $danceTicketModel->setPrice($danceTicket->price);
@@ -82,9 +82,9 @@ class DanceTicketDAO{
 
        //Get all dance tickets with artist names
     public function dance(){
-        $danceTicketArray = array();
+       $danceTicketArray = array();
 
-        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.status, t.ticketQuantity, t.price, d.danceTicketLocation, d.danceTicketSession, a.artistName
+        $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.status, t.ticketQuantity, t.price, d.danceTicketLocation, d.danceTicketSession, a.artistName
                 FROM tickets AS t
                 INNER JOIN danceticket AS d
                 ON t.ticketId = d.ticketId
@@ -94,16 +94,19 @@ class DanceTicketDAO{
                 ON p.danceArtistId = a.artistId
                 WHERE d.danceTicketLocation = 'Jopenkerk'
                 ORDER BY t.startDateTime ASC
-
                 ");
 
-        $danceTickets = $this->db->resultSet();
+      //$this->db->bind(':name', $ticketDate);
+
+      $danceTickets = $this->db->resultSet();
 
         foreach ($danceTickets as $danceTicket) {
           $danceTicketModel = new DanceTicketModel();
 
           $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
+          $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
           $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
+          $danceTicketModel->setDanceTicketArtist($danceTicket->artistName);
           $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
           $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
           $danceTicketModel->setPrice($danceTicket->price);
