@@ -161,7 +161,7 @@
 
 	    		<br>
 
-	    		<a href="ticketpagina" class="button">
+	    		<a href="<?php echo URLROOT; ?>/events/historicVenues" class="button">
 	    			LEARN MORE
 	    		</a>
 
