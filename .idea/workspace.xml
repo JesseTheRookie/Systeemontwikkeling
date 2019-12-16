@@ -6,10 +6,8 @@
       <change beforePath="$PROJECT_DIR$/app/BLL/JazzTicketService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/BLL/JazzTicketService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/DAL/JazzTicketDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DAL/JazzTicketDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Model/ArtistModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/ArtistModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/JazzTicketModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/JazzTicketModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Model/TicketModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/TicketModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/UI/events/jazz.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/events/jazz.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/UI/inc/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/inc/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/jazz.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/jazz.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +57,7 @@
       <workItem from="1575281715111" duration="841000" />
       <workItem from="1575282784040" duration="69000" />
       <workItem from="1575871255441" duration="7217000" />
+      <workItem from="1576487829232" duration="3193000" />
     </task>
     <servers />
   </component>

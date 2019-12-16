@@ -3,7 +3,6 @@ abstract class TicketModel{
     private $ticketId;
     private $startDateTime;
     private $endDateTime;
-    private $status;
     private $ticketQuantity;
     private $price;
 
