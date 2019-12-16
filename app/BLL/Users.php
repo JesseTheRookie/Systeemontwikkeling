@@ -1,4 +1,4 @@
-<?php   
+<?php
     class Users EXTENDS Controller{
         public function __construct(){
             $this->userModel = $this->model('User');
@@ -22,7 +22,7 @@
                 $user = new User();
                 $user->setUserName(trim($_POST['name']));
                 $user->setUserLastName(trim($_POST['lastName']));
-                $user->setEmail(trim($_POST['email']));
+                $user->setEmail(trim(($_POST['email'])));
                 $user->setStreet(trim($_POST['street']));
                 $user->setHouse(trim($_POST['house']));
                 $user->setPhone(trim($_POST['phone']));
@@ -118,13 +118,13 @@
 
                     //Hash password
                     $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
-                
+
                     //Register user
                     if($this->userDAO->register($user)){
                         flash('registerSuccess', 'You are now registered');
                         redirect('users/login');
                     } else {
-                        die('Something went wrong'); 
+                        die('Something went wrong');
                     }
 
                 } else {
@@ -189,9 +189,9 @@
                         //User found
                     } else{
                         //User not found
-                        $data['emailError'] = 'No user found!';                        
+                        $data['emailError'] = 'No user found!';
                     }
-                }                
+                }
 
                 //Make sure errors are empty
                 if(empty($data['emailError']) && empty($data['passwordError'])){
@@ -201,7 +201,7 @@
 
                     if($loggedInUser){
                         //Create Session
-                        $this->createUserSession($loggedInUser); 
+                        $this->createUserSession($loggedInUser);
                     } else {
                         $data['passwordError'] = 'Password incorrect';
                         $data['emailError'] = '';
@@ -227,10 +227,27 @@
             }
         }
 
+        public function forgot(){
+            //Init data
+            $data = [
+                'title' => 'Forgot password'
+            ];
+
+            //Load UI
+            $this->ui('users/forgot', $data);
+        }
+
         public function createUserSession($loggedInUser){
             $_SESSION['userId'] = $loggedInUser->userInlogId;
-            $_SESSION['useremail'] = $loggedInUser->getUserEmail;
+            $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
             $_SESSION['userType'] = $loggedInUser->userType;
+            $_SESSION['userName'] = $loggedInUser->userName;
+            $_SESSION['userLastName'] = $loggedInUser->userLastName;
+            $_SESSION['userStreet'] = $loggedInUser->userStreet;
+            $_SESSION['userHouse'] = $loggedInUser->userHouse;
+            $_SESSION['userPhone'] = $loggedInUser->userPhoneStreet;
+            $_SESSION['userGender'] = $loggedInUser->userGender;
+
 
             if($_SESSION['userType'] == 1){
                 redirect('cms/dashboard');
@@ -254,5 +271,3 @@
             }
         }
     }
-
-   

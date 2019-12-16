@@ -5,7 +5,6 @@ class ArtistModel
     private $artistName;
     private $artistBio;
     private $ticketId;
-    private $eventType;
 
     public function setTicketId($id){
         $this->ticketId = $id;
@@ -31,11 +30,12 @@ class ArtistModel
     public function getArtistBio(){
         return $this->artistBio;
     }
-    public function setEventType($type){
-        $this->eventType = $type;
-    }
-    public function getEventType()
+    public function setImgUrl($imgUrl)
     {
-        return $this->eventType;
+        $this->imgUrl = $imgUrl;
     }
+    public function getImgUrl(){
+        return $this->imgUrl;
+    }
+
 }

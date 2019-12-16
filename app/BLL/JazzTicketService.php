@@ -11,9 +11,9 @@ class JazzTicketService extends Controller {
         $artists = $this->getAllArtists();
         $tickets = $this->jazzTicketDAO->getJazzTickets();
 
-        foreach($tickets as $ticket) {
-            foreach($artists as $artist){
-                if($ticket->getTicketId == $artist->getTicketId)
+        foreach($tickets as $ticket) :
+            foreach($artists as $artist) :
+                if($ticket->getTicketId() == $artist->getTicketId())
                     $ticket->addArtist($artist);
             }
         }

@@ -11,14 +11,12 @@ class JazzTicketDAO{
     public function getJazzTickets(){
         $jazzTicketArray = array();
 
-        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.status, t.ticketQuantity, t.price, j.jazzTicketLocation, j.jazzTicketHall, a.artistName
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, j.jazzTicketHall, l.stad
                 FROM tickets AS t
-                INNER JOIN jazzticket AS j 
+                INNER JOIN jazzticket AS j
                 ON t.ticketId = j.ticketId
-                INNER JOIN performancejazz AS p
-                ON j.ticketId = p.JazzTicketId
-                INNER JOIN artist AS a 
-                ON p.JazzArtist = a.artistId");
+                INNER JOIN locations AS l
+                ON j.locationId = l.locationId");
 
         $jazzTickets = $this->db->resultSet();
 
@@ -26,11 +24,10 @@ class JazzTicketDAO{
             $jazzTicketModel = new JazzTicketModel();
 
             $jazzTicketModel->setTicketId($jazzTicket->ticketId);
-            $jazzTicketModel->setStatus($jazzTicket->status);
             $jazzTicketModel->setTicketQuantity($jazzTicket->ticketQuantity);
             $jazzTicketModel->setStartDateTime($jazzTicket->startDateTime);
             $jazzTicketModel->setEndDateTime($jazzTicket->endDateTime);
-            $jazzTicketModel->setJazzTicketLocation($jazzTicket->jazzTicketLocation);
+            $jazzTicketModel->setJazzTicketLocation($jazzTicket->stad);
             $jazzTicketModel->setJazzTicketHall($jazzTicket->jazzTicketHall);
             $jazzTicketModel->setPrice($jazzTicket->price);
 
@@ -43,9 +40,9 @@ class JazzTicketDAO{
 
         $artistArray = array();
 
-        $this->db->query("SELECT p.JazzTicketId, a.artistName, a.artistBio, a.eventType, a.artistId
+        $this->db->query("SELECT p.JazzTicketId, a.artistName, a.artistBio, a.artistId
                 FROM performancejazz AS p
-                INNER JOIN artist AS a 
+                INNER JOIN artist AS a
                 ON p.JazzArtist = a.artistId");
 
         $artists =  $this->db->resultSet();
@@ -57,7 +54,6 @@ class JazzTicketDAO{
             $artistModel->setArtistBio($artist->artistBio);
             $artistModel->setArtistId($artist->artistId);
             $artistModel->setArtistName($artist->artistName);
-            $artistModel->setEventType($artist->eventType);
 
             array_push($artistArray, $artistModel);
         }

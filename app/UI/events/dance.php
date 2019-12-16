@@ -8,16 +8,22 @@
     <div id="section-dance-header">
         <div class="content-dance-header">
             <div>
-            <img src="../img/banner-dance.jpg" alt="">
+                <img src="./img/banner-dance.jpeg"
+                    alt="Banner header dance page"
+                    title="Banner header dance page"
+                />
             </div>
+
             <div class="content-dance-right">
                 <h3>
                     Haarlem <br>Dance.
                 </h3>
-                <a href="">
+
+                <a href="#section-artists-dance">
                     Performers
                 </a>
-                <a href="">
+
+                <a href="#layout-header-dance">
                     Tickets
                 </a>
             </div>
@@ -31,25 +37,34 @@
     </h2>
 
     <hr>
+
     <div class="content-artists-dance">
-          <?php foreach($data['artists'] as $artist) : ?>
-        <div>
-            <img src="<?php echo URLROOT; ?>/<?php echo $artist->imgUrl ?>" alt="">
-            <button class="myBtn"><?php echo $artist->artistName ?></button>
+        <?php foreach($data['artists'] as $artist) : ?>
+            <div>
+                <img src="<?php echo URLROOT; ?>/<?php echo $artist->getImgUrl(); ?>" alt="">
+                <button class="myBtn"><?php echo $artist->getArtistName(); ?></button>
 
             <div id="myModal" class="modal">
                 <article class="modal-content">
-                        <article class="modal-header">
-                            <span class="close">×</span>
-                            <h1><?php echo $artist->artistName ?></h1>
-                        </article>
+                    <article class="modal-header">
+
+                        <span class="close">×</span>
+
+                        <h1>
+                            <?php echo $artist->getArtistName(); ?>
+                        </h1>
+
+                        <hr>
+                    </article>
                     <article class="modal-body">
-                        <p><?php echo $artist->artistBio ?></p>
+                        <p>
+                            <?php echo $artist->getArtistBio(); ?>
+                        </p>
                     </article>
                 </article>
             </div>
-        </div>
-<?php endforeach; ?>
+    </div>
+    <?php endforeach; ?>
 
     </div>
 </div>
@@ -62,65 +77,101 @@
   <hr>
 
   <div class="content-header-dance">
-    <div>
-        <h2>
-            Fri.
-        </h2>
-        <p>
-            27th July
-        </p>
-        <form action="<?php echo URLROOT; ?>DanceTicketService/searchByDay" method="post" role="form">
-                <input type="text" name="name" id="name" value="<?php echo $data['name'] ?>">
-                <input type="submit" name="submit">
-        </form>
+    <?php foreach ($data['days'] as $day) : ?>
+
+    <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
+            <div>
+            <h2>
+                <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
+            </h2>
+
+            <p>
+                <?php echo date("jS F", strtotime($day->startDateTime)); ?>
+            </p>
+            <form
+                action="<?php echo URLROOT; ?>/dance"
+                method="POST"
+                role="form">
+
+                <input
+                    type="text"
+                    name="ticketDate"
+                    value="Jopenkerk"
+                />
+
+                <input
+                    type="submit"
+                    name="name"
+                    value="Jopenkerk"
+                />
+            </form>
+        </div>
+    <?php endif; ?>
+    <?php endforeach; ?>
     </div>
 
-    <div>
-        <h2>
-            Sat.
-        </h2>
-        <p>
-            28th July
-        </p>
-        <form action="<?php echo URLROOT; ?>DanceTicketService/searchByDay" method="post" role="form">
-                <input type="text" name="artistName" id="name" value="dateTicketsFri">
-                <input type="submit" name="name" value="dateTickets">
-        </form>    </div>
+<?php foreach($data['tickets'] as $ticket) : ?>
+    <table class="table-tickets-dance">
+        <tr>
+            <td>
+                <?php $artists = $ticket->getArtists();
 
-    <div>
-        <h2>
-            Sun.
-        </h2>
-        <p>
-            29th July
-        </p>
-        <a href="" class="ticket-days-dance">Tickets</a>
-    </div>
-  </div>
-  <?php foreach($data['tickets'] as $tickets) : ?>
-<table class="table-tickets-dance">
-  <tr>
-    <td>    <?php echo $tickets->danceTicketArtist; ?></td>
-    <td>    <?php echo $tickets->startTijd; ?></td>
-    <td>    <?php echo $tickets->danceTicketLocation; ?></td>
-    <td>   € <?php echo $tickets->Price; ?></td>
-    <td>    <select class="select-dance">
-                    <option value="Quantity">Quantity</option>
-                    <option value="1">1</option>
-                     <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    </select>
-    </td>
-    <td> <a href="" class="button-add-dance">Add</a></td>
-  </tr>
-</table>
+                    foreach($artists as $artist) : ?>
+                        <div>
+                            <p>
+                                <?php echo $artist->getArtistName(); ?>
+                            </p>
+                        </div>
+                    <?php endforeach; ?>
+
+            </td>
+
+            <td>
+                <?php echo $ticket->getStartDateTime(); ?>
+            </td>
+
+            <td>
+                <?php echo $ticket->getDanceTicketLocation(); ?>
+            </td>
+
+            <td>
+                € <?php echo $ticket->getPrice(); ?>
+            </td>
+
+            <td>
+                <select class="select-dance">
+                    <option value="Quantity">
+                        Quantity
+                    </option>
+                    <option value="1">
+                        1
+                    </option>
+                    <option value="2">
+                        2
+                    </option>
+                    <option value="3">
+                        3
+                    </option>
+                    <option value="4">
+                        4
+                    </option>
+                </select>
+            </td>
+
+                <td>
+                    <a href="" class="button-add-dance">
+                        Add
+                    </a>
+                </td>
+        </tr>
+    </table>
 <?php endforeach; ?>
-
 </div>
+
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
+<!-- At the top of my webpage -->
+<script>
+</script>
 
-<style>
-</style>

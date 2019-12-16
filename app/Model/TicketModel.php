@@ -3,7 +3,6 @@ abstract class TicketModel{
     private $ticketId;
     private $startDateTime;
     private $endDateTime;
-    private $status;
     private $ticketQuantity;
     private $price;
 
@@ -25,12 +24,7 @@ abstract class TicketModel{
     public function getEndDateTime(){
         return $this->endDateTime;
     }
-    public function setStatus($status){
-        $this->status = $status;
-    }
-    public function getStatus(){
-        return $this->status;
-    }
+
     public function setTicketQuantity($quantity){
         $this->ticketQuantity = $quantity;
     }

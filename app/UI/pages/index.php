@@ -13,15 +13,27 @@
       </h1>
 
       <ul>
+
+    <?php foreach($data['dates'] as $date) : ?>
         <li>
           Haarlem
         </li>
         <li>
-          26TH - 29TH JULY
+          <?php
+                $startDate = $date->getEventStartDate();
+                $endDate = $date->getEventEndDate();
+                echo date("jS", strtotime($startDate)) . " - " . date("jS F", strtotime($endDate));
+          ?>
         </li>
+
         <li>
-          2019
+          <?php
+                $endDate = $date->getEventEndDate();
+                echo date("Y", strtotime($endDate));
+          ?>
         </li>
+    <?php endforeach; ?>
+
       </ul>
 
       <a href="<?php echo URLROOT; ?>/pages/tickets"
@@ -44,21 +56,23 @@
     <hr>
 
   <div class="content-festival-info">
-    <div>
-      25
-    </div>
+    <?php foreach($data['informations'] as $information) : ?>
+      <div>
+        <?php echo $information->getTotalArtists(); ?>
+      </div>
 
-    <div>
-      19
-    </div>
+      <div>
+        <?php echo $information->getTotalLocations(); ?>
+      </div>
 
-    <div>
-      15291
-    </div>
+      <div>
+        <?php echo $information->getTotalTickets(); ?>
+      </div>
 
-    <div>
-      4
-    </div>
+      <div>
+        <?php echo $information->getTotalEvents(); ?>
+      </div>
+    <?php endforeach; ?>
 
     <div>
       Artists
