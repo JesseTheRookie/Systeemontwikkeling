@@ -30,13 +30,6 @@ class ArtistModel
     public function getArtistBio(){
         return $this->artistBio;
     }
-    public function setEventType($type){
-        $this->eventType = $type;
-    }
-    public function getEventType()
-    {
-        return $this->eventType;
-    }
     public function setImgUrl($imgUrl)
     {
         $this->imgUrl = $imgUrl;

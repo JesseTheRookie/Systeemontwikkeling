@@ -114,20 +114,15 @@
     <table class="table-tickets-dance">
         <tr>
             <td>
-                <?php $artists = $ticket->getArtists();
-
-                    foreach($artists as $artist) : ?>
-                        <div>
-                            <p>
-                                <?php echo $artist->getArtistName(); ?>
-                            </p>
-                        </div>
-                    <?php endforeach; ?>
-
+                <?php echo $ticket->getDanceTicketArtist(); ?>
             </td>
 
             <td>
-                <?php echo $ticket->getStartDateTime(); ?>
+                <?php
+                    $date1 = $ticket->getEndDateTime();
+                    $date2 = $ticket->getStartDateTime();
+                    echo round((strtotime($date1) - strtotime($date2)) /60);
+                 ?>
             </td>
 
             <td>

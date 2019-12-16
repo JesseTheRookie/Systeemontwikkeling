@@ -14,7 +14,8 @@ class Dance Extends Controller{
         'title' => 'Dance Page',
         'days' => $days = $this->danceDal->getDifferentDays(),
         'tickets' => $tickets = $this->danceDal->getAllDanceTickets(),
-        'artists' => $artistInfo = $this->danceDal->getArtists($tickets)
+        'artists' => $artistInfo = $this->danceDal->getArtists($tickets),
+        'ticketDate' => trim($_POST['ticketDate'])
       ];
 
       $this->ui('events/dance', $data);
@@ -34,7 +35,7 @@ class Dance Extends Controller{
 
         return $tickets;
     }
-/*
+
     public function tickets(){
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -58,7 +59,7 @@ class Dance Extends Controller{
 
       $this->ui('events/dance', $data);
     }
-*/
+
     //Get all artists from DAO layer in order to print them under "performers"
     public function getAllArtists(){
         return $this->danceDal->getArtists();
