@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="761883f6-99fd-4721-ad05-90d27fd4b858" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/BLL/JazzTicketService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/BLL/JazzTicketService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DAL/JazzTicketDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DAL/JazzTicketDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/ArtistModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/ArtistModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/JazzTicketModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/JazzTicketModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Model/TicketModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/TicketModel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/UI/events/jazz.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/events/jazz.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/UI/inc/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/UI/inc/header.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +29,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -48,8 +55,10 @@
       <updated>1574856504072</updated>
       <workItem from="1574856508171" duration="1546000" />
       <workItem from="1574858086979" duration="114000" />
-      <workItem from="1575126045606" duration="15464000" />
-      <workItem from="1575874475417" duration="30000" />
+      <workItem from="1575126045606" duration="14864000" />
+      <workItem from="1575281715111" duration="841000" />
+      <workItem from="1575282784040" duration="69000" />
+      <workItem from="1575871255441" duration="7217000" />
     </task>
     <servers />
   </component>

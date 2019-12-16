@@ -1,6 +1,6 @@
 
 		<title> 
-			<?php echo $data['title']; ?>
+			Register
 		</title>
 
 		<link rel="stylesheet" type="text/css" href="style.css"> <!--algemeen stylesheet-->
@@ -45,17 +45,6 @@
 			.cleanForm {
 			    width: 60%;
 			    margin: auto;
-			}
-
-			.addressInput 
-			{
-				width: 18em;
-				font-weight: bold;
-			}
-
-			#houseInput
-			{
-				width: 4em;
 			}
 
 			.inputHeader 
@@ -159,49 +148,49 @@
 
 			        <label class="inputHeader">
 			        	First name *
-			        	<input type="text" name="name" <?php echo (!empty($data['nameError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['name']; ?>">
+			        	<input type="text" name="name" <?php echo (!empty($data['nameError'])) ? 'is-invalid' : ''; ?> value="">
 						<span class="invalidFeedback"> <?php echo $data['nameError'] ?> </span>
 			        </label>
 
 			        <label class="inputHeader">
 			        	Last name *
-			        	<input type="text" name="lastName" <?php echo (!empty($data['lastNameError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['lastName']; ?>">
+			        	<input type="text" name="lastName" <?php echo (!empty($data['lastNameError'])) ? 'is-invalid' : ''; ?> value="">
 			        	<span class="invalidFeedback"><?php echo $data['lastNameError'] ?></span>
 					</label>
 
 			        <label class="inputHeader">
 			        	E-email *
-			        	<input type="email" name="email" <?php echo (!empty($data['emailError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['email']; ?>">
+			        	<input type="email" name="email" <?php echo (!empty($data['emailError'])) ? 'is-invalid' : ''; ?> value="">
 						<span class="invalidFeedback"><?php echo $data['emailError'] ?></span>
 			        </label>
 
 			        <label class="inputHeader">
 			        	Phone number *
-			        	<input type="text" name="phone" <?php echo (!empty($data['phoneError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['phone']; ?>">
+			        	<input type="text" name="phone" <?php echo (!empty($data['phoneError'])) ? 'is-invalid' : ''; ?> value="">
 						<span class="invalidFeedback"><?php echo $data['phoneError'] ?></span>
 			        </label>
 
-			        <label class="addressInput" class="inputHeader">
-			        	Address *
-			        	<input class="addressInput" type="text" name="address" <?php echo (!empty($data['addressError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['address']; ?>">
-			        	<span class="invalidFeedback"><?php echo $data['addressError'] ?></span>
+			        <label class="inputHeader">
+			        	Street *
+			        	<input class="streetInput" type="text" name="street" <?php echo (!empty($data['streetError'])) ? 'is-invalid' : ''; ?> value="">
+			        	<span class="invalidFeedback"><?php echo $data['streetError'] ?></span>
 					</label>
 
 			        <label class="inputHeader">
-			        	Number *
-			        	<input id="houseInput" type="number" name="house" <?php echo (!empty($data['houseError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['house']; ?>">
+			        	House Number *
+			        	<input id="houseInput" type="number" name="house" <?php echo (!empty($data['houseError'])) ? 'is-invalid' : ''; ?> value="">
 			        	<span class="invalidFeedback"><?php echo $data['houseError'] ?></span>
 					</label>
 
 			        <label class="inputHeader"> 
 			        	Password *
-			        	<input type="password" name="password" <?php echo (!empty($data['passwordError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['password']; ?>">
+			        	<input type="password" name="password" <?php echo (!empty($data['passwordError'])) ? 'is-invalid' : ''; ?> value="">
 			        	<span class="invalidFeedback"><?php echo $data['passwordError'] ?></span>
 					</label>
 
 			        <label class="inputHeader">
 			        	Confirm password *
-			        	<input type="password" name="passwordConfirm" <?php echo (!empty($data['passwordConfirmError'])) ? 'is-invalid' : ''; ?> value="<?php echo $data['passwordConfirm']; ?>">
+			        	<input type="password" name="passwordConfirm" <?php echo (!empty($data['passwordConfirmError'])) ? 'is-invalid' : ''; ?> value="">
 						<span class="invalidFeedback"><?php echo $data['passwordConfirmError'] ?></span>
 					</label>
 

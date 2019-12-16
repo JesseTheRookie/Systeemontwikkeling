@@ -151,6 +151,7 @@
     background-position: center;
     position: relative;
     top: 60px;
+    padding: 0px 0px 300px 0px;
     height: 80%;
     width: 100%;
     z-index: 1;
@@ -161,7 +162,7 @@
     position: relative;
     margin: 0 auto;
     text-align: center;
-    top: 40%;
+    padding: 200px 0px 0px 0px
 }
 
 .content-hero h1
@@ -298,6 +299,11 @@ hr
     text-transform: uppercase;
 }
 
+#layout-footer-25
+{
+    padding: 40px 0px;
+}
+
 #layout-footer-25 > div
 {
     display: grid;
@@ -420,6 +426,11 @@ width: 300px;
 height: 200px;
 }
 
+.content-artists-33
+{
+    padding: 0px 0px 100px 0px;
+}
+
 #section-dance-header > div
 {
     display: grid;
@@ -427,12 +438,15 @@ height: 200px;
     position: relative;
     width: 100%;
     margin: 0 auto;
-    background-image: linear-gradient(to bottom, #e8e8e8, #cbcbcb, #aeaeae, #939393, #787878);
+background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
 }
 
 .content-dance-header img
 {
     width: 100%;
+    height: 500px;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
 }
 
 .content-dance-right
@@ -443,12 +457,6 @@ height: 200px;
     margin: 0 auto;
 }
 
-.content-dance-header h3
-{
-    color: #ffffff;
-    font-size: 90px;
-    padding: 0px 0px 40px 0px;
-}
 
 .content-dance-header a
 {
@@ -486,7 +494,7 @@ hr
 
 #section-artists-dance
 {
-        background-image: linear-gradient(to bottom, #e8e8e8, #cbcbcb, #aeaeae, #939393, #787878);
+background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
 }
 
 
@@ -520,10 +528,26 @@ hr
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
+  padding: 40px 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }
+
+.modal-content p
+{
+    color: #000000;
+    font-size: 18px;
+    line-height: 1.5em;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.modal-content h1
+{
+    color: #000000;
+    font-size: 40px;
+}
+
 
 /* The Close Button */
 .close {
@@ -742,4 +766,138 @@ td
 .bottom-p
 {
     padding: 0px 0px 40px 0px !important;
+}
+
+.content-dance-header h3
+{
+    color: #ffffff;
+    font-size: 70px;
+    padding: 100px 0px 40px 0px;
+    text-align: left;
+}
+#layout-header-dance
+{
+background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
+margin-bottom: 0px;
+    padding: 0px 0px 100px 0px;
+}
+
+#section-artists-dance > div
+{
+    padding: 0px 0px 100px 0px;
+}
+
+#section-artists-dance h2
+{
+     font-size: 60px;
+    color: #ffffff;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0px 0px 0px;
+}
+
+#layout-header-dance h1
+{
+    font-size: 60px;
+    color: #ffffff;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0px 0px 0px;
+}
+#section-header-dance > div
+{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0px 0px 0px 0px;
+}
+#layout-header-dance > div {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    position: relative;
+    margin: 0 auto;
+    font-size: 20px;
+    width: 80%;
+    text-align: center;
+    padding: 0px 0px 60px 0px;
+}
+.content-header-dance h2
+{
+font-size: 70px;
+color: #ffffff;
+}
+
+.content-header-dance p
+{
+font-size: 20px;
+color: #ffffff;
+padding: 20px 0px;
+}
+
+.content-header-dance a
+{
+font-size: 28px;
+color: #ffffff;
+padding: 20px 0px;
+text-decoration: none;
+border: 1px solid #ffffff;
+padding: 8px 20px;
+text-transform: uppercase;
+}
+
+.content-header-dance a:hover
+{
+    color: #000000;
+    background: #ffffff;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+}
+
+.table-tickets-dance
+{
+    width: 70%;
+    color: #ffffff;
+    font-size: 20px;
+    border: none;
+    margin: 0 auto;
+}
+
+.table-tickets-dance tr
+{
+    height: 100px;
+}
+
+.table-tickets-dance td
+{
+    width: 20%;
+}
+
+.select-dance
+{
+    background: transparent;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.button-add-dance
+{
+    background: transparent;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 12px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.button-add-dance:hover
+{
+    background: white;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+    color: #000000;
 }

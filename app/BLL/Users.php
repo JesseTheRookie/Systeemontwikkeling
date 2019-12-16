@@ -1,7 +1,8 @@
-<?php   
+<?php
     class Users EXTENDS Controller{
         public function __construct(){
             $this->userModel = $this->model('User');
+            $this->userDAO = $this->dal('UserDAO');
         }
 
         public function register(){
@@ -9,24 +10,31 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //Process form
 
-                //Sanitize POST data
+                //Sanitize POST data and determine validation regex
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
+                $nameValidation = "/^[a-zA-Z ]*$/";
+                $streetValidation = "/^[a-zA-Z ]*$/";
+                $phoneValidation = "/^[-0-9]*$/";
+                $houseValidation = "/^[0-9]*$/";
 
                 //Init data
+                $user = new User();
+                $user->setUserName(trim($_POST['name']));
+                $user->setUserLastName(trim($_POST['lastName']));
+                $user->setEmail(trim(($_POST['email'])));
+                $user->setStreet(trim($_POST['street']));
+                $user->setHouse(trim($_POST['house']));
+                $user->setPhone(trim($_POST['phone']));
+                $user->setGender(trim($_POST['gender']));
+                $user->setPassword(trim($_POST['password']));
+                $user->setPasswordConfirm(trim($_POST['passwordConfirm']));
+
                 $data = [
-                    'name' => trim($_POST['name']),
-                    'lastName' => trim($_POST['lastName']),
-                    'email' => trim($_POST['email']),
-                    'address' => trim($_POST['address']),
-                    'house' => trim($_POST['house']),
-                    'phone' => trim($_POST['phone']),
-                    'gender' => trim($_POST['gender']),
-                    'password' => trim($_POST['password']),
-                    'passwordConfirm' => trim($_POST['passwordConfirm']),
                     'nameError' => '',
                     'lastNameError' => '',
                     'emailError' => '',
-                    'addressError' => '',
+                    'streetError' => '',
                     'houseError' => '',
                     'zipError' => '',
                     'phoneError' => '',
@@ -35,60 +43,73 @@
                 ];
 
                 //Validate email not empty
-                if(empty($data['email'])){
+                if(empty($user->getEmail())){
                     $data['emailError'] = 'Please enter email';
-                } else {
+                }else {
                     //Check if email already exists
-                    if($this->userModel->findUserByEmail($data)){
+                    if($this->userDAO->findUserByEmail($user)){
                         $data['emailError'] = 'Email is already taken';
                     }
                 }
 
                 //Validate Name not empty
-                if(empty($data['name'])){
+                if(empty($user->getUserName())){
                     $data['nameError'] = 'Please enter name';
+                } elseif(!preg_match($nameValidation, $user->getUserName())){
+                    $data['nameError'] = 'Name can only contain letters and whitespace';
                 }
 
                 //Validate lastName not empty
-                if(empty($data['lastName'])){
+                if(empty($user->getUserLastName())){
                     $data['lastNameError'] = 'Please enter last name';
-                }
-                //Validate phone not empty
-                if(empty($data['phone'])){
-                    $data['phoneError'] = 'Please enter phone number';
+                } elseif(!preg_match($nameValidation, $user->getUserLastName())){
+                    $data['lastNameError'] = 'Name can only contain letters and whitespace';
                 }
 
-                //Validate Address not empty
-                if(empty($data['address'])){
-                    $data['addressError'] = 'Please enter address';
+                //Validate phone not empty
+                if(empty($user->getPhone())){
+                    $data['phoneError'] = 'Please enter phone number';
+                } elseif(!preg_match($phoneValidation, $user->getPhone())){
+                    $data['phoneError'] = 'Phone can only contain numbers and -';
+                }
+
+                //Validate street not empty
+                if(empty($user->getStreet())){
+                    $data['streetError'] = 'Please enter street';
+                } elseif(!preg_match($streetValidation, $user->getStreet())){
+                    $data['streetError'] = 'Street can only contain letters and whitespace';
                 }
 
                 //Validate House Number not empty
-                if(empty($data['house'])){
+                if(empty($user->getHouse())){
                     $data['houseError'] = 'Please enter house number';
+                } elseif(!preg_match($houseValidation, $user->getHouse())){
+                    $data['houseError'] = 'House number can only contain numbers';
                 }
 
                 //Validate Password not empty
-                if(empty($data['password'])){
+                if(empty($user->getPassword())){
                     $data['passwordError'] = 'Please enter password';
-                } elseif(strlen($data['password']) < 6) {
+                } elseif(strlen($user->getPassword()) < 6) {
                     $data['passwordError'] = 'Password must be at least 6 characters long';
+                } elseif(!preg_match($passwordValidation, $user->getPassword())){
+                    $data['passwordError'] = 'Password must have at least one numeric value, one uppercase character and one lowercase character';
                 }
 
                  //Validate password confirmation
-                 if(empty($data['passwordConfirm'])){
+                 if(empty($user->getPasswordConfirm())){
                     $data['passwordConfirmError'] = 'Please confirm password';
                 } else {
-                    if($data['password'] != $data['passwordConfirm']){
+                    if($user->getPassword() != $user->getPasswordConfirm()){
                         $data['passwordConfirmError'] = 'Passwords do not match!';
                     }
                 }
 
                 //Convert gender to number
-                if($data['gender'] == 'male'){
-                    $data['gender'] = 1;
+                if($user->getGender() == 'male'){
+                    $user->setGender(1);
                 } else {
-                    $data['gender'] = 0;
+                    $user->setGender(0);
                 }
 
                 //Make sure errors are empty
@@ -96,23 +117,20 @@
                     //Validated
 
                     //Hash password
-                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-                
+                    $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
+
                     //Register user
-                    if($this->userModel->register($data)){
+                    if($this->userDAO->register($user)){
                         flash('registerSuccess', 'You are now registered');
                         redirect('users/login');
                     } else {
-                        die('Something went wrong'); 
+                        die('Something went wrong');
                     }
 
                 } else {
-                    //Load view with errors
+                    //Load view with data
                     $this->ui('users/register', $data);
                 }
-
-
-
 
             } else {
                 //Init data
@@ -120,7 +138,7 @@
                     'name' => '',
                     'lastName' => '',
                     'email' => '',
-                    'address' => '',
+                    'street' => '',
                     'house' => '',
                     'phone' => '',
                     'gender' => '',
@@ -129,7 +147,7 @@
                     'nameError' => '',
                     'lastNameError' => '',
                     'emailError' => '',
-                    'addressError' => '',
+                    'streetError' => '',
                     'houseError' => '',
                     'zipError' => '',
                     'phoneError' => '',
@@ -151,40 +169,39 @@
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
                 //Init data
-                $data = [
-                    'email' => trim($_POST['email']),
-                    'password' => trim($_POST['password']),                    
-                ];
+                $user = new User();
+                $user->setEmail(trim($_POST['email']));
+                $user->setPassword(trim($_POST['password']));
 
                 //Validate email not empty
-                if(empty($data['email'])){
+                if(empty($user->getEmail())){
                     $data['emailError'] = 'Please enter email';
                 }
 
                 //Validate Password not empty
-                if(empty($data['password'])){
+                if(empty($user->getPassword())){
                     $data['passwordError'] = 'Please enter password';
                 }
 
                 //Check user by email
-                if(!empty($data['email'])){
-                    if($this->userModel->findUserByEmail($data)){
+                if(!empty($user->getEmail())){
+                    if($this->userDAO->findUserByEmail($user)){
                         //User found
                     } else{
                         //User not found
-                        $data['emailError'] = 'No user found!';                        
+                        $data['emailError'] = 'No user found!';
                     }
-                }                
+                }
 
                 //Make sure errors are empty
                 if(empty($data['emailError']) && empty($data['passwordError'])){
                     //Validated
                     //Check and login
-                    $loggedInUser = $this->userModel->login($data['email'], $data['password']);
+                    $loggedInUser = $this->userDAO->login($user);
 
                     if($loggedInUser){
                         //Create Session
-                        $this->createUserSession($loggedInUser); 
+                        $this->createUserSession($loggedInUser);
                     } else {
                         $data['passwordError'] = 'Password incorrect';
                         $data['emailError'] = '';
@@ -192,7 +209,7 @@
                     }
 
                 } else {
-                    //Load view with errors
+                    //Load view with data
                     $this->ui('users/login', $data);
                 }
 
@@ -203,7 +220,6 @@
                     'password' => '',
                     'emailError' => '',
                     'passwordError' => ''
-
                 ];
 
                 //Load ui
@@ -211,10 +227,33 @@
             }
         }
 
-        public function createUserSession($user){
-            $_SESSION['userId'] = $user->userInlogId;
-            $_SESSION['useremail'] = $user->userInlogId;
+        public function forgot(){
+            //Init data
+            $data = [
+                'title' => 'Forgot password'
+            ];
+
+            //Load UI
+            $this->ui('users/forgot', $data);
+        }
+
+        public function createUserSession($loggedInUser){
+            $_SESSION['userId'] = $loggedInUser->userInlogId;
+            $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
+            $_SESSION['userType'] = $loggedInUser->userType;
+            $_SESSION['userName'] = $loggedInUser->userName;
+            $_SESSION['userLastName'] = $loggedInUser->userLastName;
+            $_SESSION['userStreet'] = $loggedInUser->userStreet;
+            $_SESSION['userHouse'] = $loggedInUser->userHouse;
+            $_SESSION['userPhone'] = $loggedInUser->userPhoneStreet;
+            $_SESSION['userGender'] = $loggedInUser->userGender;
+
+
+            if($_SESSION['userType'] == 1){
+                redirect('cms/dashboard');
+            } else {
             redirect('pages/index');
+            }
         }
 
         public function logout(){
@@ -232,5 +271,3 @@
             }
         }
     }
-
-   
