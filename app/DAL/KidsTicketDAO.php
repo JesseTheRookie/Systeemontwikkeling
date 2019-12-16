@@ -1,6 +1,6 @@
 <?php
 
-class KidsTicket {
+class KidsTicketDAO {
 
 	    private $db;
 

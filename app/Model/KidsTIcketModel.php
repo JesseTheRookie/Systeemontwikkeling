@@ -3,7 +3,7 @@
 require('TicketModel.php');
 require('ArtistModel.php');
 
-abstract class KidsTicket extends TicketModel{
+ class KidsTicketModel extends TicketModel{
     //TicketId - startDateTime - endDateTime - ticketQuantity - price <- in Ticketmodel
     protected  $kidsTicketLocation;
     protected  $kidsTicketArtist;
