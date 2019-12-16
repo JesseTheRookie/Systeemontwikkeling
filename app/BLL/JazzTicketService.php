@@ -13,10 +13,10 @@ class JazzTicketService extends Controller {
 
         foreach($tickets as $ticket) :
             foreach($artists as $artist) :
-                if($ticket->getTicketId == $artist->getTicketId)
+                if($ticket->getTicketId() == $artist->getTicketId())
                     $ticket->addArtist($artist);
-            endforeach;
-        endforeach;
+            }
+        }
 
         return $tickets;
     }

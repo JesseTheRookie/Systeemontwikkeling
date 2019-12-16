@@ -227,6 +227,16 @@
             }
         }
 
+        public function forgot(){
+            //Init data
+            $data = [
+                'title' => 'Forgot password'
+            ];
+
+            //Load UI
+            $this->ui('users/forgot', $data);
+        }
+
         public function createUserSession($loggedInUser){
             $_SESSION['userId'] = $loggedInUser->userInlogId;
             $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
@@ -261,7 +271,3 @@
             }
         }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
