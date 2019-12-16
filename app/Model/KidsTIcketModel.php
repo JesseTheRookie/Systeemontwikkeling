@@ -1,4 +1,8 @@
 <?php
+
+require('TicketModel.php');
+require('ArtistModel.php');
+
 abstract class KidsTicket extends TicketModel{
     //TicketId - startDateTime - endDateTime - ticketQuantity - price <- in Ticketmodel
     protected  $kidsTicketLocation;
@@ -27,6 +31,15 @@ abstract class KidsTicket extends TicketModel{
     }
     public function getKidsTicketSession(){
         return $this->kidsTicketSession;
+    }
+
+        //GET and SET if you want to add artists
+    public function addArtist($artist) {
+        array_push($this->artists, $artist);
+    }
+
+    public function getArtists() {
+        return $this->artists;
     }
 }
 
