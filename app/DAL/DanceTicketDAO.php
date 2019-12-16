@@ -10,7 +10,7 @@ class DanceTicketDAO{
     public function getAllDanceTickets(){
         $danceTicketArray = array();
 
-        $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession, l.stad
+        $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
                 FROM tickets AS t
                 INNER JOIN danceticket AS d
                 ON t.ticketId = d.ticketId
@@ -19,18 +19,16 @@ class DanceTicketDAO{
                 ORDER BY t.startDateTime ASC
                 ");
 
-      $danceTickets = $this->db->resultSet();
+        $danceTickets = $this->db->resultSet();
 
         foreach ($danceTickets as $danceTicket) {
           $danceTicketModel = new DanceTicketModel();
 
-          $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
           $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
-          $danceTicketModel->setDanceTicketArtist($danceTicket->artistName);
           $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
           $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
           $danceTicketModel->setPrice($danceTicket->price);
-          $danceTicketModel->setDanceTicketLocation($danceTicket->stad);
+          $danceTicketModel->setDanceTicketSession($danceTicket->danceTicketSession);
 
           //Add objects into array
           array_push($danceTicketArray, $danceTicketModel);
@@ -45,24 +43,23 @@ class DanceTicketDAO{
       $this->db->query("SELECT p.DanceTicketId, a.artistName, a.artistBio, a.artistId
                 FROM performancedance AS p
                 INNER JOIN artist AS a
-                ON p.DanceArtistId = a.artistId"
-                );
+                ON p.DanceArtistId = a.artistId
+                ");
 
       $danceArtists = $this->db->resultSet();
 
       foreach ($danceArtists as $danceArtist) {
             $danceArtistModel = new ArtistModel();
 
-            $danceArtistModel->setTicketId($danceArtist->DanceTicketId);
-            $danceArtistModel->setArtistBio($danceArtist->artistBio);
             $danceArtistModel->setArtistId($danceArtist->artistId);
             $danceArtistModel->setArtistName($danceArtist->artistName);
+            $danceArtistModel->setArtistBio($danceArtist->artistBio);
+            $danceArtistModel->setTicketId($danceArtist->DanceTicketId);
 
           array_push($danceArtistArray, $danceArtistModel);
         }
         return $danceArtistArray;
     }
-
 
     //Get different days based on the datetime function
     public function getDifferentDays() {
@@ -72,46 +69,5 @@ class DanceTicketDAO{
 
         return $results;
     }
-
-
-       //Get all dance tickets with artist names
-    public function dance(){
-       $danceTicketArray = array();
-
-        $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.status, t.ticketQuantity, t.price, d.danceTicketLocation, d.danceTicketSession, a.artistName
-                FROM tickets AS t
-                INNER JOIN danceticket AS d
-                ON t.ticketId = d.ticketId
-                INNER JOIN performancedance AS p
-                ON d.ticketId = p.danceTicketId
-                INNER JOIN artist AS a
-                ON p.danceArtistId = a.artistId
-                WHERE d.danceTicketLocation = 'Jopenkerk'
-                ORDER BY t.startDateTime ASC
-                ");
-
-      //$this->db->bind(':name', $ticketDate);
-
-      $danceTickets = $this->db->resultSet();
-
-        foreach ($danceTickets as $danceTicket) {
-          $danceTicketModel = new DanceTicketModel();
-
-          $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
-          $danceTicketModel->setTicketId($danceTicket->danceTicketLocation);
-          $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
-          $danceTicketModel->setDanceTicketArtist($danceTicket->artistName);
-          $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
-          $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
-          $danceTicketModel->setPrice($danceTicket->price);
-          $danceTicketModel->setDanceTicketLocation($danceTicket->danceTicketLocation);
-          $danceTicketModel->setDanceTicketArtist($danceTicket->artistName);
-
-          //Add objects into array
-          array_push($danceTicketArray, $danceTicketModel);
-        }
-        return $danceTicketArray;
-    }
 }
-
-//2020-07-27 00:00:00
+?>

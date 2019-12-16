@@ -4,12 +4,14 @@
     <li>
         <input type="text" placeholder="Subscribe to our newsletter...">
     </li>
+
     <li>
       <button class="button-footer">
         Sign up
       </button>
     </li>
   </article>
+
   <div class="content-footer-25">
     <div>
       <h5>
@@ -24,25 +26,25 @@
         </li>
 
         <li>
-          <a href="<?php echo URLROOT; ?>/pages/about">
+          <a href="<?php echo URLROOT; ?>/about">
             About
           </a>
         </li>
 
         <li>
-          <a href="<?php echo URLROOT; ?>/pages/tickets">
+          <a href="<?php echo URLROOT; ?>/tickets">
             Tickets
           </a>
         </li>
 
         <li>
-          <a href="<?php echo URLROOT; ?>/pages/contact">
+          <a href="<?php echo URLROOT; ?>/contact">
             Contact
           </a>
         </li>
 
         <li>
-          <a href="<?php echo URLROOT; ?>/pages/login">
+          <a href="<?php echo URLROOT; ?>/login">
             Log in
           </a>
         </li>
@@ -81,35 +83,13 @@
       </h5>
 
       <ul>
-        <li>
-          <a href="<?php echo URLROOT; ?>/events/food">
-            Food
-          </a>
-        </li>
-
-        <li>
-          <a href="<?php echo URLROOT; ?>/events/dance">
-            Dance
-          </a>
-        </li>
-
-        <li>
-          <a href="<?php echo URLROOT; ?>/events/historic">
-            Historic
-          </a>
-        </li>
-
-        <li>
-          <a href="<?php echo URLROOT; ?>/events/jazz">
-            Jazz
-          </a>
-        </li>
-
-        <li>
-          <a href="<?php echo URLROOT; ?>/events/kids">
-            Kids
-          </a>
-        </li>
+        <?php foreach($data['events'] as $event) : ?>
+          <li>
+            <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
+                <?php echo ucfirst($event->getElementName()); ?>
+            </a>
+          </li>
+        <?php endforeach; ?>
       </ul>
     </div>
 
@@ -147,8 +127,5 @@
     </div>
   </div>
 </footer>
-<script src="<?php echo URLROOT; ?>/js/main.js">
-</script>
-</script>
 </body>
 </html>

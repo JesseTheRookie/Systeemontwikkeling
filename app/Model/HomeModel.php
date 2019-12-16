@@ -7,6 +7,9 @@ class HomeModel {
     protected $totalEvents;
     protected $eventStartDate;
     protected $eventEndDate;
+    protected $elementName;
+    protected $description;
+    protected $content;
 
     //Object for total artists
     public function setTotalArtists($artists){
@@ -54,6 +57,30 @@ class HomeModel {
     }
     public function getEventEndDate(){
         return $this->eventEndDate;
+    }
+
+    //Object for element content homepage
+    public function setElementName($names){
+        $this->elementName = $names;
+    }
+    public function getElementName(){
+        return $this->elementName;
+    }
+
+    //Object for description content homepage
+    public function setDescription($descriptions){
+        $this->description = $descriptions;
+    }
+    public function getDescription(){
+        return $this->description;
+    }
+
+    //Object for Events content homepage
+    public function setContent($contents){
+        $this->content = $contents;
+    }
+    public function getContent(){
+        return $this->content;
     }
 }
 ?>

@@ -12,18 +12,19 @@ class HomeDAO {
         $this->db->query("SELECT
 	                        (SELECT COUNT(*) FROM artist) as totalArtists,
                             (SELECT SUM(ticketQuantity) FROM tickets) as totalTickets,
-                            (SELECT COUNT(*) FROM eventtype) AS totalEvents"
-                        );
+                            (SELECT COUNT(*) FROM eventType) AS totalEvents,
+                            (SELECT COUNT(*) FROM locations) AS totalLocations
+                        ");
 
-        $eventInformations = $this->db->resultSet();
+        $generalInformation = $this->db->resultSet();
 
-        foreach ($eventInformations as $eventInformation) {
+        foreach ($generalInformation as $information) {
             $homeModel = new HomeModel();
 
-            $homeModel->setTotalArtists($eventInformation->totalArtists);
-            //$homeModel->setTotalLocations($eventInformation->artistBio);
-            $homeModel->setTotalTickets($eventInformation->totalTickets);
-            $homeModel->setTotalEvents($eventInformation->totalEvents);
+            $homeModel->setTotalArtists($information->totalArtists);
+            $homeModel->setTotalTickets($information->totalTickets);
+            $homeModel->setTotalEvents($information->totalEvents);
+            $homeModel->setTotalLocations($information->totalLocations);
 
             array_push($homeArray, $homeModel);
         }
@@ -51,6 +52,27 @@ class HomeDAO {
             array_push($homeDatesArray, $homeModel);
         }
         return $homeDatesArray;
+    }
+
+    public function allEvents() {
+        $eventsArray = array();
+
+        $this->db->query("SELECT elementName, description, content
+                            FROM content WHERE eventType = 2"
+                        );
+
+        $events = $this->db->resultSet();
+
+        foreach($events as $event) {
+            $homeModel = new HomeModel();
+
+            $homeModel->setElementName($event->elementName);
+            $homeModel->setDescription($event->description);
+            $homeModel->setContent($event->content);
+
+            array_push($eventsArray, $homeModel);
+        }
+        return $eventsArray;
     }
 }
 ?>

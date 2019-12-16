@@ -955,12 +955,6 @@ text-transform: uppercase;
 
 }
 
-hr {
-    width: 300px;
-    text-align: center;
-    margin: 30px auto;
-}
-
 #section-restaurant-food {
     background: rgb(39, 14, 7);
     background: linear-gradient(90deg, rgba(39, 14, 7, 1) 0%, rgba(39, 14, 7, 1) 100%);

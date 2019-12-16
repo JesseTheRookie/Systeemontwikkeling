@@ -100,16 +100,17 @@
   <hr>
 
   <div class="content-events">
-    <div class="eventContainer">
-      <a href="<?php echo URLROOT; ?>/events/jazz">
+  <?php foreach($data['events'] as $event) : ?>
+  <div class="eventContainer">
+      <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
         <img
-            src="./img/frontpage-jazz.png"
+            src="<?php echo $event->getContent(); ?>"
             alt=""
         />
 
         <div class="centered">
           <h4>
-            Haarlem Jazz
+            <?php echo $event->getElementName(); ?>
           </h4>
 
           <p>
@@ -118,82 +119,8 @@
         </div>
       </a>
     </div>
+  <?php endforeach; ?>
 
-    <div class="eventContainer">
-      <a href="<?php echo URLROOT; ?>/events/dance">
-        <img
-            src="./img/frontpage-dance.png"
-            alt=""
-        />
-
-        <div class="centered">
-          <h4>
-            Haarlem Dance
-          </h4>
-
-          <p>
-            26TH JULY - 29TH JULY
-          </p>
-        </div>
-      </a>
-    </div>
-
-    <div class="eventContainer">
-      <a href="<?php echo URLROOT; ?>/events/historic">
-        <img
-            src="./img/frontpage-historic.png"
-            alt=""
-        />
-
-        <div class="centered">
-          <h4>
-            Haarlem Historic
-          </h4>
-
-          <p>
-            26TH JULY - 29TH JULY
-          </p>
-        </div>
-      </a>
-    </div>
-
-    <div class="eventContainer">
-      <a href="<?php echo URLROOT; ?>/events/food">
-        <img
-            src="./img/frontpage-food.png"
-            alt=""
-        />
-
-        <div class="centered">
-          <h4>
-            Haarlem Food
-          </h4>
-
-          <p>
-            26TH JULY - 29TH JULY
-          </p>
-        </div>
-      </a>
-    </div>
-
-    <div class="eventContainer">
-      <a href="<?php echo URLROOT; ?>/events/kids">
-        <img
-            src="./img/frontpage-kids.png"
-            alt=""
-        />
-
-        <div class="centered">
-          <h4>
-            Haarlem Kids
-          </h4>
-
-          <p>
-            26TH JULY - 29TH JULY
-          </p>
-        </div>
-      </a>
-    </div>
   </div>
 </div>
 
@@ -222,13 +149,3 @@
 <?php
     require APPROOT . '/UI/inc/footer.php';
 ?>
-
-<?php /*require APPROOT . '/views/inc/header.php'; ?>
-  <h1><?php echo $data['title']; ?></h1>
-  <ul>
-    <?php foreach($data['posts'] as $post) : ?>
-      <li><?php echo $post->danceTicketId; ?></li>
-    <?php endforeach; ?>
-  </ul>
-<?php require APPROOT . '/views/inc/footer.php'; */?>
-

@@ -126,7 +126,7 @@
             </td>
 
             <td>
-                <?php echo $ticket->getDanceTicketLocation(); ?>
+                <?php echo $ticket->getDanceTicketSession(); ?>
             </td>
 
             <td>
