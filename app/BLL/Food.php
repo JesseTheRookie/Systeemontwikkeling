@@ -8,11 +8,12 @@ class Food Extends Controller{
     }
 
     public function index(){
+        $restaurants = $this->foodDal->getRestaurants();
 
         $data = [
-        'title' => 'Food Page',
-        'tickets' => ''
-      ];
+            'title' => 'Food Page',
+            'restaurants' => $restaurants
+        ];
 
       $this->ui('events/food', $data);
     }

@@ -10,7 +10,7 @@ class DanceTicketDAO{
     public function getAllDanceTickets($ticketDate){
         $danceTicketArray = array();
 
-        $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
                 FROM tickets AS t
                 INNER JOIN danceticket AS d
                 ON t.ticketId = d.ticketId
