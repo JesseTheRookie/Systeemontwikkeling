@@ -9,7 +9,7 @@ require('ArtistModel.php');
     protected  $kidsTicketArtist;
     protected  $kidsTicketSession;
 
-    //GET AND SET FOR Dance ticket location
+    //GET AND SET FOR Kids ticket location
     public function setKidsTicketLocation($kidsTicketLocation){
         $this->kidsTicketLocation = $kidsTicketLocation;
     }
@@ -17,7 +17,7 @@ require('ArtistModel.php');
         return $this->kidsTicketLocation;
     }
 
-    //GET AND SET FOR Dance ticket artist
+    //GET AND SET FOR Kids ticket artist
     public function setKidsTicketArtist($kidsTicketArtist){
         $this->kidsTicketArtist = $kidsTicketArtist;
     }
@@ -25,7 +25,7 @@ require('ArtistModel.php');
         return $this->kidsTicketArtist;
     }
 
-    //GET AND SET FOR Dance ticket artist
+    //GET AND SET FOR Kids ticket artist
     public function setKidsTicketSession($kidsTicketSession){
         $this->kidsTicketSession = $kidsTicketSession;
     }
