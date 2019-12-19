@@ -83,13 +83,36 @@
       </h5>
 
       <ul>
-        <?php foreach($data['events'] as $event) : ?>
-          <li>
-            <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
-                <?php echo ucfirst($event->getElementName()); ?>
-            </a>
-          </li>
-        <?php endforeach; ?>
+        <li>
+          <a href="<?php echo URLROOT; ?>/dance">
+            Dance
+          </a>
+        </li>
+
+        <li>
+          <a href="<?php echo URLROOT; ?>/jazz">
+            Jazz
+          </a>
+        </li>
+
+        <li>
+          <a href="<?php echo URLROOT; ?>/food">
+            Food
+          </a>
+        </li>
+
+        <li>
+          <a href="<?php echo URLROOT; ?>/historic">
+            Historic
+          </a>
+        </li>
+
+        <li>
+          <a href="<?php echo URLROOT; ?>/kids">
+            Kids
+          </a>
+        </li>
+
       </ul>
     </div>
 

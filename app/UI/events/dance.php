@@ -41,31 +41,10 @@
     <div class="content-artists-dance">
         <?php foreach($data['artists'] as $artist) : ?>
             <div>
-                <img src="<?php echo URLROOT; ?>/<?php echo $artist->getImgUrl(); ?>" alt="">
+                <img src="<?php echo URLROOT; ?>/<?php echo $artist->getContent(); ?>" alt="">
                 <button class="myBtn"><?php echo $artist->getArtistName(); ?></button>
-
-            <div id="myModal" class="modal">
-                <article class="modal-content">
-                    <article class="modal-header">
-
-                        <span class="close">×</span>
-
-                        <h1>
-                            <?php echo $artist->getArtistName(); ?>
-                        </h1>
-
-                        <hr>
-                    </article>
-                    <article class="modal-body">
-                        <p>
-                            <?php echo $artist->getArtistBio(); ?>
-                        </p>
-                    </article>
-                </article>
             </div>
-    </div>
-    <?php endforeach; ?>
-
+        <?php endforeach; ?>
     </div>
 </div>
 
@@ -93,35 +72,33 @@
                 method="POST"
                 role="form">
 
-                <input
-                    type="text"
-                    name="ticketDate"
-                    value="Jopenkerk"
-                />
-
-                <input
+                <button
                     type="submit"
-                    name="name"
-                    value="Jopenkerk"
-                />
+                    class="ticket-date"
+                    name="ticketDate"
+                    value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
+                    TICKETS
+                </button>
             </form>
         </div>
     <?php endif; ?>
     <?php endforeach; ?>
-    </div>
+</div>
 
 <?php foreach($data['tickets'] as $ticket) : ?>
     <table class="table-tickets-dance">
         <tr>
             <td>
-                <?php echo $ticket->getDanceTicketArtist(); ?>
+                <?php foreach($data['artists'] as $artist) : ?>
+                    <?php echo $artist->getArtistName(); ?>
+                <?php endforeach; ?>
             </td>
+
 
             <td>
                 <?php
-                    $date1 = $ticket->getEndDateTime();
-                    $date2 = $ticket->getStartDateTime();
-                    echo round((strtotime($date1) - strtotime($date2)) /60);
+                    $time = explode(" ", $ticket->getstartDateTime());
+                    echo end($time);
                  ?>
             </td>
 

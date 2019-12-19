@@ -34,11 +34,23 @@
               </li>
 
               <article class="dropdown-content">
-                <?php foreach($data['events'] as $event) : ?>
-                  <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
-                    <?php echo ucfirst($event->getElementName()); ?>
+                  <a href="<?php echo URLROOT; ?>/dance">
+                    Dance
                   </a>
-                <?php endforeach; ?>
+
+                  <a href="<?php echo URLROOT; ?>/jazz">
+                    Jazz
+                  </a>
+
+                  <a href="<?php echo URLROOT; ?>/historic">
+                    Historic
+                  </a>
+                  <a href="<?php echo URLROOT; ?>/food">
+                    Food
+                  </a>
+                  <a href="<?php echo URLROOT; ?>/kids">
+                    Kids
+                  </a>
               </article>
             </article>
           </li>

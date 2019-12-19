@@ -1,3 +1,8 @@
+html
+{
+    scroll-behavior: smooth;
+}
+
 *
 {
     top: 0;
@@ -438,7 +443,8 @@ height: 200px;
     position: relative;
     width: 100%;
     margin: 0 auto;
-background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
+    background: rgb(64,64,75);
+    background: linear-gradient(0deg, rgba(64,64,75,1) 0%, rgba(169,169,169,1) 100%);
 }
 
 .content-dance-header img
@@ -447,6 +453,12 @@ background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494,
     height: 500px;
     opacity: 0.4;
     filter: alpha(opacity=40);
+}
+
+.content-dance-header
+{
+    background: rgb(64,64,75);
+    background: linear-gradient(0deg, rgba(64,64,75,1) 0%, rgba(169,169,169,1) 100%);
 }
 
 .content-dance-right
@@ -462,16 +474,21 @@ background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494,
 {
     color: #ffffff;
     border: 1px solid #ffffff;
-    padding: 8px 28px 8px 28px;
+    padding: 12px 28px 8px 28px;
     text-decoration: none;
     margin: 0px 40px 0px 0px;
+    text-transform: uppercase;
     font-size: 20px;
+    text-align: center;
+    display: inline-block;
+    width: 140px;
 }
+
 .content-dance-header a:hover
 {
-    color: #ffffff;
-    border: 1px solid #666;
-    background-color: #666;
+    color: #000000;
+    border: 1px solid #ffffff;
+    background-color: #ffffffff;
     transition: 0.25s ease;
 }
 
@@ -494,8 +511,8 @@ hr
 
 #section-artists-dance
 {
-background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
-}
+background: rgb(169,169,169);
+background: linear-gradient(0deg, rgba(169,169,169,1) 0%, rgba(64,64,75,1) 100%);}
 
 
 #section-artists-dance h2
@@ -510,59 +527,10 @@ background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494,
 {
     width: 300px;
     height: 180px;
-}
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    box-shadow: 0 0 10px #ffffff;
+
 }
 
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 40px 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-.modal-content p
-{
-    color: #000000;
-    font-size: 18px;
-    line-height: 1.5em;
-    width: 70%;
-    margin: 0 auto;
-}
-
-.modal-content h1
-{
-    color: #000000;
-    font-size: 40px;
-}
-
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
 .myBtn
 {
     display: block;
@@ -581,6 +549,13 @@ background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494,
     width: 180px;
     font-size: 22px;
     cursor: pointer;
+}
+
+.myBtn:hover
+{
+    color: #00008b !important;
+    border: 1px solid #00008b;
+    transition: 0.25s ease-in;
 }
 
 #section-progress-cart > div
@@ -774,12 +749,19 @@ td
     font-size: 70px;
     padding: 100px 0px 40px 0px;
     text-align: left;
+    text-transform: uppercase;
 }
 #layout-header-dance
 {
-background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
-margin-bottom: 0px;
     padding: 0px 0px 100px 0px;
+    background: rgb(64,64,75);
+    background: linear-gradient(0deg, rgba(64,64,75,1) 0%, rgba(169,169,169,1) 100%);
+}
+
+#section-header-dance
+{
+    background: rgb(64,64,75);
+    background: linear-gradient(0deg, rgba(64,64,75,1) 0%, rgba(169,169,169,1) 100%);
 }
 
 #section-artists-dance > div
@@ -822,7 +804,7 @@ margin-bottom: 0px;
     font-size: 20px;
     width: 80%;
     text-align: center;
-    padding: 0px 0px 60px 0px;
+    padding: 0px 0px 100px 0px;
 }
 .content-header-dance h2
 {
@@ -881,8 +863,14 @@ text-transform: uppercase;
     border: 1px solid #ffffff;
     font-size: 16px;
     color: #ffffff;
+    width: 100px;
+    height: 42px;
 }
 
+select
+{
+    border-radius: 0;
+}
 .button-add-dance
 {
     background: transparent;
@@ -945,15 +933,6 @@ text-transform: uppercase;
     transition: 0.25s ease;
 }
 
-#section-artists-dance>div {
-    display: grid;
-    grid-template-columns: 100%;
-    position: relative;
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
-
-}
 
 #section-restaurant-food {
     background: rgb(39, 14, 7);
@@ -1108,4 +1087,23 @@ text-transform: uppercase;
 .button3:hover {
     background-color: #835C3B;
     color: white;
+}
+
+.ticket-date
+{
+    background-color: transparent;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    width: 180px;
+    height: 60px;
+    border: 1px solid #ffffff;
+    box-shadow: 0 0 10px #ffffff;
+}
+.ticket-date:hover
+{
+    background-color: #ffffff;
+    color: #000000;
+    transition: 0.25s ease-in;
 }

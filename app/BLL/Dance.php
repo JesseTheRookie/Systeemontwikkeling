@@ -9,28 +9,52 @@ class Dance Extends Controller{
 
      //Need ticket/artist and days information. Passing it in an array that will be passed around on the website.
     public function index(){
+        $ticketDate = '';
+        $days = $this->danceDal->getDifferentDays();
+        $tickets = $this->danceDal->getAllDanceTickets($ticketDate);
+        $artistInfo = $this->danceDal->getArtists();
 
         $data = [
-        'title' => 'Dance Page',
-        'days' => $days = $this->danceDal->getDifferentDays(),
-        'tickets' => $tickets = $this->danceDal->getAllDanceTickets(),
-        'artists' => $artistInfo = $this->danceDal->getArtists($tickets),
-      ];
+                'title' => 'Dance Page',
+                'days' => $days,
+                'tickets' => $tickets,
+                'artists' => $artistInfo
+            ];
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ticketDate = trim($_POST['ticketDate']);
+
+            $data = [
+                'days' => $days,
+                'tickets' => $tickets = $this->danceDal->getAllDanceTickets($ticketDate),
+                'artists' => $artistInfo
+            ];
+        }
 
       $this->ui('events/dance', $data);
     }
 
+
     //Loop through artists and tickets
     public function getAllDanceTickets(){
-        $artists = $this->getAllArtists();
-        $tickets = $this->danceDal->getAllDanceTickets();
+            $data = [
+                'title' => 'Dance Page',
+                'ticketDate' => trim($_POST['ticketDate'])
+            ];
 
-        foreach($tickets as $ticket) :
-            foreach($artists as $artist) :
-                if($ticket->getTicketId == $artist->getTicketId)
+            if ($this->danceDal->getAllDanceTickets($data['ticketDate'])) {
+                $tickets = $this->danceDal->getAllDanceTickets($data['ticketDate']);
+            }
+
+            $artists = $this->getAllArtists();
+            $tickets = $this->danceDal->getAllDanceTickets();
+
+            foreach($tickets as $ticket) :
+                foreach($artists as $artist) :
+                    if($ticket->getTicketId == $artist->getTicketId)
                     $ticket->addArtist($artist);
+                endforeach;
             endforeach;
-        endforeach;
 
         return $tickets;
     }

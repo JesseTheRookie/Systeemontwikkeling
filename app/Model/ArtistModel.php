@@ -30,12 +30,12 @@ class ArtistModel
     public function getArtistBio(){
         return $this->artistBio;
     }
-    public function setImgUrl($imgUrl)
+    public function setContent($content)
     {
-        $this->imgUrl = $imgUrl;
+        $this->content = $content;
     }
-    public function getImgUrl(){
-        return $this->imgUrl;
+    public function getContent(){
+        return $this->content;
     }
 
 }

@@ -6,8 +6,8 @@ class DanceTicketDAO{
       $this->db = new Database;
     }
 
-    //Get all dance tickets with artist names
-    public function getAllDanceTickets(){
+    //Get all dance tickets based on button click
+    public function getAllDanceTickets($ticketDate){
         $danceTicketArray = array();
 
         $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
@@ -16,8 +16,12 @@ class DanceTicketDAO{
                 ON t.ticketId = d.ticketId
                 INNER JOIN locations AS l
                 ON d.locationId = l.locationId
+                WHERE DATE(t.startDateTime) = :ticketDate
                 ORDER BY t.startDateTime ASC
                 ");
+
+        //Bind param with value from DB
+        $this->db->bind(':ticketDate', $ticketDate);
 
         $danceTickets = $this->db->resultSet();
 
@@ -40,11 +44,11 @@ class DanceTicketDAO{
     public function getArtists() {
       $danceArtistArray = array();
 
-      $this->db->query("SELECT p.DanceTicketId, a.artistName, a.artistBio, a.artistId
-                FROM performancedance AS p
-                INNER JOIN artist AS a
-                ON p.DanceArtistId = a.artistId
-                ");
+      $this->db->query("SELECT a.artistId, a.artistName, a.artistBio, c.content
+                        FROM artist as a
+                        INNER JOIN content as c
+                        ON a.artistName = c.elementName
+                      ");
 
       $danceArtists = $this->db->resultSet();
 
@@ -54,7 +58,7 @@ class DanceTicketDAO{
             $danceArtistModel->setArtistId($danceArtist->artistId);
             $danceArtistModel->setArtistName($danceArtist->artistName);
             $danceArtistModel->setArtistBio($danceArtist->artistBio);
-            $danceArtistModel->setTicketId($danceArtist->DanceTicketId);
+            $danceArtistModel->setContent($danceArtist->content);
 
           array_push($danceArtistArray, $danceArtistModel);
         }
@@ -63,7 +67,11 @@ class DanceTicketDAO{
 
     //Get different days based on the datetime function
     public function getDifferentDays() {
-        $this->db->query("SELECT DISTINCT(DATE(startDateTime)) as startDateTime FROM tickets");
+        $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
+                          FROM tickets as t
+                          INNER JOIN danceticket as d
+                          ON d.ticketId = t.ticketId
+                        ");
 
         $results = $this->db->resultSet();
 
