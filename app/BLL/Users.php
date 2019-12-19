@@ -47,7 +47,7 @@
                     $data['emailError'] = 'Please enter email';
                 }else {
                     //Check if email already exists
-                    if($this->userDAO->findUserByEmail($user)){
+                    if($this->userDAO->findUserByEmail($user->getEmail())){
                         $data['emailError'] = 'Email is already taken';
                     }
                 }
@@ -185,7 +185,7 @@
 
                 //Check user by email
                 if(!empty($user->getEmail())){
-                    if($this->userDAO->findUserByEmail($user)){
+                    if($this->userDAO->findUserByEmail($user->getEmail())){
                         //User found
                     } else{
                         //User not found
@@ -230,15 +230,73 @@
         public function forgot(){
             //Init data
             $data = [
-                'title' => 'Forgot password'
+                'title' => 'Forgot password?'
             ];
+
+            //Check for POST
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                //Sanitize POST data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                $email = trim($_POST['email']);
+
+                //Validate email not empty
+                if(empty($email)){
+                    $data['emailError'] = 'Please enter email';
+                }else{
+                    //Check user by email
+                    if($this->userDAO->findUserByEmail($email)){
+                        //User found
+
+                        //Message
+                        $msg = "You have requested a password recovery for your account at Haarlem Festival. /n
+                        Click the link below to set up a new password /n
+                        [link]";
+                        
+                        // use wordwrap() if lines are longer than 70 characters
+                        $msg = wordwrap($msg,70);
+
+                        //Subject
+                        $sub = "Haarlem Festival password recovery";
+
+                        //Send email
+                        //mail($email, $sub, $msg);
+
+                        redirect("users/pwemailsend");
+
+                    } else{
+                        //User not found
+                        $data['emailError'] = 'No user found!';
+                    }
+                }
+            }
 
             //Load UI
             $this->ui('users/forgot', $data);
         }
 
+        public function pwemailsend(){
+            //Init data
+            $data = [
+                'title' => 'Password recovery email has been send'
+            ];
+
+            //Load UI
+            $this->ui('users/pwemailsend', $data);
+        }
+
+        public function newpw(){
+            //Init data
+            $data = [
+                'title' => 'Enter new password'
+            ];
+
+            //Load UI
+            $this->ui('users/newpw', $data);
+        }
+
         public function createUserSession($loggedInUser){
-            $_SESSION['userId'] = $loggedInUser->userInlogId;
+            $_SESSION['userId'] = $loggedInUser->userId;
             $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
             $_SESSION['userType'] = $loggedInUser->userType;
             $_SESSION['userName'] = $loggedInUser->userName;

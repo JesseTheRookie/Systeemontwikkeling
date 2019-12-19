@@ -13,7 +13,7 @@ class HomeDAO {
 	                        (SELECT COUNT(*) FROM artist) as totalArtists,
                             (SELECT SUM(ticketQuantity) FROM tickets) as totalTickets,
                             (SELECT COUNT(*) FROM eventType) AS totalEvents,
-                            (SELECT COUNT(*) FROM locations) AS totalLocations
+                            (SELECT COUNT(*) FROM location) AS totalLocations
                         ");
 
         $generalInformation = $this->db->resultSet();
