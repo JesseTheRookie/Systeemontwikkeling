@@ -37,7 +37,7 @@ class HomeDAO {
         $this->db->query("SELECT
                             MIN(startDateTime) as startDate,
                             MAX(endDateTime) as endDate
-                            FROM tickets
+                            FROM Tickets
                             WHERE endDateTime >= now()"
                         );
 
@@ -58,7 +58,7 @@ class HomeDAO {
         $eventsArray = array();
 
         $this->db->query("SELECT elementName, description, content
-                            FROM content WHERE eventType = 2"
+                            FROM Content WHERE eventType = 2"
                         );
 
         $events = $this->db->resultSet();
