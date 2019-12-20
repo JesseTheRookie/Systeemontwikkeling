@@ -2,13 +2,12 @@
 
   <article class="footer-center">
     <li>
-        <input type="text" placeholder="Subscribe to our newsletter...">
+      <form method="POST" action="newsletter.php">
+        <input type="text" name="Email" placeholder="Subscribe to our newsletter...">
     </li>
 
     <li>
-      <button class="button-footer">
-        Sign up
-      </button>
+      <input class="button-footer" type="submit" value="Sign Up" name="Submit">
     </li>
   </article>
 
