@@ -10,10 +10,10 @@ class HomeDAO {
         $homeArray = array();
 
         $this->db->query("SELECT
-	                        (SELECT COUNT(*) FROM artist) as totalArtists,
+	                        (SELECT COUNT(*) FROM Artist) as totalArtists,
                             (SELECT SUM(ticketQuantity) FROM tickets) as totalTickets,
-                            (SELECT COUNT(*) FROM eventType) AS totalEvents,
-                            (SELECT COUNT(*) FROM location) AS totalLocations
+                            (SELECT COUNT(*) FROM EventType) AS totalEvents,
+                            (SELECT COUNT(*) FROM Location) AS totalLocations
                         ");
 
         $generalInformation = $this->db->resultSet();
