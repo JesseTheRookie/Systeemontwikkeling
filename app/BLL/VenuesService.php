@@ -10,5 +10,7 @@
             'title' => 'Historic Venues'
         ];
 
+        
+
         $this->ui('events/historicVenues', $data);
     }

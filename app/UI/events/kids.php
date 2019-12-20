@@ -131,7 +131,7 @@
             </td>
 
             <td>
-                <?php echo $ticket->getKidsTicketLocation(); ?>
+                <?php echo $ticket->getKidsTicketSession(); ?>
             </td>
 
             <td>

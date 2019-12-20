@@ -14,7 +14,7 @@ class Kids Extends Controller{
         'title' => 'Kids Page',
         'days' => $days = $this->kidsDal->getDifferentDays(),
         'tickets' => $tickets = $this->kidsDal->getAllKidsTickets(),
-        'artists' => $artistInfo = $this->kidsDal->getArtists($tickets)
+        'artists' => $artistInfo = $this->kidsDal->getArtists($tickets),
       ];
 
       $this->ui('events/kids', $data);
@@ -33,6 +33,30 @@ class Kids Extends Controller{
         endforeach;
 
         return $tickets;
+    }
+
+    public function tickets(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    $tickets = $this->kidsDal->getAllKidsTickets($data['ticketDate']);
+
+            $data = [
+                'title' => 'Kids Page',
+                'days' => '',
+                'tickets' => '',
+                'artists' => '',
+                'ticketDate' => trim($_POST['ticketDate'])
+            ];
+
+            if ($this->kidsDal->getAllKidsTickets($data['ticketDate'])) {
+                                    $tickets = $this->kidsDal->getAllKidsTickets($data['ticketDate']);
+
+            }
+
+            $tickets = $this->kidsDal->getAllKidsTickets();
+        }
+
+      $this->ui('events/kids', $data);
     }
 
     //Get all artists from DAO layer in order to print them under "performers"
