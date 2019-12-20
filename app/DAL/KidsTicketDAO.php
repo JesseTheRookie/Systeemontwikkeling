@@ -12,9 +12,9 @@ class KidsTicketDAO{
 
         $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.kidsTicketSession
                 FROM tickets AS t
-                INNER JOIN kidsticket AS d
+                INNER JOIN Kidsticket AS d
                 ON t.ticketId = d.ticketId
-                INNER JOIN locations AS l
+                INNER JOIN Location AS l
                 ON d.locationId = l.locationId
                 ORDER BY t.startDateTime ASC
                 ");
@@ -40,10 +40,10 @@ class KidsTicketDAO{
     public function getArtists() {
       $kidsArtistArray = array();
 
-      $this->db->query("SELECT p.KidsTicketId, a.artistName, a.artistBio, a.artistId
+      $this->db->query("SELECT p.kidsTicketId, a.artistId, a.artistName, a.artistBio
                 FROM performancekids AS p
                 INNER JOIN artist AS a
-                ON p.KidsArtistId = a.artistId
+                ON p.kidsTicketId = a.artistId
                 ");
 
       $kidsArtists = $this->db->resultSet();
