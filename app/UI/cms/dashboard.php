@@ -26,7 +26,8 @@
   </header>
 
   <nav class="nav">
-    <div class="usercontainer w-container"><img src="images/icon.svg" width="100" alt="" class="image">
+    <div class="usercontainer">
+      <img src="<?php echo URLROOT; ?>/img/adminuserimg/userIcon.png" width="125" alt="" class="image">
       <div class="nameAndFunction"><?php echo $data['UserName'] . ' ' . $data['UserLastName'] . ' - ' . $data['UserType']; ?></div>
     </div>
     <ul class="list list-2 w-list-unstyled">
@@ -67,18 +68,19 @@
     </div>
     <div class="tableblock">
         <div class="table">
-          <form id="dropdowns" action="<?php echo URLROOT; ?>/Cms/dashboard" method="POST" role="form"><select
-              id="Day" name="Day" data-name="Day" class="select-field w-select">
-              <option value="day1">Day 1</option>
-              <option value="day2">Day 2</option>
-              <option value="day3">Day 3</option>
-              <option value="day4">Day 4</option>
-            </select><select id="event" name="event" data-name="event" class="select-field-2 w-select">
+          <form id="dropdowns" action="<?php echo URLROOT; ?>/Cms/dashboard" method="POST"><select
+              id="Day" name="Day" data-name="Day">
+              <option value="2020-07-27">Day 1</option>
+              <option value="2020-07-28">Day 2</option>
+              <option value="2020-07-29">Day 3</option>
+              <option value="2019-07-30">Day 4</option>
+            </select><select id="event" name="event" data-name="event">
               <option value="dance">Dance</option>
               <option value="jazz">Jazz</option>
               <option value="historic">Historic</option>
               <option value="food">Food</option>
-            </select><input type="submit" value="Search" class="submit-button w-button"></form>
+              <option value="kids">Kids</option>
+            </select><input type="submit" value="Search" id="submitbutton"></form>
             <table border="1px">
           <tr>
             <th>Venue</th>

@@ -18,8 +18,9 @@
         $totalReservations = 3;
         $totalUsers = $this->CmsDao->GetTotalUniqueUsers();
 
-        $userName = "";
-        $userLastName = "";
+        
+        $userName = $_SESSION["userName"];
+        $userLastName = $_SESSION["userLastName"];
                 
         if($_SESSION["userType"] == 2)
         {
@@ -32,7 +33,6 @@
         
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-          //var_dump($_POST['Day']);
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
           $tableResult = $this->CmsDao->GetActivityInfo($_POST['Day'], $_POST['event']);
@@ -75,13 +75,51 @@
         $title = "Change program";
         $explanation = "Click the checkbox next to the row you wish to edit";
 
-        $data = [
-          'title' => $title,
-          'explanation' => $explanation,
-          'UserName' => $userName,
-          'UserLastName' => $userLastName,
-          'UserType' => $userType
-        ];
+        $userName = $_SESSION["userName"];
+        $userLastName = $_SESSION["userLastName"];
+                
+        if($_SESSION["userType"] == 2)
+        {
+          $userType = "Super Admin";
+        }
+        else
+        {
+          $userType = "Admin";
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+          $data = [
+            'title' => $title,
+            'explanation' => $explanation,
+            'UserName' => $userName,
+            'UserLastName' => $userLastName,
+            'UserType' => $userType,
+            'starttime' => trim($_POST['starttime']),
+            'location' => trim($_POST['location']),
+            'hall' => trim($_POST['hall']),
+            'band' => trim($_POST['band']),
+            'extra' => trim($_POST['extra'])
+          ];
+      
+        }
+        else
+        {
+          $data = [
+            'title' => $title,
+            'explanation' => $explanation,
+            'UserName' => $userName,
+            'UserLastName' => $userLastName,
+            'UserType' => $userType,
+            'starttime' => '',
+            'location' => '',
+            'hall' => '',
+            'band' => '',
+            'extra' => ''
+          ];
+        }
         
         $this->ui('cms/changeprogram', $data);
       }
@@ -92,8 +130,23 @@
 
         $title = "Edit content";
 
+        $userName = $_SESSION["userName"];
+        $userLastName = $_SESSION["userLastName"];
+                
+        if($_SESSION["userType"] == 2)
+        {
+          $userType = "Super Admin";
+        }
+        else
+        {
+          $userType = "Admin";
+        }
+
         $data = [
-          'title' => $title
+          'title' => $title,
+          'UserName' => $userName,
+          'UserLastName' => $userLastName,
+          'UserType' => $userType
         ];
         
         $this->ui('cms/editcontent', $data);

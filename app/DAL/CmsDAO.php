@@ -10,17 +10,17 @@
     public function GetTotalRev()
     {
       $this->DB->query("SELECT SUM(price) AS totalrev
-        FROM tickets
-        INNER JOIN soldtickets
-        ON tickets.ticketId = soldtickets.ticketId");
+        FROM Tickets
+        INNER JOIN SoldTickets
+        ON Tickets.ticketId = SoldTickets.ticketId");
 
       return $this->DB->single();
     }
 
     public function GetTotalTicketsSold()
     {
-      $this->DB->query("SELECT COUNT(*) AS totaltickets
-        FROM soldtickets");
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets");
 
       return $this->DB->single();
     }
@@ -28,14 +28,14 @@
     public function GetTotalUniqueUsers()
     {
       $this->DB->query("SELECT COUNT(*) AS totalusers
-        FROM user");
+        FROM User");
 
       return $this->DB->single();
     }
 
     public function GetTotalTicketsReserved()
     {
-      $this->DB->query("SELECT SUM(ticketQuantity)
+      $this->DB->query("SELECT SUM(gereserveerd)
         FROM soldTickets");
 
       return $this->DB->single();
@@ -53,10 +53,13 @@
         case "jazz":
           $result = $this->GetJazzActivityInfo($date);
           break;
-        case "historic":
+        case "food":
           $result = $this->GetHistoricActivityInfo($date);
           break;
         case "historic":
+          $result = $this->GetFoodActivityInfo($date);
+          break;
+        case "kids":
           $result = $this->GetFoodActivityInfo($date);
           break;
         default:
@@ -68,23 +71,26 @@
 
     public function GetDanceActivityInfo($date)
     {
-      $this->DB->query("SELECT danceTicketLocation AS locationorlanguage, COUNT(*) AS ticketssold, ticketQuantity AS ticketsleft
-        FROM danceticket
-        INNER JOIN tickets
-        ON danceticket.ticketId = tickets.ticketId
-        INNER JOIN soldtickets
-        ON danceticket.ticketId = soldtickets.ticketId
-        WHERE date = :date");
+      $this->DB->query("SELECT ticketId, venue AS locationorlanguage, SUM(quantity) AS , ticketQuantity AS ticketsleft
+        FROM DanceTicket
+        INNER JOIN Tickets
+        ON DanceTicket.ticketId = Tickets.ticketId
+        INNER JOIN SoldTickets
+        ON DanceTicket.ticketId = SoldTickets.ticketId
+        INNER JOIN DanceLocation
+        ON DanceTicket.ticketId = DanceLocation.ticketId
+        WHERE DATE(startDateTime) = :date");
 
-      $dateFormatted = $date . "%";
-      $this->DB->bind(':date', $dateFormatted);
+      
+      //$dateFormatted = $date . "%";
+      $this->DB->bind(':date', $date);
 
       return $this->DB->resultSet();
     }
 
     public function GetJazzActivityInfo($date)
     {
-      $this->DB->query("SELECT jazzTicketLocation, COUNT(ticketId), ticketQuantity
+      $this->DB->query("SELECT jazzTicketLocation AS locationorlanguage, SUM(quantity) AS ticketssold, ticketQuantity AS ticketsleft
         FROM jazzticket
         INNER JOIN tickets
         ON jazzticket.ticketId = tickets.ticketId

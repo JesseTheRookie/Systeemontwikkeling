@@ -17,8 +17,9 @@
   </header>
 
   <nav class="nav">
-    <div class="usercontainer w-container"><img src="images/icon.svg" width="100" alt="" class="image">
-      <div class="nameAndFunction">Jelle Spreij - Admin</div>
+    <div class="usercontainer">
+      <img src="<?php echo URLROOT; ?>/img/adminuserimg/userIcon.png" width="125" alt="" class="image">
+      <div class="nameAndFunction"><?php echo $data['UserName'] . ' ' . $data['UserLastName'] . ' - ' . $data['UserType']; ?></div>
     </div>
     <ul class="list list-2 w-list-unstyled">
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/dashboard" class="link">Dashboard</a></li>
@@ -29,7 +30,7 @@
 
   <div class="section">
 
-    <h1>Dashboard</h1>
+    <h1><?php echo $data['title']; ?></h1>
       
   </div>
 </body>

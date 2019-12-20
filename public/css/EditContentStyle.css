@@ -76,19 +76,19 @@ h1 {
 .nameAndFunction {
   position: relative;
   left: 0px;
-  bottom: -40px;
+  bottom: 0px;
   width: 200px;
   height: auto;
   padding-left: 0px;
   background-color: transparent;
-  color: #fff;
+  color: whitesmoke;
   text-align: center;
 }
 
 .image {
   position: relative;
-  left: 50px;
-  top: 30px;
+  left: 18%;
+  top: 0px;
 }
 
 .section {

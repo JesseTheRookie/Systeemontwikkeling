@@ -76,19 +76,19 @@ h1 {
 .nameAndFunction {
   position: relative;
   left: 0px;
-  bottom: -40px;
+  bottom: 0px;
   width: 200px;
   height: auto;
   padding-left: 0px;
   background-color: transparent;
-  color: #fff;
+  color: whitesmoke;
   text-align: center;
 }
 
 .image {
   position: relative;
-  left: 50px;
-  top: 30px;
+  left: 18%;
+  top: 0px;
 }
 
 .section {
@@ -278,4 +278,28 @@ table {
   position: relative;
   margin-bottom: -8px;
 }
-  
+
+#Day {
+  position: relative;
+  left: 50px;
+  top: 20px;
+  width: 75px;
+  height: 30px;
+}
+
+#event {
+  position: relative;
+  left: 100px;
+  top: 20px;
+  width: 75px;
+  height: 30px;
+}
+
+#submitbutton {
+  position: relative;
+  left: 150px;
+  top: 20px;
+  width: 75px;
+  height: 30px;
+}
+

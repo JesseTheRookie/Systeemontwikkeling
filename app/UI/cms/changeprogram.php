@@ -17,8 +17,9 @@
   </header>
 
   <nav class="nav">
-    <div class="usercontainer w-container"><img src="images/icon.svg" width="100" alt="" class="image">
-      <div class="nameAndFunction">Jelle Spreij - Admin</div>
+  <div class="usercontainer">
+      <img src="<?php echo URLROOT; ?>/img/adminuserimg/userIcon.png" width="125" alt="" class="image">
+      <div class="nameAndFunction"><?php echo $data['UserName'] . ' ' . $data['UserLastName'] . ' - ' . $data['UserType']; ?></div>
     </div>
     <ul class="list list-2 w-list-unstyled">
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/dashboard" class="link">Dashboard</a></li>
@@ -38,7 +39,7 @@
 
         </div>
         <div class="textfields">
-          <form action="/action_page.php">
+          <form action="<?php echo URLROOT; ?>/Cms/changeprogram" method="POST">
           <span class="starttimetext">tekst1</span>
           <input type="text" name="starttime" value="" class="textfield" id="starttimefield">
           <span class="locationtext">tekst2</span>
@@ -49,7 +50,7 @@
           <input type="text" name="band" value="" class="textfield" id="bandfield">  
           <span class="extratext">tekst5</span>
           <input type="text" name="extra" value="" class="textfield" id="extrafield">        
-          <input type="submit" value="Submit">
+          <input class="submitbutton" type="submit" value="Submit">
           </form>
         </div>
         
