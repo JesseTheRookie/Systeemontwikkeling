@@ -8,7 +8,7 @@ class UserDAO{
 
     public function register($user){
         //Insert into table user
-        $this->db->query('INSERT INTO user (userName, userLastName, userMail, userPassword, userPhone, userGender) VALUES (:name, :lastName, :email, :password:, :phone, :gender)');
+        $this->db->query('INSERT INTO User (userName, userLastName, userMail, userPassword, userPhone, userGender) VALUES (:name, :lastName, :email, :password:, :phone, :gender)');
         //Bind values
         $this->db->bind(':name', $user->getUserName());      
         $this->db->bind(':lastName', $user->getUserLastname());        
@@ -27,7 +27,7 @@ class UserDAO{
 
     // Login user
     public function login($user){
-        $this->db->query('SELECT * FROM user WHERE userEmail = :email');
+        $this->db->query('SELECT * FROM User WHERE userEmail = :email');
         $this->db->bind(':email', $user->getEmail());
 
         $row = $this->db->single();
@@ -42,7 +42,7 @@ class UserDAO{
 
     //Find user by email
     public function findUserByEmail($email){
-        $this->db->query('SELECT * FROM user WHERE userMail = :email');
+        $this->db->query('SELECT * FROM User WHERE userMail = :email');
         //Bind values
         $this->db->bind(':email', $email);  
 
