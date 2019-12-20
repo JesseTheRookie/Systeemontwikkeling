@@ -1362,3 +1362,293 @@ input[type="radio"] {
     margin: 20px 56px 20px 80% !important;
     display: block;
 }
+
+
+/* KIDS */
+
+#section-kids-header > div
+{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
+}
+
+.content-kids-header img
+{
+    width: 100%;
+    height: 500px;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
+.content-kids-right
+{
+    position: relative;
+    top: 10%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+.content-kids-header a
+{
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    padding: 8px 28px 8px 28px;
+    text-decoration: none;
+    margin: 0px 40px 0px 0px;
+    font-size: 20px;
+}
+.content-kids-header a:hover
+{
+    color: #ffffff;
+    border: 1px solid #666;
+    background-color: #666;
+    transition: 0.25s ease;
+}
+
+#section-artists-kids > div
+{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+hr
+{
+    width: 30px;
+    text-align: center;
+    margin: 30px auto;
+}
+
+#section-artists-kids
+{
+background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
+}
+
+
+#section-artists-kids h2
+{
+    font-size: 40px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0px 0px 0px;
+}
+
+.content-artists-kids img
+{
+    width: 300px;
+    height: 180px;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 40px 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.modal-content p
+{
+    color: #000000;
+    font-size: 18px;
+    line-height: 1.5em;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.modal-content h1
+{
+    color: #000000;
+    font-size: 40px;
+}
+
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.myBtn
+{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    top: -8%;
+    background-color: #ffffff;
+    background-color: -webkit-linear-gradient(bottom right, #ffffff 0%, #d7e1ec 74%);
+    background-image: -o-linear-gradient(bottom right, #ffffff 0%, #d7e1ec 74%);
+    background-image: linear-gradient(to top left, #ffffff 0%, #d7e1ec 74%);
+    text-align: center;
+    margin: 0 auto;
+    padding: 14px 0px;
+    box-shadow: 0 8px 22px 0 rgba(0, 0, 0, 0.4), 0 12px 30px 0 rgba(0, 0, 0, 0.29);
+    width: 180px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.content-kids-header h3
+{
+    color: #ffffff;
+    font-size: 70px;
+    padding: 100px 0px 40px 0px;
+    text-align: left;
+}
+#layout-header-kids
+{
+background-image: linear-gradient(to bottom, #d3d3d3, #bebebe, #a9a9a9, #949494, #808080);
+margin-bottom: 0px;
+    padding: 0px 0px 100px 0px;
+}
+
+#section-artists-kids > div
+{
+    padding: 0px 0px 100px 0px;
+}
+
+#section-artists-kids h2
+{
+     font-size: 60px;
+    color: #ffffff;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0px 0px 0px;
+}
+
+#layout-header-kids h1
+{
+    font-size: 60px;
+    color: #ffffff;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0px 0px 0px;
+}
+#section-header-kids > div
+{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0px 0px 0px 0px;
+}
+#layout-header-kids > div {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    position: relative;
+    margin: 0 auto;
+    font-size: 20px;
+    width: 80%;
+    text-align: center;
+    padding: 0px 0px 60px 0px;
+}
+.content-header-kids h2
+{
+font-size: 70px;
+color: #ffffff;
+}
+
+.content-header-kids p
+{
+font-size: 20px;
+color: #ffffff;
+padding: 20px 0px;
+}
+
+.content-header-kids a
+{
+font-size: 28px;
+color: #ffffff;
+padding: 20px 0px;
+text-decoration: none;
+border: 1px solid #ffffff;
+padding: 8px 20px;
+text-transform: uppercase;
+}
+
+.content-header-kids a:hover
+{
+    color: #000000;
+    background: #ffffff;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+}
+
+.table-tickets-kids
+{
+    width: 70%;
+    color: #ffffff;
+    font-size: 20px;
+    border: none;
+    margin: 0 auto;
+}
+
+.table-tickets-kids tr
+{
+    height: 100px;
+}
+
+.table-tickets-kids td
+{
+    width: 20%;
+}
+
+.select-kids
+{
+    background: transparent;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.button-add-kids
+{
+    background: transparent;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 12px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.button-add-kids:hover
+{
+    background: white;
+    text-decoration: none;
+    transition: 0.2s ease-in;
+    color: #000000;
+}
+
