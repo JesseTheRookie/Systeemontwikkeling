@@ -9,7 +9,7 @@ class FoodTicketDAO{
     public function getRestaurants() {
         $restaurantArray = array();
 
-        $query = $this->db->query("SELECT r.restaurantId, r.restaurantName, r.restaurantStars, c.description, c.content
+        $query = $this->db->query("SELECT r.restaurantId, r.restaurantName, c.description, c.content
                         FROM restaurant as r
                         INNER JOIN content as c
                         ON r.restaurantName = c.elementName
@@ -22,7 +22,6 @@ class FoodTicketDAO{
 
                 $restaurantModel->setRestaurantId($restaurant->restaurantId);
                 $restaurantModel->setRestaurantName($restaurant->restaurantName);
-                $restaurantModel->setRestaurantStars($restaurant->restaurantStars);
                 $restaurantModel->setRestaurantDescription($restaurant->description);
                 $restaurantModel->setRestaurantContent($restaurant->content);
 
@@ -66,6 +65,7 @@ class FoodTicketDAO{
                         FROM tickets as t
                         INNER JOIN foodticket as f
                         WHERE t.ticketId = f.ticketId
+
                         ");
 
         $this->db->bind(':id', $id);

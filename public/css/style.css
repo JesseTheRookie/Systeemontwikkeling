@@ -1127,6 +1127,7 @@ select
 {
     background-color: transparent;
     color: #ffffff;
+    border: 1px solid #fff;
     border-radius: 0px;
     width: 180px;
     height: 30px;
