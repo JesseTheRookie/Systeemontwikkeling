@@ -1,79 +1,9 @@
-
-		<title> 
-			<?php echo $data['title']; ?>
-		</title>
-
-		<link rel="stylesheet" type="text/css" href="style.css"> <!--algemeen stylesheet-->
-
-		<style> 
-
-			#content 
-			{
-				margin: auto;
-				width: 50%;
-			}
-
-			#loginHeader 
-			{
-				text-align: center;	
-			}
-
-			#line 
-			{
-				margin: auto;
-				height: 1em; 
-				width: 60px;
-				display: block;		
-			}
-
-			.input	
-			{
-			    display: block;
-			    margin: auto;
-			    width: 30em; 
-			    height: 2em;
-			    border: 1px solid #818181;
-			    padding: 5px;
-			}
-
-			#submit 
-			{
-				display: block;
-			    margin: auto;
-				height: 3em;
-				background-color: #000000;
-				text-align: center;
-				color: white;
-				width: 31em;
-				border: none;
-			}
-
-			.options 
-			{
-				text-align: center;
-			}
-
-			.success
-			{
-				background: light green;
-				border; 1px solid green;
-			}
-
-			.invalidFeedback 
-			{
-				color: red;
-				font-weight: normal;				
-			}
-
-		</style>
-
-
-	<?php
-    require APPROOT . '/UI/inc/header.php';
-	?>
-	<?php
-		require APPROOT . '/UI/inc/navigation.php';
-	?>
+<?php
+require APPROOT . '/UI/inc/header.php';
+?>
+<?php
+	require APPROOT . '/UI/inc/navigation.php';
+?>
 		<br><br><br>		<br><br><br>
 		<div id="content">
 

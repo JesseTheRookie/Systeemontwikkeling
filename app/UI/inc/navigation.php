@@ -3,7 +3,8 @@
     <div class="content-header-50">
       <div>
         <a href="<?php echo URLROOT; ?>">
-          <img src="./img/logo.png"
+          <img src=" http://localhost/Systeemontwikkeling/img/logo.png"
+
             alt="Logo Haarlem Festival"
             title="Logo Haarlem Festival"
             class="logo-header"
@@ -103,7 +104,7 @@
             <li>
               <a href="<?php echo URLROOT; ?>/shoppingcart/shopping-cart">
                 <img
-                  src="./img/shopping-cart.png"
+                  <img src=" http://localhost/Systeemontwikkeling/img/logo.png"
                   class="shopping-cart"
                   alt="Shopping cart"
                 />

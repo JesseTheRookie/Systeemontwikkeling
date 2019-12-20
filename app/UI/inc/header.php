@@ -46,6 +46,18 @@
     <link
             rel="stylesheet"
             type="text/css"
+            href="<?php echo URLROOT; ?>/css/users.css?version=3.2"
+    />
+
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="<?php echo URLROOT; ?>/css/historic.css?version=3.2"
+    />
+
+    <link
+            rel="stylesheet"
+            type="text/css"
             href='https://fonts.googleapis.com/css?family=Lato:300,400,700'
     />
 

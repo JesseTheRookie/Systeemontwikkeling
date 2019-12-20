@@ -13,7 +13,7 @@ class HomeDAO {
 	                        (SELECT COUNT(*) FROM artist) as totalArtists,
                             (SELECT SUM(ticketQuantity) FROM tickets) as totalTickets,
                             (SELECT COUNT(*) FROM eventType) AS totalEvents,
-                            (SELECT COUNT(*) FROM locations) AS totalLocations
+                            (SELECT COUNT(*) FROM location) AS totalLocations
                         ");
 
         $generalInformation = $this->db->resultSet();
@@ -37,7 +37,7 @@ class HomeDAO {
         $this->db->query("SELECT
                             MIN(startDateTime) as startDate,
                             MAX(endDateTime) as endDate
-                            FROM tickets
+                            FROM Tickets
                             WHERE endDateTime >= now()"
                         );
 
@@ -58,7 +58,7 @@ class HomeDAO {
         $eventsArray = array();
 
         $this->db->query("SELECT elementName, description, content
-                            FROM content WHERE eventType = 2"
+                            FROM Content WHERE eventType = 2"
                         );
 
         $events = $this->db->resultSet();

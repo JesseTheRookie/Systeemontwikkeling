@@ -10,11 +10,11 @@ class DanceTicketDAO{
     public function getAllDanceTickets($ticketDate){
         $danceTicketArray = array();
 
-        $sth = $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
-                FROM tickets AS t
-                INNER JOIN danceticket AS d
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
+                FROM Tickets AS t
+                INNER JOIN DanceTicket AS d
                 ON t.ticketId = d.ticketId
-                INNER JOIN locations AS l
+                INNER JOIN Location AS l
                 ON d.locationId = l.locationId
                 WHERE DATE(t.startDateTime) = :ticketDate
                 ORDER BY t.startDateTime ASC
@@ -45,8 +45,8 @@ class DanceTicketDAO{
       $danceArtistArray = array();
 
       $this->db->query("SELECT a.artistId, a.artistName, a.artistBio, c.content
-                        FROM artist as a
-                        INNER JOIN content as c
+                        FROM Artist as a
+                        INNER JOIN Content as c
                         ON a.artistName = c.elementName
                       ");
 
@@ -68,8 +68,8 @@ class DanceTicketDAO{
     //Get different days based on the datetime function
     public function getDifferentDays() {
         $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
-                          FROM tickets as t
-                          INNER JOIN danceticket as d
+                          FROM Tickets as t
+                          INNER JOIN DanceTicket as d
                           ON d.ticketId = t.ticketId
                         ");
 
@@ -78,4 +78,4 @@ class DanceTicketDAO{
         return $results;
     }
 }
-?>
+

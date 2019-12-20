@@ -21,19 +21,16 @@
       $this->ui('pages/index', $data);
     }
 
-    public function historic(){
-      $data = [
-        'title' => 'Historic Page',
-      ];
-
-      $this->ui('events/historic', $data);
+    public function dashboard(){
+      $data = "lol";
+      $this->ui('pages/dashboard', $data);
     }
 
-    public function historicVenues(){
+    public function shoppingcart(){
       $data = [
-          'title' => 'Historic Venues'
+        'title' => 'Shopping Cart'
       ];
 
-      $this->ui('events/historicVenues', $data);
+      $this->ui('pages/shoppingcart', $data);
+    }
   }
-}
