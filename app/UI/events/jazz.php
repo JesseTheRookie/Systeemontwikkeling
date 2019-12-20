@@ -5,7 +5,7 @@ require APPROOT . '/UI/inc/header.php';
 require APPROOT . '/UI/inc/navigation.php';
 ?>
 <header id="mainHeader">
-    <section class="background">
+    <section class="background" >
     </section>
     <section>
         <div class="overlay">
@@ -13,7 +13,11 @@ require APPROOT . '/UI/inc/navigation.php';
             <button class="bigButton">Get Tickets</button>
             <button class="bigButton">Show program</button>
         </div>
-        <p>gumbo kings<span>.</span> evolve<span>.</span> ntjam rosie<span>.</span> wicked jazz sounds<span>.</span> tom assemble<span>.</span> jonna frazer<span>.</span> fox & the mayors<span>.</span> unclu sue<span>.</span> chris allen<span>.</span> myles sanko<span>.</span>ruis soundsystem<span>.</span> the family XL<span>.</span> gare du nord<span>.</span> rilan & the bombardiers<span>.</span> soul six<span>.</span> han bennink<span>.</span> the nordanians<span>.</span> lilith merlot<span>.</span></p>
+        <p>
+        <?php foreach($data['artists'] as $artist) :
+            echo $artist->getArtistName(); echo "<span>.</span> ";
+        endforeach; ?>
+        </p>
     </section>
 </header>
 <section id="artiesten">
@@ -40,28 +44,28 @@ require APPROOT . '/UI/inc/navigation.php';
     </section>
     <section id="ticketOverzicht">
         <header>
-            <section id="thursday">
-                <h1>thu<span>.</span></h1>
-                <p>26 july</p>
-                <button class="normalButton">see tickets</button>
-            </section>
-            <section id="friday">
-                <h1>fri<span>.</span></h1>
-                <p>27 july</p>
-                <button class="normalButton">see tickets</button>
-            </section>
-            <section id="saturday">
-                <h1>sat<span>.</span></h1>
-                <p>28 july</p>
-                <button class="normalButton">see tickets</button>
-            </section>
-            <section id="sunday">
-                <h1>sun<span>.</span></h1>
-                <p>29 july</p>
-                <button class="normalButton">see tickets</button>
-            </section>
-        </header>
+            <?php foreach ($data['days'] as $day) : ?>
+            <section id="">
+                <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
+                    <h1><?php echo date("D", strtotime($day->startDateTime)) . "."; ?></h1>
+                    <p><?php echo date("jS F", strtotime($day->startDateTime)); ?></p>
+                    <form
+                            action="<?php echo URLROOT; ?>/jazz"
+                            method="POST"
+                            role="form">
 
+                        <button
+                                type="submit"
+                                class="ticket-date"
+                                name="ticketDate"
+                                value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
+                            TICKETS
+                        </button>
+                    </form>
+                <?php endif; ?>
+            </section>
+            <?php endforeach; ?>
+        </header>
         <section id="ticketItems">
             <?php
             foreach($data['tickets'] as $ticket) : ?>

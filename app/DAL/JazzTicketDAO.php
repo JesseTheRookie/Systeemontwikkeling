@@ -11,12 +11,14 @@ class JazzTicketDAO{
     public function getJazzTickets(){
         $jazzTicketArray = array();
 
-        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, j.jazzTicketHall, l.stad
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, jl.hall, l.stad
                 FROM tickets AS t
                 INNER JOIN jazzticket AS j
                 ON t.ticketId = j.ticketId
-                INNER JOIN locations AS l
-                ON j.locationId = l.locationId");
+                INNER JOIN jazzLocation AS jl
+                ON j.ticketId = jl.ticketId
+                INNER JOIN location AS l 
+                ON jl.locationId = l.locationId");
 
         $jazzTickets = $this->db->resultSet();
 
@@ -28,7 +30,7 @@ class JazzTicketDAO{
             $jazzTicketModel->setStartDateTime($jazzTicket->startDateTime);
             $jazzTicketModel->setEndDateTime($jazzTicket->endDateTime);
             $jazzTicketModel->setJazzTicketLocation($jazzTicket->stad);
-            $jazzTicketModel->setJazzTicketHall($jazzTicket->jazzTicketHall);
+            $jazzTicketModel->setJazzTicketHall($jazzTicket->hall);
             $jazzTicketModel->setPrice($jazzTicket->price);
 
             array_push($jazzTicketArray, $jazzTicketModel);
@@ -58,5 +60,17 @@ class JazzTicketDAO{
             array_push($artistArray, $artistModel);
         }
         return $artistArray;
+    }
+
+    public function getDifferentDays() {
+        $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
+                          FROM tickets as t
+                          INNER JOIN jazzTicket as j
+                          ON j.ticketId = t.ticketId
+                        ");
+
+        $results = $this->db->resultSet();
+
+        return $results;
     }
 }
