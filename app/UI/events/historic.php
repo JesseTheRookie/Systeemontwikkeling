@@ -57,7 +57,7 @@
 
 	    		<br>
 
-	    		<a href="<?php echo URLROOT; ?>/events/historicVenues" class="button">
+	    		<a href="<?php echo URLROOT; ?>/venues" class="button">
 	    			LEARN MORE
 	    		</a>
 

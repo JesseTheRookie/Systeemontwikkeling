@@ -1,14 +1,14 @@
 <?php   
     class User {
-        protected $userName;
-        protected $userLastName;
-        protected $email;
-        protected $street;
-        protected $house;
-        protected $phone;
-        protected $gender;
-        protected $password;
-        protected $passwordConfirm;
+        private $userName;
+        private $userLastName;
+        private $email;
+        private $street;
+        private $house;
+        private $phone;
+        private $gender;
+        private $password;
+        private $passwordConfirm;
 
         //Get and Set for userName
         public function setUserName($userName){

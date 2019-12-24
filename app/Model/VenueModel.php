@@ -1,8 +1,8 @@
 <?php
     class VenueModel{
-        protected $venueName;
-        protected $venueDesc;
-        protected $venueImg;
+        private $venueName;
+        private $venueDesc;
+        private $venueImg;
 
         // Get & set for venueName
         public function setVenueName($venueName){
