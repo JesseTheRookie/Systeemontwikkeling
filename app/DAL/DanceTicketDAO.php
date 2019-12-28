@@ -6,8 +6,8 @@ class DanceTicketDAO{
       $this->db = new Database;
     }
 
-    //Get all dance tickets based on button click
-    public function getAllDanceTickets($ticketDate){
+    //Get all dance tickets based on button click that's passing ticket information
+    public function getDanceTickets($ticketDate){
         $danceTicketArray = array();
 
         $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
@@ -23,19 +23,20 @@ class DanceTicketDAO{
         //Bind param with value from DB
         $this->db->bind(':ticketDate', $ticketDate);
 
+        //Fetching results
         $danceTickets = $this->db->resultSet();
 
         foreach ($danceTickets as $danceTicket) {
-          $danceTicketModel = new DanceTicketModel();
+            $danceTicketModel = new DanceTicketModel();
 
-          $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
-          $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
-          $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
-          $danceTicketModel->setPrice($danceTicket->price);
-          $danceTicketModel->setDanceTicketSession($danceTicket->danceTicketSession);
+            $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
+            $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
+            $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
+            $danceTicketModel->setPrice($danceTicket->price);
+            $danceTicketModel->setDanceTicketSession($danceTicket->danceTicketSession);
 
-          //Add objects into array
-          array_push($danceTicketArray, $danceTicketModel);
+            //Add objects into array
+            array_push($danceTicketArray, $danceTicketModel);
         }
         return $danceTicketArray;
     }
@@ -60,12 +61,12 @@ class DanceTicketDAO{
             $danceArtistModel->setArtistBio($danceArtist->artistBio);
             $danceArtistModel->setContent($danceArtist->content);
 
-          array_push($danceArtistArray, $danceArtistModel);
+            array_push($danceArtistArray, $danceArtistModel);
         }
         return $danceArtistArray;
     }
 
-    //Get different days based on the datetime function
+    //Get different days based on the date function, preventign redudancy because there are multiple tickets with the same date
     public function getDifferentDays() {
         $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
                           FROM Tickets as t

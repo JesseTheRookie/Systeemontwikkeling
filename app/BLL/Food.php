@@ -12,7 +12,7 @@ class Food Extends Controller{
 
         $data = [
             'title' => 'Food Page',
-            'restaurants' => $restaurants
+            'restaurants' => $restaurants,
         ];
 
       $this->ui('events/food', $data);

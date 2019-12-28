@@ -1,16 +1,18 @@
 <?php
 require('TicketModel.php');
 class FoodTicketModel extends TicketModel {
-    protected $restaurantId;
-    protected $restaurantName;
-    protected $restaurantStars;
-    protected $restaurantDescription;
-    protected $restaurantContent;
+    private $restaurantId;
+    private $restaurantName;
+    private $restaurantStars;
+    private $restaurantDescription;
+    private $restaurantContent;
+    private $restaurantType;
 
-    //Objects for Restaurant name (because id needs to be passed for detailed page)
+    //Objects for Restaurant id (because id needs to be passed for detailed page)
     public function setRestaurantId($id){
         $this->restaurantId = $id;
     }
+
     public function getRestaurantId(){
         return $this->restaurantId;
     }
@@ -19,6 +21,7 @@ class FoodTicketModel extends TicketModel {
     public function setRestaurantName($name){
         $this->restaurantName = $name;
     }
+
     public function getRestaurantName(){
         return $this->restaurantName;
     }
@@ -27,6 +30,7 @@ class FoodTicketModel extends TicketModel {
     public function setRestaurantStars($stars){
         $this->restaurantStars = $stars;
     }
+
     public function getRestaurantStars(){
         return $this->restaurantStars;
     }
@@ -35,6 +39,7 @@ class FoodTicketModel extends TicketModel {
     public function setRestaurantDescription($description){
         $this->restaurantDescription = $description;
     }
+
     public function getRestaurantDescription(){
         return $this->restaurantDescription;
     }
@@ -43,8 +48,18 @@ class FoodTicketModel extends TicketModel {
     public function setRestaurantContent($content){
         $this->restaurantContent = $content;
     }
+
     public function getRestaurantContent(){
         return $this->restaurantContent;
+    }
+
+    //Objects for Restaurant type
+    public function setRestaurantType($type){
+        $this->restaurantType = $type;
+    }
+
+    public function getRestaurantType(){
+        return $this->restaurantType;
     }
 
 }

@@ -8,7 +8,12 @@
 <div id="section-restaurant-header">
     <div class="content-restaurant-header">
         <div>
-            <img src="./img/food-banner.jpg" alt="" class="header-food">
+            <img
+                src="./img/food-banner.jpg"
+                alt="Header food"
+                title="Header food"
+                class="header-food"
+            />
         </div>
 
         <div class="content-food-right">
@@ -35,12 +40,29 @@
     </div>
 
     <div>
-        <select name="all(8)" class="select-food">
-            <option value="volvo">All(8)</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
-        </select>
+        <form
+            action="<?php echo URLROOT; ?>/food"
+            method="POST"
+            role="form">
+
+            <select name="all(8)" class="select-food">
+                <option value="*">
+                    All
+                </option>
+
+                <option
+                    value="Dutch / European / Modern"
+                    name="cuisineType">
+                    Dutch / European / Modern
+                </option>
+            </select>
+
+            <input
+                type="submit"
+                value="submit"
+                class="submit-cousine"
+            />
+        </form>
     </div>
 </div>
 
@@ -53,7 +75,8 @@
 
               <img
                   src="<?php echo URLROOT; ?>/<?php echo $restaurant->getRestaurantContent(); ?>"
-                  alt=""
+                  alt="Restaurant image"
+                  title="Restaurant image"
               />
 
               <div class="overlay-food">
@@ -62,7 +85,7 @@
                   </h4>
 
                   <p>
-                    <?php echo $restaurant->getRestaurantDescription(); ?>
+                    <?php echo $restaurant->getRestaurantType(); ?>
                   </p>
               </div>
             </a>
