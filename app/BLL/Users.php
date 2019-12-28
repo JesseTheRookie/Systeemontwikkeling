@@ -124,6 +124,7 @@
                         flash('registerSuccess', 'You are now registered');
                         redirect('users/login');
                     } else {
+                        //aanpassen naar iets fancies
                         die('Something went wrong');
                     }
 
@@ -249,10 +250,10 @@
                         //User found
 
                         //Message
-                        $msg = "You have requested a password recovery for your account at Haarlem Festival. /n
-                        Click the link below to set up a new password /n
+                        $msg = "You have requested a password recovery for your account at Haarlem Festival. \n
+                        Click the link below to set up a new password \n
                         [link]";
-                        
+
                         // use wordwrap() if lines are longer than 70 characters
                         $msg = wordwrap($msg,70);
 
@@ -275,7 +276,7 @@
             $this->ui('users/forgot', $data);
         }
 
-        public function pwemailsend(){
+        public function passwordEmailSend(){
             //Init data
             $data = [
                 'title' => 'Password recovery email has been send'
@@ -285,7 +286,7 @@
             $this->ui('users/pwemailsend', $data);
         }
 
-        public function newpw(){
+        public function newPassword(){
             //Init data
             $data = [
                 'title' => 'Enter new password'
