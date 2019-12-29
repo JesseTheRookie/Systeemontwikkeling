@@ -56,7 +56,7 @@
     <hr>
 
   <div class="content-festival-info">
-    <?php foreach($data['informations'] as $information) : ?>
+    <?php foreach($data['eventInfo'] as $information) : ?>
       <div>
         <?php echo $information->getTotalArtists(); ?>
       </div>

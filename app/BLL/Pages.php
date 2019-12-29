@@ -7,17 +7,17 @@
     }
 
     public function index(){
-      $eventInformation = $this->homeDal->eventInformation();
-      $allEvents = $this->homeDal->allEvents();
-      $eventDates = $this->homeDal->eventDates();
+        $eventInformation = $this->homeDal->eventInformation();
+        $allEvents = $this->homeDal->allEvents();
+        $eventDates = $this->homeDal->eventDates();
 
-      $data = [
-        'title' => 'Welcome',
-        'informations' => $eventInformation,
-        'events' => $allEvents,
-        'dates' => $eventDates
-      ];
+        $data = [
+          'title' => 'Haarlem Festival',
+          'eventInfo' => $eventInformation,
+          'events' => $allEvents,
+          'dates' => $eventDates
+        ];
 
-      $this->ui('pages/index', $data);
+        $this->ui('pages/index', $data);
     }
   }
