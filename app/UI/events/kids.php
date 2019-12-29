@@ -8,7 +8,7 @@
     <div id="section-kids-header">
         <div class="content-kids-header">
             <div>
-                <img src="./img/kids/banner-kids.jpeg"
+                <img src="./img/kids/kids_banner_1.jpg"
                     alt="Banner header kids page"
                     title="Banner header kids page"
                 />
@@ -46,7 +46,7 @@
                     alt="Performer Kids Artist"
                     title="Performer Kids Artist"
                 />
-                <button class="myBtn">
+                <button class="myBtnKids">
                     <?php echo $artist->getArtistName(); ?>
                 </button>
             </div>
@@ -109,7 +109,7 @@
             </td>
 
             <td>
-                <?php echo $ticket->getDidsTicketSession(); ?>
+                <?php echo $ticket->getKidsTicketSession(); ?>
             </td>
 
             <td>
