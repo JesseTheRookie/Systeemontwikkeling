@@ -22,8 +22,10 @@ require APPROOT . '/UI/inc/navigation.php';
 </header>
 <section id="artiesten">
         <div id="lineup">
-            <?php foreach($data['artists'] as $artist) :
-                $counter = 0;
+            <?php 
+            $counter = 0;
+            foreach($data['artists'] as $artist) :
+
                 ?>
                 <article><h1><?php echo $artist->getArtistName(); ?><span>.</span></h1></article>
             <?php
@@ -68,22 +70,33 @@ require APPROOT . '/UI/inc/navigation.php';
         </header>
         <section id="ticketItems">
             <?php
-            foreach($data['tickets'] as $ticket) : ?>
-                <article>
-                    <?php $artists = $ticket->getArtists();
+               if (isset($_POST["ticketDate"]))
+               {
+                foreach($data['tickets'] as $ticket) :
+                    $dateAndTime = explode(" ", $ticket->getStartDateTime());       
+                    
+                    if($dateAndTime[0] == $_POST["ticketDate"]){ ?>
+                
+                    <article>
+                        <?php $artists = $ticket->getArtists();
 
-                    foreach($artists as $artist) : ?>
-                        <div><p><?php echo $artist->getArtistName(); ?></p></div>
-                    <?php endforeach; ?>
+                        foreach($artists as $artist) : ?>
+                            <div><p><?php echo $artist->getArtistName(); ?></p></div>
+                        <?php endforeach; ?>
 
-                    <div><p><?php echo $ticket->getStartDateTime(); ?> - <?php echo $ticket->getEndDateTime() ?></p></div>
-                    <div><p><?php echo $ticket->getJazzTicketLocation(); ?><br/><span><?php echo $ticket->getJazzTicketHall();?></span></p></div>
-                    <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
-                    <div><input type="text" id="" name="quantity" placeholder="0"></div>
-                    <div><button class="smallButton">add</button></div>
-                </article>
-            <?php endforeach; ?>
-
+                        <div><p><?php echo $ticket->getStartDateTime(); ?> - <?php echo $ticket->getEndDateTime() ?></p></div>
+                        <div><p><?php echo $ticket->getJazzTicketLocation(); ?><br/><span><?php echo $ticket->getJazzTicketHall();?></span></p></div>
+                        <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
+                        <div><input type="text" id="" name="quantity" placeholder="0"></div>
+                        <div><button class="smallButton">add</button></div>
+                    </article>
+               
+                <?php  }
+                endforeach; 
+                        
+                    
+                }           
+                ?>       
 
 <?php
 require APPROOT . '/UI/inc/footer.php';
