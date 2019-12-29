@@ -1644,6 +1644,8 @@ text-transform: uppercase;
     border: 1px solid #ffffff;
     font-size: 16px;
     color: #ffffff;
+    width: 100px;
+    height: 42px;
 }
 
 .button-add-kids
