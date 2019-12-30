@@ -17,7 +17,7 @@ class JazzTicketDAO{
                 ON t.ticketId = j.ticketId
                 INNER JOIN jazzLocation AS jl
                 ON j.ticketId = jl.ticketId
-                INNER JOIN location AS l 
+                INNER JOIN location AS l
                 ON jl.locationId = l.locationId");
 
         $jazzTickets = $this->db->resultSet();

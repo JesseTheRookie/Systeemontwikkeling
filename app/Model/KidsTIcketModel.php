@@ -16,8 +16,8 @@ class KidsTicketModel extends TicketModel {
     }
 
     //Object for ticket session
-    public function setKidsTicketSession($kidsTicketSession){
-        $this->kidsTicketSession = $kidseTicketSession;
+    public function setKidsTicketSession($session){
+        $this->kidsTicketSession = $session;
     }
 
     public function getKidsTicketSession(){
