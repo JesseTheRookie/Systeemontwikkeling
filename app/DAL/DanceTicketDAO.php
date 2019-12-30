@@ -45,10 +45,12 @@ class DanceTicketDAO{
     public function getArtists() {
       $danceArtistArray = array();
 
-      $this->db->query("SELECT a.artistId, a.artistName, a.artistBio, c.content
-                        FROM Artist as a
-                        INNER JOIN Content as c
-                        ON a.artistName = c.elementName
+      $this->db->query("SELECT p.DanceTicketId, a.artistName, a.artistBio, a.artistId, c.content
+                FROM PerformanceDance AS p
+                INNER JOIN Artist AS a
+                ON p.danceArtistId = a.artistId
+                INNER JOIN Content as c
+                ON a.artistName = c.elementName
                       ");
 
       $danceArtists = $this->db->resultSet();
