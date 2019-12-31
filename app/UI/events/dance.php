@@ -91,13 +91,23 @@
         <?php endforeach; ?>
     </div>
 
-<?php foreach($data['tickets'] as $ticket) : ?>
+<?php 
+
+if (isset($_POST["ticketDate"]))
+{
+    foreach($data['tickets'] as $ticket) : 
+    $dateAndTime = explode(" ", $ticket->getStartDateTime());       
+                    
+    if($dateAndTime[0] == $_POST["ticketDate"]){ ?>
     <table class="table-tickets-dance">
         <tr>
             <td>
-                <?php foreach($data['artists'] as $artist) : ?>
-                    <?php echo $artist->getArtistName(); ?>
-                <?php endforeach; ?>
+            <?php $artists = $ticket->getArtists();
+
+                foreach($artists as $artist) : 
+                    echo $artist->getArtistName();
+                endforeach; 
+            ?>
             </td>
 
 
@@ -143,7 +153,11 @@
                 </td>
         </tr>
     </table>
-<?php endforeach; ?>
+<?php
+    } 
+endforeach; 
+}
+?>
 </div>
 
 <?php

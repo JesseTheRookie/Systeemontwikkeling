@@ -7,21 +7,17 @@ class DanceTicketDAO{
     }
 
     //Get all dance tickets based on button click that's passing ticket information
-    public function getDanceTickets($ticketDate){
+    public function getDanceTickets(){
         $danceTicketArray = array();
 
         $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
-                FROM Tickets AS t
-                INNER JOIN DanceTicket AS d
-                ON t.ticketId = d.ticketId
-                INNER JOIN Location AS l
-                ON d.locationId = l.locationId
-                WHERE DATE(t.startDateTime) = :ticketDate
-                ORDER BY t.startDateTime ASC
-                ");
-
-        //Bind param with value from DB
-        $this->db->bind(':ticketDate', $ticketDate);
+                          FROM Tickets AS t
+                          INNER JOIN DanceTicket AS d
+                          ON t.ticketId = d.ticketId
+                          INNER JOIN danceLocation AS dl
+                          ON d.ticketId = dl.ticketId
+                          INNER JOIN Location AS l
+                          ON d.locationId = l.locationId");
 
         //Fetching results
         $danceTickets = $this->db->resultSet();
@@ -29,6 +25,7 @@ class DanceTicketDAO{
         foreach ($danceTickets as $danceTicket) {
             $danceTicketModel = new DanceTicketModel();
 
+            $danceTicketModel->setTicketId($danceTicket->ticketId);
             $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
             $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
             $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
@@ -45,21 +42,21 @@ class DanceTicketDAO{
     public function getArtists() {
       $danceArtistArray = array();
 
-      $this->db->query("SELECT a.artistId, a.artistName, a.artistBio, c.content
-                        FROM Artist as a
-                        INNER JOIN Content as c
-                        ON a.artistName = c.elementName
-                      ");
+      $this->db->query("SELECT d.danceTicketId, a.artistName, a.artistBio, a.artistId
+      FROM PerformanceDance AS d
+      INNER JOIN Artist AS a
+      ON d.danceArtistId = a.artistId");
 
       $danceArtists = $this->db->resultSet();
 
       foreach ($danceArtists as $danceArtist) {
             $danceArtistModel = new ArtistModel();
 
+            $danceArtistModel->setTicketId($danceArtist->danceTicketId);
             $danceArtistModel->setArtistId($danceArtist->artistId);
             $danceArtistModel->setArtistName($danceArtist->artistName);
             $danceArtistModel->setArtistBio($danceArtist->artistBio);
-            $danceArtistModel->setContent($danceArtist->content);
+            //$danceArtistModel->setContent($danceArtist->content);
 
             array_push($danceArtistArray, $danceArtistModel);
         }

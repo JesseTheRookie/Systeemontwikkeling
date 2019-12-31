@@ -43,7 +43,7 @@ class JazzTicketDAO{
         $artistArray = array();
 
         $this->db->query("SELECT p.JazzTicketId, a.artistName, a.artistBio, a.artistId
-                FROM performancejazz AS p
+                FROM PerformanceJazz AS p
                 INNER JOIN artist AS a
                 ON p.JazzArtist = a.artistId");
 
@@ -66,8 +66,7 @@ class JazzTicketDAO{
         $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
                           FROM tickets as t
                           INNER JOIN jazzTicket as j
-                          ON j.ticketId = t.ticketId
-                        ");
+                          ON j.ticketId = t.ticketId");
 
         $results = $this->db->resultSet();
 
