@@ -12,13 +12,13 @@ class JazzTicketDAO{
         $jazzTicketArray = array();
 
         $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, jl.hall, l.stad
-            FROM tickets AS t
-            INNER JOIN jazzticket AS j
-            ON t.ticketId = j.ticketId
-            INNER JOIN jazzLocation AS jl
-            ON j.ticketId = jl.ticketId
-            INNER JOIN location AS l 
-            ON jl.locationId = l.locationId");
+                FROM tickets AS t
+                INNER JOIN jazzticket AS j
+                ON t.ticketId = j.ticketId
+                INNER JOIN jazzLocation AS jl
+                ON j.ticketId = jl.ticketId
+                INNER JOIN location AS l
+                ON jl.locationId = l.locationId");
 
         $jazzTickets = $this->db->resultSet();
 
