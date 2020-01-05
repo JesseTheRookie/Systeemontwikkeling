@@ -43,12 +43,24 @@ h1 {
   font-family: Lato, sans-serif;
 }
 
+h3 {
+  position: relative;
+  top: 30px;
+  left: 6%;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+}
+
 .logoutlink {
   position: relative;
   top: 20%;
   left: 93%;
   font-size: 24px;
   font-family: Lato, sans-serif;
+  color: #e1d9d9;
+}
+
+.link {
   color: #e1d9d9;
 }
 
@@ -61,10 +73,6 @@ h1 {
   padding-top: 10px;
   padding-bottom: 10px;
   font-family: Lato, sans-serif;
-}
-
-.link {
-  color: #e1d9d9;
 }
 
 .usercontainer {
@@ -101,181 +109,27 @@ h1 {
   background-color: rgba(225, 211, 211, 0.85);
 }
 
-.datablocks {
-  margin-top: 80px;
-  overflow: hidden;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  height: auto;
-}
-
-.generatedblocks{
-  margin-top: 40px;
-  overflow: hidden;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  height: auto;
-}
-
-.tableblock{
-  margin-top: 40px;
-  overflow: hidden;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
-  height: auto;
-}
-
-.revenue {
-  position: relative;
-  float: left;
-  margin-left: 6%;
-  left: 0px;
-  top: 0px;
-  right: auto;
-  bottom: 0px;
-  width: 225px;
-  height: 100px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #0f3719;
-  background-color: whitesmoke;
-}
-
-.tickets {
-  position: relative;
-  float: left;
-  margin-left: 5%;
-  left: 0px;
-  top: 0px;
-  right: auto;
-  bottom: auto;
-  width: 225px;
-  height: 100px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #0f3719;
-  background-color: whitesmoke;
-}
-
-.reservations {
-  position: relative;
-  float: left;
-  margin-left: 5%;
-  left:   0px;
-  top:    0px;
-  width:  225px;
-  height: 100px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #0f3719;
-  background-color: whitesmoke;
-}
-
-.other {
-  position: relative;
-  float: left;
-  margin-left: 5%;
-  left: 0px;
-  top: 0px;
-  width: 225px;
-  height: 100px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #0f3719;
-  background-color: whitesmoke;
-}
-
-.importantdata {
-  position: relative;
-  left: 0px;
-  top: 5px;
-  font-size: 24px;
-  text-align: center;
-}
-
-.graph {
-  margin-left: 6%;
-  float: left;
-  position: relative;
-  left: 0px;
-  top: 0px;
-  width: 600px;
-  height: 350px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #0f3719;
-  background-color: whitesmoke;
-}
-
-.weekly {
-  position: relative;
-  top: 280px;
-  left: 60px;
-  width: 150px;
-  font-size: 18px;
-  text-align: center;
-}
-
-.trend {
-  position: relative;
-  top: 216px;
-  left: 460px;
-  width: 120px;
-  font-size: 18px;
-}
-
-.monthly {
-  position: relative;
-  top: 247px;
-  left: 260px;
-  width: 150px;
-  font-size: 18px;
-}
-
-.circlediagram {
-  margin-left: 5%;
-  float: left;
-  position: relative;
-  left: 0px;
-  top: 0px;
-  width: 459px;
-  height: 350px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #0f3719;
-  background-color: whitesmoke;
-}
-
-.table {
-  position: relative;
-  float: left;
-  margin-left: 6%;
-  margin-bottom: 50px;
-  left: 0px;
-  top: 0px;
-  width: 1138px;
-  height: 400px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #0f3719;
-  background-color: whitesmoke;
-}
-
-table {
-  border-collapse: collapse;
-}
-
 .dropdowns {
   position: relative;
-  margin-bottom: -8px;
+  width: 100%;
+  height: 10%;
+  top: 10px;
+  left: 0px;
+}
+
+#event {
+  position: relative;
+  margin-left: 6%;
+  margin-top: 50px;
+  width: 125px;
+  height: 30px;
+}
+
+#submitbutton {
+  position: relative;
+  margin-left: 3%;
+  margin-top: 50px;
+  width: 100px;
+  height: 30px;
 }
   

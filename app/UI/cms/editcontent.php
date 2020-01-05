@@ -30,7 +30,20 @@
 
   <div class="section">
 
-    <h1><?php echo $data['title']; ?></h1>
+    <h1><u><?php echo $data['title']; ?></u></h1>
+    <h3><?php echo $data['explanation'] ?></h3>
+
+    <div class="dropdowns">    
+      <form id="dropdowns" action="<?php echo URLROOT; ?>/Cms/editcontent" method="GET">
+        <select id="event" name="event" data-name="event">
+        <?php
+          foreach($data['Events'] as $event)
+          {
+            echo '<option value=' . $event->event . '>' . $event->event . '</option>';
+          }
+        ?>  
+        </select><input type="submit" value="Search" id="submitbutton"></form>
+    </div>
       
   </div>
 </body>

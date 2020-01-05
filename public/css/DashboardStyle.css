@@ -272,6 +272,19 @@ h1 {
 
 table {
   border-collapse: collapse;
+  text-align: center;
+  margin-top: 40px;
+  margin-left: 5%;
+  width: 85%;
+}
+
+th {
+  text-align: left;
+  height: 30px;
+}
+
+tr {
+  height: 25px;
 }
 
 .dropdowns {
@@ -281,25 +294,31 @@ table {
 
 #Day {
   position: relative;
-  left: 50px;
-  top: 20px;
-  width: 75px;
+  left: 5%;
+  top: 25px;
+  width: 125px;
   height: 30px;
 }
 
 #event {
   position: relative;
-  left: 100px;
-  top: 20px;
-  width: 75px;
+  left: 10%;
+  top: 25px;
+  width: 125px;
   height: 30px;
 }
 
 #submitbutton {
   position: relative;
-  left: 150px;
-  top: 20px;
-  width: 75px;
+  left: 15%;
+  top: 25px;
+  width: 100px;
   height: 30px;
+}
+
+#dateeventtekst {
+  position: relative;
+  left: 72%;
+  top: -15px;
 }
 

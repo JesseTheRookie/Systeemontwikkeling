@@ -163,70 +163,70 @@ span {
   width: 200px;
 }
 
-.starttimetext {
+.text1 {
   position: relative;
   top: 0px;
   left: 50px;
   right: 0px;
 }
 
-#starttimefield {
+#field1 {
   position: relative;
   top: 20px;
   left: 8px;
   right: 0px;
 }
 
-.locationtext {
+.text2 {
   position: relative;
   top: 0px;
   left: 80px;
   right: 0px;
 }
 
-#locationfield {
+#field2 {
   position: relative;
   top: 20px;
   left: 39px;
   right: 0px;
 }
 
-.halltext {
+.text3 {
   position: relative;
   top: 70px;
   left: -450px;
   right: 0px;
 }
 
-#hallfield {
+#field3 {
   position: relative;
   top: 90px;
   left: -491px;
   right: 0px;
 }
 
-.bandtext {
+.text4 {
   position: relative;
   top: 70px;
   left: -420px;
   right: 0px;
 }
 
-#bandfield {
+#field4 {
   position: relative;
   top: 90px;
   left: -461px;
   right: 0px;
 }
 
-.extratext {
+.textextra {
   position: relative;
   top: -1.5px;
   left: -400px;
   right: 0px;
 }
 
-#extrafield {
+#fieldextra {
   position: relative;
   top: -1.5px;
   left: 600px;
@@ -239,3 +239,45 @@ span {
   left: -160px;
   right: 0px;
 }
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 50px;
+  margin-left: 5%;
+  width: 85%;
+}
+
+th {
+  text-align: left;
+  height: 30px;
+}
+
+tr {
+  height: 25px;
+}
+
+#Day {
+  position: relative;
+  left: 5%;
+  top: 25px;
+  width: 125px;
+  height: 30px;
+}
+
+#event {
+  position: relative;
+  left: 10%;
+  top: 25px;
+  width: 125px;
+  height: 30px;
+}
+
+#submitbutton {
+  position: relative;
+  left: 15%;
+  top: 25px;
+  width: 100px;
+  height: 30px;
+}
+
