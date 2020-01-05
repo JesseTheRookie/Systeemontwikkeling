@@ -1,6 +1,6 @@
 <?php
 
-class JazzTicketService extends Controller {
+class Jazz extends Controller {
     public function __construct(){
         $this->jazzTicketModel = $this->model('JazzTicketModel');
         $this->jazzTicketDAO = $this->dal('JazzTicketDAO');
