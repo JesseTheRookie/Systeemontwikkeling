@@ -1,39 +1,30 @@
 <?php
-
 require('TicketModel.php');
 require('ArtistModel.php');
+class KidsTicketModel extends TicketModel {
+    private $kidsTicketLocation;
+    private $kidsTicketSession;
+    private $artists = array();
 
- class KidsTicketModel extends TicketModel{
-    //TicketId - startDateTime - endDateTime - ticketQuantity - price <- in Ticketmodel
-    protected  $kidsTicketLocation;
-    protected  $kidsTicketArtist;
-    protected  $kidsTicketSession;
-
-    //GET AND SET FOR Kids ticket location
-    public function setKidsTicketLocation($kidsTicketLocation){
-        $this->kidsTicketLocation = $kidsTicketLocation;
+    //Objects for kids ticket location
+    public function setKidsTicketLocation($location){
+        $this->kidsTicketLocation = $location;
     }
+
     public function getKidsTicketLocation(){
         return $this->kidsTicketLocation;
     }
 
-    //GET AND SET FOR Kids ticket artist
-    public function setKidsTicketArtist($kidsTicketArtist){
-        $this->kidsTicketArtist = $kidsTicketArtist;
-    }
-    public function getKidsTicketArtist(){
-        return $this->kidsTicketArtist;
+    //Object for ticket session
+    public function setKidsTicketSession($session){
+        $this->kidsTicketSession = $session;
     }
 
-    //GET AND SET FOR Kids ticket artist
-    public function setKidsTicketSession($kidsTicketSession){
-        $this->kidsTicketSession = $kidsTicketSession;
-    }
     public function getKidsTicketSession(){
         return $this->kidsTicketSession;
     }
 
-        //GET and SET if you want to add artists
+    //Objects from artists
     public function addArtist($artist) {
         array_push($this->artists, $artist);
     }
@@ -42,6 +33,4 @@ require('ArtistModel.php');
         return $this->artists;
     }
 }
-
-
 ?>

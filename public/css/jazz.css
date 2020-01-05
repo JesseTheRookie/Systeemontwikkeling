@@ -7,7 +7,6 @@ h1 span{
 #mainHeader{
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 500px;
 }
 #mainHeader section:nth-child(2) h1{
     font-size: 100px;
@@ -28,13 +27,7 @@ h1 span{
     text-transform: capitalize;
 }
 .overlay{
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
     position: absolute;
-    padding: 0;
-    z-index: 1;
     background-color: rgba(0,0,0,0.95);
 }
 #mainHeader section:nth-child(2) button{

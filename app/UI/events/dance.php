@@ -8,7 +8,7 @@
     <div id="section-dance-header">
         <div class="content-dance-header">
             <div>
-                <img src="./img/banner-dance.jpeg"
+                <img src="./img/dance/banner-dance.jpeg"
                     alt="Banner header dance page"
                     title="Banner header dance page"
                 />
@@ -41,8 +41,14 @@
     <div class="content-artists-dance">
         <?php foreach($data['artists'] as $artist) : ?>
             <div>
-                <img src="<?php echo URLROOT; ?>/<?php echo $artist->getContent(); ?>" alt="">
-                <button class="myBtn"><?php echo $artist->getArtistName(); ?></button>
+                <img
+                    src="<?php echo URLROOT; ?>/<?php echo $artist->getContent(); ?>"
+                    alt="Performer Dance Artist"
+                    title="Performer Dance Artist"
+                />
+                <button class="myBtn">
+                    <?php echo $artist->getArtistName(); ?>
+                </button>
             </div>
         <?php endforeach; ?>
     </div>
@@ -56,42 +62,52 @@
   <hr>
 
   <div class="content-header-dance">
-    <?php foreach ($data['days'] as $day) : ?>
+        <?php foreach ($data['days'] as $day) : ?>
 
-    <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
-            <div>
-            <h2>
-                <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
-            </h2>
+            <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
+                <div>
+                    <h2>
+                        <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
+                    </h2>
 
-            <p>
-                <?php echo date("jS F", strtotime($day->startDateTime)); ?>
-            </p>
-            <form
-                action="<?php echo URLROOT; ?>/dance"
-                method="POST"
-                role="form">
+                    <p>
+                        <?php echo date("jS F", strtotime($day->startDateTime)); ?>
+                    </p>
+                <form
+                    action="<?php echo URLROOT; ?>/dance"
+                    method="POST"
+                    role="form">
 
-                <button
-                    type="submit"
-                    class="ticket-date"
-                    name="ticketDate"
-                    value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
-                    TICKETS
-                </button>
-            </form>
-        </div>
-    <?php endif; ?>
-    <?php endforeach; ?>
-</div>
+                    <button
+                        type="submit"
+                        class="ticket-date"
+                        name="ticketDate"
+                        value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
+                        TICKETS
+                    </button>
+                </form>
+            </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
 
-<?php foreach($data['tickets'] as $ticket) : ?>
+<?php 
+
+if (isset($_POST["ticketDate"]))
+{
+    foreach($data['tickets'] as $ticket) : 
+    $dateAndTime = explode(" ", $ticket->getStartDateTime());       
+                    
+    if($dateAndTime[0] == $_POST["ticketDate"]){ ?>
     <table class="table-tickets-dance">
         <tr>
             <td>
-                <?php foreach($data['artists'] as $artist) : ?>
-                    <?php echo $artist->getArtistName(); ?>
-                <?php endforeach; ?>
+            <?php $artists = $ticket->getArtists();
+
+                foreach($artists as $artist) : 
+                    echo $artist->getArtistName();
+                endforeach; 
+            ?>
             </td>
 
 
@@ -137,7 +153,11 @@
                 </td>
         </tr>
     </table>
-<?php endforeach; ?>
+<?php
+    } 
+endforeach; 
+}
+?>
 </div>
 
 <?php

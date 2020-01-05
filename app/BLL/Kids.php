@@ -7,55 +7,30 @@ class Kids Extends Controller{
         $this->kidsTicketModel = $this->model('KidsTicketModel');
     }
 
-     //Need ticket/artist and days information. Passing it in an array that will be passed around on the website.
+    //Need ticket/artist and days information. Passing it in an array that will be passed around on the website.
     public function index(){
+        $ticketDate = '';
+        $days = $this->kidsDal->getDifferentDays();
+        $tickets = $this->kidsDal->getKidsTickets($ticketDate);
+        $artists = $this->kidsDal->getArtists();
 
         $data = [
-        'title' => 'Kids Page',
-        'days' => $days = $this->kidsDal->getDifferentDays(),
-        'tickets' => $tickets = $this->kidsDal->getAllKidsTickets(),
-        'artists' => $artistInfo = $this->kidsDal->getArtists($tickets),
-      ];
-
-      $this->ui('events/kids', $data);
-    }
-
-    //Loop through artists and tickets
-    public function getAllKidsTickets(){
-        $artists = $this->getAllArtists();
-        $tickets = $this->kidsDal->getAllKidsTickets();
-
-        foreach($tickets as $ticket) :
-            foreach($artists as $artist) :
-                if($ticket->getTicketId == $artist->getTicketId)
-                    $ticket->addArtist($artist);
-            endforeach;
-        endforeach;
-
-        return $tickets;
-    }
-
-    public function tickets(){
-
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                    $tickets = $this->kidsDal->getAllKidsTickets($data['ticketDate']);
-
-            $data = [
                 'title' => 'Kids Page',
-                'days' => '',
-                'tickets' => '',
-                'artists' => '',
-                'ticketDate' => trim($_POST['ticketDate'])
+                'days' => $days,
+                'tickets' => $tickets,
+                'artists' => $artists
             ];
 
-            if ($this->kidsDal->getAllKidsTickets($data['ticketDate'])) {
-                                    $tickets = $this->kidsDal->getAllKidsTickets($data['ticketDate']);
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ticketDate = trim($_POST['ticketDate']);
+            $tickets = $this->kidsDal->getKidsTickets($ticketDate);
 
-            }
-
-            $tickets = $this->kidsDal->getAllKidsTickets();
+            $data = [
+                'days' => $days,
+                'tickets' => $tickets,
+                'artists' => $artists
+            ];
         }
-
       $this->ui('events/kids', $data);
     }
 
@@ -64,3 +39,4 @@ class Kids Extends Controller{
         return $this->kidsDal->getArtists();
     }
 }
+

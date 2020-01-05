@@ -7,30 +7,17 @@
     }
 
     public function index(){
-      $eventInformation = $this->homeDal->eventInformation();
-      $allEvents = $this->homeDal->allEvents();
-      $eventDates = $this->homeDal->eventDates();
+        $eventInformation = $this->homeDal->eventInformation();
+        $allEvents = $this->homeDal->allEvents();
+        $eventDates = $this->homeDal->eventDates();
 
-      $data = [
-        'title' => 'Welcome',
-        'informations' => $eventInformation,
-        'events' => $allEvents,
-        'dates' => $eventDates
-      ];
+        $data = [
+          'title' => 'Haarlem Festival',
+          'eventInfo' => $eventInformation,
+          'events' => $allEvents,
+          'dates' => $eventDates
+        ];
 
-      $this->ui('pages/index', $data);
-    }
-
-    public function dashboard(){
-      $data = "lol";
-      $this->ui('pages/dashboard', $data);
-    }
-
-    public function shoppingcart(){
-      $data = [
-        'title' => 'Shopping Cart'
-      ];
-
-      $this->ui('pages/shoppingcart', $data);
+        $this->ui('pages/index', $data);
     }
   }

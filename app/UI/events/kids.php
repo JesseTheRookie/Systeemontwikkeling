@@ -8,7 +8,7 @@
     <div id="section-kids-header">
         <div class="content-kids-header">
             <div>
-                <img src="./img/banner-kids.jpeg"
+                <img src="./img/kids/kids_banner_1.jpg"
                     alt="Banner header kids page"
                     title="Banner header kids page"
                 />
@@ -41,31 +41,16 @@
     <div class="content-artists-kids">
         <?php foreach($data['artists'] as $artist) : ?>
             <div>
-                <img src="<?php echo URLROOT; ?>/<?php echo $artist->getImgUrl(); ?>" alt="">
-                <button class="myBtn"><?php echo $artist->getArtistName(); ?></button>
-
-            <div id="myModal" class="modal">
-                <article class="modal-content">
-                    <article class="modal-header">
-
-                        <span class="close">×</span>
-
-                        <h1>
-                            <?php echo $artist->getArtistName(); ?>
-                        </h1>
-
-                        <hr>
-                    </article>
-                    <article class="modal-body">
-                        <p>
-                            <?php echo $artist->getArtistBio(); ?>
-                        </p>
-                    </article>
-                </article>
+                <img
+                    src="<?php echo URLROOT; ?>/<?php echo $artist->getContent(); ?>"
+                    alt="Performer Kids Artist"
+                    title="Performer Kids Artist"
+                />
+                <button class="myBtnKids">
+                    <?php echo $artist->getArtistName(); ?>
+                </button>
             </div>
-    </div>
-    <?php endforeach; ?>
-
+        <?php endforeach; ?>
     </div>
 </div>
 
@@ -77,57 +62,50 @@
   <hr>
 
   <div class="content-header-kids">
-    <?php foreach ($data['days'] as $day) : ?>
+        <?php foreach ($data['days'] as $day) : ?>
 
-    <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
-            <div>
-            <h2>
-                <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
-            </h2>
+            <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
+                <div>
+                    <h2>
+                        <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
+                    </h2>
 
-            <p>
-                <?php echo date("jS F", strtotime($day->startDateTime)); ?>
-            </p>
-            <form
-                action="<?php echo URLROOT; ?>/kids"
-                method="POST"
-                role="form">
+                    <p>
+                        <?php echo date("jS F", strtotime($day->startDateTime)); ?>
+                    </p>
+                <form
+                    action="<?php echo URLROOT; ?>/kids"
+                    method="POST"
+                    role="form">
 
-                <input
-                    type="text"
-                    name="ticketDate"
-                    value="Jopenkerk"
-                />
-
-                <input
-                    type="submit"
-                    name="name"
-                    value="Jopenkerk"
-                />
-            </form>
-        </div>
-    <?php endif; ?>
-    <?php endforeach; ?>
+                    <button
+                        type="submit"
+                        class="ticket-date"
+                        name="ticketDate"
+                        value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
+                        TICKETS
+                    </button>
+                </form>
+            </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </div>
 
 <?php foreach($data['tickets'] as $ticket) : ?>
     <table class="table-tickets-kids">
         <tr>
             <td>
-                <?php $artists = $ticket->getArtists();
-
-                    foreach($artists as $artist) : ?>
-                        <div>
-                            <p>
-                                <?php echo $artist->getArtistName(); ?>
-                            </p>
-                        </div>
-                    <?php endforeach; ?>
-
+                <?php foreach($data['artists'] as $artist) : ?>
+                    <?php echo $artist->getArtistName(); ?>
+                <?php endforeach; ?>
             </td>
 
+
             <td>
-                <?php echo $ticket->getStartDateTime(); ?>
+                <?php
+                    $time = explode(" ", $ticket->getstartDateTime());
+                    echo end($time);
+                 ?>
             </td>
 
             <td>
@@ -171,7 +149,4 @@
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
-<!-- At the top of my webpage -->
-<script>
-</script>
 

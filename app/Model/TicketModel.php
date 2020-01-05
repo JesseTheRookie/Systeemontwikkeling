@@ -24,7 +24,6 @@ abstract class TicketModel{
     public function getEndDateTime(){
         return $this->endDateTime;
     }
-
     public function setTicketQuantity($quantity){
         $this->ticketQuantity = $quantity;
     }

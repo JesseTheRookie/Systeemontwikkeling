@@ -1,15 +1,15 @@
 <?php
 
 class HomeModel {
-    protected $totalArtists;
-    protected $totalLocations;
-    protected $totalTickets;
-    protected $totalEvents;
-    protected $eventStartDate;
-    protected $eventEndDate;
-    protected $elementName;
-    protected $description;
-    protected $content;
+    private $totalArtists;
+    private $totalLocations;
+    private $totalTickets;
+    private $totalEvents;
+    private $eventStartDate;
+    private $eventEndDate;
+    private $elementName;
+    private $description;
+    private $content;
 
     //Object for total artists
     public function setTotalArtists($artists){
@@ -23,6 +23,7 @@ class HomeModel {
     public function setTotalLocations($locations){
         $this->totalLocations = $locations;
     }
+
     public function getTotalLocations(){
         return $this->totalLocations;
     }
@@ -31,6 +32,7 @@ class HomeModel {
     public function setTotalTickets($tickets){
         $this->totalTickets = $tickets;
     }
+
     public function getTotalTickets(){
         return $this->totalTickets;
     }
@@ -39,6 +41,7 @@ class HomeModel {
     public function setTotalEvents($events){
         $this->totalEvents = $events;
     }
+
     public function getTotalEvents(){
         return $this->totalEvents;
     }
@@ -47,6 +50,7 @@ class HomeModel {
     public function setEventStartDate($dateTime){
         $this->eventStartDate = $dateTime;
     }
+
     public function getEventStartDate(){
         return $this->eventStartDate;
     }
@@ -55,6 +59,7 @@ class HomeModel {
     public function setEventEndDate($dateTime){
         $this->eventEndDate = $dateTime;
     }
+
     public function getEventEndDate(){
         return $this->eventEndDate;
     }
@@ -63,6 +68,7 @@ class HomeModel {
     public function setElementName($names){
         $this->elementName = $names;
     }
+
     public function getElementName(){
         return $this->elementName;
     }
@@ -71,6 +77,7 @@ class HomeModel {
     public function setDescription($descriptions){
         $this->description = $descriptions;
     }
+
     public function getDescription(){
         return $this->description;
     }
@@ -79,6 +86,7 @@ class HomeModel {
     public function setContent($contents){
         $this->content = $contents;
     }
+
     public function getContent(){
         return $this->content;
     }
