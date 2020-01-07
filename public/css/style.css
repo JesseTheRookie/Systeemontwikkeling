@@ -28,6 +28,7 @@ html
     width: 50px;
     padding: 8px 0px 0px 0px;
 }
+
 .header-nav
 {
     text-align: right;
@@ -82,7 +83,7 @@ html
     right: -10%;
 }
 
-#section-header-50 > div
+#section-header-50 > article
 {
     display: grid;
     grid-template-columns: 30% 70%;
@@ -113,7 +114,8 @@ html
     color: #000000;
 }
 
-.dropdown-content {
+.dropdown-content
+{
     display: none;
     position: absolute;
     background-color: #f2f2f2;
@@ -123,7 +125,8 @@ html
     margin: 18px 0px 0px 0px;
 }
 
-.dropdown-content a {
+.dropdown-content a
+{
     color: black;
     background-color: #f2f2f2;
     padding: 12px 32px;
@@ -156,18 +159,19 @@ html
     background-position: center;
     position: relative;
     top: 60px;
-    padding: 0px 0px 300px 0px;
-    height: 80%;
+    padding: 500px 0px 0px 0px;
     width: 100%;
     z-index: 1;
+    display: block;
 }
 
 .content-hero
 {
     position: relative;
     margin: 0 auto;
+    top: -240px;
     text-align: center;
-    padding: 200px 0px 0px 0px
+    padding: 0px 0px 0px 0px
 }
 
 .content-hero h1
@@ -197,22 +201,23 @@ html
 
 #festival-info
 {
-    padding: 60px 0px 0px 0px;
+    padding: 40px 0px 0px 0px;
     text-align: center;
     width: 60%;
-    margin: 0 auto;
+    height: 240px;
+    top: -130px;
+    margin: 100px auto 0px auto;
     background-color: #ffffff;
     background-image: -webkit-linear-gradient(bottom right, #ffffff 0%, #d7e1ec 74%);
     background-image: -o-linear-gradient(bottom right, #ffffff 0%, #d7e1ec 74%);
     background-image: linear-gradient(to top left, #ffffff 0%, #d7e1ec 74%);
     box-shadow: 0 0 10px #000;
     z-index: 12000;
-    padding: 40px;
     position: relative;
 }
 
 
-#festival-info > div
+#festival-info > article
 {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
@@ -237,7 +242,7 @@ hr
 {
     margin: 0 auto;
     text-align: center;
-    padding: 100px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
 }
 
 #section-events h2
@@ -245,7 +250,7 @@ hr
     font-size: 40px;
 }
 
-#section-events > div
+#section-events > article
 {
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
@@ -309,7 +314,7 @@ hr
     padding: 40px 0px;
 }
 
-#layout-footer-25 > div
+#layout-footer-25 > article
 {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
@@ -336,6 +341,7 @@ hr
     color: #000000;
     text-decoration: none;
     font-size: 16px;
+    font-weight: normal;
 }
 
 .content-footer-25 ul li a:hover
@@ -344,12 +350,17 @@ hr
     transition: 0.25s ease;
 }
 
+.content-footer-25
+{
+    text-align: left;
+}
+
 footer
 {
     margin: 0 auto;
-    background: #ada996; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ada996;
+    background: -webkit-linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
+    background: linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea);
     padding: 60px 0px;
     margin: 100px 0px 0px 0px;
     box-shadow: 0 0 10px #000;
@@ -414,7 +425,7 @@ input
     font-size: 40px;
 }
 
-#layout-artists-33 > div
+#layout-artists-33 > article
 {
     display: grid;
     grid-template-columns: 33% 33% 33%;
@@ -436,7 +447,7 @@ height: 200px;
     padding: 0px 0px 100px 0px;
 }
 
-#section-dance-header > div
+#section-dance-header > article
 {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -480,7 +491,7 @@ height: 200px;
     font-size: 20px;
     text-align: center;
     display: inline-block;
-    width: 180px;
+    width: 200px;
 }
 
 .content-dance-header a:hover
@@ -491,7 +502,7 @@ height: 200px;
     transition: 0.25s ease;
 }
 
-#section-artists-dance > div
+#section-artists-dance > article
 {
     display: grid;
     grid-template-columns: 33% 33% 33%;
@@ -510,9 +521,9 @@ hr
 
 #section-artists-dance
 {
-background: rgb(169,169,169);
-background: linear-gradient(0deg, rgba(169,169,169,1) 0%, rgba(64,64,75,1) 100%);}
-
+    background: rgb(169,169,169);
+    background: linear-gradient(0deg, rgba(169,169,169,1) 0%, rgba(64,64,75,1) 100%);
+}
 
 #section-artists-dance h2
 {
@@ -527,7 +538,6 @@ background: linear-gradient(0deg, rgba(169,169,169,1) 0%, rgba(64,64,75,1) 100%)
     width: 300px;
     height: 180px;
     box-shadow: 0 0 10px #ffffff;
-
 }
 
 .myBtn
@@ -606,6 +616,7 @@ table
     border-bottom: 1px solid #000000;
     padding: 20px 0px;
 }
+
 th
 {
     width: 20%;
@@ -621,6 +632,12 @@ td
 {
     padding: 40px 0px 20px 0px;
     width: 30%;
+}
+
+.input-amount-dance
+{
+    width: 70px;
+    text-align: center;
 }
 
 #layout-total-amount  > div
@@ -717,7 +734,6 @@ td
     width: 80%;
     height: 90%;
     box-shadow: 0 0 10px #000;
-
 }
 
 .content-cross-selling p
@@ -737,6 +753,7 @@ td
     text-transform: uppercase;
     text-decoration: none;
 }
+
 .bottom-p
 {
     padding: 0px 0px 40px 0px !important;
@@ -750,9 +767,10 @@ td
     text-align: left;
     text-transform: uppercase;
 }
+
 #layout-header-dance
 {
-    padding: 0px 0px 100px 0px;
+    padding: 0px 0px 0px 0px;
     background: rgb(64,64,75);
     background: linear-gradient(0deg, rgba(64,64,75,1) 0%, rgba(169,169,169,1) 100%);
 }
@@ -763,14 +781,14 @@ td
     background: linear-gradient(0deg, rgba(64,64,75,1) 0%, rgba(169,169,169,1) 100%);
 }
 
-#section-artists-dance > div
+#section-artists-dance > article
 {
     padding: 0px 0px 100px 0px;
 }
 
 #section-artists-dance h2
 {
-     font-size: 60px;
+    font-size: 60px;
     color: #ffffff;
     margin: 0 auto;
     text-align: center;
@@ -785,7 +803,8 @@ td
     text-align: center;
     padding: 100px 0px 0px 0px;
 }
-#section-header-dance > div
+
+#section-header-dance > article
 {
     display: grid;
     grid-template-columns: 33% 33% 33%;
@@ -795,7 +814,9 @@ td
     margin: 0 auto;
     padding: 0px 0px 0px 0px;
 }
-#layout-header-dance > div {
+
+#layout-header-dance > article
+{
     display: grid;
     grid-template-columns: 33% 33% 33%;
     position: relative;
@@ -805,28 +826,29 @@ td
     text-align: center;
     padding: 0px 0px 100px 0px;
 }
+
 .content-header-dance h2
 {
-font-size: 70px;
-color: #ffffff;
+    font-size: 70px;
+    color: #ffffff;
 }
 
 .content-header-dance p
 {
-font-size: 20px;
-color: #ffffff;
-padding: 20px 0px;
+    font-size: 20px;
+    color: #ffffff;
+    padding: 20px 0px;
 }
 
 .content-header-dance a
 {
-font-size: 28px;
-color: #ffffff;
-padding: 20px 0px;
-text-decoration: none;
-border: 1px solid #ffffff;
-padding: 8px 20px;
-text-transform: uppercase;
+    font-size: 28px;
+    color: #ffffff;
+    padding: 20px 0px;
+    text-decoration: none;
+    border: 1px solid #ffffff;
+    padding: 8px 20px;
+    text-transform: uppercase;
 }
 
 .content-header-dance a:hover
@@ -844,16 +866,17 @@ text-transform: uppercase;
     font-size: 20px;
     border: none;
     margin: 0 auto;
+    padding: 0px 0px 100px 0px;
 }
 
 .table-tickets-dance tr
 {
-    height: 100px;
+    height: 140px;
 }
 
 .table-tickets-dance td
 {
-    width: 20%;
+    width: 19%;
 }
 
 .select-dance
@@ -870,6 +893,7 @@ select
 {
     border-radius: 0;
 }
+
 .button-add-dance
 {
     background: transparent;
@@ -889,7 +913,8 @@ select
     color: #000000;
 }
 
-#section-restaurant-header>div {
+#section-restaurant-header> article
+{
     display: grid;
     grid-template-columns: 50% 50%;
     position: relative;
@@ -899,11 +924,13 @@ select
     background-image: linear-gradient(to top, #392613, #2e1f10, #23190d, #191209, #0c0804);
 }
 
-.content-restaurant-header img {
+.content-restaurant-header img
+{
     width: 700px;
 }
 
-.content-food-right {
+.content-food-right
+{
     position: relative;
     top: 10%;
     width: 90%;
@@ -911,13 +938,15 @@ select
 }
 
 
-.content-restaurant-header h3 {
+.content-restaurant-header h3
+{
     color: #ffffff;
     font-size: 90px;
     padding: 0px 0px 40px 0px;
 }
 
-.content-restaurant-header a {
+.content-restaurant-header a
+{
     color: #ffffff;
     border: 1px solid #ffffff;
     padding: 8px 28px 8px 28px;
@@ -926,7 +955,8 @@ select
     font-size: 20px;
 }
 
-.content-restaurant-header a:hover {
+.content-restaurant-header a:hover
+{
     color: #000000;
     border: 1px solid #ffff;
     background-color: #fff;
@@ -934,28 +964,38 @@ select
 }
 
 
-#section-restaurant-food {
+#section-restaurant-food
+{
     background: rgb(39, 14, 7);
     background-image: linear-gradient(to bottom, #392613, #2e1f10, #23190d, #191209, #0c0804);
-    display: grid;
-    grid-template-columns: 45% 55%;
     position: relative;
     width: 100%;
-    padding: 40px 0px;
-
+    padding: 40px 0px 0px 0px;
 }
 
 
-#section-restaurant-food h2 {
+.errorFood
+{
+    font-size: 20px;
+    color: #ffffff;
+    z-index: 10000;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0px 0px 0px;
+}
+
+#section-restaurant-food h2
+{
     font-size: 22px;
     margin: 0 auto;
-    text-align: right;
-    padding: 10px 0px 10px 0px;
+    text-align: center;
     color: white;
-
+    padding: 60px 0px 50px 0px;
 }
 
-#section-restaurant-food h3 {
+#section-restaurant-food h3
+{
     font-size: 20px;
     margin: 0 auto;
     text-align: center;
@@ -963,12 +1003,9 @@ select
     color: white;
 }
 
-.content-restaurant-food img {
-    width: 300px;
-    height: 180px;
-}
 
-#section-reservation-food>div {
+#section-reservation-food> article
+{
     display: grid;
     grid-template-columns: 50% 50%;
     position: relative;
@@ -977,7 +1014,8 @@ select
     background-color: white;
 }
 
-.submit-cousine {
+.submit-cousine
+{
     margin: 0 !important;
     display: inline;
     background-color: #3CB371;
@@ -989,36 +1027,83 @@ select
     color: #ffffff;
     border: 1px solid #3CB371;
     box-shadow: 0 0 10px #3CB371;
-
 }
-.content-food-header img {
+
+.content-food-header img
+{
     width: 60%;
     padding: 20px 0px 20px 0px;
 }
 
-.content-food-header a {
+.form-restaurants input
+{
+    display: inline;
+}
+
+.form-restaurants
+{
+    text-align: center;
+    display: inline;
+}
+
+.error-message-food
+{
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+    padding: 100px 0px 0px 0px;
+}
+
+.errorFood
+{
+    font-size: 20px;
+    color: #ffffff;
+    padding: 100px 0px 0px 0px;
+}
+
+.submit-cuisine
+{
+    display: inline;
+    text-align: center;
+    margin: 0 auto;
+    width: 80px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    vertical-align: middle;
+    font-size: 14px;
+    margin-top: -4px;
+    margin-left: 30px;
+}
+
+.content-food-header a
+{
     color: grey;
     font-size: 20px;
 }
 
-.content-food-header p {
+.content-food-header p
+{
     display: inline-block;
     width: 600px;
     height: 0px 0px 0px 0px;
 }
 
-.content-food-header hr {
+.content-food-header hr
+{
     display: inline-block;
     width: 600px;
     border-top: 1px solid grey;
-
 }
 
-.content-food-header h3 {
+.content-food-header h3
+{
     font-size: 17px;
 }
 
-#section-information-food>div {
+#section-information-food> article
+{
     display: grid;
     grid-template-columns: 50% 50%;
     position: relative;
@@ -1027,36 +1112,35 @@ select
     background-color: white;
 }
 
-}
-
-.content-information-food img {
+.content-information-food img
+{
     width: 100%;
 }
 
-.content-information-right {
+.content-information-right
+{
     position: relative;
     top: 10%;
     width: 90%;
     margin: 0 auto;
 }
 
-.content-information-food h1 {
+.content-information-food h1
+{
     display: inline-block;
-
     width: 600px;
-
     font-size: 16px;
     text-align: left;
 }
 
-.content-information-food a {
-
+.content-information-food a
+{
     font-size: 15px;
     color: black;
 }
 
-
-.button {
+.button
+{
     background-color: #4CAF50;
     /* Green */
     border: none;
@@ -1068,43 +1152,48 @@ select
     font-size: 16px;
     margin: 4px 2px;
     -webkit-transition-duration: 0.4s;
-    /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
 }
 
-.button1 {
+.button1
+{
     background-color: white;
     color: #835C3B;
     border: 2px solid #835C3B;
     padding: 1px 20px;
 }
 
-.button1:hover {
+.button1:hover
+{
     background-color: #835C3B;
     color: white;
 }
 
-.button2 {
+.button2
+{
     background-color: white;
     color: #835C3B;
     border: 2px solid #835C3B;
     padding: 1px 20px;
 }
 
-.button2:hover {
+.button2:hover
+{
     background-color: #835C3B;
     color: white;
 }
 
-.button3 {
+.button3
+{
     background-color: white;
     color: #835C3B;
     border: 2px solid #835C3B;
     padding: 1px 20px;
 }
 
-.button3:hover {
+.button3:hover
+{
     background-color: #835C3B;
     color: white;
 }
@@ -1121,6 +1210,7 @@ select
     border: 1px solid #ffffff;
     box-shadow: 0 0 10px #ffffff;
 }
+
 .ticket-date:hover
 {
     background-color: #ffffff;
@@ -1134,7 +1224,6 @@ select
     text-align: left;
     text-transform: uppercase;
 }
-
 
 .select-food
 {
@@ -1156,11 +1245,10 @@ select
 #section-all-restaurants
 {
     background-image: linear-gradient(to top, #392613, #2e1f10, #23190d, #191209, #0c0804);
-    padding: 60px 0px 100px 0px;
-
+    padding: 60px 0px 0px 0px;
 }
 
-#section-all-restaurants > div
+#section-all-restaurants > article
 {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -1168,10 +1256,11 @@ select
     width: 80%;
     margin: 0 auto;
     text-align: center;
+    padding: 0px 0px 100px 0px;
 }
 
-
-.overlay-information {
+.overlay-information
+{
     position: absolute;
     top: 85%;
     height: 90px;
@@ -1180,7 +1269,6 @@ select
     background-color: rgba(0,0,0,.7);
     transform: translate(-50%, -43%);
 }
-
 
 .restaurant-box
 {
@@ -1215,7 +1303,6 @@ select
     box-shadow: 0 0 10px #ffff;
 }
 
-
 .overlay-food h4
 {
     font-size: 22px;
@@ -1233,10 +1320,12 @@ select
 
 #section-detailed-restaurant
 {
-    background-image: linear-gradient(to top, #392613, #2e1f10, #23190d, #191209, #0c0804);
+    background: rgb(39, 14, 7);
+    background-image: linear-gradient(to bottom, #392613, #2e1f10, #23190d, #191209, #0c0804);
+    padding: 100px 0px 100px 0px;
 }
 
-#section-detailed-restaurant > div
+#section-detailed-restaurant > article
 {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -1269,7 +1358,7 @@ select
     padding: 20px 0px 0px 0px;
 }
 
-.content-detailed-restaurant > div
+.content-detailed-restaurant > article
 {
     width: 80%;
     margin: 0 auto;
@@ -1284,9 +1373,11 @@ select
     padding: 0;
     box-shadow: none;
 }
-input[type="radio"] {
-    -ms-transform: scale(1.1); /* IE 9 */
-    -webkit-transform: scale(1.1); /* Chrome, Safari, Opera */
+
+input[type="radio"]
+{
+    -ms-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
     transform: scale(1.1);
     margin: 0px 0px 0px 0px;
     vertical-align: middle;
@@ -1309,7 +1400,6 @@ input[type="radio"] {
     text-align: left;
     box-shadow: 0 0 10px #000;
     border-bottom: 1px solid #000;
-
 }
 
 #form-food
@@ -1356,7 +1446,6 @@ input[type="radio"] {
     padding: 0px 0px 20px 0px !important;
 }
 
-
 #form-food span
 {
     border: none;
@@ -1375,7 +1464,6 @@ input[type="radio"] {
     margin: 20px 56px 20px 80% !important;
     display: block;
 }
-
 
 /* KIDS */
 
@@ -1405,7 +1493,6 @@ background-image: linear-gradient(to bottom, #2Db688, #2Db688, #2Db688, #2Db688,
     margin: 0 auto;
 }
 
-
 .content-kids-header a
 {
     color: #ffffff;
@@ -1415,6 +1502,7 @@ background-image: linear-gradient(to bottom, #2Db688, #2Db688, #2Db688, #2Db688,
     margin: 0px 40px 0px 0px;
     font-size: 20px;
 }
+
 .content-kids-header a:hover
 {
     color: #000000;
@@ -1442,9 +1530,8 @@ hr
 
 #section-artists-kids
 {
-background-image: url("../img/kids/artist_bg.png");
+    background-image: url("../img/kids/artist_bg.png");
 }
-
 
 #section-artists-kids h2
 {
@@ -1459,26 +1546,28 @@ background-image: url("../img/kids/artist_bg.png");
     width: 300px;
     height: 180px;
 }
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+.modal
+{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 40px 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 40px 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
 }
 
 .modal-content p
@@ -1496,21 +1585,23 @@ background-image: url("../img/kids/artist_bg.png");
     font-size: 40px;
 }
 
-
 /* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.close
+{
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.close:focus
+{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
+
 .myBtnKids
 {
     display: block;
@@ -1554,10 +1645,11 @@ background-image: url("../img/kids/artist_bg.png");
     padding: 100px 0px 40px 0px;
     text-align: left;
 }
+
 #layout-header-kids
 {
-background-image: linear-gradient(to bottom, #2db688, #2db688, #2db688, #2db688, #000000);
-margin-bottom: 0px;
+    background-image: linear-gradient(to bottom, #2db688, #2db688, #2db688, #2db688, #000000);
+    margin-bottom: 0px;
     padding: 0px 0px 100px 0px;
 }
 
@@ -1568,7 +1660,7 @@ margin-bottom: 0px;
 
 #section-artists-kids h2
 {
-     font-size: 60px;
+    font-size: 60px;
     color: #000000;
     margin: 0 auto;
     text-align: center;
@@ -1583,6 +1675,7 @@ margin-bottom: 0px;
     text-align: center;
     padding: 100px 0px 0px 0px;
 }
+
 #section-header-kids > div
 {
     display: grid;
@@ -1593,7 +1686,9 @@ margin-bottom: 0px;
     margin: 0 auto;
     padding: 0px 0px 0px 0px;
 }
-#layout-header-kids > div {
+
+#layout-header-kids > div
+{
     display: grid;
     grid-template-columns: 33% 33% 33%;
     position: relative;
@@ -1603,23 +1698,24 @@ margin-bottom: 0px;
     text-align: center;
     padding: 0px 0px 60px 0px;
 }
+
 .content-header-kids h2
 {
-font-size: 70px;
-color: #ffffff;
+    font-size: 70px;
+    color: #ffffff;
 }
 
 .content-header-kids p
 {
-font-size: 20px;
-color: #ffffff;
-padding: 20px 0px;
+    font-size: 20px;
+    color: #ffffff;
+    padding: 20px 0px;
 }
 
 .content-header-kids a
 {
-font-size: 28px;
-color: #ffffff;
+    font-size: 28px;
+    color: #ffffff;
 padding: 20px 0px;
 text-decoration: none;
 border: 1px solid #ffffff;
@@ -1848,4 +1944,46 @@ text-transform: uppercase;
     height: 40px;
     font-size: 18px;
     margin: 20px 0px 0px 0px;
+}
+
+#layout-timetable-buttons
+{
+    background-image: linear-gradient(to right top, #989898, #a6a6a6, #b5b5b5, #c4c4c4, #d3d3d3);
+}
+
+#layout-timetable-buttons > article
+{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    padding: 100px 0px;
+    text-align: center;
+}
+
+.content-timetable-buttons
+{
+padding: 400px;
+}
+
+.content-timetable-buttons button
+{
+    display: inline;
+}
+
+.button-header-timetable
+{
+    border: 1px solid #000000;
+    display: inline;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+}
+
+.button-header-timetable:hover
+{
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    transition: 0.25s ease-in;
 }

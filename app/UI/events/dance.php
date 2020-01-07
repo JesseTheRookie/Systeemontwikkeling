@@ -5,42 +5,50 @@
     require APPROOT . '/UI/inc/navigation.php';
 ?>
 
-    <div id="section-dance-header">
-        <div class="content-dance-header">
-            <div>
-                <img src="./img/dance/banner-dance.jpeg"
+<?php foreach($data['content'] as $c) : ?>
+    <section id="section-dance-header">
+        <article class="content-dance-header">
+            <article>
+                <img src="<?php echo URLROOT; ?>/<?php echo $c->getContent(); ?>"
                     alt="Banner header dance page"
                     title="Banner header dance page"
                 />
-            </div>
+            </article>
 
-            <div class="content-dance-right">
+            <article class="content-dance-right">
                 <h3>
-                    Haarlem <br>Dance.
+                    <?php
+                        echo $c->getElementName();
+                    ?>
                 </h3>
 
-                <a href="#section-artists-dance">
-                    Performers
-                </a>
+                <?php
+                    $links = explode(", ", $c->getDescription());
+                ?>
 
-                <a href="#layout-header-dance">
-                    Tickets
-                </a>
-            </div>
-        </div>
-    </div>
+                <?php foreach($links as $link) : ?>
+                    <a href="<?php echo $link; ?>">
+                        <?php
+                            echo $link;
+                        ?>
+                    </a>
+                <?php endforeach; ?>
 
+            </article>
+        </article>
+    </section>
+<?php endforeach; ?>
 
-<div id="section-artists-dance">
+<section id="section-artists-dance" class="Performance">
     <h2>
         Performers
     </h2>
 
     <hr>
 
-    <div class="content-artists-dance">
+    <article class="content-artists-dance">
         <?php foreach($data['artists'] as $artist) : ?>
-            <div>
+            <article>
                 <img
                     src="<?php echo URLROOT; ?>/<?php echo $artist->getContent(); ?>"
                     alt="Performer Dance Artist"
@@ -49,19 +57,19 @@
                 <button class="myBtn">
                     <?php echo $artist->getArtistName(); ?>
                 </button>
-            </div>
+            </article>
         <?php endforeach; ?>
-    </div>
-</div>
+    </article>
+</section>
 
-<div id="layout-header-dance">
+<section id="layout-header-dance">
   <h1>
     Tickets
   </h1>
 
   <hr>
 
-  <div class="content-header-dance">
+  <article class="content-header-dance" class="">
         <?php foreach ($data['days'] as $day) : ?>
 
             <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
@@ -73,43 +81,35 @@
                     <p>
                         <?php echo date("jS F", strtotime($day->startDateTime)); ?>
                     </p>
-                <form
-                    action="<?php echo URLROOT; ?>/dance"
-                    method="POST"
-                    role="form">
+                    <form
+                        action="<?php echo URLROOT; ?>/dance"
+                        method="POST"
+                        role="form">
 
-                    <button
-                        type="submit"
-                        class="ticket-date"
-                        name="ticketDate"
-                        value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
-                        TICKETS
-                    </button>
-                </form>
-            </div>
+                        <button
+                            type="submit"
+                            class="ticket-date"
+                            name="ticketDate"
+                            value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
+                            TICKETS
+                        </button>
+                    </form>
+                </div>
             <?php endif; ?>
         <?php endforeach; ?>
-    </div>
+    </article>
 
-<?php 
-
-if (isset($_POST["ticketDate"]))
-{
-    foreach($data['tickets'] as $ticket) : 
-    $dateAndTime = explode(" ", $ticket->getStartDateTime());       
-                    
-    if($dateAndTime[0] == $_POST["ticketDate"]){ ?>
+<?php
+    foreach($data['tickets'] as $ticket) : ?>
     <table class="table-tickets-dance">
         <tr>
             <td>
             <?php $artists = $ticket->getArtists();
-
-                foreach($artists as $artist) : 
-                    echo $artist->getArtistName();
-                endforeach; 
+                foreach($artists as $artist) :
+                    echo $artist->getArtistName() . "<br>";
+                endforeach;
             ?>
             </td>
-
 
             <td>
                 <?php
@@ -119,31 +119,19 @@ if (isset($_POST["ticketDate"]))
             </td>
 
             <td>
-                <?php echo $ticket->getDanceTicketSession(); ?>
+                <?php
+                    echo $ticket->getDanceTicketSession();
+                ?>
             </td>
 
             <td>
-                € <?php echo $ticket->getPrice(); ?>
+                <?php
+                    echo "€ " . $ticket->getPrice();
+                ?>
             </td>
 
             <td>
-                <select class="select-dance">
-                    <option value="Quantity">
-                        Quantity
-                    </option>
-                    <option value="1">
-                        1
-                    </option>
-                    <option value="2">
-                        2
-                    </option>
-                    <option value="3">
-                        3
-                    </option>
-                    <option value="4">
-                        4
-                    </option>
-                </select>
+                <input type="text" id="" name="quantity" placeholder="0" class="input-amount-dance">
             </td>
 
                 <td>
@@ -153,14 +141,9 @@ if (isset($_POST["ticketDate"]))
                 </td>
         </tr>
     </table>
-<?php
-    } 
-endforeach; 
-}
-?>
+<?php endforeach; ?>
 </div>
 
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
-

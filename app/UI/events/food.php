@@ -4,73 +4,81 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
+<?php foreach($data['content'] as $c) : ?>
+  <section id="section-restaurant-header">
+      <article class="content-restaurant-header">
+          <article>
+              <img
+                  src="<?php echo URLROOT; ?>/<?php echo $c->getContent(); ?>"
+                  alt="Header food"
+                  title="Header food"
+                  class="header-food"
+              />
+          </article>
 
-<div id="section-restaurant-header">
-    <div class="content-restaurant-header">
-        <div>
-            <img
-                src="./img/food-banner.jpg"
-                alt="Header food"
-                title="Header food"
-                class="header-food"
-            />
-        </div>
+          <article class="content-food-right">
+              <h3>
+                  <?php
+                    echo $c->getElementName();
+                  ?>
+              </h3>
 
-        <div class="content-food-right">
-            <h3>
-                Haarlem <br>Food.
-            </h3>
+              <?php
+                  $links = explode(", ", $c->getDescription());
+              ?>
 
-            <a href="#section-restaurant-food">
-                Reservations
-            </a>
+              <?php foreach($links as $link) : ?>
+                  <a href="<?php echo $link; ?>">
+                      <?php
+                          echo $link;
+                      ?>
+                  </a>
+              <?php endforeach; ?>
+          </article>
+      </article>
+  </section>
+<?php endforeach; ?>
 
-            <a href="">
-                Tickets
-            </a>
-        </div>
-    </div>
-</div>
+<section id="section-restaurant-food">
+    <article class="content-restaurant-food">
+      <h2>
+        Search for your cuisine or scroll down to see all restaurants!
+      </h2>
+    </article>
 
-<div id="section-restaurant-food">
-    <div class="content-restaurant-food">
-        <h2>
-            Choose your restaurant <span class="food-span">:</span>
-        </h2>
-    </div>
+    <article class="form-restaurants">
+    <form
+        action="<?php echo URLROOT; ?>/food"
+        method="POST"
+        role="form">
 
-    <div>
-        <form
-            action="<?php echo URLROOT; ?>/food"
-            method="POST"
-            role="form">
+        <input
+        type="text"
+        name="restaurantType"
+        placeholder="Type your cuisine...">
 
-            <select name="all(8)" class="select-food">
-                <option value="*">
-                    All
-                </option>
+        <button
+        type="submit"
+        class="submit-cuisine"
+        value="French">
+            SEARCH
+        </button>
+    </form>
+    </article>
 
-                <option
-                    value="Dutch / European / Modern"
-                    name="cuisineType">
-                    Dutch / European / Modern
-                </option>
-            </select>
+    <article class="error-message-food">
+                <span class="errorFood">
+                    <?php echo $data['restaurantsError']; ?>
+                  </span>
 
-            <input
-                type="submit"
-                value="submit"
-                class="submit-cousine"
-            />
-        </form>
-    </div>
-</div>
+    </article>
+</section>
 
-<div id="section-all-restaurants">
-  <div class="content-all-restaurants">
+<section id="section-all-restaurants">
+  <article class="content-all-restaurants">
       <?php foreach($data['restaurants'] as $restaurant) : ?>
 
-        <div class="restaurant-box">
+        <article class="restaurant-box">
             <a href="<?php echo URLROOT; ?>/restaurant/<?php echo $restaurant->getRestaurantId(); ?>">
 
               <img
@@ -79,7 +87,7 @@
                   title="Restaurant image"
               />
 
-              <div class="overlay-food">
+              <article class="overlay-food">
                   <h4>
                     <?php echo $restaurant->getRestaurantName(); ?>
                   </h4>
@@ -87,12 +95,12 @@
                   <p>
                     <?php echo $restaurant->getRestaurantType(); ?>
                   </p>
-              </div>
+              </article>
             </a>
-        </div>
+        </article>
       <?php endforeach; ?>
-  </div>
-</div>
+  </article>
+</article>
 
 <?php
     require APPROOT . '/ui/inc/footer.php';

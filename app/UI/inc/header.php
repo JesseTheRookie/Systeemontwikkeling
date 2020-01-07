@@ -69,12 +69,17 @@
     />
 
     <link
+        rel="stylesheet"
+        href="path/to/font-awesome/css/font-awesome.min.css"
+    />
+
+    <link
         href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap"
         rel="stylesheet"
     />
 
     <script
-        src="https://code.jquery.com/jquery-1.12.0.min.js">
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
     </script>
 
     <script

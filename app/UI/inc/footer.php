@@ -1,6 +1,6 @@
 <footer id="layout-footer-25">
 
-  <article class="footer-center">
+  <div class="footer-center">
     <li>
       <form method="POST" action="newsletter.php">
         <input type="text" name="Email" placeholder="Subscribe to our newsletter...">
@@ -9,10 +9,10 @@
     <li>
       <input class="button-footer" type="submit" value="Sign Up" name="Submit">
     </li>
-  </article>
+  </div>
 
-  <div class="content-footer-25">
-    <div>
+  <article class="content-footer-25">
+    <article>
       <h5>
         Navigation
       </h5>
@@ -48,9 +48,9 @@
           </a>
         </li>
       </ul>
-    </div>
+    </article>
 
-    <div>
+    <article>
       <h5>
         Festival Info
       </h5>
@@ -74,12 +74,11 @@
           </a>
         </li>
       </ul>
-    </div>
+    </article>
 
-    <div>
+    <article>
       <h5>
         Events
-      </h5>
 
       <ul>
         <li>
@@ -113,9 +112,9 @@
         </li>
 
       </ul>
-    </div>
+    </article>
 
-    <div>
+    <article>
       <h5>
         Contact
       </h5>
@@ -145,9 +144,9 @@
           </a>
         </li>
       </ul>
-    </div>
-    </div>
-  </div>
+    </article>
+    </article>
+  </article>
 </footer>
 </body>
 </html>

@@ -6,38 +6,30 @@
 ?>
 
 
-<div id="section-restaurant-header">
-    <div class="content-restaurant-header">
-       <div>
+<section id="section-restaurant-header">
+    <article class="content-restaurant-header">
+       <article>
             <img
                 src="../img/food-banner.jpg"
                 alt="Restaurant image"
                 title="Restaurant image"
                 class="header-food"
             />
-        </div>
+        </article>
 
-        <div class="content-food-right">
+        <article class="content-food-right">
             <?php foreach($data['restaurant'] as $restaurant) : ?>
                 <h3>
                     <?php echo $restaurant->getRestaurantName(); ?>
                 </h3>
             <?php endforeach; ?>
-        </div>
-    </div>
-</div>
+        </article>
+    </article>
+</section>
 
-<div id="section-restaurant-food">
-    <div class="content-restaurant-food">
-        <h2>
-            Reservation
-        </h2>
-    </div>
-</div>
-
-<div id="section-detailed-restaurant">
-    <div class="content-detailed-restaurant">
-        <div>
+<section id="section-detailed-restaurant">
+    <article class="content-detailed-restaurant">
+        <article>
             <?php foreach($data['restaurant'] as $restaurant) : ?>
                 <h3>
                     <?php echo $restaurant->getRestaurantName(); ?>
@@ -62,9 +54,9 @@
                 <h5>
                     <?php echo $restaurant->getRestaurantDescription(); ?>
                 </h5>
-        </div>
+        </article>
 
-        <div>
+        <article>
             <form
                 action=""
                 id="form-food">
@@ -157,8 +149,8 @@
             </form>
             <?php endforeach; ?>
         </div>
-    </div>
-</div>
+    </article>
+</section>
 
 <?php
     require APPROOT . '/ui/inc/footer.php';
