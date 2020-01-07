@@ -50,3 +50,7 @@
     </div>
   </div>
 </div>
+
+<?php
+	require APPROOT . '/ui/inc/footer.php';
+?>
