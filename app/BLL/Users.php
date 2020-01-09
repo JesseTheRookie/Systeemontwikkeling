@@ -121,7 +121,6 @@
 
                     //Register user
                     if($this->userDAO->register($user)){
-                        flash('registerSuccess', 'You are now registered');
                         redirect('users/login');
                     } else {
                         //aanpassen naar iets fancies

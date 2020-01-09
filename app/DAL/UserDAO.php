@@ -21,7 +21,7 @@ class UserDAO{
         if($this->db->execute()){
             return true;
         } else {
-            die('rip');
+            die('Query failed to execute!');
         }       
     }
 
@@ -55,6 +55,4 @@ class UserDAO{
             return false;
         }
     }
-
-    //
 }
