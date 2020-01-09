@@ -6,9 +6,6 @@ require APPROOT . '/UI/inc/header.php';
 ?>
 		<br><br><br>		<br><br><br>
 		<div id="content">
-
-			<?php flash('registerSuccess'); ?>
-
 			<h1 class="center" id="loginHeader">
 				Login
 			</h1>

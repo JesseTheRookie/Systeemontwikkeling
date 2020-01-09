@@ -26,7 +26,8 @@
   </header>
 
   <nav class="nav">
-    <div class="usercontainer w-container"><img src="images/icon.svg" width="100" alt="" class="image">
+    <div class="usercontainer">
+      <img src="<?php echo URLROOT; ?>/img/adminuserimg/userIcon.png" width="125" alt="" class="image">
       <div class="nameAndFunction"><?php echo $data['UserName'] . ' ' . $data['UserLastName'] . ' - ' . $data['UserType']; ?></div>
     </div>
     <ul class="list list-2 w-list-unstyled">
@@ -40,7 +41,7 @@
     <h1><u><?php echo $data['title'] ?></u></h1>
     <div class="datablocks">
       <div class="revenue">
-        <h1 class="importantdata"><?php echo $data['TotalRev']; ?></h1>
+        <h1 class="importantdata"><?php echo "\xE2\x82\xAc " . $data['TotalRev']; ?></h1>
         <h1 class="importantdata">Revenue</h1>
       </div>
       <div class="reservations">
@@ -67,34 +68,42 @@
     </div>
     <div class="tableblock">
         <div class="table">
-          <form id="dropdowns" action="<?php echo URLROOT; ?>/Cms/dashboard" method="POST" role="form"><select
-              id="Day" name="Day" data-name="Day" class="select-field w-select">
-              <option value="day1">Day 1</option>
-              <option value="day2">Day 2</option>
-              <option value="day3">Day 3</option>
-              <option value="day4">Day 4</option>
-            </select><select id="event" name="event" data-name="event" class="select-field-2 w-select">
-              <option value="dance">Dance</option>
-              <option value="jazz">Jazz</option>
-              <option value="historic">Historic</option>
-              <option value="food">Food</option>
-            </select><input type="submit" value="Search" class="submit-button w-button"></form>
+          <form id="dropdowns" action="<?php echo URLROOT; ?>/Cms/dashboard" method="POST">
+            <select id="Day" name="day" data-name="day">
+              <?php
+                foreach($data['Dates'] as $date)
+                {
+                echo '<option value=' . $date->date . '>' . DateTime::createFromFormat('Y-m-d', $date->date)->format('d-m-Y') . '</option>';
+                }
+              ?>
+            </select>
+            <select id="event" name="event" data-name="event">
+              <?php
+                foreach($data['Events'] as $event)
+                {
+                echo '<option value=' . $event->event . '>' . $event->event . '</option>';
+                }
+              ?>  
+            </select><input type="submit" value="Search" id="submitbutton"></form>
+            <h2 id="dateeventtekst"><?php echo ucfirst($data['SelectedEvent']) . ' - ' . DateTime::createFromFormat('Y-m-d', $data['SelectedDate'])->format('D d-m-Y'); ?></h2>
             <table border="1px">
           <tr>
-            <th>Venue</th>
+            <th></th>
+            <th>Session</th>
             <th>Tickets sold</th>
             <th>Reservations</th>
             <th>Tickets available</th>
           </tr>
           <?php
-          foreach ($data['tableResult'] as $activity)
+          foreach ($data['TableResult'] as $activity)
           {
               echo "<tr>";  
-              echo '"<td>"' . $activity['locationorlanguage'] . '"</td>"';
-              echo '"<td>"' . $activity['ticketssold'] . '"</td>"';
-              echo '"<td>"' . $activity['ticketsleft'] . '"</td>"';
-              echo "<td></td>";
-              echo "<tr>";
+              echo '<td>' . $activity->identifier . '</td>';
+              echo '<td>' . $activity->identifier2 . '</td>';
+              echo '<td>' . $activity->soldtickets . '</td>';
+              echo '<td>' . $activity->reservedtickets . '</td>';
+              echo '<td>' . $activity->ticketsleft . '</td>';
+              echo "</tr>";
           }
           ?>
         </table>

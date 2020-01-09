@@ -1,7 +1,7 @@
 <header>
   <section id="section-header-50">
-    <div class="content-header-50">
-      <div>
+    <article class="content-header-50">
+      <article>
         <a href="<?php echo URLROOT; ?>">
           <img src=" http://localhost/Systeemontwikkeling/img/logo.png"
 
@@ -10,13 +10,13 @@
             class="logo-header"
           />
         </a>
-      </div>
+      </article>
 
-      <div>
+      <article>
         <ul class="header-nav">
           <li>
-            <a href="<?php echo URLROOT; ?>/about">
-              About
+            <a href="<?php echo URLROOT; ?>/timetable">
+              Timetable
             </a>
           </li>
 
@@ -46,9 +46,11 @@
                   <a href="<?php echo URLROOT; ?>/historic">
                     Historic
                   </a>
+
                   <a href="<?php echo URLROOT; ?>/food">
                     Food
                   </a>
+
                   <a href="<?php echo URLROOT; ?>/kids">
                     Kids
                   </a>
@@ -103,7 +105,6 @@
 
             <li>
               <a href="<?php echo URLROOT; ?>/shoppingcart/shopping-cart">
-                <img
                   <img src=" http://localhost/Systeemontwikkeling/img/shopping-cart.png"
                   class="shopping-cart"
                   alt="Shopping cart"
@@ -111,7 +112,7 @@
               </a>
             </li>
           </ul>
-        </div>
-    </div>
+        </article>
+    </article>
   </section>
 </header>

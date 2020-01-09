@@ -6,8 +6,32 @@ class FoodTicketDAO{
       $this->db = new Database;
     }
 
+    //Get the image, event name and buttons of top section Dance Page.
+    public function getFoodContent() {
+      $foodContentArray = array();
+
+      $this->db->query("SELECT elementName, description, content
+                        FROM Content as c
+                        WHERE contentType = 3
+                      ");
+
+      $foodContent = $this->db->resultSet();
+
+      foreach ($foodContent as $content) {
+            $foodContentModel = new HomeModel();
+
+            $foodContentModel->setElementName($content->elementName);
+            $foodContentModel->setDescription($content->description);
+            $foodContentModel->setContent($content->content);
+
+            array_push($foodContentArray, $foodContentModel);
+        }
+        return $foodContentArray;
+    }
+
+
     //Selecting all restaurants
-    public function getRestaurants() {
+    public function getRestaurants($restaurantType) {
         $restaurantArray = array();
 
         $query = $this->db->query("SELECT r.restaurantId, r.restaurantName, c.description, c.content, f.foodType
@@ -18,7 +42,10 @@ class FoodTicketDAO{
                         ON r.restaurantId = rf.restaurantId
                         INNER JOIN FoodType as f
                         ON rf.foodtypeId = f.foodTypeId
+                        WHERE f.foodType LIKE '%' :restaurantType '%'
                         ");
+
+        $this->db->bind(':restaurantType', $restaurantType);
 
         $restaurants = $this->db->resultSet();
 

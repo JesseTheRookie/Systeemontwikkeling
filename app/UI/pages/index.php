@@ -5,110 +5,108 @@
     require APPROOT . '/UI/inc/navigation.php';
 ?>
 
-
-<div id="section-hero">
-    <div class="content-hero">
+<section id="section-hero">
+    <article class="content-hero">
       <h1>
         Haarlem Festival
       </h1>
 
       <ul>
+        <?php foreach($data['dates'] as $date) : ?>
+          <li>
+            Haarlem
+          </li>
 
-    <?php foreach($data['dates'] as $date) : ?>
-        <li>
-          Haarlem
-        </li>
-        <li>
-          <?php
+          <li>
+              <?php
                 $startDate = $date->getEventStartDate();
                 $endDate = $date->getEventEndDate();
                 echo date("jS", strtotime($startDate)) . " - " . date("jS F", strtotime($endDate));
-          ?>
-        </li>
+              ?>
+          </li>
 
-        <li>
-          <?php
+          <li>
+            <?php
                 $endDate = $date->getEventEndDate();
                 echo date("Y", strtotime($endDate));
-          ?>
-        </li>
-    <?php endforeach; ?>
-
+            ?>
+          </li>
+        <?php endforeach; ?>
       </ul>
 
       <a href="<?php echo URLROOT; ?>/pages/tickets"
          class="buttonStyle">
-        Tickets
+         Tickets
       </a>
 
        <a href="<?php echo URLROOT; ?>/pages/about"
           class="buttonStyle">
-        Program
+          Program
       </a>
-    </div>
-</div>
+    </article>
+  </section>
 
-<div id="festival-info">
+<section id="festival-info">
     <h2>
       Experience a different kind of festival
     </h2>
 
     <hr>
 
-  <div class="content-festival-info">
+  <article class="content-festival-info">
     <?php foreach($data['eventInfo'] as $information) : ?>
-      <div>
+      <article>
         <?php echo $information->getTotalArtists(); ?>
-      </div>
+      </article>
 
-      <div>
+      <article>
         <?php echo $information->getTotalLocations(); ?>
-      </div>
+      </article>
 
-      <div>
+      <article>
         <?php echo $information->getTotalTickets(); ?>
-      </div>
+      </article>
 
-      <div>
+      <article>
         <?php echo $information->getTotalEvents(); ?>
-      </div>
+      </article>
     <?php endforeach; ?>
 
-    <div>
+    <article>
       Artists
-    </div>
+    </article>
 
-    <div>
+    <article>
       Locations
-    </div>
+    </article>
 
-    <div>
+    <article>
       Tickets
-    </div>
+    </article>
 
-    <div>
+    <article>
       Events
-    </div>
-  </div>
-</div>
+    </article>
+  </article>
+</section>
 
-<div id="section-events">
+<section id="section-events">
   <h2>
     Events
   </h2>
 
   <hr>
 
-  <div class="content-events">
+  <article class="content-events">
   <?php foreach($data['events'] as $event) : ?>
-  <div class="eventContainer">
+  <article class="eventContainer">
       <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
         <img
             src="<?php echo $event->getContent(); ?>"
             alt=""
         />
 
-        <div class="centered">
+        <article class="centered">
           <h4>
             <?php echo $event->getElementName(); ?>
           </h4>
@@ -116,35 +114,34 @@
           <p>
             26TH JULY - 29TH JULY
           </p>
-        </div>
+        </article>
       </a>
-    </div>
+    </article>
   <?php endforeach; ?>
+</article>
+</section>
 
-  </div>
-</div>
-
-<div id="layout-artists-33">
+<section id="layout-artists-33">
   <h2>
     Artists
   </h2>
 
   <hr>
 
-  <div class="content-artists-33">
-    <div>
+  <article class="content-artists-33">
+    <article>
         <img id="image" src="./img/tiesto.jpg">
-    </div>
+    </article>
 
-    <div>
+    <article>
         <img id="image2" src="./img/armin.png">
-    </div>
+    </article>
 
-    <div>
+    <article>
         <img id="image3" src="./img/afrojack.jpg">
-    </div>
-  </div>
-</div>
+    </article>
+  </article>
+</article>
 
 <?php
     require APPROOT . '/UI/inc/footer.php';

@@ -76,19 +76,19 @@ h1 {
 .nameAndFunction {
   position: relative;
   left: 0px;
-  bottom: -40px;
+  bottom: 0px;
   width: 200px;
   height: auto;
   padding-left: 0px;
   background-color: transparent;
-  color: #fff;
+  color: whitesmoke;
   text-align: center;
 }
 
 .image {
   position: relative;
-  left: 50px;
-  top: 30px;
+  left: 18%;
+  top: 0px;
 }
 
 .section {
@@ -272,10 +272,53 @@ h1 {
 
 table {
   border-collapse: collapse;
+  text-align: center;
+  margin-top: 40px;
+  margin-left: 5%;
+  width: 85%;
+}
+
+th {
+  text-align: left;
+  height: 30px;
+}
+
+tr {
+  height: 25px;
 }
 
 .dropdowns {
   position: relative;
   margin-bottom: -8px;
 }
-  
+
+#Day {
+  position: relative;
+  left: 5%;
+  top: 25px;
+  width: 125px;
+  height: 30px;
+}
+
+#event {
+  position: relative;
+  left: 10%;
+  top: 25px;
+  width: 125px;
+  height: 30px;
+}
+
+#submitbutton {
+  position: relative;
+  left: 15%;
+  top: 25px;
+  width: 100px;
+  height: 30px;
+}
+
+#dateeventtekst {
+  position: relative;
+  left: 72%;
+  top: -15px;
+}
+

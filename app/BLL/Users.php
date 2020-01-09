@@ -121,7 +121,6 @@
 
                     //Register user
                     if($this->userDAO->register($user)){
-                        flash('registerSuccess', 'You are now registered');
                         redirect('users/login');
                     } else {
                         //aanpassen naar iets fancies
@@ -308,7 +307,7 @@
             $_SESSION['userGender'] = $loggedInUser->userGender;
 
 
-            if($_SESSION['userType'] == 1){
+            if($_SESSION['userType'] == 2 || $_SESSION['userType'] == 3){
                 redirect('cms/dashboard');
             } else {
             redirect('pages/index');
