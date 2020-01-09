@@ -1,8 +1,8 @@
 <?php
 require APPROOT . '/UI/inc/header.php';
-?>
-<?php
 require APPROOT . '/UI/inc/navigation.php';
+
+session_start();
 ?>
 <header id="mainHeader">
     <section class="background" >
@@ -83,20 +83,18 @@ require APPROOT . '/UI/inc/navigation.php';
                         foreach($artists as $artist) : ?>
                             <div><p><?php echo $artist->getArtistName(); ?></p></div>
                         <?php endforeach; ?>
-
+                        <form method="post" action="<?php APPROOT . '/BLL/ShoppingCart.php/add/AddToCart('$ticket')'?>">
                         <div><p><?php echo $ticket->getStartDateTime(); ?> - <?php echo $ticket->getEndDateTime() ?></p></div>
                         <div><p><?php echo $ticket->getJazzTicketLocation(); ?><br/><span><?php echo $ticket->getJazzTicketHall();?></span></p></div>
                         <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
                         <div><input type="text" id="" name="quantity" placeholder="0"></div>
-                        <div><button class="smallButton">add</button></div>
+                        <div><button class="smallButton" type="submit">add</button></div>
                     </article>
                
                 <?php  }
-                endforeach; 
-                        
-                    
+                endforeach;                          
                 }           
-                ?>       
+            ?>       
 
 <?php
 require APPROOT . '/UI/inc/footer.php';

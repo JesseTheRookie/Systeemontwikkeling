@@ -13,13 +13,22 @@
       return new $model();
     }
 
-        // Load DAL
+    // Load DAL
     public function dal($dal){
       // Require dal file
       require_once '../app/DAL/' . $dal . '.php';
 
       // Instatiate dal
       return new $dal();
+    }
+
+    // Load DAL
+    public function bll($bll){
+      // Require dal file
+      require_once '../app/BLL/' . $bll . '.php';
+
+      // Instatiate dal
+      return new $bll();
     }
 
     // Load view

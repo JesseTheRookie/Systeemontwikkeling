@@ -1,5 +1,5 @@
 <?php
-abstract class TicketModel{
+class TicketModel{
     private $ticketId;
     private $startDateTime;
     private $endDateTime;
