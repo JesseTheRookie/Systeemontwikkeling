@@ -4,9 +4,6 @@
 <?php
     require APPROOT . '/ui/inc/navigation.php';
 ?>
-
-			<br><br><br><br>
-
 		<div class="headerGrid">
 			<div class="headerItem">
 				<p>
