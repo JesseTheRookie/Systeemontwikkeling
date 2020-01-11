@@ -12,45 +12,41 @@
 
             $this->db->query("SELECT elementName, description, content
                               FROM Content as c
-                              WHERE AND eventType = 5
+                              WHERE eventType = 5 AND contentType = 4
                             ");
             
             $historicContent = $this->db->resultSet();
 
             foreach ($historicContent as $content) {
-                $historicContentModel = new HomeModel();
+                $historicContentModel = new HistoricModel();
 
-                $historicContentModel->setElementName($content->elementName);
+                $historicContentModel->setHeader($content->elementName);
                 $historicContentModel->setDescription($content->description);
-                $historicContentModel->setContent($content->content);
+                $historicContentModel->setButton($content->content);
 
                 array_push($historicContentArray, $historicContentModel);
             }
             return $historicContentArray;
         }
 
-        // Get all the venues stuff from the database
-        public function getVenuesContent() {
-            $venuesContentArray = array();
+        // Get all the historic images from the database
+        public function getHistoricImages() {
+            $historicImageArray = array();
 
             $this->db->query("SELECT elementName, description, content
                               FROM Content as c
-                              WHERE contentType = 1 AND eventType = 6
+                              WHERE eventType = 5 AND contentType = 1
                             ");
             
-            $venuesContent = $this->db->resultSet();
+            $historicImages = $this->db->resultSet();
 
-            foreach ($venuesContent as $content) {
-                $venue = new VenueModel();
+            foreach ($historicImages as $image) {
+                $historicImageModel = new HistoricImageModel();
 
-                $venue->setVenueName($content->elementName);
-                $venue->setVenueDesc($content->description);
-                $venue->setVenueImg($content->content);
+                $historicImageModel->setImageUrl($image->content);
 
-                array_push($venuesContentArray, $venue);
+                array_push($historicImageArray, $historicImageModel);
             }
-            return $venuesContentArray;
+            return $historicImageArray;
         }
-
-
     }

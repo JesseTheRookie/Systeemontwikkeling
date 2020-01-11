@@ -3,7 +3,7 @@
 
         // Create object for DAO and Model layer
         public function __construct() {
-            $this->historicDAO = $this->dal('HistoricDAO');
+            $this->venueDAO = $this->dal('VenueDAO');
             $this->VenueModel = $this->model('VenueModel');
         }
 
@@ -20,7 +20,7 @@
         }
 
         public function getVenues(){
-            $venues = $this->historicDAO->getVenuesContent();
+            $venues = $this->venueDAO->getVenuesContent();
             return $venues;
         }
 
