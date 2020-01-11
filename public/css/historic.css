@@ -49,6 +49,10 @@ padding: 0px;
 grid-gap: 0px;
 }
 
+.contentHeader{
+    padding: 0.8em;
+}
+
 .contentItem{
 border: 0;
 padding: 0px;
@@ -64,8 +68,9 @@ margin-top: 1em;
 
 .contentText{
 margin: auto;
-width: 60%;
-font-size: 0.75em;
+padding: 1em;
+width: 100%;
+font-size: 1em;
 color: black;
 }
 

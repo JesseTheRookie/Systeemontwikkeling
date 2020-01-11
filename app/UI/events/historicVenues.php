@@ -20,7 +20,7 @@
       <div class="container '.$side.'">
         <div class="content">
           <img class="timelineImg" src="'.URLROOT.'/'.$venue->getVenueImg().'"></img>
-          <h2>'.$venue->getVenueName().'</h2>
+          <h2 class="contentHeader">'.$venue->getVenueName().'</h2>
           <p class="contentText">'.$venue->getVenueDesc().'</p>
         </div>
       </div>    
