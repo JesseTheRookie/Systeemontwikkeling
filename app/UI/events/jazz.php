@@ -22,7 +22,7 @@ require APPROOT . '/UI/inc/navigation.php';
 </header>
 <section id="artiesten">
         <div id="lineup">
-            <?php 
+            <?php
             $counter = 0;
             foreach($data['artists'] as $artist) :
 
@@ -73,10 +73,10 @@ require APPROOT . '/UI/inc/navigation.php';
                if (isset($_POST["ticketDate"]))
                {
                 foreach($data['tickets'] as $ticket) :
-                    $dateAndTime = explode(" ", $ticket->getStartDateTime());       
-                    
+                    $dateAndTime = explode(" ", $ticket->getStartDateTime());
+
                     if($dateAndTime[0] == $_POST["ticketDate"]){ ?>
-                
+
                     <article>
                         <?php $artists = $ticket->getArtists();
 
@@ -90,13 +90,13 @@ require APPROOT . '/UI/inc/navigation.php';
                         <div><input type="text" id="" name="quantity" placeholder="0"></div>
                         <div><button class="smallButton">add</button></div>
                     </article>
-               
+
                 <?php  }
-                endforeach; 
-                        
-                    
-                }           
-                ?>       
+                endforeach;
+
+
+                }
+                ?>
 
 <?php
 require APPROOT . '/UI/inc/footer.php';

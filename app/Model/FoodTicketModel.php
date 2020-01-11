@@ -1,5 +1,7 @@
 <?php
 require('TicketModel.php');
+
+//Extending tickets but there are 6 extra columns needed.
 class FoodTicketModel extends TicketModel {
     private $restaurantId;
     private $restaurantName;
@@ -61,6 +63,5 @@ class FoodTicketModel extends TicketModel {
     public function getRestaurantType(){
         return $this->restaurantType;
     }
-
 }
 ?>

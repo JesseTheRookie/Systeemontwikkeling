@@ -5,9 +5,9 @@
     require APPROOT . '/UI/inc/navigation.php';
 ?>
 
-<?php foreach($data['content'] as $c) : ?>
-    <section id="section-dance-header">
-        <article class="content-dance-header">
+<section id="section-dance-header">
+    <article class="content-dance-header">
+        <?php foreach($data['content'] as $c) : ?>
             <article>
                 <img src="<?php echo URLROOT; ?>/<?php echo $c->getContent(); ?>"
                     alt="Banner header dance page"
@@ -23,40 +23,47 @@
                 </h3>
 
                 <?php
-                    $links = explode(", ", $c->getDescription());
+                  //To create a dynamic link, we need the button names(links), and we need the event name. In order to get the event name, we need to explode 'HAARLEM FOOD' because we only need 'FOOD'
+                  $links = explode(", ", $c->getDescription());
+                  $eventName = explode(" ", $c->getElementName());
                 ?>
 
                 <?php foreach($links as $link) : ?>
-                    <a href="<?php echo $link; ?>">
+                  <a href="<?php echo URLROOT; ?>/<?php echo end($eventName); ?>#<?php echo $link ?>">
                         <?php
                             echo $link;
                         ?>
                     </a>
                 <?php endforeach; ?>
-
             </article>
-        </article>
-    </section>
-<?php endforeach; ?>
+        <?php endforeach; ?>
+    </article>
+</section>
 
-<section id="section-artists-dance" class="Performance">
+<section id="section-artists-dance">
     <h2>
         Performers
     </h2>
 
     <hr>
 
-    <article class="content-artists-dance">
-        <?php foreach($data['artists'] as $artist) : ?>
+    <?php
+    foreach ($data['artists'] as $artist) {
+         $content[] = $artist->getContent();
+         $names[] = $artist->getArtistName();
+    }
+        $content = array_unique($content);
+        $names = array_unique($names);
+    ?>
+
+    <article class="content-artists-dance" id="performance">
+        <?php foreach ($content as $c): ?>
             <article>
                 <img
-                    src="<?php echo URLROOT; ?>/<?php echo $artist->getContent(); ?>"
+                    src="<?php echo URLROOT; echo $c ?>"
                     alt="Performer Dance Artist"
                     title="Performer Dance Artist"
                 />
-                <button class="myBtn">
-                    <?php echo $artist->getArtistName(); ?>
-                </button>
             </article>
         <?php endforeach; ?>
     </article>
@@ -69,11 +76,10 @@
 
   <hr>
 
-  <article class="content-header-dance" class="">
+  <article class="content-header-dance" id="tickets">
         <?php foreach ($data['days'] as $day) : ?>
-
             <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
-                <div>
+                <article>
                     <h2>
                         <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
                     </h2>
@@ -81,6 +87,7 @@
                     <p>
                         <?php echo date("jS F", strtotime($day->startDateTime)); ?>
                     </p>
+
                     <form
                         action="<?php echo URLROOT; ?>/dance"
                         method="POST"
@@ -94,17 +101,19 @@
                             TICKETS
                         </button>
                     </form>
-                </div>
+                </article>
             <?php endif; ?>
         <?php endforeach; ?>
     </article>
 
-<?php
-    foreach($data['tickets'] as $ticket) : ?>
+
+<?php foreach($data['tickets'] as $ticket) : ?>
+
     <table class="table-tickets-dance">
         <tr>
             <td>
             <?php $artists = $ticket->getArtists();
+
                 foreach($artists as $artist) :
                     echo $artist->getArtistName() . "<br>";
                 endforeach;
@@ -119,19 +128,20 @@
             </td>
 
             <td>
-                <?php
-                    echo $ticket->getDanceTicketSession();
-                ?>
+                <?php echo $ticket->getDanceTicketSession(); ?>
             </td>
 
             <td>
-                <?php
-                    echo "€ " . $ticket->getPrice();
-                ?>
+                € <?php echo $ticket->getPrice(); ?>
             </td>
 
             <td>
-                <input type="text" id="" name="quantity" placeholder="0" class="input-amount-dance">
+                <input
+                    type="text"
+                    id=""
+                    name="quantity"
+                    class="input-amount-dance"
+                    placeholder="0">
             </td>
 
                 <td>
@@ -142,8 +152,10 @@
         </tr>
     </table>
 <?php endforeach; ?>
-</div>
+
+</section>
 
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
+

@@ -1,5 +1,6 @@
 <?php
 
+//Event objects to output on the frontpage of the website
 class HomeModel {
     private $totalArtists;
     private $totalLocations;

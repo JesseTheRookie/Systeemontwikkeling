@@ -36,5 +36,4 @@ abstract class TicketModel{
     public function getPrice(){
         return $this->price;
     }
-
 }

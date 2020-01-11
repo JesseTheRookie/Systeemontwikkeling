@@ -10,19 +10,19 @@ class UserDAO{
         //Insert into table user
         $this->db->query('INSERT INTO User (userName, userLastName, userMail, userPassword, userPhone, userGender) VALUES (:name, :lastName, :email, :password, :phone, :gender)');
         //Bind values
-        $this->db->bind(':name', $user->getUserName());      
-        $this->db->bind(':lastName', $user->getUserLastname());        
+        $this->db->bind(':name', $user->getUserName());
+        $this->db->bind(':lastName', $user->getUserLastname());
         $this->db->bind(':email', $user->getEmail());
-        $this->db->bind(':password', $user->getPassword()); 
-        $this->db->bind(':phone', $user->getPhone()); 
+        $this->db->bind(':password', $user->getPassword());
+        $this->db->bind(':phone', $user->getPhone());
         $this->db->bind(':gender', $user->getGender());
-        
+
         //Execute
         if($this->db->execute()){
             return true;
         } else {
             die('rip');
-        }       
+        }
     }
 
     // Login user
@@ -44,7 +44,7 @@ class UserDAO{
     public function findUserByEmail($email){
         $this->db->query('SELECT * FROM User WHERE userMail = :email');
         //Bind values
-        $this->db->bind(':email', $email);  
+        $this->db->bind(':email', $email);
 
         $row = $this->db->single();
 

@@ -4,6 +4,7 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
+
 <?php foreach($data['content'] as $c) : ?>
   <section id="section-restaurant-header">
       <article class="content-restaurant-header">
@@ -24,11 +25,13 @@
               </h3>
 
               <?php
+                  //To create a dynamic link, we need the button names(links), and we need the event name. In order to get the event name, we need to explode 'HAARLEM FOOD' because we only need 'FOOD'
                   $links = explode(", ", $c->getDescription());
+                  $eventName = explode(" ", $c->getElementName());
               ?>
 
               <?php foreach($links as $link) : ?>
-                  <a href="<?php echo $link; ?>">
+                  <a href="<?php echo URLROOT; ?>/<?php echo end($eventName); ?>#<?php echo $link ?>">
                       <?php
                           echo $link;
                       ?>
@@ -40,44 +43,43 @@
 <?php endforeach; ?>
 
 <section id="section-restaurant-food">
-    <article class="content-restaurant-food">
+    <article class="content-restaurant-food" id="restaurants">
       <h2>
         Search for your cuisine or scroll down to see all restaurants!
       </h2>
     </article>
 
     <article class="form-restaurants">
-    <form
-        action="<?php echo URLROOT; ?>/food"
-        method="POST"
-        role="form">
+      <form
+          action="<?php echo URLROOT; ?>/food"
+          method="POST"
+          role="form">
 
-        <input
-        type="text"
-        name="restaurantType"
-        placeholder="Type your cuisine...">
+          <input
+            type="text"
+            name="restaurantType"
+            value=""
+            placeholder="Choose your cuisine...">
 
-        <button
-        type="submit"
-        class="submit-cuisine"
-        value="French">
-            SEARCH
-        </button>
-    </form>
+          <button
+            type="submit"
+            class="submit-cuisine"
+            value="submit">
+              SEARCH
+          </button>
+      </form>
     </article>
 
     <article class="error-message-food">
-                <span class="errorFood">
-                    <?php echo $data['restaurantsError']; ?>
-                  </span>
-
+        <span class="errorFood">
+            <?php echo $data['restaurantsError']; ?>
+        </span>
     </article>
 </section>
 
 <section id="section-all-restaurants">
   <article class="content-all-restaurants">
       <?php foreach($data['restaurants'] as $restaurant) : ?>
-
         <article class="restaurant-box">
             <a href="<?php echo URLROOT; ?>/restaurant/<?php echo $restaurant->getRestaurantId(); ?>">
 

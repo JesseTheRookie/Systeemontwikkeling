@@ -29,21 +29,20 @@ class FoodTicketDAO{
         return $foodContentArray;
     }
 
-
-    //Selecting all restaurants
+    //Selecting all restaurants based on user input
     public function getRestaurants($restaurantType) {
         $restaurantArray = array();
 
         $query = $this->db->query("SELECT r.restaurantId, r.restaurantName, c.description, c.content, f.foodType
-                        FROM restaurant as r
-                        INNER JOIN content as c
-                        ON r.restaurantName = c.elementName
-                        INNER JOIN RestaurantFoodType as rf
-                        ON r.restaurantId = rf.restaurantId
-                        INNER JOIN FoodType as f
-                        ON rf.foodtypeId = f.foodTypeId
-                        WHERE f.foodType LIKE '%' :restaurantType '%'
-                        ");
+                                   FROM restaurant as r
+                                   INNER JOIN content as c
+                                   ON r.restaurantName = c.elementName
+                                   INNER JOIN RestaurantFoodType as rf
+                                   ON r.restaurantId = rf.restaurantId
+                                   INNER JOIN FoodType as f
+                                   ON rf.foodtypeId = f.foodTypeId
+                                   WHERE f.foodType LIKE '%' :restaurantType '%'
+                                  ");
 
         $this->db->bind(':restaurantType', $restaurantType);
 
@@ -67,15 +66,15 @@ class FoodTicketDAO{
     public function getRestaurantById($id) {
         $restaurantArray = array();
 
-        $this->db->query("SELECT r.restaurantId, r.restaurantName, r.restaurantStars, c.description, c.content, f.foodType
-                        FROM restaurant as r
-                        INNER JOIN content as c
-                        ON r.restaurantName = c.elementName
-                        INNER JOIN RestaurantFoodType as rf
-                        ON r.restaurantId = rf.restaurantId
-                        INNER JOIN FoodType as f
-                        ON rf.foodtypeId = f.foodTypeId
-                        WHERE r.restaurantId = :id
+        $this->db->query("SELECT r.restaurantId, r.restaurantName, r.restaurantStars, c.description, c.content             , f.foodType
+                          FROM restaurant as r
+                          INNER JOIN content as c
+                          ON r.restaurantName = c.elementName
+                          INNER JOIN RestaurantFoodType as rf
+                          ON r.restaurantId = rf.restaurantId
+                          INNER JOIN FoodType as f
+                          ON rf.foodtypeId = f.foodTypeId
+                          WHERE r.restaurantId = :id
                         ");
 
         $this->db->bind(':id', $id);
@@ -101,11 +100,12 @@ class FoodTicketDAO{
     public function getRestaurantTicketsById($id) {
         $restaurantArray = array();
 
-        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.price
-                        FROM tickets as t
-                        INNER JOIN foodticket as f
-                        WHERE t.ticketId = f.ticketId
-                        ");
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.price, f.restaurantId
+                          FROM tickets as t
+                          INNER JOIN foodticket as f
+                          ON t.ticketId = f.ticketId
+                          WHERE f.restaurantId = :id AND t.startDateTime >= CURDATE()
+                         ");
 
         $this->db->bind(':id', $id);
 
