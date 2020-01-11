@@ -24,6 +24,22 @@
             return $venues;
         }
 
+        public function venueTimeline($data){
+            $side = "";
+            foreach($data['venues'] as $venue) {
+                $side = $this->timelineSideSetter($side);
+                echo '
+                    <div class="container '.$side.'">
+                        <div class="content">
+                            <img class="timelineImg" src="'.URLROOT.'/'.$venue->getVenueImg().'"></img>
+                            <h2 class="contentHeader">'.$venue->getVenueName().'</h2>
+                            <p class="contentText">'.$venue->getVenueDesc().'</p>
+                        </div>
+                    </div>    
+                ';
+            }
+        }
+
         public function timelineSideSetter($side){
             switch ($side) {
                 case "left":
