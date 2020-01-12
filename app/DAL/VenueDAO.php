@@ -10,7 +10,7 @@
         public function getVenuesContent() {
             $venuesContentArray = array();
 
-            $this->db->query("SELECT elementName, description, content
+            $this->db->query("SELECT name, description, content
                               FROM Content as c
                               WHERE contentType = 1 AND eventType = 6
                             ");
@@ -20,7 +20,7 @@
             foreach ($venuesContent as $content) {
                 $venue = new VenueModel();
 
-                $venue->setVenueName($content->elementName);
+                $venue->setVenueName($content->name);
                 $venue->setVenueDesc($content->description);
                 $venue->setVenueImg($content->content);
 

@@ -10,7 +10,7 @@
         public function getHistoricContent() {
             $historicContentArray = array();
 
-            $this->db->query("SELECT elementName, description, content
+            $this->db->query("SELECT name, description, content
                               FROM Content as c
                               WHERE eventType = 5 AND contentType = 4
                             ");
@@ -20,7 +20,7 @@
             foreach ($historicContent as $content) {
                 $historicContentModel = new HistoricModel();
 
-                $historicContentModel->setHeader($content->elementName);
+                $historicContentModel->setHeader($content->name);
                 $historicContentModel->setDescription($content->description);
                 $historicContentModel->setButton($content->content);
 
@@ -33,7 +33,7 @@
         public function getHistoricImages() {
             $historicImageArray = array();
 
-            $this->db->query("SELECT elementName, description, content
+            $this->db->query("SELECT content
                               FROM Content as c
                               WHERE eventType = 5 AND contentType = 1
                             ");

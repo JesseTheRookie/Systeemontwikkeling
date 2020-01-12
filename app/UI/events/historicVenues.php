@@ -5,8 +5,6 @@
     require APPROOT . '/ui/inc/navigation.php';
 ?>
 
-<br><br><br><br><br><br><br>
-
 <h1 id="historicHeader">
   <?php echo $data['title']; ?>
 </h1>
