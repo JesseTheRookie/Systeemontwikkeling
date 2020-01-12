@@ -83,7 +83,7 @@ session_start();
                         foreach($artists as $artist) : ?>
                             <div><p><?php echo $artist->getArtistName(); ?></p></div>
                         <?php endforeach; ?>
-                        <form method="post" action="<?php APPROOT . '/BLL/ShoppingCart.php/add/AddToCart('$ticket')'?>">
+                        <form method="post" action="<?php APPROOT . '/BLL/ShoppingCart.php/add/AddToCart($ticket)'?>">
                         <div><p><?php echo $ticket->getStartDateTime(); ?> - <?php echo $ticket->getEndDateTime() ?></p></div>
                         <div><p><?php echo $ticket->getJazzTicketLocation(); ?><br/><span><?php echo $ticket->getJazzTicketHall();?></span></p></div>
                         <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>

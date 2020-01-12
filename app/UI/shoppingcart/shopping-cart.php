@@ -204,7 +204,7 @@
 
 </div>
 
-
+<script src="<?php echo URLROOT; ?>/js/ShoppingCartFunctions.js"></script>
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
