@@ -5,13 +5,21 @@ class Dance Extends Controller{
     public function __construct() {
         $this->danceDal = $this->dal('DanceTicketDAO');
         $this->danceTicketModel = $this->model('DanceTicketModel');
-        $this->contentTicketModel = $this->model('ContentModel');
+        $this->danceTicketModel = $this->model('DanceTicketModel');
+        $this->homeModel = $this->model('HomeModel');
+    }
+
+    public function getAllArtists(){
+        return $this->danceDal->getArtists();
+    }
+
+    public function  getDifferentDays(){
+        return $this->danceDal->getDifferentDays();
     }
 
     public function getAllDanceTickets(){
-        $ticketDate = '';
         $artists = $this->getAllArtists();
-        $tickets = $this->danceDal->getDanceTickets($ticketDate);
+        $tickets = $this->danceDal->getDanceTickets();
 
         foreach($tickets as $ticket) {
             foreach($artists as $artist) {
@@ -24,40 +32,32 @@ class Dance Extends Controller{
 
     //Need ticket/artist and days information. Passing it in an array that will be passed around on the website.
     public function index(){
-
         $ticketDate = '';
         $content = $this->danceDal->getDanceContent();
-        $artists = $this->getAllArtists();
+
         $days = $this->danceDal->getDifferentDays();
         $tickets = $this->getAllDanceTickets();
+        $artists = $this->danceDal->getArtists();
 
         $data = [
                 'title' => 'Dance Page',
                 'content' => $content,
-                'artists' => $artists,
                 'days' => $days,
                 'tickets' => $tickets,
-                'ticketDate' => $ticketDate
+                'artists' => $artists,
+                'quantityError' => ''
             ];
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        /*if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $ticketDate = trim($_POST['ticketDate']);
             $tickets = $this->danceDal->getDanceTickets($ticketDate);
 
             $data = [
-                'content' => $content,
-                'artists' => $artists,
                 'days' => $days,
                 'tickets' => $tickets,
-                'ticketDate' => $ticketDate
+                'artists' => $artists
             ];
-        }
+        }*/
       $this->ui('events/dance', $data);
     }
-
-    //Get all artists from DAO layer in order to print them under "performers"
-    public function getAllArtists(){
-        return $this->danceDal->getArtists();
-    }
 }
-

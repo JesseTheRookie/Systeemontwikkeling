@@ -6,25 +6,35 @@ class Timetable Extends Controller{
         $this->timeTableDal = $this->dal('TimeTableDAO');
         $this->homeDal = $this->dal('HomeDAO');
         $this->timeTableModel = $this->model('TimeTableModel');
+        $this->danceTicketModel = $this->model('DanceTicketModel');
     }
 
     public function index(){
 
-        $eventTimeTable = '';
         $eventType = $this->timeTableDal->getEventNames();
+        $tickets = $this->timeTableDal->getDanceTickets();
 
         $data = [
-            'events' => $eventType
+            'events' => $eventType,
+            'tickets' => $tickets
         ];
+
+      $this->ui('pages/timetable', $data);
+    }
+
+    public function dance() {
+        $eventType = $this->timeTableDal->getEventNames();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $eventTimeTable = trim($_POST['ticketDate']);
+            $tickets = $this->timeTableDal->getDanceTickets();
 
+            $data = [
+                'events' => $eventType,
+                'tickets' => $tickets
+            ];
 
         }
-
       $this->ui('pages/timetable', $data);
-
     }
 }

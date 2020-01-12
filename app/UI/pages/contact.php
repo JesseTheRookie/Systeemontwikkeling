@@ -72,7 +72,7 @@ require APPROOT . '/UI/inc/navigation.php';
                         </div>
 
                     </form>
-      
+
            <?php
 
             if(isset($_POST['ok'])){
@@ -85,9 +85,9 @@ require APPROOT . '/UI/inc/navigation.php';
                     echo "<script>alert('Something Went wrong!!')</script>";
                 }
             }
-            
-           ?>   
- 
+
+           ?>
+
                 </div><!-- /.8 -->
 
             </div> <!-- /.row-->

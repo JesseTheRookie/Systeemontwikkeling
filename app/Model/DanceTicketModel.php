@@ -1,10 +1,11 @@
 <?php
 require('TicketModel.php');
 require('ArtistModel.php');
+
+//Extending Tickets and Artists but dance has 2 different columns (Location and Session)
 class DanceTicketModel extends TicketModel {
     private $danceTicketLocation;
     private $danceTicketSession;
-    private $artistName;
     private $artists = array();
 
     //Objects for dance ticket location
@@ -23,16 +24,6 @@ class DanceTicketModel extends TicketModel {
 
     public function getDanceTicketSession(){
         return $this->danceTicketSession;
-    }
-
-
-    // ARTISTS (EXTRA)
-    public function setArtistName($artist){
-        $this->artistName = $artist;
-    }
-
-    public function getArtistName(){
-        return $this->artistName;
     }
 
     //Objects from artists

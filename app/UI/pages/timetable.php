@@ -10,7 +10,7 @@
         <?php foreach ($data['events'] as $event) : ?>
                 <div>
                     <form
-                        action="<?php echo URLROOT; ?>/timetable"
+                        action="<?php echo URLROOT; ?>/timetable/ <?php echo $event->getEventType(); ?>"
                         method="POST"
                         role="form">
 
@@ -18,7 +18,7 @@
                             type="submit"
                             class="button-header-timetable"
                             name=""
-                            value="<?php $event->getEventType(); ?>">
+                            value="submit">
                             <?php echo $event->getEventType(); ?>
                         </button>
                     </form>
@@ -27,6 +27,21 @@
     </article>
 </section>
 
+<section id="layout-timetable-25">
+    <article class="content-timetable-25">
+        <article>
+
+        </article>
+
+        <article>
+            wrelkjrwelkwre
+        </article>
+
+        <article>
+            wrelkjrwelkwre
+        </article>
+    </article>
+</section>
 
 
 

@@ -22,7 +22,7 @@ session_start();
 </header>
 <section id="artiesten">
         <div id="lineup">
-            <?php 
+            <?php
             $counter = 0;
             foreach($data['artists'] as $artist) :
 
@@ -73,10 +73,10 @@ session_start();
                if (isset($_POST["ticketDate"]))
                {
                 foreach($data['tickets'] as $ticket) :
-                    $dateAndTime = explode(" ", $ticket->getStartDateTime());       
-                    
+                    $dateAndTime = explode(" ", $ticket->getStartDateTime());
+
                     if($dateAndTime[0] == $_POST["ticketDate"]){ ?>
-                
+
                     <article>
                         <?php $artists = $ticket->getArtists();
 
@@ -90,11 +90,15 @@ session_start();
                         <div><input type="text" id="" name="quantity" placeholder="0"></div>
                         <div><button class="smallButton" type="submit">add</button></div>
                     </article>
-               
+
                 <?php  }
                 endforeach;                          
                 }           
             ?>       
+
+
+                }
+                ?>
 
 <?php
 require APPROOT . '/UI/inc/footer.php';
