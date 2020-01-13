@@ -3,8 +3,8 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: '../../BLL/ShoppingCart.php',
-            data: 'img='+encodeURIComponent(ticket), // the product image as a parameter
-            dataType: 'json',   // expecting json
+            data: 'ticket='+encodeURIComponent(ticket),
+            dataType: 'json',
             success: function (msg) {
             }
         });

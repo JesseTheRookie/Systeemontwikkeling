@@ -83,11 +83,11 @@ session_start();
                         foreach($artists as $artist) : ?>
                             <div><p><?php echo $artist->getArtistName(); ?></p></div>
                         <?php endforeach; ?>
-                        <form method="post" action="<?php APPROOT . '/BLL/ShoppingCart.php/add/AddToCart($ticket)'?>">
+                        <form method="POST" action="<?php APPROOT . '/BLL/ShoppingCart.php/add/AddToCart'?>">
                         <div><p><?php echo $ticket->getStartDateTime(); ?> - <?php echo $ticket->getEndDateTime() ?></p></div>
                         <div><p><?php echo $ticket->getJazzTicketLocation(); ?><br/><span><?php echo $ticket->getJazzTicketHall();?></span></p></div>
                         <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
-                        <div><input type="text" id="" name="quantity" placeholder="0"></div>
+                        <div><input type="text" id="" name="quantity" placeholder="0"></div><!-- drop down van maken -->
                         <div><button class="smallButton" type="submit">add</button></div>
                     </article>
 
@@ -96,9 +96,8 @@ session_start();
                 }           
             ?>       
 
-
                 }
-                ?>
+            ?>
 
 <?php
 require APPROOT . '/UI/inc/footer.php';
