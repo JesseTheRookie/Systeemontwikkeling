@@ -47,23 +47,17 @@
 
     <hr>
 
-    <?php
-    foreach ($data['artists'] as $artist) {
-         $content[] = $artist->getContent();
-         $names[] = $artist->getArtistName();
-    }
-        $content = array_unique($content);
-        $names = array_unique($names);
-    ?>
-
     <article class="content-artists-dance" id="performance">
-        <?php foreach ($content as $c): ?>
+        <?php foreach ($data['performers'] as $performer) : ?>
             <article>
                 <img
-                    src="<?php echo URLROOT; echo $c ?>"
+                    src="<?php echo URLROOT; echo $performer->content; ?>"
                     alt="Performer Dance Artist"
                     title="Performer Dance Artist"
                 />
+                <button class="myBtn">
+                    <?php echo $performer->name ?>
+                </button>
             </article>
         <?php endforeach; ?>
     </article>
@@ -78,7 +72,6 @@
 
   <article class="content-header-dance" id="tickets">
         <?php foreach ($data['days'] as $day) : ?>
-            <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
                 <article>
                     <h2>
                         <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
@@ -90,7 +83,7 @@
 
                     <form
                         action="<?php echo URLROOT; ?>/dance"
-                        method="POST"
+                        method="GET"
                         role="form">
 
                         <button
@@ -102,57 +95,61 @@
                         </button>
                     </form>
                 </article>
-            <?php endif; ?>
         <?php endforeach; ?>
     </article>
 
+    <?php foreach($data['tickets'] as $ticket) : ?>
+        <table class="table-tickets-dance">
+            <tr>
+                <td>
+                    <?php
+                        foreach($data['artists'] as $artist) :
+                            if ($artist->ticketId == $ticket->getTicketId()) {
+                                echo $artist->artistName . "<br>";
+                            }
+                        endforeach;
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        $time = explode(" ", $ticket->getstartDateTime());
+                        echo end($time);
+                     ?>
+                </td>
 
-<?php foreach($data['tickets'] as $ticket) : ?>
+                <td>
+                    <?php echo $ticket->getDanceTicketSession(); ?>
+                </td>
 
-    <table class="table-tickets-dance">
-        <tr>
-            <td>
-            <?php $artists = $ticket->getArtists();
+                <td>
+                    € <?php echo $ticket->getPrice(); ?>
+                </td>
 
-                foreach($artists as $artist) :
-                    echo $artist->getArtistName() . "<br>";
-                endforeach;
-            ?>
-            </td>
+                <td>
+                    <select class="select-dance">
+                        <option value="">
+                            SELECT
+                        </option>
 
-            <td>
-                <?php
-                    $time = explode(" ", $ticket->getstartDateTime());
-                    echo end($time);
-                 ?>
-            </td>
-
-            <td>
-                <?php echo $ticket->getDanceTicketSession(); ?>
-            </td>
-
-            <td>
-                € <?php echo $ticket->getPrice(); ?>
-            </td>
-
-            <td>
-                <input
-                    type="text"
-                    id=""
-                    name="quantity"
-                    class="input-amount-dance"
-                    placeholder="0">
-            </td>
+                        <?php
+                        $i = 1;
+                        while ($i <= 10): ?>
+                        <option value="<?php echo $i; ?>">
+                            <?php echo $i;
+                            $i++;
+                             ?>
+                        </option>
+                    <?php endwhile; ?>
+                </td>
 
                 <td>
                     <a href="" class="button-add-dance">
                         Add
                     </a>
                 </td>
-        </tr>
-    </table>
-<?php endforeach; ?>
-
+            </tr>
+        </table>
+    <?php endforeach; ?>
 </section>
 
 <?php

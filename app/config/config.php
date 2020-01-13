@@ -1,5 +1,5 @@
 <?php
-  // DB Params
+  // DB Constants params
   //define('DB_HOST', 'db.nazaragency.nl');
   //define('DB_USER', 'md500698db492431');
   //define('DB_PASS', 'Phpiskut1!');

@@ -19,11 +19,13 @@
             $this->ui('events/historicVenues', $data);
         }
 
+        // Get the venues from the DAL
         public function getVenues(){
             $venues = $this->venueDAO->getVenuesContent();
             return $venues;
         }
 
+        // Create the timeline on the venues page
         public function venueTimeline($data){
             $side = "";
             foreach($data['venues'] as $venue) {
@@ -40,6 +42,7 @@
             }
         }
 
+        // Determine on which side of the timeline the venue should be
         public function timelineSideSetter($side){
             switch ($side) {
                 case "left":

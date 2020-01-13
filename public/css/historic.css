@@ -7,15 +7,10 @@
     box-sizing: border-box;
 }
 
-#historicHeader{
-    color: black;
-}
-
 .headerGrid{
     display: grid;
     grid-template-columns: auto auto auto;
     padding: 1em;
-    padding-top: 100px;
     grid-template-columns: repeat(3, 1fr);
 }
 
@@ -25,6 +20,8 @@
 }
 
 #historicHeader{
+    padding-top: 100px;
+    color: black;
     text-align: center;
     font-weight: bold;
     font-size: 3em;
@@ -213,4 +210,9 @@
 /* Make all right containers behave like the left ones */
 .right {
     left: 0%;
+}
+}
+
+.crumb{
+    color: black;
 }

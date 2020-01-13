@@ -7,7 +7,7 @@
 		<div class="headerGrid">
 			<div class="headerItem">
 				<p>
-					<a class="crumb" href="~\home.html">Home</a> > <a class="crumb" href="historic.html">Historic</a>	
+					<a class="crumb" href="<?php echo URLROOT; ?>">Home</a> > <a class="crumb" href="<?php echo URLROOT; ?>/historic">Historic</a>	
 				</p>
 			</div>
   			<div class="headerItem">  				
@@ -19,10 +19,12 @@
 		</div>
 
 		<div class="contentGrid">
-			<?php echo $this->gridItem1($data); ?>
-			<?php echo $this->gridItem2($data); ?>
-			<?php echo $this->gridItem3($data); ?>
-			<?php echo $this->gridItem4($data); ?>		  	
+			<?php 
+				echo $this->gridItem1($data);
+				echo $this->gridItem2($data);
+				echo $this->gridItem3($data);
+				echo $this->gridItem4($data); 
+			?>		  	
 		</div>
 
 
