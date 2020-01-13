@@ -5,7 +5,7 @@
 <?php
 	require APPROOT . '/UI/inc/navigation.php';
 ?>
-		<br><br><br>		<br><br><br>
+
 		<div id="content">
 			<h1 class="center" id="loginHeader">
 				Register
@@ -72,7 +72,7 @@
 			        	<span class="invalidFeedback"><?php echo $data['houseError'] ?></span>
 					</label>
 
-			        <label class="inputHeader"> 
+			        <label class="inputHeader">
 			        	Password *
 			        	<input type="password" name="password" <?php echo (!empty($data['passwordError'])) ? 'is-invalid' : ''; ?> value="">
 			        	<span class="invalidFeedback"><?php echo $data['passwordError'] ?></span>
@@ -93,7 +93,7 @@
 			    <br>
 
 			    <input id="submit" type="submit" value="Register">
-			</form>			
+			</form>
 		</div>
 </div>
 <?php

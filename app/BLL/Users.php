@@ -201,6 +201,7 @@
 
                     if($loggedInUser){
                         //Create Session
+
                         $this->createUserSession($loggedInUser);
                         
                         if($_SESSION['userId'] > 1){
@@ -302,6 +303,7 @@
         }
 
         public function createUserSession($loggedInUser){
+<<<<<<< Updated upstream
             try {
                 session_start();
                 $_SESSION['userId'] = $loggedInUser->userId;
@@ -318,6 +320,24 @@
             }
             catch(Exception $e) {
                 die('f');
+=======
+            $_SESSION['userId'] = $loggedInUser->userId;
+            $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
+            $_SESSION['userType'] = $loggedInUser->userType;
+            $_SESSION['userName'] = $loggedInUser->userName;
+            $_SESSION['userLastName'] = $loggedInUser->userLastName;
+            $_SESSION['userStreet'] = $loggedInUser->userStreet;
+            $_SESSION['userHouse'] = $loggedInUser->userHouse;
+            $_SESSION['userPhone'] = $loggedInUser->userPhoneStreet;
+            $_SESSION['userGender'] = $loggedInUser->userGender;
+
+
+
+            if($_SESSION['userType'] == 1){
+                redirect('cms/dashboard');
+            } else {
+            redirect('pages/index');
+>>>>>>> Stashed changes
             }
         }
 

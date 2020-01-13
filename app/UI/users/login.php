@@ -41,7 +41,7 @@ require APPROOT . '/UI/inc/header.php';
 
 			<span
 				class="invalidFeedback">
-				<?php echo $data['passwordError'] ?>
+				<?php echo $data['passwordError']; ?>
 			</span>
 
 			<input

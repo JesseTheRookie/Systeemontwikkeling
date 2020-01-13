@@ -6,7 +6,6 @@ class TimeTableDAO{
       $this->db = new Database;
     }
 
-
     public function getEventNames() {
         $eventNamesArray = array();
 
@@ -33,7 +32,7 @@ class TimeTableDAO{
     public function getDanceTickets() {
         $danceTicketArray = array();
 
-        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.danceTicketSession
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.price, d.danceTicketSession
                           FROM Tickets AS t
                           INNER JOIN DanceTicket AS d
                           ON t.ticketId = d.ticketId
@@ -52,7 +51,6 @@ class TimeTableDAO{
             $danceTicketModel->setTicketId($danceTicket->ticketId);
             $danceTicketModel->setStartDateTime($danceTicket->startDateTime);
             $danceTicketModel->setEndDateTime($danceTicket->endDateTime);
-            $danceTicketModel->setTicketQuantity($danceTicket->ticketQuantity);
             $danceTicketModel->setPrice($danceTicket->price);
             $danceTicketModel->setDanceTicketSession($danceTicket->danceTicketSession);
 
@@ -60,5 +58,35 @@ class TimeTableDAO{
             array_push($danceTicketArray, $danceTicketModel);
         }
         return $danceTicketArray;
+    }
+
+    public function getJazzTickets(){
+        $jazzTicketArray = array();
+
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, jl.hall, l.stad
+                FROM tickets AS t
+                INNER JOIN jazzticket AS j
+                ON t.ticketId = j.ticketId
+                INNER JOIN jazzLocation AS jl
+                ON j.ticketId = jl.ticketId
+                INNER JOIN location AS l
+                ON jl.locationId = l.locationId");
+
+        $jazzTickets = $this->db->resultSet();
+
+        foreach ($jazzTickets as $jazzTicket) {
+            $jazzTicketModel = new JazzTicketModel();
+
+            $jazzTicketModel->setTicketId($jazzTicket->ticketId);
+            $jazzTicketModel->setTicketQuantity($jazzTicket->ticketQuantity);
+            $jazzTicketModel->setStartDateTime($jazzTicket->startDateTime);
+            $jazzTicketModel->setEndDateTime($jazzTicket->endDateTime);
+            $jazzTicketModel->setJazzTicketLocation($jazzTicket->stad);
+            $jazzTicketModel->setJazzTicketHall($jazzTicket->hall);
+            $jazzTicketModel->setPrice($jazzTicket->price);
+
+            array_push($jazzTicketArray, $jazzTicketModel);
+        }
+        return $jazzTicketArray;
     }
 }

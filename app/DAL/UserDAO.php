@@ -8,7 +8,7 @@ class UserDAO{
 
     public function register($user){
         //Insert into table user
-        $this->db->query('INSERT INTO User (userName, userLastName, userMail, userPassword, userPhone, userGender, userStreet, userHouse) VALUES (:name, :lastName, :email, :password, :phone, :gender, :street, :house)');
+        $this->db->query('INSERT INTO user (userName, userLastName, userMail, userPassword, userPhone, userGender) VALUES (:name, :lastName, :email, :password, :phone, :gender)');
         //Bind values
         $this->db->bind(':name', $user->getUserName());
         $this->db->bind(':lastName', $user->getUserLastname());
@@ -23,8 +23,8 @@ class UserDAO{
         if($this->db->execute()){
             return true;
         } else {
-            die('Query failed to execute!');
-        }       
+            die('rip');
+        }
     }
 
     // Login user
@@ -57,4 +57,6 @@ class UserDAO{
             return false;
         }
     }
+
+    //
 }

@@ -1846,6 +1846,7 @@ text-transform: uppercase;
     padding: 10px 0px;
 }
 
+
 .background-grey-location {
     background-color: #DCDCDC;
     box-shadow: 0 0 10px #000;
@@ -2023,7 +2024,7 @@ padding: 400px;
 #layout-timetable-25 > article
 {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 33% 33% 33%;
     position: relative;
     width: 80%;
     margin: 0 auto;
@@ -2032,11 +2033,51 @@ padding: 400px;
 
 }
 
-
 .content-timetable-25 > article
 {
-    background-color: red;
+    background-color: #ffffff;
+    margin: 40px;
+    box-shadow: 0 0 10px #000;
+    text-align: left;
+    padding: 40px 0px;
+}
+
+.content-timetable-25 h2
+{
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
     padding: 20px;
+}
+
+.content-timetable-25 p
+{
+    font-size: 18px;
+    font-weight: 100;
+    text-transform: uppercase;
+    padding: 20px;
+    color: #666666;
+}
+
+.content-timetable-25 h3
+{
+    text-align: left;
+    border-bottom: 2px solid #ff0000;
+    padding: 0px 0px 0px 20px;
+    line-height: 0.1em;
+    margin: 10px auto 20px auto;
+    font-size: 18px;
+    font-weight: 100;
+
+}
+
+.content-timetable-25 span
+{
+    padding: 0px 10px;
+    background-color: red;
+    padding: 10px;
+    border-radius: 50%;
+    color: #ffffff;
 }
 
 .input-amount-dance
