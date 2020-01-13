@@ -8,7 +8,7 @@ class UserDAO{
 
     public function register($user){
         //Insert into table user
-        $this->db->query('INSERT INTO User (userName, userLastName, userMail, userPassword, userPhone, userGender) VALUES (:name, :lastName, :email, :password, :phone, :gender)');
+        $this->db->query('INSERT INTO User (userName, userLastName, userMail, userPassword, userPhone, userGender, userStreet, userHouse) VALUES (:name, :lastName, :email, :password, :phone, :gender, :street, :house)');
         //Bind values
         $this->db->bind(':name', $user->getUserName());
         $this->db->bind(':lastName', $user->getUserLastname());
@@ -16,6 +16,8 @@ class UserDAO{
         $this->db->bind(':password', $user->getPassword());
         $this->db->bind(':phone', $user->getPhone());
         $this->db->bind(':gender', $user->getGender());
+        $this->db->bind(':street', $user->getStreet());
+        $this->db->bind(':house', $user->getHouse());
 
         //Execute
         if($this->db->execute()){

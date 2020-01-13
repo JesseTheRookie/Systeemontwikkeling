@@ -202,6 +202,12 @@
                     if($loggedInUser){
                         //Create Session
                         $this->createUserSession($loggedInUser);
+                        
+                        if($_SESSION['userId'] > 1){
+                            redirect('pages/cms');
+                        } else {
+                        redirect('pages/index');
+                        }                        
                     } else {
                         $data['passwordError'] = 'Password incorrect';
                         $data['emailError'] = '';
@@ -296,27 +302,37 @@
         }
 
         public function createUserSession($loggedInUser){
-            $_SESSION['userId'] = $loggedInUser->userId;
-            $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
-            $_SESSION['userType'] = $loggedInUser->userType;
-            $_SESSION['userName'] = $loggedInUser->userName;
-            $_SESSION['userLastName'] = $loggedInUser->userLastName;
-            $_SESSION['userStreet'] = $loggedInUser->userStreet;
-            $_SESSION['userHouse'] = $loggedInUser->userHouse;
-            $_SESSION['userPhone'] = $loggedInUser->userPhoneStreet;
-            $_SESSION['userGender'] = $loggedInUser->userGender;
-
-
-            if($_SESSION['userType'] == 2 || $_SESSION['userType'] == 3){
-                redirect('cms/dashboard');
-            } else {
-            redirect('pages/index');
+            try {
+                session_start();
+                $_SESSION['userId'] = $loggedInUser->userId;
+                $_SESSION['userEmail'] = $loggedInUser->userMail;
+                $_SESSION['userType'] = $loggedInUser->userType;
+                $_SESSION['userName'] = $loggedInUser->userName;
+                $_SESSION['userLastName'] = $loggedInUser->userLastName;
+                $_SESSION['userStreet'] = $loggedInUser->userStreet;
+                $_SESSION['userHouse'] = $loggedInUser->userHouse;
+                $_SESSION['userPhone'] = $loggedInUser->userPhone;
+                $_SESSION['userGender'] = $loggedInUser->userGender;
+                $_SESSION['userVerified'] = $loggedInUser->verified;
+                
+            }
+            catch(Exception $e) {
+                die('f');
             }
         }
 
         public function logout(){
+            session_start();
             unset($_SESSION['userId']);
             unset($_SESSION['userEmail']);
+            unset($_SESSION['userType']);
+            unset($_SESSION['userName']);
+            unset($_SESSION['userLastName']);
+            unset($_SESSION['userStreet']);
+            unset($_SESSION['userHosue']);
+            unset($_SESSION['userPhone']);
+            unset($_SESSION['userGender']);
+            unset($_SESSION['userVerified']);
             session_destroy();
             redirect('users/login');
         }
