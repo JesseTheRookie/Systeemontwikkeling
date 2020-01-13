@@ -5,7 +5,7 @@ class Dance Extends Controller{
     public function __construct() {
         $this->danceDal = $this->dal('DanceTicketDAO');
         $this->danceTicketModel = $this->model('DanceTicketModel');
-        $this->danceTicketModel = $this->model('DanceTicketModel');
+        // Creating objects for getDanceContent (to prevent creating getters and setters that already exists)
         $this->homeModel = $this->model('HomeModel');
     }
 
@@ -17,47 +17,49 @@ class Dance Extends Controller{
         return $this->danceDal->getDifferentDays();
     }
 
-    public function getAllDanceTickets(){
-        $artists = $this->getAllArtists();
-        $tickets = $this->danceDal->getDanceTickets();
-
-        foreach($tickets as $ticket) {
-            foreach($artists as $artist) {
-                if($ticket->getTicketId() == $artist->getTicketId())
-                    $ticket->addArtist($artist);
-            }
-        }
+    public function getAllDanceTickets($date){
+        $tickets = $this->danceDal->getDanceTickets($date);
         return $tickets;
     }
 
     //Need ticket/artist and days information. Passing it in an array that will be passed around on the website.
     public function index(){
-        $ticketDate = '';
         $content = $this->danceDal->getDanceContent();
+        $days = $this->getDifferentDays();
+        $performers = $this->danceDal->getPerformers();
 
-        $days = $this->danceDal->getDifferentDays();
-        $tickets = $this->getAllDanceTickets();
-        $artists = $this->danceDal->getArtists();
+        if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-        $data = [
-                'title' => 'Dance Page',
-                'content' => $content,
-                'days' => $days,
-                'tickets' => $tickets,
-                'artists' => $artists,
-                'quantityError' => ''
-            ];
+            // Sanitize GET data
+            $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
-        /*if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $ticketDate = trim($_POST['ticketDate']);
-            $tickets = $this->danceDal->getDanceTickets($ticketDate);
+            if(isset($_GET['ticketDate'])) {
+                $ticketDate = $_GET['ticketDate'];
+                } else {
+                    $ticketDate = $days[0]->startDateTime;
+                }
 
             $data = [
-                'days' => $days,
-                'tickets' => $tickets,
-                'artists' => $artists
+                'title' => 'Dance Page',
+                'content' => $content,
+                'days' => $this->getDifferentDays(),
+                'tickets' => $this->getAllDanceTickets($ticketDate),
+                'artists' => $this->getAllArtists(),
+                'performers' => $performers
             ];
-        }*/
-      $this->ui('events/dance', $data);
+        } else {
+            //Init Data
+            $data = [
+                'title' => 'Dance Page',
+                'content' => '',
+                'days' => '',
+                'tickets' => '',
+                'artists' => '',
+                'performers' => ''
+            ];
+    }
+
+    //Load View
+    $this->ui('events/dance', $data);
     }
 }

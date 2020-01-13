@@ -105,7 +105,7 @@
 
             <li>
               <a href="<?php echo URLROOT; ?>/shoppingcart/shopping-cart">
-                  <img src=" http://localhost/Systeemontwikkeling/img/shopping-cart.png"
+                  <img src=" http://localhost/Systeemontwikkeling/img/shopping-cart/shopping-cart.png"
                   class="shopping-cart"
                   alt="Shopping cart"
                 />

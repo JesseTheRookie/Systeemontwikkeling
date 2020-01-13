@@ -34,14 +34,14 @@
         <?php endforeach; ?>
       </ul>
 
-      <a href="<?php echo URLROOT; ?>/pages/tickets"
+      <a href="<?php echo URLROOT; ?>/tickets"
          class="buttonStyle">
          Tickets
       </a>
 
-       <a href="<?php echo URLROOT; ?>/pages/about"
+       <a href="<?php echo URLROOT; ?>/timetable"
           class="buttonStyle">
-          Program
+          Timetable
       </a>
     </article>
   </section>
@@ -130,15 +130,15 @@
 
   <article class="content-artists-33">
     <article>
-        <img id="image" src="./img/tiesto.jpg">
+        <img id="image" src="./img/dance/tiesto.jpeg">
     </article>
 
     <article>
-        <img id="image2" src="./img/armin.png">
+        <img id="image2" src="./img/dance/armin.png">
     </article>
 
     <article>
-        <img id="image3" src="./img/afrojack.jpg">
+        <img id="image3" src="./img/dance/afrojack.jpg">
     </article>
   </article>
 </article>

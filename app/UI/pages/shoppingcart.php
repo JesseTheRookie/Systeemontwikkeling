@@ -78,9 +78,9 @@
             <a href="">
                 Order
             </a>
-            <img src="../img/paypal.png" alt="">
-            <img src="../img/mastercard.png" alt="">
-            <img src="../img/ideal.png" alt="">
+            <img src="<?php echo URLROOT; ?>/img/shopping-cart/mastercard.png">
+            <img src="<?php echo URLROOT; ?>/img/shopping-cart/mastercard.png">
+            <img src="<?php echo URLROOT; ?>/img/shopping-cart/mastercard.png">
         </div>
     </div>
 </div>

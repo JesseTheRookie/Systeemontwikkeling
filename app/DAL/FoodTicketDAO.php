@@ -36,7 +36,7 @@ class FoodTicketDAO{
         $query = $this->db->query("SELECT r.restaurantId, r.restaurantName, c.description, c.content, f.foodType
                                    FROM restaurant as r
                                    INNER JOIN content as c
-                                   ON r.restaurantName = c.elementName
+                                   ON r.restaurantName = c.name
                                    INNER JOIN RestaurantFoodType as rf
                                    ON r.restaurantId = rf.restaurantId
                                    INNER JOIN FoodType as f
@@ -67,9 +67,9 @@ class FoodTicketDAO{
         $restaurantArray = array();
 
         $this->db->query("SELECT r.restaurantId, r.restaurantName, r.restaurantStars, c.description, c.content             , f.foodType
-                          FROM restaurant as r
-                          INNER JOIN content as c
-                          ON r.restaurantName = c.elementName
+                          FROM Restaurant as r
+                          INNER JOIN Content as c
+                          ON r.restaurantName = c.name
                           INNER JOIN RestaurantFoodType as rf
                           ON r.restaurantId = rf.restaurantId
                           INNER JOIN FoodType as f

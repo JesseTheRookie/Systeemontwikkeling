@@ -2,9 +2,9 @@
             var currentPos = 0;
             var currentPos2 = 0;
             var currentPos3 = 0;
-            var images = ["./img/martin.jpeg", "./img/hardwell.jpg", "./img/nicky.jpg"];
+            var images = ["/img/dance/armin.png", "/img/dance/hardwell.jpg", "/img/dance/nicky.jpg"];
             var images2 = ["./img/gare.jpg", "./img/nordanians.jpg", "./img/soul.jpeg"];
-            var images3 = ["./img/armin.png", "./img/tiesto.jpg", "./img/afrojack.jpg"];
+            var images3 = ["./img/dance/armin.png", "./img/dance/tiesto.jpeg", "./img/dance/afrojack.jpg"];
 
             function volgendefoto() {
                 if (++currentPos >= images.length)
