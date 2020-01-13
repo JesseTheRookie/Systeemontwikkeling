@@ -7,7 +7,7 @@
 		<div class="headerGrid">
 			<div class="headerItem">
 				<p>
-					<a class="crumb" href="~\home.html">Home</a> > <a class="crumb" href="historic.html">Historic</a>	
+					<a class="crumb" href="<?php echo URLROOT; ?>">Home</a> > <a class="crumb" href="<?php echo URLROOT; ?>/historic">Historic</a>	
 				</p>
 			</div>
   			<div class="headerItem">  				
@@ -19,46 +19,12 @@
 		</div>
 
 		<div class="contentGrid">
-		  	<div class="contentItem">
-		  		<h2 class="gridHeaders">
-	    			Take the Tour!
-	    		</h2>
-
-	    		<p class="contentText">
-	    			This enthralling tour through the old city of Haarlem will take you to 9 unique venues and included a 15-minute break with refreshments at the Jopenkerk!
-	    		</p>
-
-	    		<br>
-
-	    		<a href="ticketpagina" class="button">
-	    			BOOK NOW
-	    		</a>
-		  	</div>
-
-		  	<div class="contentItem">
-		  		<img class="img" src="../img/vleeshal.jpg">
-		  	</div>
-
-		  	<div class="contentItem">
-		  		<img class="img" src="../img/molen.jpg">
-		  	</div>
-
-		  	<div class="contentItem">
-		  		<h2 class="gridHeaders">
-	    			Discover the Venues!
-	    		</h2>
-
-	    		<p class="contentText">
-	    			Old churches, a windmill with a touching story, an former church with a brewery inside, one of the last remaining parts of the old city wall and more!
-	    		</p>
-
-	    		<br>
-
-	    		<a href="<?php echo URLROOT; ?>/venues" class="button">
-	    			LEARN MORE
-	    		</a>
-
-		  	</div>
+			<?php 
+				echo $this->gridItem1($data);
+				echo $this->gridItem2($data);
+				echo $this->gridItem3($data);
+				echo $this->gridItem4($data); 
+			?>		  	
 		</div>
 
 
