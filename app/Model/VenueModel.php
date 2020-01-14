@@ -1,5 +1,5 @@
 <?php
-    class VenueModel{
+    class VenueModel {
         private $venueName;
         private $venueDesc;
         private $venueImg;

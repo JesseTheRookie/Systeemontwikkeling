@@ -5,36 +5,61 @@ class Timetable Extends Controller{
     public function __construct() {
         $this->timeTableDal = $this->dal('TimeTableDAO');
         $this->homeDal = $this->dal('HomeDAO');
+
         $this->timeTableModel = $this->model('TimeTableModel');
         $this->danceTicketModel = $this->model('DanceTicketModel');
     }
 
-    public function index(){
+    public function index () {
 
         $eventType = $this->timeTableDal->getEventNames();
-        $tickets = $this->timeTableDal->getDanceTickets();
 
         $data = [
             'events' => $eventType,
-            'tickets' => $tickets
         ];
 
       $this->ui('pages/timetable', $data);
     }
 
-    public function dance() {
+    public function dance () {
         $eventType = $this->timeTableDal->getEventNames();
+        $dance = $this->timeTableDal->getDanceTickets();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $tickets = $this->timeTableDal->getDanceTickets();
+            // Sanitize GET data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data = [
-                'events' => $eventType,
-                'tickets' => $tickets
-            ];
+            if (isset($_POST['dance'])) {
+                $eventTimes = $this->timeTableDal->getDanceTickets();
+            }
 
-        }
-      $this->ui('pages/timetable', $data);
+        $data = [
+            'events' => $eventType,
+            'eventTimes' => $eventTimes
+        ];
     }
+      $this->ui('pages/timetable', $data);
+}
+
+    public function jazz () {
+        $eventType = $this->timeTableDal->getEventNames();
+        $jazz = $this->timeTableDal->getJazzTickets();
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            // Sanitize GET data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            if (isset($_POST['jazz'])) {
+                $eventTimes = $this->timeTableDal->getJazzTickets();
+            }
+
+        $data = [
+            'events' => $eventType,
+            'eventTimes' => $eventTimes
+        ];
+    }
+      $this->ui('pages/timetable', $data);
+}
 }

@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <header>
   <section id="section-header-50">
     <article class="content-header-50">
@@ -91,14 +92,13 @@
           <?php if(isset($_SESSION['userId'])) : ?>
             <li>
               <a href="<?php echo URLROOT; ?>/users/logout" class="buttonStyle">
-                Logout
+                LOGOUT
               </a>
             </li>
           <?php else : ?>
-
             <li>
               <a href="<?php echo URLROOT; ?>/users/login" class="buttonStyle">
-                Login
+                LOGIN
               </a>
             </li>
           <?php endif; ?>

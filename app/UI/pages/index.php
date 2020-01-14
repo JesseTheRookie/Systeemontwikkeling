@@ -89,6 +89,7 @@
     </article>
   </article>
 </section>
+  <?php var_dump($_SESSION['userId']); ?>
 
 <section id="section-events">
   <h2>

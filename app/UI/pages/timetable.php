@@ -17,8 +17,8 @@
                         <button
                             type="submit"
                             class="button-header-timetable"
-                            name=""
-                            value="submit">
+                            name=" <?php echo $event->getEventType(); ?>"
+                            value="<?php echo $event->getEventType(); ?>">
                             <?php echo $event->getEventType(); ?>
                         </button>
                     </form>
@@ -29,17 +29,37 @@
 
 <section id="layout-timetable-25">
     <article class="content-timetable-25">
+        <?php foreach ($data['eventTimes'] as $eventTime) : ?>
         <article>
+            <h2>
+                <?php
+                    echo $eventTime->getDanceTicketSession() . " On the ";
+                ?>
+                <?php
+                    $strTime = $eventTime->getStartDateTime();
+                    echo date("jS F", strtotime($strTime));
+                ?>
 
+            </h2>
+            <h3>
+                <span>
+                <?php echo "€ " . $eventTime->getPrice(); ?>
+            </span>
+            </h3>
+            <p>
+                <?php
+                    $strTime = $eventTime->getStartDateTime();
+                    echo "Event starts at: " . date("H:i:s", strtotime($strTime));
+                ?>
+            </p>
+            <p>
+                <?php
+                    $strTime = $eventTime->getEndDateTime();
+                    echo "Event ends at: " . date("H:i:s", strtotime($strTime));
+                ?>
+            </p>
         </article>
-
-        <article>
-            wrelkjrwelkwre
-        </article>
-
-        <article>
-            wrelkjrwelkwre
-        </article>
+        <?php endforeach; ?>
     </article>
 </section>
 
