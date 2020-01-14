@@ -1,9 +1,24 @@
 <?php
 require APPROOT . '/UI/inc/header.php';
 require APPROOT . '/UI/inc/navigation.php';
+include APPROOT . '/BLL/ShoppingCart.php';
 
-session_start();
+if (isset($_POST['ticket-quantity'])) {
+    //$ticketId = $_POST['ticket-quantity'];
+
+    //Nog ff naar kijken
+    list($ticketId, $quantity) = explode("-", $_POST['ticket-quantity'], 2);
+
+    foreach ($data['tickets'] as $t){
+        if($t->getTicketId() == $ticketId){
+            $t->setTicketQuantity($quantity);
+            ShoppingCart::AddToCart($t);
+        }
+    }
+}
+
 ?>
+
 <header id="mainHeader">
     <section class="background" >
     </section>
@@ -70,34 +85,51 @@ session_start();
         </header>
         <section id="ticketItems">
             <?php
-               if (isset($_POST["ticketDate"]))
+            $i = 0;
+            if (isset($_POST["ticketDate"]))
                {
-                foreach($data['tickets'] as $ticket) :
+                foreach($data['tickets'] as $ticket) {
                     $dateAndTime = explode(" ", $ticket->getStartDateTime());
 
-                    if($dateAndTime[0] == $_POST["ticketDate"]){ ?>
+                    if ($dateAndTime[0] == $_POST["ticketDate"]) { ?>
 
-                    <article>
-                        <?php $artists = $ticket->getArtists();
+                        <article>
+                            <form method="post" action="<?php APPROOT . '/BLL/ShoppingCart.php/AddToCart' ?>">
 
-                        foreach($artists as $artist) : ?>
-                            <div><p><?php echo $artist->getArtistName(); ?></p></div>
-                        <?php endforeach; ?>
-                        <form method="POST" action="<?php APPROOT . '/BLL/ShoppingCart.php/add/AddToCart'?>">
-                        <div><p><?php echo $ticket->getStartDateTime(); ?> - <?php echo $ticket->getEndDateTime() ?></p></div>
-                        <div><p><?php echo $ticket->getJazzTicketLocation(); ?><br/><span><?php echo $ticket->getJazzTicketHall();?></span></p></div>
-                        <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
-                        <div><input type="text" id="" name="quantity" placeholder="0"></div><!-- drop down van maken -->
-                        <div><button class="smallButton" type="submit">add</button></div>
-                    </article>
+                                <?php $artists = $ticket->getArtists();
 
-                <?php  }
-                endforeach;                          
-                }           
+                                foreach ($artists as $artist) : ?>
+                                    <div><p><?php echo $artist->getArtistName(); ?></p></div>
+                                <?php endforeach; ?>
+
+                                <div><p><?php echo $ticket->getStartDateTime(); ?>
+                                        - <?php echo $ticket->getEndDateTime() ?></p></div>
+                                <div><p><?php echo $ticket->getJazzTicketLocation(); ?>
+                                        <br/><span><?php echo $ticket->getJazzTicketHall(); ?></span></p></div>
+                                <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
+                                <div>
+                                    <select name="ticket-quantity" class="select-dance">
+                                        <?php
+                                        while ($i <= 10){ ?>
+                                            <option value="<?php echo $ticket->getTicketId() . "-" . $i ?>">
+                                                <?php
+                                                echo ++$i;
+                                                ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div><!-- drop down van maken -->
+                                <div>
+                                    <button class="smallButton" type="submit" name="addToCart">add</button>
+                                </div>
+                        </article>
+
+                    <?php
+                        }
+                    }
+                }
             ?>       
 
-                }
-            ?>
 
 <?php
 require APPROOT . '/UI/inc/footer.php';

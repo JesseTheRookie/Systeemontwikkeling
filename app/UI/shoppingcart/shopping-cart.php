@@ -1,8 +1,10 @@
 <?php
+    session_start();
+
     require APPROOT . '/UI/inc/header.php';
-?>
-<?php
     require APPROOT . '/UI/inc/navigation.php';
+
+    print_r($_SESSION['cart']);
 ?>
 
 <div id="layout-shoppingcart">
@@ -46,7 +48,7 @@
 </div>
 
 <div id="shoppingcart-overview">
-    <table class="shoppingcart-items">
+    <!--<table class="shoppingcart-items">
         <tr>
             <th>
                 Description
@@ -90,7 +92,8 @@
                 />
             </td>
         </tr>
-    </table>
+    </table>-->
+    <?php $this->DisplayItems();?>
 </div>
 
 <div id="layout-checkout">
