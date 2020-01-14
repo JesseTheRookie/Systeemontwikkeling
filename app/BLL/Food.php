@@ -56,4 +56,4 @@ class Food Extends Controller{
       $this->ui('events/food', $data);
     }
 }
-?>
+
