@@ -5,38 +5,61 @@ class Kids Extends Controller{
     public function __construct() {
         $this->kidsDal = $this->dal('KidsTicketDAO');
         $this->kidsTicketModel = $this->model('KidsTicketModel');
+        // Creating objects for getKidsContent (to prevent creating getters and setters that already exists)
+        $this->homeModel = $this->model('HomeModel');
+    }
+
+    public function getAllArtists(){
+        return $this->kidsDal->getArtists();
+    }
+
+    public function  getDifferentDays(){
+        return $this->kidsDal->getDifferentDays();
+    }
+
+    public function getAllKidsTickets($date){
+        $tickets = $this->kidseDal->getKidsTickets($date);
+        return $tickets;
     }
 
     //Need ticket/artist and days information. Passing it in an array that will be passed around on the website.
     public function index(){
-        $ticketDate = '';
-        $days = $this->kidsDal->getDifferentDays();
-        $tickets = $this->kidsDal->getKidsTickets($ticketDate);
-        $artists = $this->kidsDal->getArtists();
+        $content = $this->kidsDal->getKidsContent();
+        $days = $this->getDifferentDays();
+        $performers = $this->kidsDal->getPerformers();
 
-        $data = [
-                'title' => 'Kids Page',
-                'days' => $days,
-                'tickets' => $tickets,
-                'artists' => $artists
-            ];
+        if($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $ticketDate = trim($_POST['ticketDate']);
-            $tickets = $this->kidsDal->getKidsTickets($ticketDate);
+            // Sanitize GET data
+            $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+
+            if(isset($_GET['ticketDate'])) {
+                $ticketDate = $_GET['ticketDate'];
+                } else {
+                    $ticketDate = $days[0]->startDateTime;
+                }
 
             $data = [
-                'days' => $days,
-                'tickets' => $tickets,
-                'artists' => $artists
+                'title' => 'Kids Page',
+                'content' => $content,
+                'days' => $this->getDifferentDays(),
+                'tickets' => $this->getAllKidsTickets($ticketDate),
+                'artists' => $this->getAllArtists(),
+                'performers' => $performers
             ];
-        }
-      $this->ui('events/kids', $data);
+        } else {
+            //Init Data
+            $data = [
+                'title' => 'Kids Page',
+                'content' => '',
+                'days' => '',
+                'tickets' => '',
+                'artists' => '',
+                'performers' => ''
+            ];
     }
 
-    //Get all artists from DAO layer in order to print them under "performers"
-    public function getAllArtists(){
-        return $this->kidsDal->getArtists();
+    //Load View
+    $this->ui('events/kids', $data);
     }
 }
-
