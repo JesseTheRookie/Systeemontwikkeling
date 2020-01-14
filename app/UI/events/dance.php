@@ -134,12 +134,12 @@
                         <?php
                         $i = 1;
                         while ($i <= 10): ?>
-                        <option value="<?php echo $i; ?>">
-                            <?php echo $i;
-                            $i++;
-                             ?>
-                        </option>
-                    <?php endwhile; ?>
+                            <option value="<?php echo $i; ?>">
+                                <?php echo $i;
+                                $i++;
+                                 ?>
+                            </option>
+                        <?php endwhile; ?>
                 </td>
 
                 <td>

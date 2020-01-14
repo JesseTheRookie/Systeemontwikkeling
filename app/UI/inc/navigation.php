@@ -62,8 +62,8 @@
           <li>
             <article class="dropdown">
               <li class="dropbtn">
-                <a href="<?php echo URLROOT; ?>/information/information">
-                  Information <i class="fas fa-caret-down"></i>
+                <a href="<?php echo URLROOT; ?>/personaltimetable">
+                  Personal Timetable <i class="fas fa-caret-down"></i>
                 </a>
               </li>
 

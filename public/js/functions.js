@@ -19,3 +19,7 @@ $(document).ready(function(){
         $(this).removeClass("bigButton").addClass("invertedBigButton")
     });
 });
+
+$(document).ready(function() {
+    $("#calendar").fullCalendar();
+});

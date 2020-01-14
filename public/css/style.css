@@ -2128,3 +2128,94 @@ padding: 400px;
     color: #000000;
     border-bottom: 1px solid #000000;
 }
+
+
+#layout-header-pt > article
+{
+    background-color: #ffffff;
+    margin: 40px;
+    padding: 100px 0px;
+    display: grid;
+    grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0px 100px 0px;
+    text-align: center;
+
+}
+
+#layout-header-pt h1
+{
+    padding: 140px 0px 0px 0px;
+    color: #000000;
+    font-size: 32px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.content-header-pt a
+{
+    text-decoration: none;
+    border: 1px solid black;
+    color: #000000;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+
+.table-bordered th
+{
+    height: 30px;
+    width: 15% !important;
+    text-align: center;
+    border: 1px solid #dcdcdc !important;
+    background-color: #4c4cff;
+    color :#ffffff;
+    text-transform: uppercase;
+    padding: 20px !important;
+    box-shadow: 0 0 5px #000;
+}
+
+.table-bordered td
+{
+    border: 1px solid #dcdcdc !important;
+    padding: 20px !important;
+    box-shadow: 0 0 5px #000;
+}
+
+.table-bordered
+{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+#layout-button-confirm
+{
+    width: 80%;
+    margin: 100px auto;
+    text-align: center;
+
+}
+
+.content-button-confirm a
+{
+    width: 240px;
+    height: 50px;
+    font-size: 18px;
+    display: block;
+    background-color: #04df8f;
+    color: #fff;
+    margin: 0 auto;
+    font-size: 24px;
+    padding: 8px;
+}
+
+.content-button-confirm a:hover
+{
+    background-color: #4c4cff;
+    color: #fff;
+    transform: 0.25s ease-in-out;
+    text-decoration: none;
+}

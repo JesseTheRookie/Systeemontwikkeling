@@ -203,12 +203,12 @@
                         //Create Session
 
                         $this->createUserSession($loggedInUser);
-                        
+
                         if($_SESSION['userId'] > 1){
                             redirect('pages/cms');
                         } else {
                         redirect('pages/index');
-                        }                        
+                        }
                     } else {
                         $data['passwordError'] = 'Password incorrect';
                         $data['emailError'] = '';
@@ -303,7 +303,6 @@
         }
 
         public function createUserSession($loggedInUser){
-<<<<<<< Updated upstream
             try {
                 session_start();
                 $_SESSION['userId'] = $loggedInUser->userId;
@@ -316,11 +315,10 @@
                 $_SESSION['userPhone'] = $loggedInUser->userPhone;
                 $_SESSION['userGender'] = $loggedInUser->userGender;
                 $_SESSION['userVerified'] = $loggedInUser->verified;
-                
+
             }
             catch(Exception $e) {
                 die('f');
-=======
             $_SESSION['userId'] = $loggedInUser->userId;
             $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
             $_SESSION['userType'] = $loggedInUser->userType;
@@ -337,9 +335,9 @@
                 redirect('cms/dashboard');
             } else {
             redirect('pages/index');
->>>>>>> Stashed changes
             }
         }
+    }
 
         public function logout(){
             session_start();
