@@ -207,7 +207,7 @@
                         if($_SESSION['userId'] > 1){
                             redirect('pages/cms');
                         } else {
-                        redirect('pages/index');
+                        redirect('index');
                         }
                     } else {
                         $data['passwordError'] = 'Password incorrect';

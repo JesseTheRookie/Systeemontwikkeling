@@ -23,7 +23,7 @@
             echo "ey";
         }
     }
-    
+
     public function DeleteFromCart($id){
       unset($_SESSION['cart'][$id]);
     }
@@ -43,7 +43,7 @@
     public function DisplayItems(){
 
         foreach ($this->items as $ticket){
-           echo' 
+           echo'
                 <table class="shoppingcart-items">
                     <tr>
                         <th>Description</th>

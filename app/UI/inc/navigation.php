@@ -1,10 +1,9 @@
-<?php session_start() ?>
 <header>
   <section id="section-header-50">
     <article class="content-header-50">
       <article>
         <a href="<?php echo URLROOT; ?>">
-          <img src=" http://localhost/Systeemontwikkeling/img/logo.png"
+          <img src="<?php echo URLROOT; ?>/img/logo.png"
 
             alt="Logo Haarlem Festival"
             title="Logo Haarlem Festival"
@@ -62,8 +61,8 @@
           <li>
             <article class="dropdown">
               <li class="dropbtn">
-                <a href="<?php echo URLROOT; ?>/personaltimetable">
-                  Personal Timetable <i class="fas fa-caret-down"></i>
+                <a href="<?php echo URLROOT; ?>/information">
+                  Information <i class="fas fa-caret-down"></i>
                 </a>
               </li>
 
@@ -90,12 +89,21 @@
           </li>
 
           <?php if(isset($_SESSION['userId'])) : ?>
+         <article class="dropdown">
             <li>
               <a href="<?php echo URLROOT; ?>/users/logout" class="buttonStyle">
                 LOGOUT
               </a>
             </li>
+
+              <article class="dropdown-content">
+                  <a href="<?php echo URLROOT; ?>/personaltimetable">
+                    Personal timetable
+                  </a>
+              </article>
+            </article>
           <?php else : ?>
+
             <li>
               <a href="<?php echo URLROOT; ?>/users/login" class="buttonStyle">
                 LOGIN
@@ -105,7 +113,7 @@
 
             <li>
               <a href="<?php echo URLROOT; ?>/shoppingcart/shopping-cart">
-                  <img src=" http://localhost/Systeemontwikkeling/img/shopping-cart/shopping-cart.png"
+                  <img src="<?php ECHO URLROOT; ?>/img/shopping-cart/shopping-cart.png"
                   class="shopping-cart"
                   alt="Shopping cart"
                 />

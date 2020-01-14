@@ -39,7 +39,7 @@ body
 .header-nav
 {
     text-align: right;
-    padding: 18px 0px 0px 0px;
+    padding: 24px 0px 0px 0px;
 }
 
 .header-nav li
@@ -87,8 +87,11 @@ body
 {
     width: 24px;
     position: relative;
+    display: inline-block;
     right: -10%;
+    margin-bottom: -5px;
 }
+
 
 #section-header-50 > article
 {
