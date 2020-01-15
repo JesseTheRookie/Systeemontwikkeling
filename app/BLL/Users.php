@@ -304,7 +304,6 @@
 
         public function createUserSession($loggedInUser){
             try {
-                session_start();
                 $_SESSION['userId'] = $loggedInUser->userId;
                 $_SESSION['userEmail'] = $loggedInUser->userMail;
                 $_SESSION['userType'] = $loggedInUser->userType;
@@ -340,7 +339,6 @@
     }
 
         public function logout(){
-            session_start();
             unset($_SESSION['userId']);
             unset($_SESSION['userEmail']);
             unset($_SESSION['userType']);

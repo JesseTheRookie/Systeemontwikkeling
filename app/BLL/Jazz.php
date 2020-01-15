@@ -38,7 +38,6 @@ class Jazz extends Controller {
         ];
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $ticketDate = trim($_POST['ticketDate']);
 
             $data = [
                 'days' =>  $this->getDifferentDays(),
