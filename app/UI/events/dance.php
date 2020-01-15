@@ -99,6 +99,11 @@
     </article>
 
     <?php foreach($data['tickets'] as $ticket) : ?>
+        <form
+            action="<?php echo URLROOT; ?>/dance/order"
+            method="POST"
+            role="form">
+
         <table class="table-tickets-dance">
             <tr>
                 <td>
@@ -110,6 +115,7 @@
                         endforeach;
                     ?>
                 </td>
+
                 <td>
                     <?php
                         $time = explode(" ", $ticket->getstartDateTime());
@@ -126,26 +132,23 @@
                 </td>
 
                 <td>
-                    <select class="select-dance">
-                        <option value="">
-                            SELECT
-                        </option>
-
+                    <select name="quantity" class="select-dance">
                         <?php
-                        $i = 1;
-                        while ($i <= 10): ?>
-                            <option value="<?php echo $i; ?>">
-                                <?php echo $i;
-                                $i++;
-                                 ?>
-                            </option>
-                        <?php endwhile; ?>
-                </td>
-
+                            $i = 1;
+                            while ($i <= 10){ ?>
+                                <option value="<?php echo $i . "|" . $ticket->getTicketId() ?>">
+                                    <?php
+                                        echo $i;
+                                        $i++;
+                                    ?>
+                                </option>
+                        <?php } ?>
+                    </select>
                 <td>
-                    <a href="" class="button-add-dance">
-                        Add
-                    </a>
+                        <button type="add" value="add" name="add" class="button-add-dance">
+                            Add
+                        </button>
+                    </form>
                 </td>
             </tr>
         </table>

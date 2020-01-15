@@ -1,10 +1,6 @@
 <?php
-    session_start();
-
     require APPROOT . '/UI/inc/header.php';
     require APPROOT . '/UI/inc/navigation.php';
-
-    print_r($_SESSION['cart']);
 ?>
 
 <div id="layout-shoppingcart">
@@ -48,7 +44,7 @@
 </div>
 
 <div id="shoppingcart-overview">
-    <!--<table class="shoppingcart-items">
+    <table class="shoppingcart-items">
         <tr>
             <th>
                 Description
@@ -59,41 +55,80 @@
             </th>
 
             <th>
-                VAT %
+                Time
+            </th>
+
+            <th>
+                Subtotal
             </th>
 
             <th>
                 Total
             </th>
         </tr>
+         <?php foreach ($data['items'] as $item): ?>
         <tr>
             <td>
-                Hardwell / Martin Garrix/ Armin van Buuren $ Caprera Openluchttheater
+                <?php
+                    echo $item['name'];
+                ?>
             </td>
 
             <td>
-                1
+                <?php
+                    foreach ($_SESSION['shoppingCart'] as $quantity => $total) {
+                        //Converting array ($Total) to a string by the implode function.
+                        if ($item['ticketId'] == $quantity) {
+                            $string_product = implode(',',$total);
+                            echo $string_product;
+                        }
+                    }
+                 ?>
             </td>
 
             <td>
-                21 %
+                <?php
+                   echo date("jS F H:i", strtotime($item['startDateTime']));
+                 ?>
             </td>
 
             <td>
-                150,00
+                <?php
+                    echo $item['price'];
+                ?>
             </td>
 
             <td>
-                <img
-                    src="./img/delete.png"
-                    alt="Header food"
-                    title="Header food"
-                    class="header-food"
-                />
+                <?php
+                    foreach ($_SESSION['shoppingCart'] as $quantity => $total) {
+                        if ($item['ticketId'] == $quantity) {
+                            echo $item['price'] * $total['Quantity'];
+                        }
+                    }
+                 ?>
+            </td>
+
+            <td>
+                    <form
+                        action="<?php echo URLROOT; ?>/shoppingcart/deleteFromCart"
+                        method="POST"
+                        role="form">
+
+                        <button
+                            type="submit"
+                            name="delete"
+                            value="<?php echo $item['ticketId']; ?>">
+                        <img
+                            src="<?php echo URLROOT; ?>/img/shopping-cart/delete.png"
+                            alt="Trash button"
+                            title="Trash button"
+                        />
+                        </button>
+                    </form>
             </td>
         </tr>
-    </table>-->
-    <?php $this->DisplayItems();?>
+        <?php endforeach; ?>
+    </table>
 </div>
 
 <div id="layout-checkout">
@@ -113,19 +148,19 @@
                 Order
             </button>
                 <img
-                    src="./img/ideal.png"
+                    src="<?php echo URLROOT; ?>/img/shopping-cart/ideal.png"
                     alt="Icon iDeal"
                     title="Icon iDeal"
                     class="header-food"
                 />
                 <img
-                    src="./img/mastercard.png"
+                    src="<?php echo URLROOT; ?>/img/shopping-cart/mastercard.png"
                     alt="Icon mastercard"
                     title="Icon mastercard"
                     class="header-food"
                 />
                 <img
-                    src="./img/paypal.png"
+                    src="<?php echo URLROOT; ?>/img/shopping-cart/paypal.png"
                     alt="Icon paypal"
                     title="Icon paypal"
                     class="header-food"
@@ -140,8 +175,11 @@
             <h4>
                 Grab a bite
             </h4>
-            <hr>
-            <img src="./img/food-banner.jpg" alt="">
+            <img
+                src="<?php echo URLROOT; ?>/img/food/fris.jpg"
+                alt="Cross selling"
+                title="Cross selling Item"
+            />
             <p>
                 Restaurant: Urban Frenchy Bistro Tojours
             </p>
@@ -162,8 +200,11 @@
             <h4>
                 Grab a bite
             </h4>
-            <hr>
-            <img src="./img/food-banner.jpg" alt="">
+            <img
+                src="<?php echo URLROOT; ?>/img/food/fris.jpg"
+                alt="Cross selling"
+                title="Cross selling Item"
+            />
             <p>
                 Restaurant: Urban Frenchy Bistro Tojours
             </p>
@@ -185,8 +226,11 @@
             <h4>
                 Grab a bite
             </h4>
-            <hr>
-            <img src="./img/food-banner.jpg" alt="">
+            <img
+                src="<?php echo URLROOT; ?>/img/food/fris.jpg"
+                alt="Cross selling"
+                title="Cross selling Item"
+            />
             <p>
                 Restaurant: Urban Frenchy Bistro Tojours
             </p>
