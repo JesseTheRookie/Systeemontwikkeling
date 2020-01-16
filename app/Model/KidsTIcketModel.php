@@ -1,6 +1,8 @@
 <?php
 require('TicketModel.php');
 require('ArtistModel.php');
+
+//Extending Tickets and Artists but kids has 2 different columns (Location and Session)
 class KidsTicketModel extends TicketModel {
     private $kidsTicketLocation;
     private $kidsTicketSession;
@@ -16,8 +18,8 @@ class KidsTicketModel extends TicketModel {
     }
 
     //Object for ticket session
-    public function setKidsTicketSession($session){
-        $this->kidsTicketSession = $session;
+    public function setKidsTicketSession($kidsTicketSession){
+        $this->kidsTicketSession = $kidsTicketSession;
     }
 
     public function getKidsTicketSession(){

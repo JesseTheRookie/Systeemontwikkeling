@@ -18,7 +18,7 @@ class Kids Extends Controller{
     }
 
     public function getAllKidsTickets($date){
-        $tickets = $this->kidseDal->getKidsTickets($date);
+        $tickets = $this->kidsDal->getKidsTickets($date);
         return $tickets;
     }
 
