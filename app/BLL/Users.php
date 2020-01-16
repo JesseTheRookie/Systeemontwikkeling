@@ -447,10 +447,10 @@
                         <input id="send" type="submit" value="submit">
                     </form> ';
                 } else {
-                    echo "Invalid request!";
+                    echo "Invalid token request!";
                 }
             } else {
-                echo "Invalid request!";
+                echo "Invalid token!";
             }            
         }
     }
