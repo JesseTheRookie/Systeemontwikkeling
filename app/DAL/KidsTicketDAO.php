@@ -6,65 +6,27 @@ class KidsTicketDAO{
       $this->db = new Database;
     }
 
-    //Get all kids tickets based on button click that's passing ticket information
-    public function getKidsTickets($ticketDate){
-        $kidsTicketArray = array();
+    //Get the image, event name and buttons of top section Kids Page.
+    public function getKidsContent() {
+      $kidsContentArray = array();
 
-        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, k.kidsTicketSession
-                FROM Tickets AS t
-                INNER JOIN KidsTicket AS k
-                ON t.ticketId = k.ticketId
-                INNER JOIN Location AS l
-                ON k.locationId = l.locationId
-                WHERE DATE(t.startDateTime) = :ticketDate
-                ORDER BY t.startDateTime ASC
-                ");
+      $this->db->query("SELECT elementName, description, content
+                        FROM Content as c
+                        WHERE contentType = 2
+                       ");
 
-        //Bind param with value from DB
-        $this->db->bind(':ticketDate', $ticketDate);
+      $kidsContent = $this->db->resultSet();
 
-        //Fetching results
-        $kidsTickets = $this->db->resultSet();
+      foreach ($kidsContent as $content) {
+            $kidsContentModel = new HomeModel();
 
-        foreach ($kidsTickets as $kidsTicket) {
-            $kidsTicketModel = new KidsTicketModel();
+            $kidsContentModel->setElementName($content->elementName);
+            $kidsContentModel->setDescription($content->description);
+            $kidsContentModel->setContent($content->content);
 
-            $kidsTicketModel ->setStartDateTime($kidsTicket->startDateTime);
-            $kidsTicketModel ->setEndDateTime($kidsTicket->endDateTime);
-            $kidsTicketModel ->setTicketQuantity($kidsTicket->ticketQuantity);
-            $kidsTicketModel ->setPrice($kidsTicket->price);
-            $kidsTicketModel->setKidsTicketSession($kidsTicket->kidsTicketSession);
-
-            //Add objects into array
-            array_push($kidsTicketArray, $kidsTicketModel);
+            array_push($kidsContentArray, $kidsContentModel);
         }
-        return $kidsTicketArray;
-    }
-
-    //Get all artist names for section "Performers"
-    public function getArtists() {
-      $kidsArtistArray = array();
-
-      $this->db->query("SELECT a.artistId, a.artistName, a.artistBio, c.content
-                        FROM Artist as a
-                        INNER JOIN Content as c
-                        ON a.artistName = c.elementName
-                        WHERE c.eventType = 4
-                      ");
-
-      $kidsArtists = $this->db->resultSet();
-
-      foreach ($kidsArtists as $kidsArtist) {
-            $kidsArtistModel = new ArtistModel();
-
-            $kidsArtistModel->setArtistId($kidsArtist->artistId);
-            $kidsArtistModel->setArtistName($kidsArtist->artistName);
-            $kidsArtistModel->setArtistBio($kidsArtist->artistBio);
-            $kidsArtistModel->setContent($kidsArtist->content);
-
-            array_push($kidsArtistArray, $kidsArtistModel);
-        }
-        return $kidsArtistArray;
+        return $kidsContentArray;
     }
 
     //Get different days based on the date function, preventign redudancy because there are multiple tickets with the same date
@@ -78,6 +40,71 @@ class KidsTicketDAO{
         $results = $this->db->resultSet();
 
         return $results;
+    }
+
+    //Get all artist names for section "Performers"
+    public function getArtists() {
+      $this->db->query("SELECT a.artistName, dt.ticketId
+                        FROM PerformanceKids AS d
+                        INNER JOIN Artist AS a
+                        ON d.kidsArtistId = a.artistId
+                        INNER JOIN Content as c
+                        ON a.artistName = c.name
+                        INNER JOIN KidsTicket as dt
+                        ON d.kidsTicketId = dt.ticketId
+                       ");
+
+      return $this->db->resultSet();
+    }
+
+    //Get all kids performers
+    public function getPerformers(){
+        $kidsPerformersArray = array();
+
+        $this->db->query("SELECT description, content, name
+                          FROM Content
+                          WHERE EventType = 1 AND Content IS NOT NULL
+                        ");
+
+        //Fetching results
+        return $this->db->resultSet();
+    }
+
+    //Get all kids tickets based on button click that's passing ticket information
+    public function getKidsTickets($ticketDate){
+        $kidsTicketArray = array();
+
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.kidsTicketSession
+                          FROM Tickets AS t
+                          INNER JOIN KidsTicket AS d
+                          ON t.ticketId = d.ticketId
+                          INNER JOIN kidsLocation AS dl
+                          ON d.ticketId = dl.ticketId
+                          INNER JOIN Location AS l
+                          ON d.locationId = l.locationId
+                          WHERE t.startDateTime LIKE '%$ticketDate%'
+                          ORDER BY t.price DESC
+                        ");
+
+        $this->db->bind(':ticketDate', $ticketDate);
+
+        //Fetching results
+        $kidsTickets = $this->db->resultSet();
+
+        foreach ($kidsTickets as $kidsTicket) {
+            $kidsTicketModel = new KidsTicketModel();
+
+            $kidsTicketModel->setTicketId($kidsTicket->ticketId);
+            $kidsTicketModel->setStartDateTime($kidsTicket->startDateTime);
+            $kidsTicketModel->setEndDateTime($kidsTicket->endDateTime);
+            $kidsTicketModel->setTicketQuantity($kidsTicket->ticketQuantity);
+            $kidsTicketModel->setPrice($kidsTicket->price);
+            $kidsTicketModel->setKidsTicketSession($kidsTicket->kidsTicketSession);
+
+            //Add objects into array
+            array_push($kidsTicketArray, $kidsTicketModel);
+        }
+        return $kidsTicketArray;
     }
 }
 

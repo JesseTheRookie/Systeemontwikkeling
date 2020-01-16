@@ -1,4 +1,4 @@
-<?php
+ <?php
 class DanceTicketDAO{
     private $db;
 
@@ -12,8 +12,10 @@ class DanceTicketDAO{
 
       $this->db->query("SELECT elementName, description, content
                         FROM Content as c
-                        WHERE contentType = 2
+                        WHERE contentType = :contentType
                        ");
+
+      $this->db->bind(':contentType', 2);
 
       $danceContent = $this->db->resultSet();
 
@@ -63,9 +65,10 @@ class DanceTicketDAO{
 
         $this->db->query("SELECT description, content, name
                           FROM Content
-                          WHERE EventType = 1 AND Content IS NOT NULL
+                          WHERE EventType = :eventType AND Content IS NOT NULL
                         ");
 
+        $this->db->bind(':eventType', 1);
         //Fetching results
         return $this->db->resultSet();
     }

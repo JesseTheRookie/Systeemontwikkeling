@@ -35,6 +35,7 @@ if (isset($_POST['ticket-quantity'])) {
         </p>
     </section>
 </header>
+
 <section id="artiesten">
         <div id="lineup">
             <?php
@@ -94,7 +95,7 @@ if (isset($_POST['ticket-quantity'])) {
                     if ($dateAndTime[0] == $_POST["ticketDate"]) { ?>
 
                         <article>
-                            <form method="post" action="<?php APPROOT . '/BLL/ShoppingCart.php/AddToCart' ?>">
+                            <form method="GET" action="<?php APPROOT . '/BLL/ShoppingCart.php/AddToCart' ?>">
 
                                 <?php $artists = $ticket->getArtists();
 
@@ -128,9 +129,7 @@ if (isset($_POST['ticket-quantity'])) {
                         }
                     }
                 }
-            ?>       
-
-
+            ?>
 <?php
 require APPROOT . '/UI/inc/footer.php';
 ?>
