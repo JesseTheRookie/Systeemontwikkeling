@@ -5,6 +5,7 @@ class TicketModel{
     private $endDateTime;
     private $ticketQuantity;
     private $price;
+    private $reserved;
 
     public function setTicketId($id){
         $this->ticketId = $id;
@@ -35,5 +36,11 @@ class TicketModel{
     }
     public function getPrice(){
         return $this->price;
+    }
+    public function setReserved($reserved){
+        $this->reserved = $reserved;
+    }
+    public function getReserved(){
+        return $this->reserved;
     }
 }
