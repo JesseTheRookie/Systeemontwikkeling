@@ -237,7 +237,8 @@
         public function forgot(){
             //Init data
             $data = [
-                'title' => 'Forgot password?'
+                'title' => 'Forgot password?',
+                'emailError' => ''
             ];
 
             //Check for POST
@@ -253,26 +254,28 @@
                 }else{
                     //Check user by email
                     if($this->userDAO->findUserByEmail($email)){
-                        //User found
+                        // User found
 
-                        //Message
-                        $msg = "You have requested a password recovery for your account at Haarlem Festival. \n
+                        // Message
+                        $message = "You have requested a password recovery for your account at Haarlem Festival. \n
                         Click the link below to set up a new password \n
                         [link]";
 
-                        // use wordwrap() if lines are longer than 70 characters
-                        $msg = wordwrap($msg,70);
+                        // Use wordwrap() if lines are longer than 70 characters
+                        $message = wordwrap($message,70);
 
-                        //Subject
-                        $sub = "Haarlem Festival password recovery";
+                        // Subject
+                        $subject = "Haarlem Festival password recovery";
 
-                        //Send email
-                        //mail($email, $sub, $msg);
+                        // Send email
+                        //mail($email, $subject, $message);                        
+
+                        $this->createToken($email, "forgot");
 
                         redirect("users/pwemailsend");
 
                     } else{
-                        //User not found
+                        // User not found
                         $data['emailError'] = 'No user found!';
                     }
                 }
@@ -282,24 +285,90 @@
             $this->ui('users/forgot', $data);
         }
 
-        public function passwordEmailSend(){
+        public function pwEmailSend(){
             //Init data
             $data = [
                 'title' => 'Password recovery email has been send'
-            ];
+            ];            
 
             //Load UI
             $this->ui('users/pwemailsend', $data);
-        }
+        }        
 
-        public function newPassword(){
-            //Init data
+        public function newPassword(){   
+            // Sanitize the token
+            $token = trim(filter_var($_GET['token'], FILTER_SANITIZE_STRING));
+            
+            // Sanitize user input and declare password validation regex
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/"; 
+            
+            // Init data
             $data = [
-                'title' => 'Enter new password'
+                'title' => 'Enter new password',
+                'token' => $token,
+                'error' => ""
             ];
 
+            // Check for post
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                // Init POST data
+                $password = trim($_POST['password']);
+                $passwordConfirm = trim($_POST['passwordConfirmation']);
+
+                // Validate Password not empty
+                if(!empty($password) && !empty($passwordConfirm)){
+                    
+                    // Validate if password is 6 characters or longer
+                    if(strlen($password < 6)) {
+
+                        // Validate if password matches contains the required characters
+                        if(preg_match($passwordValidation, $password)) {
+
+                            // Validate if password matches confirmation password
+                            if($password == $passwordConfirm) {
+                                // Hash password
+                                $password = password_hash($password, PASSWORD_DEFAULT);
+                                
+                                // Update password in datebase
+                                $this->userDAO->newPassword($token, $password);
+
+                                // Delete token from database
+                                $this->userDAO->deleteToken($token);
+
+                                // Redirect to login page
+                                redirect("users/login");
+                            } else {
+                                $data['error'] = "Passwords don't match!";
+                            }
+                        } else {
+                            $data['error'] = "Invalid password";
+                        }
+                    } else {
+                        $data['error'] = "Password needs to be at leat 6 characters long";
+                    }
+                } else {
+                    $data['error'] = "Please enter a new password";
+                }                           
+            }
+
             //Load UI
-            $this->ui('users/newpw', $data);
+            $this->ui('users/newpassword', $data);
+        }
+
+        public function pwDone(){            
+            //sanitize user input and declare password validation regex
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/"; 
+            //Init data
+            $data = [
+                'title' => "You can now use  your new password",
+                'token' => $token,
+            ];           
+
+            //Load UI
+            $this->ui('users/pwdone', $data);
         }
 
         public function createUserSession($loggedInUser){
@@ -318,25 +387,25 @@
             }
             catch(Exception $e) {
                 die('f');
-            $_SESSION['userId'] = $loggedInUser->userId;
-            $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
-            $_SESSION['userType'] = $loggedInUser->userType;
-            $_SESSION['userName'] = $loggedInUser->userName;
-            $_SESSION['userLastName'] = $loggedInUser->userLastName;
-            $_SESSION['userStreet'] = $loggedInUser->userStreet;
-            $_SESSION['userHouse'] = $loggedInUser->userHouse;
-            $_SESSION['userPhone'] = $loggedInUser->userPhoneStreet;
-            $_SESSION['userGender'] = $loggedInUser->userGender;
+                $_SESSION['userId'] = $loggedInUser->userId;
+                $_SESSION['userEmail'] = $loggedInUser->getUserEmail;
+                $_SESSION['userType'] = $loggedInUser->userType;
+                $_SESSION['userName'] = $loggedInUser->userName;
+                $_SESSION['userLastName'] = $loggedInUser->userLastName;
+                $_SESSION['userStreet'] = $loggedInUser->userStreet;
+                $_SESSION['userHouse'] = $loggedInUser->userHouse;
+                $_SESSION['userPhone'] = $loggedInUser->userPhoneStreet;
+                $_SESSION['userGender'] = $loggedInUser->userGender;
 
 
 
-            if($_SESSION['userType'] == 1){
-                redirect('cms/dashboard');
-            } else {
-            redirect('pages/index');
+                if($_SESSION['userType'] == 1){
+                    redirect('cms/dashboard');
+                } else {
+                redirect('pages/index');
+                }
             }
         }
-    }
 
         public function logout(){
             unset($_SESSION['userId']);
@@ -359,5 +428,29 @@
             } else {
                 return false;
             }
+        }
+
+        public function createToken($email, $type){
+            $token = bin2hex(openssl_random_pseudo_bytes(50));
+            $this->userDAO->insertToken($email, $token, $type);
+        }
+
+        public function checkToken($token){
+            if($row = $this->userDAO->checkTokenType($token)){
+                if($row->tokenType == "forgot"){
+                    echo '
+                    <form id="forgotForm" action="newpassword?token='.$token.'" method="POST">
+                        <span>Password:</span>
+                        <input type="password" name="password" placeholder="New password">
+                        <span>Confirm password:</span>
+                        <input type="password" name="passwordConfirmation" placeholder="Confirm password">
+                        <input id="send" type="submit" value="submit">
+                    </form> ';
+                } else {
+                    echo "Invalid request!";
+                }
+            } else {
+                echo "Invalid request!";
+            }            
         }
     }
