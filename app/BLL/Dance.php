@@ -35,9 +35,15 @@ class Dance Extends Controller{
 
             if(isset($_GET['ticketDate'])) {
                 $ticketDate = $_GET['ticketDate'];
+
+                $_SESSION['ticketDate'] = $_GET['ticketDate'];
+                var_dump($_SESSION);
                 } else {
                     $ticketDate = $days[0]->startDateTime;
+                    $_SESSION['ticketDate'] = $days[0]->startDateTime;
+                    var_dump($_SESSION);
                 }
+
 
             $data = [
                 'title' => 'Dance Page',
@@ -47,19 +53,49 @@ class Dance Extends Controller{
                 'artists' => $this->getAllArtists(),
                 'performers' => $performers
             ];
-        } else {
-            //Init Data
-            $data = [
-                'title' => 'Dance Page',
-                'content' => '',
-                'days' => '',
-                'tickets' => '',
-                'artists' => '',
-                'performers' => ''
-            ];
-    }
 
+        }
     //Load View
     $this->ui('events/dance', $data);
     }
+
+    public function order() {
+     include APPROOT . '/BLL/ShoppingCart.php';
+
+        $content = $this->danceDal->getDanceContent();
+        $days = $this->getDifferentDays();
+        $performers = $this->danceDal->getPerformers();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+             $data = [
+                    'title' => 'Dance Page',
+                    'content' => $content,
+                    'days' => $this->getDifferentDays(),
+                    'tickets' => $this->getAllDanceTickets($_SESSION['ticketDate']),
+                    'artists' => $this->getAllArtists(),
+                    'performers' => $performers
+                ];
+
+                // Sanitize GET data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                $quantity = explode("|", $_POST['quantity']);
+                $ticketId = $quantity[1];
+                $quantity = $quantity[0];
+
+                $items = array(
+                    'Quantity' => $quantity
+                );
+                var_dump($items);
+                if (!isset($_SESSION['shoppingCart'])) {
+                    $_SESSION['shoppingCart'] = array();
+                }
+                if (!array_key_exists($ticketId, $_SESSION['shoppingCart'])) {
+                    $_SESSION['shoppingCart'][$ticketId]=$items;
+                }
+    //Load View
+    $this->ui('events/dance', $data);
+     }
+}
+
 }
