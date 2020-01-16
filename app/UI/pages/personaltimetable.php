@@ -53,10 +53,12 @@
         </article>
 </section>
 
-  <?php var_dump($_SESSION['userId']); ?>
-
-        <?php foreach($data['tickets'] as $tickets) : ?>
-            <?php print_r($tickets); ?>
+  <?php var_dump($_SESSION['userId']);
+          print_r($data['jazzTickets']);
+          print_r($data['danceTickets']);
+  ?>
+        <?php foreach($data['jazzTickets'] as $jazzTicket) : ?>
+            <?php print_r($jazzTicket); ?>
         <?php endforeach; ?>
 
 

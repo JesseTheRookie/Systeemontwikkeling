@@ -22,6 +22,30 @@ class Dance Extends Controller{
         return $tickets;
     }
 
+    public function getDanceLocationsFromTicket($ticketId){
+        return $this->danceDal->getDanceTicketLocationsFromTicket($ticketId);
+    }
+
+    public function getDanceArtistsFromTicket($ticketId){
+        return $this->danceDal->getArtistsFromTicket($ticketId);
+    }
+
+    public function getDanceTicketFromTicket($ticketId, $reserved, $start, $end){
+        $locations = $this->getDanceLocationsFromTicket($ticketId);
+        $artists = $this->getDanceArtistsFromTicket($ticketId);
+
+        $danceTicket = new DanceTicketModel();
+
+        $danceTicket->setTicketId($ticketId);
+        $danceTicket->setReserved($reserved);
+        $danceTicket->setStartDateTime($start);
+        $danceTicket->setEndDateTime($end);
+        $danceTicket->setArtists($artists);
+        $danceTicket->setDanceTicketLocation($locations['city']);
+
+        return $danceTicket;
+    }
+
     //Need ticket/artist and days information. Passing it in an array that will be passed around on the website.
     public function index(){
         $content = $this->danceDal->getDanceContent();

@@ -31,6 +31,56 @@ class DanceTicketDAO{
         return $danceContentArray;
     }
 
+    public function getDanceTicketLocationsFromTicket($ticketId){
+        $danceTicketLocations = array();
+
+        $this->db->query("SELECT d.venue, l.stad
+                                FROM DanceLocation AS d 
+                                JOIN Location AS l 
+                                ON d.locationId = l.locationId
+                                WHERE d.ticketId = :id");
+
+        $this->db->bind(':id', $ticketId);
+
+        $result = $this->db->resultSet();
+
+        foreach ($result as $location){
+            $jazzTicketLocation = array(
+                'city' => $location->stad,
+                'venue' => $location->venue,
+                'ticketId' => $ticketId
+            );
+            array_push($danceTicketLocations, $jazzTicketLocation);
+        }
+        return $danceTicketLocations;
+    }
+
+    public function getArtistsFromTicket($ticketId){
+        $danceTicketArtists = array();
+
+        $this->db->query("SELECT a.artistname, a.artistBio, a.artistId
+                                FROM PerformanceDance as p 
+                                JOIN Artist as a 
+                                ON p.danceArtistId = a.artistId
+                                WHERE p.ticketId = :id");
+
+        $this->db->bind(':id', $ticketId);
+
+        $artists =  $this->db->resultSet();
+
+        foreach ($artists as $artist) {
+            $artistModel = new ArtistModel();
+
+            $artistModel->setTicketId($artist->JazzTicketId);
+            $artistModel->setArtistName($artist->artistName);
+            $artistModel->setArtistBio($artist->artistBio);
+            $artistModel->setTicketId($ticketId);
+
+            array_push($artistArray, $artistModel);
+        }
+        return $danceTicketArtists;
+    }
+
     //Get different days based on the date function, preventign redudancy because there are multiple tickets with the same date
     public function getDifferentDays() {
         $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
