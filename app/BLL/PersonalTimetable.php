@@ -17,21 +17,24 @@ class PersonalTimeTable Extends Controller {
         $this->personalTimeTableModel = $this->model('PersonalTimeTableModel');
         $this->ticketsBoughtByUser = $this->personalTimeTableDal->getTicketsBoughtByUser();
         $this->jazzBll = $this->bll('Jazz');
+        $this->danceBll = $this->bll('Dance');
+        $this->setTimetableData();
     }
 
     public function setTimetableData(){
         foreach ($this->ticketsBoughtByUser as $ticket){
             array_push($this->jazzTickets, $this->jazzBll->getJazzTicketFromTicket($ticket['ticketId'], $ticket['reserved'], $ticket['start'], $ticket['end']));
+            array_push($this->danceTickets, $this->danceBll->getDanceTicketFromTicket($ticket['ticketId'], $ticket['reserved'], $ticket['start'], $ticket['end']));
         }
     }
 
     public function index () {
-        $days = $this->personalTimeTableDal->getDifferentDays();
-        $tickets = $this->personalTimeTableDal->getUserTickets($id = '1');
+        //$days = $this->personalTimeTableDal->getDifferentDays();
+        //$tickets = $this->personalTimeTableDal->getUserTickets($id = '1');
 
         $data = [
-            'days' => $days,
-            'tickets' => $tickets
+            'jazzTickets' => $this->jazzTickets,
+            'danceTickets' => $this->danceTickets
         ];
 
       $this->ui('pages/personaltimetable', $data);

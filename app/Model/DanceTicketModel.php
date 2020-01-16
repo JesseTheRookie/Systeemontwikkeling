@@ -30,9 +30,11 @@ class DanceTicketModel extends TicketModel {
     public function addArtist($artist) {
         array_push($this->artists, $artist);
     }
-
+    public function setArtists($artists){
+        $this->artists = $artistsp;
+    }
     public function getArtists() {
         return $this->artists;
     }
 }
-?>
+
