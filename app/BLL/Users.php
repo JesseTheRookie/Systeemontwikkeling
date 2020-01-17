@@ -142,7 +142,7 @@
                     $subject = "Haarlem Festival User Verification";
 
                     // Send email
-                    //mail($email, $subject, $message);  
+                    //mail($user->getEmail(), $subject, $message);  
 
                 } else {
                     //Load view with data
