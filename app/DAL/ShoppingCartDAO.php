@@ -31,6 +31,7 @@ class ShoppingCartDAO{
 
         return $ticket;
     }
+<<<<<<< HEAD
 
     public function findJazzTickets($ticketId) {
         $this->db->query("SELECT t.ticketId AS ticketId, t.startDateTime As startDateTime, t.price AS price, jl.hall AS name
@@ -58,4 +59,6 @@ class ShoppingCartDAO{
 
         return $ticket;
     }
+=======
+>>>>>>> develop
 }

@@ -91,7 +91,12 @@ if (isset($_POST['ticket-quantity'])) {
     <?php foreach($data['tickets'] as $ticket) : ?>
     <?php   $dateAndTime = explode(" ", $ticket->getStartDateTime()); ?>
 
+<<<<<<< HEAD
         <?php if ($dateAndTime[0] == $_POST["ticketDate"]): ?>
+=======
+                        <article>
+                            <form method="GET" action="<?php APPROOT . '/BLL/ShoppingCart.php/AddToCart' ?>">
+>>>>>>> develop
 
         <form
             action="<?php echo URLROOT; ?>/jazz/orderJazzTickets"
@@ -107,6 +112,7 @@ if (isset($_POST['ticket-quantity'])) {
                                 <?php endforeach; ?>
                 </td>
 
+<<<<<<< HEAD
                 <td>
 <?php echo $ticket->getStartDateTime(); ?>
                                         - <?php echo $ticket->getEndDateTime() ?>
@@ -145,6 +151,35 @@ if (isset($_POST['ticket-quantity'])) {
 
     <?php endforeach; ?>
     <?php endif; ?>
+=======
+                                <div><p><?php echo $ticket->getStartDateTime(); ?>
+                                        - <?php echo $ticket->getEndDateTime() ?></p></div>
+                                <div><p><?php echo $ticket->getJazzTicketLocation(); ?>
+                                        <br/><span><?php echo $ticket->getJazzTicketHall(); ?></span></p></div>
+                                <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
+                                <div>
+                                    <select name="ticket-quantity" class="select-dance">
+                                        <?php
+                                        while ($i <= 10){ ?>
+                                            <option value="<?php echo $ticket->getTicketId() . "-" . $i ?>">
+                                                <?php
+                                                echo ++$i;
+                                                ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div><!-- drop down van maken -->
+                                <div>
+                                    <button class="smallButton" type="submit" name="addToCart">add</button>
+                                </div>
+                        </article>
+
+                    <?php
+                        }
+                    }
+                }
+            ?>
+>>>>>>> develop
 <?php
 require APPROOT . '/UI/inc/footer.php';
 ?>

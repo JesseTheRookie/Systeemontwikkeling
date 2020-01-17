@@ -102,7 +102,11 @@
     <?php foreach($data['tickets'] as $ticket) : ?>
         <form
             action="<?php echo URLROOT; ?>/dance/order"
+<<<<<<< HEAD
             method="GET"
+=======
+            method="POST"
+>>>>>>> develop
             role="form">
 
         <table class="table-tickets-dance">
@@ -137,7 +141,11 @@
                         <?php
                             $i = 1;
                             while ($i <= 10){ ?>
+<<<<<<< HEAD
                                 <option value="<?php echo "dance" . "|" . $i . "|" . $ticket->getTicketId() ?>">
+=======
+                                <option value="<?php echo $i . "|" . $ticket->getTicketId() ?>">
+>>>>>>> develop
                                     <?php
                                         echo $i;
                                         $i++;
@@ -146,11 +154,15 @@
                         <?php } ?>
                     </select>
                 <td>
+<<<<<<< HEAD
                         <button
                             type="add"
                             value="add"
                             name="add"
                             class="button-add-dance">
+=======
+                        <button type="add" value="add" name="add" class="button-add-dance">
+>>>>>>> develop
                             Add
                         </button>
                     </form>

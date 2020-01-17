@@ -1,3 +1,4 @@
+<<<<<<< HEAD
         #content
 		{
 			margin: auto;
@@ -97,10 +98,116 @@
 			color: red;
 			font-weight: normal;
 		}
+=======
+#content 
+{
+	margin: auto;
+	width: 60%;
+}
+>>>>>>> develop
 
-#formHeader{
+#loginHeader 
+{
+	text-align: center;	
+}
+
+#line 
+{
+	margin: auto;
+	height: 1em; 
+	width: 60px;
+	display: block;		
+}
+
+#register 
+{
+	width: 60%;
+	margin: auto;
+}
+
+.input 
+{
+	border: 0px;
+}
+
+.options 
+{
+	text-align: center;
+}
+
+.cleanForm {
+	width: 60%;
+	margin: auto;
+}
+
+.inputHeader 
+{
+	font-weight: bold;
+}
+
+fieldset 
+{
+	border: 0;
+	margin: auto;
+	width: 58%;
+	padding: 3em;
+}
+
+fieldset > label > input {
+	display: block;
+}
+
+input[type="checkbox"] {
+	display: inline;
+}
+
+label {
+	margin: 10px;
+	padding: 0px;
+}
+
+fieldset > label {
+	float: left;
+}
+
+label:nth-child(2n+1) {
+	clear: both;
+}
+
+#gender, .tos, button {
+	clear: both;
+}
+
+.tos {
+	width: 400px;
+}
+
+#submit 
+{
+	display: block;
+	margin: auto;
+	height: 3em;
+	background-color: #000000;
+	text-align: center;
+	color: white;
+	width: 15em;
+	border: none;
+}
+
+.invalidFeedback 
+{
+	color: red;
+	font-weight: normal;				
+}
+
+#newPassword{
+	padding-top: 100px;
     color: black;
     text-align: center;
+}
+
+#formHeader{
+	color: black;
 }
 
 #formTutorial{
@@ -120,3 +227,11 @@
 .invalidFeedback{
     text-align: center;
 }
+<<<<<<< HEAD
+=======
+
+#content{
+	padding-top: 100px;
+	text-align: center;
+}
+>>>>>>> develop

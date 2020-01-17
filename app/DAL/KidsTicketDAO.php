@@ -34,8 +34,8 @@ class KidsTicketDAO{
     public function getDifferentDays() {
         $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
                           FROM Tickets as t
-                          INNER JOIN KidsTicket as k
-                          ON k.ticketId = t.ticketId
+                          INNER JOIN KidsTicket as d
+                          ON d.ticketId = t.ticketId
                         ");
 
         $results = $this->db->resultSet();
@@ -46,13 +46,21 @@ class KidsTicketDAO{
     //Get all artist names for section "Performers"
     public function getArtists() {
       $this->db->query("SELECT a.artistName, dt.ticketId
-                        FROM PerformanceKids AS k
+                        FROM PerformanceKids AS d
                         INNER JOIN Artist AS a
+<<<<<<< HEAD
                         ON k.kidsTicketArtist = a.artistId
                         INNER JOIN Content as c
                         ON a.artistName = c.name
                         INNER JOIN KidsTicket as dt
                         ON k.kidsTicketId = dt.ticketId
+=======
+                        ON d.kidsArtistId = a.artistId
+                        INNER JOIN Content as c
+                        ON a.artistName = c.name
+                        INNER JOIN KidsTicket as dt
+                        ON d.kidsTicketId = dt.ticketId
+>>>>>>> develop
                        ");
 
       return $this->db->resultSet();
@@ -80,12 +88,19 @@ class KidsTicketDAO{
 
         $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, k.kidsTicketsession
                           FROM Tickets AS t
+<<<<<<< HEAD
                           INNER JOIN KidsTicket AS k
                           ON t.ticketId = k.ticketId
                           INNER JOIN KidsLocation AS kl
                           ON t.ticketId = kl.ticketId
+=======
+                          INNER JOIN KidsTicket AS d
+                          ON t.ticketId = d.ticketId
+                          INNER JOIN kidsLocation AS dl
+                          ON d.ticketId = dl.ticketId
+>>>>>>> develop
                           INNER JOIN Location AS l
-                          ON k.locationId = l.locationId
+                          ON d.locationId = l.locationId
                           WHERE t.startDateTime LIKE '%$ticketDate%'
                           ORDER BY t.price DESC
                         ");

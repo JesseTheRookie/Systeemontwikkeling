@@ -8,7 +8,8 @@ class UserDAO{
 
     public function register($user){
         //Insert into table user
-        $this->db->query('INSERT INTO user (userName, userLastName, userMail, userPassword, userPhone, userGender) VALUES (:name, :lastName, :email, :password, :phone, :gender)');
+        $this->db->query('INSERT INTO user (userName, userLastName, userMail, userPassword, userPhone, userGender, userStreet, userHouse) 
+                          VALUES (:name, :lastName, :email, :password, :phone, :gender, :street, :house)');
         //Bind values
         $this->db->bind(':name', $user->getUserName());
         $this->db->bind(':lastName', $user->getUserLastname());
@@ -23,7 +24,7 @@ class UserDAO{
         if($this->db->execute()){
             return true;
         } else {
-            die('rip');
+            die('Query failed to execute!');
         }
     }
 
@@ -44,10 +45,13 @@ class UserDAO{
 
     //Find user by email
     public function findUserByEmail($email){
+        // Prepare query
         $this->db->query('SELECT * FROM User WHERE userMail = :email');
+
         //Bind values
         $this->db->bind(':email', $email);
 
+        // Execute
         $row = $this->db->single();
 
         //Check row
@@ -58,5 +62,92 @@ class UserDAO{
         }
     }
 
-    //
+    public function insertToken($email, $token, $type){
+        // Prepare query
+        $this->db->query('  INSERT INTO tokens (token, email, tokenType)
+                            VALUES (:token, :email, :tokenType)');
+        
+        // Bind values
+        $this->db->bind(':token', $token);
+        $this->db->bind(':email', $email);
+        $this->db->bind(':tokenType', $type);
+
+        // Execute
+        if($this->db->execute()){
+            return true;
+        } else {
+            die('Query failed to execute!');
+        }
+    }
+
+    public function checkTokenType($token){
+        // Prepare query
+        $this->db->query('  SELECT (tokenType) FROM Tokens
+                            WHERE token = :token');
+        
+        // Bind values
+        $this->db->bind(':token', $token);
+
+        // Execute
+        if($row = $this->db->single()){   
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function newPassword($token, $password){
+        // Prepare query
+        $this->db->query('  UPDATE User
+                            INNER JOIN Tokens 
+                                ON User.userMail = Tokens.email 
+                            SET User.userPassword = :password
+                            WHERE Tokens.token = :token');
+
+        // Bind values
+        $this->db->bind(':password', $password);
+        $this->db->bind(':token', $token);
+
+        // Execute
+        if($this->db->execute()){
+            return true;
+        } else {
+            die('Query failed to execute!');
+        }
+    }
+
+    public function verificateUser($token){
+        // Prepare query
+        $this->db->query('  UPDATE User
+                            INNER JOIN Tokens 
+                                ON User.userMail = Tokens.email 
+                            SET User.verified = "1"
+                            WHERE Tokens.token = :token');
+
+        // Bind values
+        $this->db->bind(':token', $token);
+
+        // Execute
+        if($this->db->execute()){
+            return true;
+        } else {
+            die('Query failed to execute!');
+        }
+    }
+
+    public function deleteToken($token){
+        // Prepare query
+        $this->db->query('  DELETE FROM Tokens
+                            WHERE token = :token');
+        
+        // Bind values
+        $this->db->bind(':token', $token);
+
+        // Execute
+        if($this->db->execute()){
+            return true;
+        } else {
+            die('Query failed to execute!');
+        }
+    }
 }

@@ -6,7 +6,40 @@ class PersonalTimeTableDAO {
       $this->db = new Database;
     }
 
+    public function getTicketsBoughtByUser(){
 
+        $ticketsBoughtByUser = array();
+
+        $this->db->query("SELECT t.ticketId, s.gereserveerd, t.startDateTime, t.endDateTime
+                                FROM User as u
+                                JOIN SoldTickets AS s
+                                ON u.userId = s.userId
+                                JOIN Tickets AS t 
+                                ON s.ticketId = t.ticketId
+                                WHERE u.userId = :id
+                        ");
+
+        $this->db->bind(':id', $_SESSION['userId']);
+
+        $result = $this->db->resultSet();
+
+        foreach ($result as $ticket) {
+
+            $boughtTicket = array(
+                'ticketId' => $ticket->ticketId,
+                'reserved' => $ticket->gereserveerd,
+                'start' => $ticket->startDateTime,
+                'end' => $ticket->endDateTime
+            );
+
+            //Add objects into array
+            array_push($ticketsBoughtByUser, $boughtTicket);
+        }
+
+        return $ticketsBoughtByUser;
+    }
+
+    /*
     //Get different days based on the date function, preventign redudancy because there are multiple tickets with the same date
     public function getDifferentDays() {
         $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
@@ -46,4 +79,5 @@ class PersonalTimeTableDAO {
         }
         return $userTicketsArray;
     }
+    */
 }

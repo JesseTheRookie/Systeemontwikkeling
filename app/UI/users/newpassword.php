@@ -5,10 +5,8 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?> 
-    
-    <section id="content">
-        <h1 id="formHeader"><?php echo $data['title'] ?></h1>
-    </section>
+    <!-- Depending on if and what kind of token is provided a form to submit a new password or an error will be echo'd here  -->
+
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
