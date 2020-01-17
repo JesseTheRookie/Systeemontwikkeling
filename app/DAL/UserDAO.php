@@ -116,6 +116,25 @@ class UserDAO{
         }
     }
 
+    public function verificateUser($token){
+        // Prepare query
+        $this->db->query('  UPDATE User
+                            INNER JOIN Tokens 
+                                ON User.userMail = Tokens.email 
+                            SET User.verified = "1"
+                            WHERE Tokens.token = :token');
+
+        // Bind values
+        $this->db->bind(':token', $token);
+
+        // Execute
+        if($this->db->execute()){
+            return true;
+        } else {
+            die('Query failed to execute!');
+        }
+    }
+
     public function deleteToken($token){
         // Prepare query
         $this->db->query('  DELETE FROM Tokens

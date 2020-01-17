@@ -125,3 +125,8 @@ label:nth-child(2n+1) {
 .invalidFeedback{
     text-align: center;
 }
+
+#content{
+	padding-top: 100px;
+	text-align: center;
+}

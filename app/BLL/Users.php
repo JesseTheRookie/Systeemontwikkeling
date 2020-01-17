@@ -6,11 +6,11 @@
         }
 
         public function register(){
-            //Check for POST
+            // Check for POST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                //Process form
+                // Process form
 
-                //Sanitize POST data and determine validation regex
+                // Sanitize POST data and determine validation regex
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
                 $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
                 $nameValidation = "/^[a-zA-Z ]*$/";
@@ -18,7 +18,7 @@
                 $phoneValidation = "/^[-0-9]*$/";
                 $houseValidation = "/^[0-9]*$/";
 
-                //Init data
+                // Init data
                 $user = new User();
                 $user->setUserName(trim($_POST['name']));
                 $user->setUserLastName(trim($_POST['lastName']));
@@ -42,52 +42,52 @@
                     'passwordConfirmError' => ''
                 ];
 
-                //Validate email not empty
+                // Validate email not empty
                 if(empty($user->getEmail())){
                     $data['emailError'] = 'Please enter email';
                 }else {
-                    //Check if email already exists
+                    // Check if email already exists
                     if($this->userDAO->findUserByEmail($user->getEmail())){
                         $data['emailError'] = 'Email is already taken';
                     }
                 }
 
-                //Validate Name not empty
+                // Validate Name not empty
                 if(empty($user->getUserName())){
                     $data['nameError'] = 'Please enter name';
                 } elseif(!preg_match($nameValidation, $user->getUserName())){
                     $data['nameError'] = 'Name can only contain letters and whitespace';
                 }
 
-                //Validate lastName not empty
+                // Validate lastName not empty
                 if(empty($user->getUserLastName())){
                     $data['lastNameError'] = 'Please enter last name';
                 } elseif(!preg_match($nameValidation, $user->getUserLastName())){
                     $data['lastNameError'] = 'Name can only contain letters and whitespace';
                 }
 
-                //Validate phone not empty
+                // Validate phone not empty
                 if(empty($user->getPhone())){
                     $data['phoneError'] = 'Please enter phone number';
                 } elseif(!preg_match($phoneValidation, $user->getPhone())){
                     $data['phoneError'] = 'Phone can only contain numbers and -';
                 }
 
-                //Validate street not empty
+                // Validate street not empty
                 if(empty($user->getStreet())){
                     $data['streetError'] = 'Please enter street';
                 } elseif(!preg_match($streetValidation, $user->getStreet())){
                     $data['streetError'] = 'Street can only contain letters and whitespace';
                 }
 
-                //Validate House Number not empty
+                // Validate House Number not empty
                 if(empty($user->getHouse())){
                     $data['houseError'] = 'Please enter house number';
                 } elseif(!preg_match($houseValidation, $user->getHouse())){
                     $data['houseError'] = 'House number can only contain numbers';
                 }
 
-                //Validate Password not empty
+                // Validate Password not empty
                 if(empty($user->getPassword())){
                     $data['passwordError'] = 'Please enter password';
                 } elseif(strlen($user->getPassword()) < 6) {
@@ -96,7 +96,7 @@
                     $data['passwordError'] = 'Password must have at least one numeric value, one uppercase character and one lowercase character';
                 }
 
-                 //Validate password confirmation
+                 // Validate password confirmation
                  if(empty($user->getPasswordConfirm())){
                     $data['passwordConfirmError'] = 'Please confirm password';
                 } else {
@@ -105,25 +105,24 @@
                     }
                 }
 
-                //Convert gender to number
+                // Convert gender to number
                 if($user->getGender() == 'male'){
                     $user->setGender(1);
                 } else {
                     $user->setGender(0);
                 }
 
-                //Make sure errors are empty
+                // Make sure errors are empty
                 if(empty($data['emailError']) && empty($data['nameError']) && empty($data['passwordError']) && empty($data['passwordConfirmError'])){
-                    //Validated
+                    // Validated
 
-                    //Hash password
+                    // Hash password
                     $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
 
-                    //Register user
+                    // Register user
                     if($this->userDAO->register($user)){
                         redirect('users/login');
                     } else {
-                        //aanpassen naar iets fancies
                         die('Something went wrong');
                     }
 
@@ -161,29 +160,29 @@
         }
 
         public function login(){
-            //Check for POST
+            // Check for POST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                //Process form
+                // Process form
 
-                //Sanitize POST data
+                // Sanitize POST data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-                //Init data
+                // Init data
                 $user = new User();
                 $user->setEmail(trim($_POST['email']));
                 $user->setPassword(trim($_POST['password']));
 
-                //Validate email not empty
+                // Validate email not empty
                 if(empty($user->getEmail())){
                     $data['emailError'] = 'Please enter email';
                 }
 
-                //Validate Password not empty
+                // Validate Password not empty
                 if(empty($user->getPassword())){
                     $data['passwordError'] = 'Please enter password';
                 }
 
-                //Check user by email
+                // Check user by email
                 if(!empty($user->getEmail())){
                     if($this->userDAO->findUserByEmail($user->getEmail())){
                         //User found
@@ -193,14 +192,14 @@
                     }
                 }
 
-                //Make sure errors are empty
+                // Make sure errors are empty
                 if(empty($data['emailError']) && empty($data['passwordError'])){
-                    //Validated
-                    //Check and login
+                    // Validated
+                    // Check and login
                     $loggedInUser = $this->userDAO->login($user);
 
                     if($loggedInUser){
-                        //Create Session
+                        // Create Session
 
                         $this->createUserSession($loggedInUser);
 
@@ -216,12 +215,12 @@
                     }
 
                 } else {
-                    //Load view with data
+                    // Load view with data
                     $this->ui('users/login', $data);
                 }
 
             } else {
-                //Init data
+                // Init data
                 $data = [
                     'email' => '',
                     'password' => '',
@@ -229,30 +228,30 @@
                     'passwordError' => ''
                 ];
 
-                //Load ui
+                // Load ui
                 $this->ui('users/login', $data);
             }
         }
 
         public function forgot(){
-            //Init data
+            // Init data
             $data = [
                 'title' => 'Forgot password?',
                 'emailError' => ''
             ];
 
-            //Check for POST
+            // Check for POST
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                //Sanitize POST data
+                // Sanitize POST data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
                 $email = trim($_POST['email']);
 
-                //Validate email not empty
+                // Validate email not empty
                 if(empty($email)){
                     $data['emailError'] = 'Please enter email';
                 }else{
-                    //Check user by email
+                    // Check user by email
                     if($this->userDAO->findUserByEmail($email)){
                         // User found
 
@@ -281,17 +280,17 @@
                 }
             }
 
-            //Load UI
+            // Load UI
             $this->ui('users/forgot', $data);
         }
 
         public function pwEmailSend(){
-            //Init data
+            // Init data
             $data = [
                 'title' => 'Password recovery email has been send'
             ];            
 
-            //Load UI
+            // Load UI
             $this->ui('users/pwemailsend', $data);
         }        
 
@@ -333,8 +332,6 @@
                                 
                                 // Update password in datebase
                                 $this->userDAO->newPassword($token, $password);
-
-                                // Delete token from database
                                 $this->userDAO->deleteToken($token);
 
                                 // Redirect to login page
@@ -351,6 +348,28 @@
                 } else {
                     $data['error'] = "Please enter a new password";
                 }                           
+            } else {
+                if($this->tokenHandler($token) == "forgot"){
+                    echo '
+                    <section id="content">
+                        <h1 id="formHeader">'.$data['title'].'</h1>
+                        <form id="forgotForm" action="newpassword?token='.$token.'" method="POST">
+                            <span>Password:</span>
+                            <input type="password" name="password" placeholder="New password">
+                            <span>Confirm password:</span>
+                            <input type="password" name="passwordConfirmation" placeholder="Confirm password">
+                            <input id="send" type="submit" value="submit">
+                        </form>
+                        <span class="invalidFeedback">'.$data['error'].'</span>
+                    </section>';
+                } else {
+                    $data['title'] = "Invalid token!";
+                    echo '
+                    <section id="content">
+                    <h1 id="formHeader">'.$data['title'].'</h1>
+                    </section>';
+                }
+                
             }
 
             //Load UI
@@ -369,6 +388,28 @@
 
             //Load UI
             $this->ui('users/pwdone', $data);
+        }
+
+        public function userVerification(){
+            // Sanitize the token
+            $token = trim(filter_var($_GET['token'], FILTER_SANITIZE_STRING));
+
+             // Init data
+             $data = [
+                'title' => '',                
+            ];
+
+            // Give token to token handler for processing
+            if($this->tokenHandler($token) == "verification"){
+                $this->userDAO->verificateUser($token);
+                $this->userDAO->deleteToken($token);
+                $data['title'] = "You are now verified";
+            } else {
+                $data['title'] = "Invalid request!";
+            }
+
+            //Load UI
+            $this->ui('users/userverification', $data);
         }
 
         public function createUserSession($loggedInUser){
@@ -435,21 +476,15 @@
             $this->userDAO->insertToken($email, $token, $type);
         }
 
-        public function checkToken($token){
+        // Handles tokens
+        public function tokenHandler($token){
+            // Check if checkTokenType in the UserDAO returns a result
             if($row = $this->userDAO->checkTokenType($token)){
-                if($row->tokenType == "forgot"){
-                    echo '
-                    <form id="forgotForm" action="newpassword?token='.$token.'" method="POST">
-                        <span>Password:</span>
-                        <input type="password" name="password" placeholder="New password">
-                        <span>Confirm password:</span>
-                        <input type="password" name="passwordConfirmation" placeholder="Confirm password">
-                        <input id="send" type="submit" value="submit">
-                    </form> ';
-                } else {
-                    echo "Invalid token request!";
-                }
-            } else {
+                // Return the tokenType
+                return $row->tokenType;
+            } 
+            // If the token doesn't return a result
+            else {
                 echo "Invalid token!";
             }            
         }
