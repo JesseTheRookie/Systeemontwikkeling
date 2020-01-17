@@ -10,17 +10,18 @@ class KidsTicketDAO{
     public function getKidsContent() {
       $kidsContentArray = array();
 
-      $this->db->query("SELECT elementName, description, content
+      $this->db->query("SELECT name, description, content
                         FROM Content as c
-                        WHERE contentType = 2
+                        WHERE contentType = :contentType
                        ");
 
+      $this->db->bind(':contentType', 6);
       $kidsContent = $this->db->resultSet();
 
       foreach ($kidsContent as $content) {
             $kidsContentModel = new HomeModel();
 
-            $kidsContentModel->setElementName($content->elementName);
+            $kidsContentModel->setElementName($content->name);
             $kidsContentModel->setDescription($content->description);
             $kidsContentModel->setContent($content->content);
 
@@ -47,11 +48,11 @@ class KidsTicketDAO{
       $this->db->query("SELECT a.artistName, dt.ticketId
                         FROM PerformanceKids AS k
                         INNER JOIN Artist AS a
-                        ON k.kidsArtistId = a.artistId
+                        ON k.kidsTicketArtist = a.artistId
                         INNER JOIN Content as c
                         ON a.artistName = c.name
-                        INNER JOIN KidsTicket as kt
-                        ON k.kidsTicketId = kt.ticketId
+                        INNER JOIN KidsTicket as dt
+                        ON k.kidsTicketId = dt.ticketId
                        ");
 
       return $this->db->resultSet();
@@ -63,8 +64,11 @@ class KidsTicketDAO{
 
         $this->db->query("SELECT description, content, name
                           FROM Content
-                          WHERE EventType = 1 AND Content IS NOT NULL
+                          WHERE EventType = :eventType AND contentType != :contentType
                         ");
+
+      $this->db->bind(':eventType', 4);
+      $this->db->bind(':contentType', 6);
 
         //Fetching results
         return $this->db->resultSet();
@@ -74,11 +78,11 @@ class KidsTicketDAO{
     public function getKidsTickets($ticketDate){
         $kidsTicketArray = array();
 
-        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, d.kidsTicketSession
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, k.kidsTicketsession
                           FROM Tickets AS t
                           INNER JOIN KidsTicket AS k
                           ON t.ticketId = k.ticketId
-                          INNER JOIN kidsLocation AS kl
+                          INNER JOIN KidsLocation AS kl
                           ON t.ticketId = kl.ticketId
                           INNER JOIN Location AS l
                           ON k.locationId = l.locationId
@@ -91,7 +95,7 @@ class KidsTicketDAO{
         //Fetching results
         $kidsTickets = $this->db->resultSet();
 
-        foreach ($kidsTickets as $kidsTickets) {
+        foreach ($kidsTickets as $kidsTicket) {
             $kidsTicketModel = new KidsTicketModel();
 
             $kidsTicketModel->setTicketId($kidsTicket->ticketId);
@@ -99,7 +103,7 @@ class KidsTicketDAO{
             $kidsTicketModel->setEndDateTime($kidsTicket->endDateTime);
             $kidsTicketModel->setTicketQuantity($kidsTicket->ticketQuantity);
             $kidsTicketModel->setPrice($kidsTicket->price);
-            $kidsTicketModel->setKidsTicketSession($kidsTicket->kidsTicketSession);
+            $kidsTicketModel->setKidsTicketSession($kidsTicket->kidsTicketsession);
 
             //Add objects into array
             array_push($kidsTicketArray, $kidsTicketModel);

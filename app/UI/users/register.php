@@ -26,12 +26,12 @@
 			    		</label> <br><br>
 
 			            <label>
-			            	<input type="radio" name="gender" value="male" checked>
+			            	<input type="radio" name="gender" value="male" checked class="radio-payment">
 			            	Male
 			            </label>
 
 			            <label>
-			            	<input type="radio" name="gender" value="female">
+			            	<input type="radio" name="gender" value="female" class="radio-payment">
 			            	Female
 			        	</label>
 			        </div> <br>

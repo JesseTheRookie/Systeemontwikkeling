@@ -56,19 +56,27 @@
   <article class="content-festival-info">
     <?php foreach($data['eventInfo'] as $information) : ?>
       <article>
-        <?php echo $information->getTotalArtists(); ?>
+          <?php
+            echo $information->getTotalArtists();
+          ?>
       </article>
 
       <article>
-        <?php echo $information->getTotalLocations(); ?>
+          <?php
+            echo $information->getTotalLocations();
+          ?>
       </article>
 
       <article>
-        <?php echo $information->getTotalTickets(); ?>
+          <?php
+            echo $information->getTotalTickets();
+          ?>
       </article>
 
       <article>
-        <?php echo $information->getTotalEvents(); ?>
+          <?php
+            echo $information->getTotalEvents();
+          ?>
       </article>
     <?php endforeach; ?>
 
@@ -98,27 +106,31 @@
   <hr>
 
   <article class="content-events">
-  <?php foreach($data['events'] as $event) : ?>
-  <article class="eventContainer">
-      <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
-        <img
-            src="<?php echo $event->getContent(); ?>"
-            alt=""
-        />
+    <?php foreach($data['events'] as $event) : ?>
+    <article class="eventContainer">
+        <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
+          <img
+              src="<?php echo $event->getContent(); ?>"
+              alt="Image event"
+          />
 
-        <article class="centered">
-          <h4>
-            <?php echo $event->getElementName(); ?>
-          </h4>
+          <article class="centered">
+            <h4>
+                <?php
+                  echo $event->getElementName();
+                ?>
+            </h4>
 
-          <p>
-            26TH JULY - 29TH JULY
-          </p>
-        </article>
-      </a>
-    </article>
-  <?php endforeach; ?>
-</article>
+            <p>
+                <?php
+                echo $event->getDescription();
+                ?>
+            </p>
+          </article>
+        </a>
+      </article>
+    <?php endforeach; ?>
+  </article>
 </section>
 
 <section id="layout-artists-33">

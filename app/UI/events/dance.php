@@ -4,6 +4,7 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
+<?php var_dump($_SESSION) ?>
 
 <section id="section-dance-header">
     <article class="content-dance-header">
@@ -101,7 +102,7 @@
     <?php foreach($data['tickets'] as $ticket) : ?>
         <form
             action="<?php echo URLROOT; ?>/dance/order"
-            method="POST"
+            method="GET"
             role="form">
 
         <table class="table-tickets-dance">
@@ -136,7 +137,7 @@
                         <?php
                             $i = 1;
                             while ($i <= 10){ ?>
-                                <option value="<?php echo $i . "|" . $ticket->getTicketId() ?>">
+                                <option value="<?php echo "dance" . "|" . $i . "|" . $ticket->getTicketId() ?>">
                                     <?php
                                         echo $i;
                                         $i++;
@@ -145,7 +146,11 @@
                         <?php } ?>
                     </select>
                 <td>
-                        <button type="add" value="add" name="add" class="button-add-dance">
+                        <button
+                            type="add"
+                            value="add"
+                            name="add"
+                            class="button-add-dance">
                             Add
                         </button>
                     </form>

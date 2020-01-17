@@ -31,4 +31,31 @@ class ShoppingCartDAO{
 
         return $ticket;
     }
+
+    public function findJazzTickets($ticketId) {
+        $this->db->query("SELECT t.ticketId AS ticketId, t.startDateTime As startDateTime, t.price AS price, jl.hall AS name
+                          FROM tickets AS t
+                          INNER JOIN jazzticket AS j
+                          ON t.ticketId = j.ticketId
+                          INNER JOIN jazzLocation AS jl
+                          ON j.ticketId = jl.ticketId
+                          WHERE t.ticketId = :ticketId
+                        ");
+
+        $this->db->bind(':ticketId', $ticketId);
+
+        $result = $this->db->resultSet();
+        $ticket = array();
+
+        foreach ($result as $r) {
+          $ticket = array(
+          'ticketId' => $r->ticketId,
+          'startDateTime' => $r->startDateTime,
+          'price'=> $r->price,
+          'name' => $r->name
+          );
+        }
+
+        return $ticket;
+    }
 }

@@ -52,8 +52,8 @@
             <article>
                 <img
                     src="<?php echo URLROOT; echo $performer->content; ?>"
-                    alt="Performer Kids Artist"
-                    title="Performer Kids Artist"
+                    alt="Performer dance Artist"
+                    title="Performer dance Artist"
                 />
                 <button class="myBtn">
                     <?php echo $performer->name ?>
@@ -126,7 +126,7 @@
                 </td>
 
                 <td>
-                    <select class="select-kids">
+                    <select class="select-dance">
                         <option value="">
                             SELECT
                         </option>
@@ -134,7 +134,7 @@
                         <?php
                         $i = 1;
                         while ($i <= 10): ?>
-                            <option value="<?php echo $i; ?>">
+                                <option value="<?php echo "jazz" . "|" . $i . "|" . $ticket->getTicketId() ?>">
                                 <?php echo $i;
                                 $i++;
                                  ?>
@@ -143,7 +143,7 @@
                 </td>
 
                 <td>
-                    <a href="" class="button-add-kids">
+                    <a href="" class="button-add-dance">
                         Add
                     </a>
                 </td>

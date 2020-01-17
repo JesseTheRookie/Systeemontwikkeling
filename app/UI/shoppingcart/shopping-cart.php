@@ -1,16 +1,15 @@
 <?php
     require APPROOT . '/UI/inc/header.php';
-    require APPROOT . '/UI/inc/navigation.php';
+   // require APPROOT . '/UI/inc/navigation.php';
 ?>
-
 <div id="layout-shoppingcart">
-        <h1>
-            Shopping Cart
-        </h1>
+    <h1>
+        Shopping Cart
+    </h1>
 
-        <hr>
+    <hr>
+
     <div class="content-shoppingcart">
-
         <div>
             <h2>
                 Tickets >
@@ -66,49 +65,40 @@
                 Total
             </th>
         </tr>
-         <?php foreach ($data['items'] as $item): ?>
-        <tr>
-            <td>
-                <?php
-                    echo $item['name'];
-                ?>
-            </td>
 
-            <td>
-                <?php
-                    foreach ($_SESSION['shoppingCart'] as $quantity => $total) {
-                        //Converting array ($Total) to a string by the implode function.
-                        if ($item['ticketId'] == $quantity) {
-                            $string_product = implode(',',$total);
-                            echo $string_product;
-                        }
-                    }
-                 ?>
-            </td>
+        <?php foreach ($data['items'] as $item): ?>
+            <tr>
+                <td>
+                    <?php
+                        echo $item['name'];
+                    ?>
+                </td>
 
-            <td>
-                <?php
-                   echo date("jS F H:i", strtotime($item['startDateTime']));
-                 ?>
-            </td>
+                <td>
+                    <?php
+                        echo $this->getQuantity($item['ticketId']);
+                     ?>
+                </td>
 
-            <td>
-                <?php
-                    echo $item['price'];
-                ?>
-            </td>
+                <td>
+                    <?php
+                        echo date("jS F H:i", strtotime($item['startDateTime']));
+                     ?>
+                </td>
 
-            <td>
-                <?php
-                    foreach ($_SESSION['shoppingCart'] as $quantity => $total) {
-                        if ($item['ticketId'] == $quantity) {
-                            echo $item['price'] * $total['Quantity'];
-                        }
-                    }
-                 ?>
-            </td>
+                <td>
+                    <?php
+                        echo "€ " . $item['price'];
+                    ?>
+                </td>
 
-            <td>
+                <td class="totalpp">
+                    <?php
+                         echo "€ " . $this->calculateTotalPricePerProd($item['ticketId']);
+                     ?>
+                </td>
+
+                <td>
                     <form
                         action="<?php echo URLROOT; ?>/shoppingcart/deleteFromCart"
                         method="POST"
@@ -118,15 +108,16 @@
                             type="submit"
                             name="delete"
                             value="<?php echo $item['ticketId']; ?>">
-                        <img
-                            src="<?php echo URLROOT; ?>/img/shopping-cart/delete.png"
-                            alt="Trash button"
-                            title="Trash button"
-                        />
+
+                            <img
+                                src="<?php echo URLROOT; ?>/img/shopping-cart/delete.png"
+                                alt="Trash button"
+                                title="Trash button"
+                            />
                         </button>
                     </form>
-            </td>
-        </tr>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </table>
 </div>
@@ -140,25 +131,35 @@
         </div>
 
         <div>
-            260,-
+            <?php
+                echo "€ " . $this->calculateTotalPrice();
+            ?>
         </div>
 
         <div>
-            <button type="submit" name="submit">
-                Order
-            </button>
+            <form
+                action="<?php echo URLROOT; ?>/payment"
+                method="POST"
+                role="form">
+                <?php
+                    $this->buttonShoppingCart();
+                ?>
+            </form>
+
                 <img
                     src="<?php echo URLROOT; ?>/img/shopping-cart/ideal.png"
                     alt="Icon iDeal"
                     title="Icon iDeal"
                     class="header-food"
                 />
+
                 <img
                     src="<?php echo URLROOT; ?>/img/shopping-cart/mastercard.png"
                     alt="Icon mastercard"
                     title="Icon mastercard"
                     class="header-food"
                 />
+
                 <img
                     src="<?php echo URLROOT; ?>/img/shopping-cart/paypal.png"
                     alt="Icon paypal"
@@ -192,27 +193,27 @@
             <p>
                 Location: Oude Groenmarkt 10, Haarlem
             </p>
-            <button type="submit" name="submit">
+            <button type="submit" name="submit" >
                 Add to cart
             </button>
         </div>
         <div>
             <h4>
-                Grab a bite
+                Go Party
             </h4>
             <img
-                src="<?php echo URLROOT; ?>/img/food/fris.jpg"
+                src="<?php echo URLROOT; ?>/img/dance/armin.png"
                 alt="Cross selling"
                 title="Cross selling Item"
             />
             <p>
-                Restaurant: Urban Frenchy Bistro Tojours
+                Session: Back2Back
             </p>
             <p>
-                Price: 35,00 pp
+                Price:  € 75
             </p>
             <p>
-                Start: Today, 17.30
+                Start: 20:00, 27th July
             </p>
             <p>
                 Location: Oude Groenmarkt 10, Haarlem

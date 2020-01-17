@@ -12,12 +12,10 @@ body
 }
 *
 {
-    top: 0;
     margin: 0;
     padding: 0;
     left: 0;
     right: 0;
-    bottom: 0;
     font-family: 'Lato', sans-serif;
 }
 
@@ -319,17 +317,15 @@ hr
     text-transform: uppercase;
 }
 
-footer
-{
-    clear: both;
-    position: relative;
-    bottom: 0%;
-}
 
 #layout-footer-25
 {
     padding: 40px 0px;
+    clear: both;
+    position: relative;
+    bottom: 0px !important;
 }
+
 
 #layout-footer-25 > article
 {
@@ -338,6 +334,7 @@ footer
     position: relative;
     margin: 0 auto;
     font-size: 20px;
+    bottom: 0% !important;
     width: 80%;
 }
 
@@ -1484,7 +1481,7 @@ input[type="radio"]
 
 /* KIDS */
 
-#section-kids-header > div
+#section-kids-header > article
 {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -1528,7 +1525,7 @@ background-image: linear-gradient(to bottom, #2Db688, #2Db688, #2Db688, #2Db688,
     transition: 0.25s ease;
 }
 
-#section-artists-kids > div
+#section-artists-kids > article
 {
     display: grid;
     grid-template-columns: 33% 33% 33%;
@@ -1670,7 +1667,7 @@ hr
     padding: 0px 0px 100px 0px;
 }
 
-#section-artists-kids > div
+#section-artists-kids > article
 {
     padding: 0px 0px 100px 0px;
 }
@@ -1704,7 +1701,7 @@ hr
     padding: 0px 0px 0px 0px;
 }
 
-#layout-header-kids > div
+#layout-header-kids > article
 {
     display: grid;
     grid-template-columns: 33% 33% 33%;
@@ -1864,7 +1861,7 @@ text-transform: uppercase;
 
 .shoppingcart-items
 {
-    width: 70%;
+    width: 75%;
     margin: 100px auto;
 }
 
@@ -1883,7 +1880,18 @@ text-transform: uppercase;
     font-size: 14px;
     text-align: left;
     padding: 12px 0px;
-    width: 24%;
+    width: 28%;
+    border-bottom: 1px solid #d2d2d2;
+
+}
+
+.shoppingcart-items td
+{
+    font-weight: 100;
+    font-size: 14px;
+    text-align: left;
+    padding: 12px 0px;
+    width: 23%;
     border-bottom: 1px solid #d2d2d2;
 
 }
@@ -2105,7 +2113,7 @@ padding: 400px;
 {
     padding: 140px 0px 0px 0px;
     width: 100%;
-    height: 66%;
+    height: 120%;
 }
 
 #loginHeader
@@ -2233,4 +2241,128 @@ padding: 400px;
     color: #fff;
     transform: 0.25s ease-in-out;
     text-decoration: none;
+}
+
+#layout-payment-form > div
+{
+    display: grid;
+    grid-template-columns: 20% 75%;
+    position: relative;
+    grid-gap: 5%;
+    margin: 0 auto;
+    font-size: 20px;
+    width: 80%;
+    text-align: left;
+
+}
+
+#layout-payment-form
+{
+    padding: 100px 0px;
+}
+.content-payment-form
+{
+    margin: 20px;
+    text-align: left;
+    padding: 20px;
+}
+
+.content-payment-form p
+{
+    font-size: 14px;
+    color: #000000;
+    padding: 0px 0px 0px 0px;
+    margin: 20px 0px;
+    border-bottom: 1px solid #000000;
+}
+
+.border-above
+{
+    font-size: 14px;
+    color: #000000;
+    padding: 10px 0px 0px 0px;
+    border-bottom: hidden !important;
+    margin: 30px 0px !important;
+    font-weight: bold;
+}
+
+
+.content-payment-form h3
+{
+    font-size: 18px;
+    color: #000000;
+    padding: 10px 0px 20px 0px;
+}
+
+.box-left
+{    box-shadow: 0 0 10px #b7e1fc;
+    padding: 20px;
+    background: rgb(207,235,253);
+    background: linear-gradient(90deg, rgba(207,235,253,1) 0%, rgba(243,250,254,1) 35%, rgba(183,225,252,1) 100%);
+}
+
+.box-right
+{
+    box-shadow: 0 0 10px #b7e1fc;
+    display: block;
+    padding: 20px;
+    background: rgb(207,235,253);
+    background: linear-gradient(90deg, rgba(207,235,253,1) 0%, rgba(243,250,254,1) 35%, rgba(183,225,252,1) 100%);
+}
+
+.box-right form
+{
+    padding: 40px 0px;
+}
+
+.radio-payment
+{
+    box-shadow: none !important;
+    display: inline;
+    width: 30px;
+}
+
+.box-right h4
+{
+    display: inline-block;
+}
+
+.box-right img
+{
+    width: 30px;
+    vertical-align: middle;
+}
+
+.box-right article
+{
+    box-shadow: 0 0 10px #f0f9fe;
+
+    padding: 0px 0px 40px 0px;
+    background-color: #f0f9fe;
+    margin: 0px 0px 20px 0px;
+    padding: 20px;
+}
+
+.box-right h4
+{
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.button-payment
+{
+    width: 140px;
+    height: 40px;
+    font-size: 18px;
+    display: block;
+    background-color: #04df8f;
+    color: #fff;
+    display: inline;
+}
+
+.confirm-btn-payment
+{
+    box-shadow: none !important;
+    background-color: transparent !important;
+    padding: 40px 0px !important;
 }
