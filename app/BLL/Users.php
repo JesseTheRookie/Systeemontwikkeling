@@ -314,8 +314,13 @@
         }        
 
         public function newPassword(){   
-            // Sanitize the token
-            $token = trim(filter_var($_GET['token'], FILTER_SANITIZE_STRING));
+            // Sanitize the token if provided
+            if(isset($_GET['token'])){
+                $token = trim(filter_var($_GET['token'], FILTER_SANITIZE_STRING));
+            } else {
+                $token = "";
+            }
+            
             
             // Sanitize user input and declare password validation regex
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -357,41 +362,35 @@
                                 redirect("users/login");
                             } else {
                                 $data['error'] = "Passwords don't match!";
-                                $this->newPasswordFormFactory($data, $token);
 
                                 //Load UI
                                 $this->ui('users/newpassword', $data);
                             }
                         } else {
                             $data['error'] = "Invalid password";
-                            $this->newPasswordFormFactory($data, $token);
 
                             //Load UI
                             $this->ui('users/newpassword', $data);
                         }
                     } else {
                         $data['error'] = "Password needs to be at leat 6 characters long";
-                        $this->newPasswordFormFactory($data, $token);
 
                         //Load UI
                         $this->ui('users/newpassword', $data);
                     }
                 } else {
                     $data['error'] = "Please enter a new password";
-                    $this->newPasswordFormFactory($data, $token);
 
                     //Load UI
                     $this->ui('users/newpassword', $data);
                 }                           
             } else {
                 if($this->tokenHandler($token) == "forgot"){
-                    $this->newPasswordFormFactory($data, $token);
                 } else {
-                    $data['title'] = "Invalid token!";
-                    echo '
-                    <section id="content">
-                    <h1 id="formHeader">'.$data['title'].'</h1>
-                    </section>';
+                    $data['title'] = "Invalid request!";
+
+                    //Load UI
+                    $this->ui('users/newpassword', $data);
                 }
                 
             }
@@ -509,22 +508,20 @@
             } 
             // If the token doesn't return a result
             else {
-                echo "Invalid token!";
+                return false;
             }            
         }
 
         public function newPasswordFormFactory($data, $token){
             echo '
-                <section id="content">
-                    <h1 id="formHeader">'.$data['title'].'</h1>
-                    <form id="forgotForm" action="newpassword?token='.$token.'" method="POST">
-                        <span>Password:</span>
-                        <input type="password" name="password" placeholder="New password">
-                        <span>Confirm password:</span>
-                        <input type="password" name="passwordConfirmation" placeholder="Confirm password">
-                        <input id="send" type="submit" value="submit">
-                    </form>
-                    <span class="invalidFeedback">'.$data['error'].'</span>
-                </section>';
+                <form id="forgotForm" action="newpassword?token='.$token.'" method="POST">
+                    <span>Password:</span>
+                    <input type="password" name="password" placeholder="New password">
+                    <span>Confirm password:</span>
+                    <input type="password" name="passwordConfirmation" placeholder="Confirm password">
+                    <input id="send" type="submit" value="submit">
+                </form>
+                <br/>
+                <span class="invalidFeedback">'.$data['error'].'</span>';
         }
     }
