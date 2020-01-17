@@ -126,6 +126,24 @@
                         die('Something went wrong');
                     }
 
+                    // Send verification email
+                    // Create token
+                    $this->createToken($user->getEmail(), "verification");
+
+                    // Message
+                    $message = "You have registered at Haarlem Festival. \n
+                    Click the link below to verificate your account! \n
+                    " . URLROOT . "?token=" . $token;
+
+                    // Use wordwrap() if lines are longer than 70 characters
+                    $message = wordwrap($message,70);
+
+                    // Subject
+                    $subject = "Haarlem Festival User Verification";
+
+                    // Send email
+                    //mail($email, $subject, $message);  
+
                 } else {
                     //Load view with data
                     $this->ui('users/register', $data);
@@ -255,6 +273,9 @@
                     if($this->userDAO->findUserByEmail($email)){
                         // User found
 
+                        // Create token
+                        $this->createToken($email, "forgot");
+
                         // Message
                         $message = "You have requested a password recovery for your account at Haarlem Festival. \n
                         Click the link below to set up a new password \n
@@ -267,9 +288,7 @@
                         $subject = "Haarlem Festival password recovery";
 
                         // Send email
-                        //mail($email, $subject, $message);                        
-
-                        $this->createToken($email, "forgot");
+                        //mail($email, $subject, $message);                                                
 
                         redirect("users/pwemailsend");
 
