@@ -13,7 +13,7 @@
             $images = $this->getHistoricImages();
 
             $data = [
-                'title' => 'Historic Page',
+                'title' => 'Haarlem Historic',
                 'content' => $content,
                 'images' => $images
             ];

@@ -119,6 +119,11 @@
                 />
               </a>
             </li>
+            <li>
+              <a href="<?php echo URLROOT; ?>/search/search">
+                  Search
+              </a>
+            </li>
           </ul>
         </article>
     </article>
