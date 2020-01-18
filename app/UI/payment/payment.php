@@ -69,8 +69,12 @@
                    <?php echo "Choose your payment method, " . $_SESSION['userName']; ?>
                 </h3>
                 <article>
-                    <form action="">
-                        <input type="radio" class="radio-payment">
+                <form
+                    action="<?php echo URLROOT; ?>/mollie"
+                    method="GET"
+                    role="form">
+
+                <input type="radio" class="radio-payment">
                     <img
                         src="<?php echo URLROOT; ?>/img/shopping-cart/ideal.png"
                         alt="Icon iDeal"
@@ -108,7 +112,11 @@
                         </h4>
                 </article>
                 <article class="confirm-btn-payment">
-                    <button class="button-payment">
+                    <button
+                        type="confirm"
+                        value="confirm"
+                        name="confirm"
+                        class="button-payment">
                         Confirm
                     </button>
                     <h4>

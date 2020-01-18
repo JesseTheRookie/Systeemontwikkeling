@@ -2,41 +2,32 @@
 require APPROOT . '/UI/inc/header.php';
 require APPROOT . '/UI/inc/navigation.php';
 include APPROOT . '/BLL/ShoppingCart.php';
-
-if (isset($_POST['ticket-quantity'])) {
-    //$ticketId = $_POST['ticket-quantity'];
-
-    //Nog ff naar kijken
-    list($ticketId, $quantity) = explode("-", $_POST['ticket-quantity'], 2);
-
-    foreach ($data['tickets'] as $t){
-        if($t->getTicketId() == $ticketId){
-            $t->setTicketQuantity($quantity);
-            ShoppingCart::AddToCart($t);
-        }
-    }
-}
-
 ?>
 
-<?php var_dump($_SESSION) ?>
-
-<header id="mainHeader">
-    <section class="background" >
+<div id="mainHeader">
+    <section class="background">
     </section>
+
     <section>
         <div class="overlay">
             <h1>haarlem <br/>jazz<span>.</span></h1>
-            <button class="bigButton">Get Tickets</button>
-            <button class="bigButton">Show program</button>
+
+            <button class="bigButton">
+                Get Tickets
+            </button>
+
+            <button class="bigButton">
+                Show program
+            </button>
         </div>
+
         <p>
-        <?php foreach($data['artists'] as $artist) :
-            echo $artist->getArtistName(); echo "<span>.</span> ";
-        endforeach; ?>
+            <?php foreach($data['artists'] as $artist) :
+                echo $artist->getArtistName(); echo "<span>.</span> ";
+            endforeach; ?>
         </p>
     </section>
-</header>
+</div>
 
 <section id="artiesten">
         <div id="lineup">

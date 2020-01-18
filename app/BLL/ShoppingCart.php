@@ -65,7 +65,6 @@
                     $cartItem = $this->shoppingCartDal->findJazzTickets($id);
                     $cartItems[] = $cartItem;
                   }
-
             }
         }
         $_SESSION['cartItems'] = $cartItems;

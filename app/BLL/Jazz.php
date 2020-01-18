@@ -22,10 +22,7 @@ class Jazz extends Controller {
                     $ticket->addArtist($artist);
             }
         }
-    }
-
-    public function getJazzLocationsFromTicket($ticketId){
-        return $this->jazzTicketDAO->getJazzTicketLocationsFromTicket($ticketId);
+        return $tickets;
     }
 
     public function getJazzArtistsFromTicket($ticketId){
@@ -80,24 +77,24 @@ class Jazz extends Controller {
 
     //'ADD' button will execute this
     public function orderJazzTickets() {
-        include APPROOT . '/BLL/ShoppingCart.php';
 
-        $content = $this->danceDal->getDanceContent();
-        $days = $this->getDifferentDays();
-        $performers = $this->danceDal->getPerformers();
+        $data = [
+            'title' => 'Jazz Page',
+            'days' =>  $this->getDifferentDays(),
+            'tickets' => $this->getAllJazzTickets(),
+            'artists' => $this->getAllArtists()
+        ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             // Sanitize GET data
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
-            $data = [
-                    'title' => 'Dance Page',
-                    'content' => $content,
-                    'days' => $this->getDifferentDays(),
-                    'tickets' => $this->getAllDanceTickets($_SESSION['ticketDate']),
-                    'artists' => $this->getAllArtists(),
-                    'performers' => $performers
-                ];
+             $data = [
+                'title' => 'Jazz Page',
+                'days' =>  $this->getDifferentDays(),
+                'tickets' => $this->getAllJazzTickets(),
+                'artists' => $this->getAllArtists()
+            ];
 
             //Quantity select has three values; bought tickets, ticketId and event type
             //Exploding it because we need them seperate.
@@ -125,7 +122,7 @@ class Jazz extends Controller {
             }
 
         //Load View
-        $this->ui('events/dance', $data);
+        $this->ui('events/jazz', $data);
         }
     }
 }

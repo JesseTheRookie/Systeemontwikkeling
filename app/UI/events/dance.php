@@ -4,8 +4,7 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
-<?php var_dump($_SESSION) ?>
-
+<?php var_dump($_SESSION); ?>
 <section id="section-dance-header">
     <article class="content-dance-header">
         <?php foreach($data['content'] as $c) : ?>
@@ -99,6 +98,13 @@
         <?php endforeach; ?>
     </article>
 
+    <div class="msg-dance">
+        <span
+            class="message-dance">
+            <?php echo $data['message'] ?>
+        </span>
+    </div>
+
     <?php foreach($data['tickets'] as $ticket) : ?>
         <form
             action="<?php echo URLROOT; ?>/dance/order"
@@ -175,4 +181,3 @@
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
-

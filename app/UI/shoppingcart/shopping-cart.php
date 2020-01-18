@@ -1,10 +1,6 @@
 <?php
     require APPROOT . '/UI/inc/header.php';
-<<<<<<< HEAD
-   // require APPROOT . '/UI/inc/navigation.php';
-=======
     require APPROOT . '/UI/inc/navigation.php';
->>>>>>> develop
 ?>
 <div id="layout-shoppingcart">
     <h1>

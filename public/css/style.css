@@ -815,7 +815,7 @@ td
     color: #ffffff;
     margin: 0 auto;
     text-align: center;
-    padding: 100px 0px 0px 0px;
+    padding: 60px 0px 0px 0px;
 }
 
 #section-header-dance > article
@@ -2373,4 +2373,54 @@ padding: 400px;
     box-shadow: none !important;
     background-color: transparent !important;
     padding: 40px 0px !important;
+}
+
+.message-dance
+{
+    color: #04df8f;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.msg-dance
+{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 22px;
+    padding: 0px 0px 40px 0px;
+}
+
+#section-confirm
+{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content-confirm h2
+{
+    padding: 100px 0px 40px 0px;
+    font-size: 40px;
+}
+
+.content-confirm p
+{
+    font-size: 22px;
+    color: #666666;
+    padding: 0px 0px 20px 0px;
+}
+
+
+.content-confirm a
+{
+    font-size: 28px;
+    color: #666666;
+    padding: 6px 0px 20px 0px;
+    width: 140px;
+    height: 40px;
+    display: block;
+    background-color: #04df8f;
+    color: #fff;
+    margin: 0 auto 100px auto;
+    text-decoration: none;
 }

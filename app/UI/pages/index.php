@@ -5,6 +5,9 @@
     require APPROOT . '/UI/inc/navigation.php';
 ?>
 
+<?php
+var_dump($_SESSION['totalPrice']) ?>
+
 <section id="section-hero">
     <article class="content-hero">
       <h1>
