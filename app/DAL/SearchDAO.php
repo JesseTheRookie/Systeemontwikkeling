@@ -37,7 +37,7 @@ class SearchDAO {
 
     public function searchDB($table, $column, $value){
         // Prepare query
-        $this->db->query("  SELECT * FROM `tickets` WHERE `price` LIKE '60'
+        $this->db->query("  SELECT * FROM `:tableName` WHERE `:columns` LIKE ':value'
                             "); 
         //die($table . " | " . $column . " | " . $value);
         // Bind values 
