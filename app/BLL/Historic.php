@@ -1,56 +1,71 @@
-<?php
+<?php 
+    class Historic EXTENDS Controller{
 
-class Jazz extends Controller {
-    public function __construct(){
-        $this->jazzTicketModel = $this->model('JazzTicketModel');
-        $this->jazzTicketDAO = $this->dal('JazzTicketDAO');
-    }
-
-    public function getAllJazzTickets(){
-        $artists = $this->getAllArtists();
-        $tickets = $this->jazzTicketDAO->getJazzTickets();
-
-        foreach($tickets as $ticket) {
-            foreach($artists as $artist) {
-                if($ticket->getTicketId() == $artist->getTicketId())
-                    $ticket->addArtist($artist);
-            }
+        // Create object for DAO and Model layer
+        public function __construct() {
+            $this->historicModel = $this->model('HistoricModel');
+            $this->historicImageModel = $this->model('HistoricImageModel');
+            $this->historicDAO = $this->dal('HistoricDAO');
         }
-
-        return $tickets;
-    }
-
-    public function getAllArtists(){
-        return $this->jazzTicketDAO->getArtists();
-    }
-
-    public function  getDifferentDays(){
-        return $this->jazzTicketDAO->getDifferentDays();
-    }
-
-    public function index(){
-        $ticketDate = '';
-        $data = [
-            'title' => 'Jazz Page',
-            'days' =>  $this->getDifferentDays(),
-            'tickets' => $this->getAllJazzTickets(),
-            'artists' => $this->getAllArtists()
-        ];
-
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  
+        public function index(){
+            $content = $this->getHistoricContent();
+            $images = $this->getHistoricImages();
 
             $data = [
-                'days' =>  $this->getDifferentDays(),
-                'tickets' => $this->getAllJazzTickets(),
-                'artists' => $this->getAllArtists()
+                'title' => 'Historic Page',
+                'content' => $content,
+                'images' => $images
             ];
+
+            $this->ui('events/historic', $data);
         }
 
-<<<<<<< HEAD
-        $this->ui('events/jazz', $data);
-    }
-}
-=======
+        // Get all the Historic content from the DAL
+        public function getHistoricContent(){
+            return $this->historicDAO->getHistoricContent();
+        }
+
+        // Get all the Historic images from the DAL
+        public function getHistoricImages(){
+            return $this->historicDAO->getHistoricImages();
+        }
+
+        // Top left item
+        public function gridItem1($data){
+            $content = array_slice($data['content'], 0);
+
+            echo '
+                <div class="contentItem">
+                    <h2 class="gridHeaders">
+                        '.$content[0]->getHeader().'
+                    </h2>
+                
+                    <p class="contentText">
+                    '.$content[0]->getDescription().'
+                    </p>
+                
+                    <br>
+                
+                    <a href="'.URLROOT.'/ticketpagina" class="button">
+                    '.$content[0]->getButton().'
+                    </a>
+                </div>
+            ';
+        }
+
+        // Top right item
+        public function gridItem2($data){
+            $images = array_slice($data['images'], 0);
+
+            echo 
+            '
+            <div class="contentItem">
+                <img class="img" src="'.URLROOT.'/'.$images[0]->getImageUrl().'">
+            </div>
+            ';
+        }
+
         // Bottom left item
         public function gridItem3($data){
             $images = array_slice($data['images'], 1);
@@ -86,4 +101,3 @@ class Jazz extends Controller {
             ';
         }
     }
->>>>>>> develop
