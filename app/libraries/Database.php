@@ -76,4 +76,8 @@
     public function rowCount(){
       return $this->stmt->rowCount();
     }
+
+    public function returnStatement(){
+      die(var_dump($this->stmt));
+    }
   }

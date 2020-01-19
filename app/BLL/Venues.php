@@ -8,9 +8,10 @@
         }
 
         public function index(){
-
+            // Acquire the venues
             $venues = $this->getVenues();
 
+            // Init data
             $data = [
                 'title' => 'Historic Venues',
                 'venues' => $venues

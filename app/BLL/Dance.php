@@ -57,15 +57,13 @@ class Dance Extends Controller{
             // Sanitize GET data
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
+            //If GET request, the Date button that is clicked will be saved in a session
             if(isset($_GET['ticketDate'])) {
                 $ticketDate = $_GET['ticketDate'];
-
                 $_SESSION['ticketDate'] = $_GET['ticketDate'];
-                var_dump($_SESSION);
                 } else {
                     $ticketDate = $days[0]->startDateTime;
                     $_SESSION['ticketDate'] = $days[0]->startDateTime;
-                    var_dump($_SESSION);
                 }
 
 
@@ -75,51 +73,82 @@ class Dance Extends Controller{
                 'days' => $this->getDifferentDays(),
                 'tickets' => $this->getAllDanceTickets($ticketDate),
                 'artists' => $this->getAllArtists(),
-                'performers' => $performers
+                'performers' => $performers,
+                'message' => ''
             ];
+        } else {
+            //Init Data
+            $data = [
+                'title' => 'Dance Page',
+                'content' => '',
+                'days' => '',
+                'tickets' => '',
+                'artists' => '',
+                'performers' => ''
+            ];
+    }
 
-        }
     //Load View
     $this->ui('events/dance', $data);
     }
 
+    //'ADD' button will execute this
     public function order() {
-     include APPROOT . '/BLL/ShoppingCart.php';
+        include APPROOT . '/BLL/ShoppingCart.php';
 
         $content = $this->danceDal->getDanceContent();
         $days = $this->getDifferentDays();
         $performers = $this->danceDal->getPerformers();
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-             $data = [
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            // Sanitize GET data
+            $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+
+            $data = [
                     'title' => 'Dance Page',
                     'content' => $content,
                     'days' => $this->getDifferentDays(),
                     'tickets' => $this->getAllDanceTickets($_SESSION['ticketDate']),
                     'artists' => $this->getAllArtists(),
-                    'performers' => $performers
+                    'performers' => $performers,
+                    'message' => ''
                 ];
 
-                // Sanitize GET data
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            //Print out success message when ticket added to shopping cart.
+            $data['message'] = 'Ticket added in shopping cart!';
 
-                $quantity = explode("|", $_POST['quantity']);
-                $ticketId = $quantity[1];
-                $quantity = $quantity[0];
+            //Quantity select has three values; bought tickets, ticketId and event type
+            //Exploding it because we need them seperate.
+            $info = explode("|", $_GET['quantity']);
+            $eventType = $info[0];
+            $quantity = $info[1];
+            $ticketId = $info[2];
 
-                $items = array(
-                    'Quantity' => $quantity
-                );
-                var_dump($items);
-                if (!isset($_SESSION['shoppingCart'])) {
-                    $_SESSION['shoppingCart'] = array();
-                }
-                if (!array_key_exists($ticketId, $_SESSION['shoppingCart'])) {
-                    $_SESSION['shoppingCart'][$ticketId]=$items;
-                }
-    //Load View
-    $this->ui('events/dance', $data);
-     }
-}
+            $oldQuantity = 0;
 
+            //Creating an array and passing the quantity
+            $items = array(
+                'Quantity' => $quantity,
+                'Event' => $eventType,
+                'ticketId' => $ticketId
+            );
+
+            //If shoppingcart is not created (so empty), create one.
+            if (!isset($_SESSION['shoppingCart'])) {
+                $_SESSION['shoppingCart'] = array();
+            }
+
+            //If ticketId already exists in shopping cart, add it and do not create a new one
+            if (!array_key_exists($ticketId, $_SESSION['shoppingCart'])) {
+                $_SESSION['shoppingCart'][$ticketId] = $items;
+                $_SESSION['oldQuantity'] = $quantity;
+            } else {
+                $oldQuantity = $quantity + $oldQuantity;
+                $_SESSION['shoppingCart'][$ticketId] = $items;
+            }
+
+        //Load View
+        $this->ui('events/dance', $data);
+        }
+    }
 }

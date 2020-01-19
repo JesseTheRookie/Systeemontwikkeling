@@ -1,12 +1,12 @@
 <?php
-require APPROOT . '/UI/inc/header.php';
+	require APPROOT . '/UI/inc/header.php';
 ?>
 
 <?php
 	require APPROOT . '/UI/inc/navigation.php';
 ?>
 
-<div id="content">
+<section id="content">
 	<h1 class="center" id="loginHeader">
 		Login
 	</h1>
@@ -62,7 +62,7 @@ require APPROOT . '/UI/inc/header.php';
 					Forgot password?
 				</a>
 		</p>
-	</div>
+	</section>
 
 <?php
 	require APPROOT . '/ui/inc/footer.php';

@@ -98,9 +98,17 @@
         <?php endforeach; ?>
     </article>
 
+    <div class="msg-dance">
+        <span
+            class="message-dance">
+            <?php echo $data['message'] ?>
+        </span>
+    </div>
+
     <?php foreach($data['tickets'] as $ticket) : ?>
         <form
             action="<?php echo URLROOT; ?>/dance/order"
+            method="GET"
             method="POST"
             role="form">
 
@@ -136,7 +144,7 @@
                         <?php
                             $i = 1;
                             while ($i <= 10){ ?>
-                                <option value="<?php echo $i . "|" . $ticket->getTicketId() ?>">
+                                <option value="<?php echo "dance" . "|" . $i . "|" . $ticket->getTicketId() ?>">
                                     <?php
                                         echo $i;
                                         $i++;
@@ -145,6 +153,7 @@
                         <?php } ?>
                     </select>
                 <td>
+
                         <button type="add" value="add" name="add" class="button-add-dance">
                             Add
                         </button>
@@ -158,4 +167,3 @@
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
-

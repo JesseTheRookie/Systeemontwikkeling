@@ -42,9 +42,15 @@
         <?php foreach($data['artists'] as $artist) : ?>
             <div>
                 <img
+<<<<<<< HEAD
+                    src="<?php echo URLROOT; echo $performer->content; ?>"
+                    alt="Performer dance Artist"
+                    title="Performer dance Artist"
+=======
                     src="<?php echo URLROOT; ?>/<?php echo $artist->getContent(); ?>"
                     alt="Performer Kids Artist"
                     title="Performer Kids Artist"
+>>>>>>> develop
                 />
                 <button class="myBtnKids">
                     <?php echo $artist->getArtistName(); ?>
@@ -101,6 +107,28 @@
             </td>
 
 
+<<<<<<< HEAD
+                <td>
+                    € <?php echo $ticket->getPrice(); ?>
+                </td>
+
+                <td>
+                    <select class="select-dance">
+                        <option value="">
+                            SELECT
+                        </option>
+
+                        <?php
+                        $i = 1;
+                        while ($i <= 10): ?>
+                                <option value="<?php echo "jazz" . "|" . $i . "|" . $ticket->getTicketId() ?>">
+                                <?php echo $i;
+                                $i++;
+                                 ?>
+                            </option>
+                        <?php endwhile; ?>
+                </td>
+=======
             <td>
                 <?php
                     $time = explode(" ", $ticket->getstartDateTime());
@@ -135,9 +163,10 @@
                     </option>
                 </select>
             </td>
+>>>>>>> develop
 
                 <td>
-                    <a href="" class="button-add-kids">
+                    <a href="" class="button-add-dance">
                         Add
                     </a>
                 </td>
