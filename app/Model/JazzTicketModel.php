@@ -1,6 +1,6 @@
 <?php
-require('TicketModel.php');
-require('ArtistModel.php');
+require_once('TicketModel.php');
+require_once('ArtistModel.php');
 class JazzTicketModel extends TicketModel {
     private $jazzTicketLocation;
     private $jazzTicketHall;

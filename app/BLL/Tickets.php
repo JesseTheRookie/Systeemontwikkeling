@@ -1,6 +1,6 @@
 <?php
 
-class Ticketss extends Controller {
+class Tickets extends Controller {
 
     public function __construct(){
         $this->jazzController = $this->bll('Jazz');

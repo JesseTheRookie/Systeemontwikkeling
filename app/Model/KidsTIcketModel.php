@@ -1,6 +1,6 @@
 <?php
-require('TicketModel.php');
-require('ArtistModel.php');
+require_once('TicketModel.php');
+require_once('ArtistModel.php');
 
 //Extending Tickets and Artists but kids has 2 different columns (Location and Session)
 class KidsTicketModel extends TicketModel {

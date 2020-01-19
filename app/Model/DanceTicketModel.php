@@ -1,6 +1,6 @@
 <?php
-require('TicketModel.php');
-require('ArtistModel.php');
+require_once('TicketModel.php');
+require_once('ArtistModel.php');
 
 //Extending Tickets and Artists but dance has 2 different columns (Location and Session)
 class DanceTicketModel extends TicketModel {
@@ -31,7 +31,7 @@ class DanceTicketModel extends TicketModel {
         array_push($this->artists, $artist);
     }
     public function setArtists($artists){
-        $this->artists = $artistsp;
+        $this->artists = $artists;
     }
     public function getArtists() {
         return $this->artists;

@@ -57,75 +57,31 @@
           print_r($data['jazzTickets']);
           print_r($data['danceTickets']);
   ?>
-        <?php foreach($data['jazzTickets'] as $jazzTicket) : ?>
-            <?php print_r($jazzTicket); ?>
-        <?php endforeach; ?>
 
 
 <section id="layout-calendar">
     <article class="content-calendar">
     <table class="table-bordered" id="table">
-        <tr>
-        <?php foreach($data['days'] as $day) : ?>
-            <th>
-                <?php echo date("jS F", strtotime($day->startDateTime)); ?>
-            </th>
-        <?php endforeach; ?>
-        </tr>
 
         <tr>
-            <td id="row">
-
-            </td>
-            <td>
-                1
-            </td>
-            <td>
-                2
-            </td>
-            <td>
-                15
-            </td>
-            <td>
-                16
-            </td>
+            <td></td>
+            <td>Monday</td>
+            <td>Wednesday</td>
+            <td>Thursday</td>
+            <td>Friday</td>
         </tr>
+            <?php
+                for($i = 10; $i < 24; $i++ ){
+                    echo '<tr>
+                            <td>' . $i . ':00 </td>
+                            <td value="2020-07-26">'. $this->getTicketByDayAndTime("2020-07-26", "$i:00:00" ) .'</td>
+                            <td value="2020-07-27">'. $this->getTicketByDayAndTime("2020-07-27", "$i:00:00" ) .'</td>
+                            <td value="2020-07-28">'. $this->getTicketByDayAndTime("2020-07-28", "$i:00:00" ) .'</td>
+                            <td value="2020-07-29">'. $this->getTicketByDayAndTime("2020-07-29", "$i:00:00" ) .'</td>
+                          </tr>';
+                }
+                ?>
 
-        <tr>
-            <td>
-                7
-            </td>
-            <td>
-                8
-            </td>
-            <td>
-                9
-            </td>
-            <td>
-                15
-            </td>
-            <td>
-                16
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                14
-            </td>
-            <td>
-                15
-            </td>
-            <td>
-                16
-            </td>
-            <td>
-                15
-            </td>
-            <td>
-                16
-            </td>
-        </tr>
     </table>
     </article>
 </section>

@@ -1,14 +1,4 @@
 
-<script type="text/javascript">
-$('#dance').click(function (e) {
-    $.ajax({
-      type: 'POST',
-      url: 'tickets.php',
-      data: ({eventType:"danceTickets"}),
-      cache: false
-    })
-});
-</script>
 
 <!DOCTYPE html>
 <html>
@@ -64,7 +54,7 @@ $('#dance').click(function (e) {
             <p>€ 0.00</p>
         </div>
         <button class="smallButton"><i class="fas fa-shopping-cart"></i></button>
-    </div>'
+    </div>';
     }?>
 
         <div class="ticket">
