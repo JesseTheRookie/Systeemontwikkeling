@@ -2,32 +2,41 @@
 require APPROOT . '/UI/inc/header.php';
 require APPROOT . '/UI/inc/navigation.php';
 include APPROOT . '/BLL/ShoppingCart.php';
+
+if (isset($_POST['ticket-quantity'])) {
+    //$ticketId = $_POST['ticket-quantity'];
+
+    //Nog ff naar kijken
+    list($ticketId, $quantity) = explode("-", $_POST['ticket-quantity'], 2);
+
+    foreach ($data['tickets'] as $t){
+        if($t->getTicketId() == $ticketId){
+            $t->setTicketQuantity($quantity);
+            ShoppingCart::AddToCart($t);
+        }
+    }
+}
+
 ?>
 
-<div id="mainHeader">
-    <section class="background">
-    </section>
+<?php var_dump($_SESSION) ?>
 
+<header id="mainHeader">
+    <section class="background" >
+    </section>
     <section>
         <div class="overlay">
             <h1>haarlem <br/>jazz<span>.</span></h1>
-
-            <button class="bigButton">
-                Get Tickets
-            </button>
-
-            <button class="bigButton">
-                Show program
-            </button>
+            <button class="bigButton">Get Tickets</button>
+            <button class="bigButton">Show program</button>
         </div>
-
         <p>
-            <?php foreach($data['artists'] as $artist) :
-                echo $artist->getArtistName(); echo "<span>.</span> ";
-            endforeach; ?>
+        <?php foreach($data['artists'] as $artist) :
+            echo $artist->getArtistName(); echo "<span>.</span> ";
+        endforeach; ?>
         </p>
     </section>
-</div>
+</header>
 
 <section id="artiesten">
         <div id="lineup">
@@ -82,12 +91,7 @@ include APPROOT . '/BLL/ShoppingCart.php';
     <?php foreach($data['tickets'] as $ticket) : ?>
     <?php   $dateAndTime = explode(" ", $ticket->getStartDateTime()); ?>
 
-<<<<<<< HEAD
         <?php if ($dateAndTime[0] == $_POST["ticketDate"]): ?>
-=======
-                        <article>
-                            <form method="GET" action="<?php APPROOT . '/BLL/ShoppingCart.php/AddToCart' ?>">
->>>>>>> develop
 
         <form
             action="<?php echo URLROOT; ?>/jazz/orderJazzTickets"
@@ -103,7 +107,6 @@ include APPROOT . '/BLL/ShoppingCart.php';
                                 <?php endforeach; ?>
                 </td>
 
-<<<<<<< HEAD
                 <td>
 <?php echo $ticket->getStartDateTime(); ?>
                                         - <?php echo $ticket->getEndDateTime() ?>
@@ -142,35 +145,6 @@ include APPROOT . '/BLL/ShoppingCart.php';
 
     <?php endforeach; ?>
     <?php endif; ?>
-=======
-                                <div><p><?php echo $ticket->getStartDateTime(); ?>
-                                        - <?php echo $ticket->getEndDateTime() ?></p></div>
-                                <div><p><?php echo $ticket->getJazzTicketLocation(); ?>
-                                        <br/><span><?php echo $ticket->getJazzTicketHall(); ?></span></p></div>
-                                <div><p>&#8364; <?php echo $ticket->getPrice(); ?></p></div>
-                                <div>
-                                    <select name="ticket-quantity" class="select-dance">
-                                        <?php
-                                        while ($i <= 10){ ?>
-                                            <option value="<?php echo $ticket->getTicketId() . "-" . $i ?>">
-                                                <?php
-                                                echo ++$i;
-                                                ?>
-                                            </option>
-                                        <?php } ?>
-                                    </select>
-                                </div><!-- drop down van maken -->
-                                <div>
-                                    <button class="smallButton" type="submit" name="addToCart">add</button>
-                                </div>
-                        </article>
-
-                    <?php
-                        }
-                    }
-                }
-            ?>
->>>>>>> develop
 <?php
 require APPROOT . '/UI/inc/footer.php';
 ?>

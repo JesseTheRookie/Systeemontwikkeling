@@ -91,7 +91,6 @@ class Dance Extends Controller{
     //Load View
     $this->ui('events/dance', $data);
     }
-}
 
     //'ADD' button will execute this
     public function order() {
@@ -125,6 +124,8 @@ class Dance Extends Controller{
             $quantity = $info[1];
             $ticketId = $info[2];
 
+            $oldQuantity = 0;
+
             //Creating an array and passing the quantity
             $items = array(
                 'Quantity' => $quantity,
@@ -137,9 +138,12 @@ class Dance Extends Controller{
                 $_SESSION['shoppingCart'] = array();
             }
 
-            //Get quantity from session
             //If ticketId already exists in shopping cart, add it and do not create a new one
             if (!array_key_exists($ticketId, $_SESSION['shoppingCart'])) {
+                $_SESSION['shoppingCart'][$ticketId] = $items;
+                $_SESSION['oldQuantity'] = $quantity;
+            } else {
+                $oldQuantity = $quantity + $oldQuantity;
                 $_SESSION['shoppingCart'][$ticketId] = $items;
             }
 

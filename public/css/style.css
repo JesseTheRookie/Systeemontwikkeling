@@ -1861,11 +1861,7 @@ text-transform: uppercase;
 
 .shoppingcart-items
 {
-<<<<<<< HEAD
     width: 75%;
-=======
-    width: 70%;
->>>>>>> develop
     margin: 100px auto;
 }
 
@@ -2423,4 +2419,16 @@ padding: 400px;
     color: #fff;
     margin: 0 auto 100px auto;
     text-decoration: none;
+}
+
+.content-confirm p a
+{
+    font-size: 22px !important;
+    color: #666666 !important;
+    padding: 0px 0px 20px 0px !important;
+    margin: 0 auto!important;
+    width: 80%;
+    color: #04df8f !important;
+
+    background-color: transparent !important;
 }

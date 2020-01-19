@@ -50,7 +50,7 @@
         </h2>
 
         <p>
-            We will be processing your order, please check your e-mail for the confirmation.
+            We will be processing your order, please check your e-mail for the confirmation or <a href="<?php echo URLROOT; ?>/payment/invoice" target="_blank" class="download-pdf">download your invoice here.</a>
         </p>
 
         <p>
