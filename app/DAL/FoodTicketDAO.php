@@ -62,6 +62,20 @@ class FoodTicketDAO{
         return $restaurantArray;
     }
 
+    public function getRestaurantNameByTicketId($ticketId){
+        $this->db->query("SELECT r.restaurantName
+                                FROM FoodTicket as f
+                                JOIN Restaurant as r 
+                                ON f.restaurantId = r.restaurantId
+                                WHERE f.ticketId = :id");
+
+        $this->db->bind(':id', $ticketId);
+
+        $restaurant = $this->db->resultSet();
+
+        return $restaurant;
+    }
+
     //Need to pass in ID in URL when clicking on a restaurant
     public function getRestaurantById($id) {
         $restaurantArray = array();

@@ -86,65 +86,68 @@ if (isset($_POST['ticket-quantity'])) {
             </section>
             <?php endforeach; ?>
         </header>
-
-    <?php if(isset($_POST["ticketDate"])): ?>
-    <?php foreach($data['tickets'] as $ticket) : ?>
-    <?php   $dateAndTime = explode(" ", $ticket->getStartDateTime()); ?>
+        <?php if(isset($_POST["ticketDate"])): ?>
+        <?php foreach($data['tickets'] as $ticket) : ?>
+        <?php   $dateAndTime = explode(" ", $ticket->getStartDateTime()); ?>
 
         <?php if ($dateAndTime[0] == $_POST["ticketDate"]): ?>
 
         <form
-            action="<?php echo URLROOT; ?>/jazz/orderJazzTickets"
-            method="GET"
-            role="form">
+                action="<?php echo URLROOT; ?>/jazz/orderJazzTickets"
+                method="GET"
+                role="form">
 
-        <table class="table-tickets-dance">
-            <tr>
-                <td>
-                    <?php $artists = $ticket->getArtists();
-                                foreach ($artists as $artist) : ?>
-                                    <div><p><?php echo $artist->getArtistName(); ?></p></div>
-                                <?php endforeach; ?>
-                </td>
+            <table class="table-tickets-dance">
+                <tr>
+                    <td>
+                        <?php $artists = $ticket->getArtists();
+                        foreach ($artists as $artist) : ?>
+                            <div><p><?php echo $artist->getArtistName(); ?></p></div>
+                        <?php endforeach; ?>
+                    </td>
 
-                <td>
-<?php echo $ticket->getStartDateTime(); ?>
-                                        - <?php echo $ticket->getEndDateTime() ?>
-                </td>
+                    <td>
+                        <?php echo $ticket->getStartDateTime(); ?>
+                        - <?php echo $ticket->getEndDateTime() ?>
+                    </td>
 
-                <td>
-                    <?php echo $ticket->getJazzTicketLocation(); ?>
-                </td>
+                    <td>
+                        <?php echo $ticket->getJazzTicketLocation(); ?>
+                    </td>
 
-                <td>
-                    &#8364; <?php echo $ticket->getPrice(); ?>
-                </td>
+                    <td>
+                        &#8364; <?php echo $ticket->getPrice(); ?>
+                    </td>
 
-                <td>
-                    <select name="quantity" class="select-dance">
-                        <?php
+                    <td>
+                        <select name="quantity" class="select-dance">
+                            <?php
                             $i = 1;
                             while ($i <= 10){ ?>
                                 <option value="<?php echo "jazz" . "|" . $i . "|" . $ticket->getTicketId() ?>">
                                     <?php
-                                        echo $i;
-                                        $i++;
+                                    echo $i;
+                                    $i++;
                                     ?>
                                 </option>
-                        <?php } ?>
-                    </select>
-                <td>
+                            <?php } ?>
+                        </select>
+                    <td>
                         <button type="add" value="add" name="add" class="button-add-dance">
                             Add
                         </button>
-                    </form>
-                </td>
-            </tr>
+        </form>
+        </td>
+        </tr>
         </table>
-    <?php endif; ?>
+                <?php endif; ?>
 
-    <?php endforeach; ?>
-    <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </section>
+
+
+
 <?php
 require APPROOT . '/UI/inc/footer.php';
 ?>

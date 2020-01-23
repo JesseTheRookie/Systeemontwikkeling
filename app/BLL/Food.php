@@ -8,6 +8,28 @@ class Food Extends Controller{
         $this->contentTicketModel = $this->model('ContentModel');
     }
 
+    public function getRestaurantNameByTicketId($ticketId){
+        return $this->foodDal->getRestaurantNameByTicketId($ticketId);
+    }
+
+    public function getFoodTicketFromTicket($ticketId, $reserved, $start, $end){
+        $restaurantName = $this->getRestaurantNameByTicketId($ticketId);
+        if(!empty($restaurantName)){
+            $foodTicket = new FoodTicketModel();
+
+            $foodTicket->setTicketId($ticketId);
+            $foodTicket->setReserved($reserved);
+            $foodTicket->setStartDateTime($start);
+            $foodTicket->setEndDateTime($end);
+            $foodTicket->setRestaurantName($restaurantName);
+
+            return $foodTicket;
+        }
+        else{
+            return null;
+        }
+    }
+
     public function index(){
         $restaurantType = '';
         $restaurants = $this->foodDal->getRestaurants($restaurantType);

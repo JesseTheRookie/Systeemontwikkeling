@@ -29,6 +29,27 @@
             return $historicContentArray;
         }
 
+        public function getHistoricLocationByTicketId($ticketId){
+            $historicLocations = 0;
+
+            $this->db->query("SELECT l.stad
+                                    FROM HistoricLocation as h 
+                                    JOIN Location as l 
+                                    ON  h.locationId = l.locationId
+                                    WHERE h.ticketId = :id");
+
+            $this->db->bind(':id', $ticketId);
+
+            $result = $this->db->resultSet();
+
+            foreach ($result as $location){
+                $historicLocations = array(
+                    'city' => $location->stad,
+                );
+            }
+            return $historicLocations;
+        }
+
         // Get all the historic images from the database
         public function getHistoricImages() {
             $historicImageArray = array();
