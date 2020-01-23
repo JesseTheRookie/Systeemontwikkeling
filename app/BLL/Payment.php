@@ -30,23 +30,22 @@
 
         $data = [
             'title' => 'Payment Form',
-            'comments' => ''
         ];
 
         //Save user information in array
         foreach ($_SESSION['shoppingCart'] as $item) {
-
-         $data = [
+          $data = [
               'userId' => $_SESSION['userId'],
               'ticketId' => $item['ticketId'],
               'date' => $_SESSION['ticketDate'],
-              'quantity' => $item['Quantity'],
-              'comments' => $item['comments']
+              'quantity' => $item['Quantity']
+
           ];
 
-            //Insert sold ticket information in database with information above
+          //Insert sold ticket information in database with information above
           //Inside loop because you want to add more than one ticket
           $this->paymentDal->soldTickets($data);
+
         }
         $this->ui('payment/success', $data);
     }
@@ -118,28 +117,24 @@
       $pdf->Ln();
 
       //Header table or order information
-      $pdf->SetFont('helvetica', 'B', 12);
-      $pdf->Cell(60, 10, 'Name', 1, 0, 'C');
-      $pdf->Cell(20, 10, 'Price', 1, 0, 'C');
-      $pdf->Cell(30, 10, 'Quantity', 1, 0, 'C');
-      $pdf->Cell(20, 10, 'Total', 1, 0, 'C');
-      $pdf->Cell(60, 10, 'Comment', 1, 0, 'C');
+      $pdf->Cell(90, 10, 'Name', 1, 0, 'C');
+      $pdf->Cell(50, 10, 'Quantity', 1, 0, 'C');
+      $pdf->Cell(30, 10, 'Price', 1, 0, 'C');
+      $pdf->Cell(30, 10, 'Total', 1, 0, 'C');
       $pdf->Ln();
 
       //Loop through cart items and shopping cart to get information about items
       foreach ($_SESSION['cartItems'] as $item) {
-        foreach ($_SESSION['shoppingCart'] as $c) {
-          if ($item['ticketId'] == $c['ticketId']) {
-              $pdf->SetFont('helvetica', '', 10);
-              $pdf->Cell(60,10, ' ' . $item['name'], 1, 0, 'C');
-              $pdf->Cell(20,10, ' ' . $item['price'], 1, 0, 'C');
-              $pdf->Cell(30,10, ' ' . $c['Quantity'], 1, 0, 'C');
-              $pdf->Cell(20,10, ' ' . $c['Quantity'] * $item['price'], 1, 0, 'C');
-              $pdf->Cell(60,10, ' ' . $c['comments'], 1, 0, 'C');
-              $pdf->Ln();
+          foreach ($_SESSION['shoppingCart'] as $c) {
+              $pdf->SetFont('helvetica', '', 12);
+              $pdf->Cell(90,10, ' ' . $item['name'] . ' ', 1, 0, 'L');
+              $pdf->Cell(50,10, ' ' . $c['Quantity'] . ' ', 1, 0, 'L');
+              $pdf->Cell(30,10, ' ' . $item['price'] . ' ', 1, 0, 'L');
+              $pdf->Cell(30,10, ' ' . $c['Quantity'] * $item['price'] . ' ', 1, 0, 'L');
           }
+        $pdf->Ln();
       }
-    }
+
       //Close and output PDF document
      //$pdf->Output($path . '/' . $fileName . '.pdf', 'F');
      $pdf->Output($_SESSION['userName'] . '.pdf', 'D');

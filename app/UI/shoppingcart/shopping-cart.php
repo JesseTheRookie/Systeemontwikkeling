@@ -3,8 +3,6 @@
     require APPROOT . '/UI/inc/navigation.php';
 ?>
 
-
-<?php print_r($_SESSION['shoppingCart'])  ?>
 <div id="layout-shoppingcart">
     <h1>
         Shopping Cart

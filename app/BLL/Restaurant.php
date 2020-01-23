@@ -14,14 +14,10 @@ class Restaurant Extends Controller{
         $data = [
             'title' => 'Food Page',
             'restaurant' => $restaurant,
-            'information' => $information,
-            'guests' => '',
-            'comments' => '',
-            'guestError' => '',
-            'commentError' => ''
-            ];
+            'information' => $information
+        ];
 
         $this->ui('events/restaurant', $data);
     }
-
 }
+?>

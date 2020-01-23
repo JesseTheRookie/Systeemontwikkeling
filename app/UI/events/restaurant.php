@@ -5,7 +5,6 @@
     require APPROOT . '/UI/inc/navigation.php';
 ?>
 
-
 <section id="section-restaurant-header">
     <article class="content-restaurant-header">
         <?php foreach($data['restaurant'] as $restaurant) : ?>
@@ -58,11 +57,8 @@
 
         <article>
             <form
-                action="<?php echo URLROOT ?>/food/orderFoodTicket"
-                id="form-food"
-                method="GET"
-                role="form">
-
+                action=""
+                id="form-food">
                 <h1>
                     Book a table
                 </h1>
@@ -72,18 +68,11 @@
                         Guests:
                     </label>
 
-                    <select class="content-time-food" name="guests">
-                        <?php
-                            $i = 1;
-                            while ($i <= 10){ ?>
-                                <option value="<?php echo $i ?>">
-                                    <?php
-                                        echo $i;
-                                        $i++;
-                                    ?>
-                                </option>
-                        <?php } ?>
-                    </select>
+                    <input
+                        type="text"
+                        name="guests"
+                        class="input-guests"
+                    />
                 </article>
 
                 <article class="radio-buttons-food">
@@ -91,17 +80,21 @@
                         Pick time:
                     </label>
 
-                    <select class="content-time-food" name="time">
+                    <select class="content-time-food">
                     <?php foreach($data['information'] as $information) : ?>
-                          <option value="<?php echo "food" . "|" . $information->getStartDateTime() . "|" . $information->getTicketId() ?>">
+                          <option value="<?php $information->getStartDateTime(); ?>">
                                 <?php echo $information->getStartDateTime(); ?>
                             </option>
                     <?php endforeach; ?>
                     </select>
                 </article>
 
+
+
+
                 <article>
-                    <textarea name="comment" class="comment-food" id="comment"></textarea>
+                    <textarea name="comment" class="comment-food">
+                    </textarea>
                 </article>
 
                 <article>
@@ -120,7 +113,9 @@
                     </p>
                 </article>
 
-                <button type="add" value="add" name="add" class="button-submit">
+                <button
+                    type="submit"
+                    class="button-submit">
                         Add to cart
                 </button>
 

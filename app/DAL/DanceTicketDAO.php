@@ -35,8 +35,8 @@ class DanceTicketDAO{
         $danceTicketLocations = array();
 
         $this->db->query("SELECT d.venue, l.stad
-                                FROM DanceLocation AS d
-                                JOIN Location AS l
+                                FROM DanceLocation AS d 
+                                JOIN Location AS l 
                                 ON d.locationId = l.locationId
                                 WHERE d.ticketId = :id");
 
@@ -59,8 +59,8 @@ class DanceTicketDAO{
         $danceTicketArtists = array();
 
         $this->db->query("SELECT a.artistname, a.artistBio, a.artistId
-                                FROM PerformanceDance as p
-                                JOIN Artist as a
+                                FROM PerformanceDance as p 
+                                JOIN Artist as a 
                                 ON p.danceArtistId = a.artistId
                                 WHERE p.ticketId = :id");
 
@@ -87,7 +87,6 @@ class DanceTicketDAO{
                           FROM Tickets as t
                           INNER JOIN DanceTicket as d
                           ON d.ticketId = t.ticketId
-                          WHERE startDateTime >=  DATE(NOW())
                         ");
 
         $results = $this->db->resultSet();

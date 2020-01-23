@@ -4,7 +4,14 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
+<?php
 
+
+print_r($_SESSION);
+
+
+
+?>
 <section id="section-hero">
     <article class="content-hero">
       <h1>

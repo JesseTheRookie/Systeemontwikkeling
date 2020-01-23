@@ -47,7 +47,6 @@
         if (!isset($_SESSION['shoppingCart'])) {
             $_SESSION['shoppingCart'] = array();
         }
-
         if (count($_SESSION['shoppingCart']) > 0) {
             $ids = array_keys($_SESSION['shoppingCart']);
             foreach ($ids as $id) {
@@ -59,11 +58,6 @@
                 //Create cart item for jazz tickets
                 if (!empty($_SESSION['shoppingCart'][$id]['Event'] == 'jazz')) {
                     $cartItem = $this->shoppingCartDal->findJazzTickets($id);
-                    $cartItems[] = $cartItem;
-                  }
-                //Create cart item for food tickets
-                if (!empty($_SESSION['shoppingCart'][$id]['Event'] == 'food')) {
-                    $cartItem = $this->shoppingCartDal->findfoodTicket($id);
                     $cartItems[] = $cartItem;
                   }
             }
