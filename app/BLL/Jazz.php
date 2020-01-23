@@ -107,7 +107,9 @@ class Jazz extends Controller {
             $items = array(
                 'Quantity' => $quantity,
                 'Event' => $eventType,
-                'ticketId' => $ticketId
+                'ticketId' => $ticketId,
+                'comments' => ''
+
             );
 
             //If shoppingcart is not created (so empty), create one.

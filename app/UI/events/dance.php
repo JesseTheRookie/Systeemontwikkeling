@@ -109,7 +109,6 @@
         <form
             action="<?php echo URLROOT; ?>/dance/order"
             method="GET"
-            method="POST"
             role="form">
 
         <table class="table-tickets-dance">

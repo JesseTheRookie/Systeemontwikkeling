@@ -120,6 +120,7 @@ class Dance Extends Controller{
             //Quantity select has three values; bought tickets, ticketId and event type
             //Exploding it because we need them seperate.
             $info = explode("|", $_GET['quantity']);
+
             $eventType = $info[0];
             $quantity = $info[1];
             $ticketId = $info[2];
@@ -130,7 +131,8 @@ class Dance Extends Controller{
             $items = array(
                 'Quantity' => $quantity,
                 'Event' => $eventType,
-                'ticketId' => $ticketId
+                'ticketId' => $ticketId,
+                'comments' => ''
             );
 
             //If shoppingcart is not created (so empty), create one.
@@ -152,3 +154,5 @@ class Dance Extends Controller{
         }
     }
 }
+
+
