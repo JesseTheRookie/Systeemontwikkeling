@@ -53,9 +53,9 @@
         </article>
 </section>
 
-  <?php var_dump($_SESSION['userId']);
-          print_r($data['jazzTickets']);
-          print_r($data['danceTickets']);
+  <?php //var_dump($_SESSION['userId']);
+          //print_r($data['jazzTickets']);
+          //print_r($data['danceTickets']);
   ?>
 
 
@@ -72,14 +72,14 @@
         </tr>
             <?php
                 for($i = 10; $i < 24; $i++ ){
-                    echo '<tr>
-                            <td>' . $i . ':00 </td>
-                            <td value="2020-07-26">'. $this->getTicketByDayAndTime("2020-07-26", "$i:00:00" ) .'</td>
-                            <td value="2020-07-27">'. $this->getTicketByDayAndTime("2020-07-27", "$i:00:00" ) .'</td>
-                            <td value="2020-07-28">'. $this->getTicketByDayAndTime("2020-07-28", "$i:00:00" ) .'</td>
-                            <td value="2020-07-29">'. $this->getTicketByDayAndTime("2020-07-29", "$i:00:00" ) .'</td>
-                          </tr>';
-                }
+            ?>            <tr>
+                            <td> <?php echo "$i:00:00" ?></td>
+                            <td value="2020-07-26"><?php $this->getTicketByDayAndTime("2020-07-26", $i ) ?></td>
+                            <td value="2020-07-27"><?php $this->getTicketByDayAndTime("2020-07-27", $i ) ?></td>
+                            <td value="2020-07-28"><?php $this->getTicketByDayAndTime("2020-07-28", $i ) ?></td>
+                            <td value="2020-07-29"><?php $this->getTicketByDayAndTime("2020-07-29", $i ) ?></td>
+                          </tr>
+          <?php  }
                 ?>
 
     </table>

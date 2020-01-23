@@ -35,4 +35,4 @@ class KidsTicketModel extends TicketModel {
         return $this->artists;
     }
 }
-?>
+

@@ -1,4 +1,4 @@
-h1, p{
+#mainHeader h1, #mainHeader p, #artiesten p, #artiesten h1, #ticketOverzicht h1, #ticketOverzicht p{
     color: white;
 }
 h1 span{

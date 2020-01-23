@@ -4,6 +4,7 @@
         // Create object for DAO and Model layer
         public function __construct() {
             $this->historicModel = $this->model('HistoricModel');
+            $this->historicTicketModel = $this->model('HistoricTicketModel');
             $this->historicImageModel = $this->model('HistoricImageModel');
             $this->historicDAO = $this->dal('HistoricDAO');
         }
@@ -19,6 +20,28 @@
             ];
 
             $this->ui('events/historic', $data);
+        }
+        public function getHistoricLocationByTicketId($ticketId)
+        {
+            return $this->historicDAO->getHistoricLocationByTicketId($ticketId);
+        }
+
+        public function getHistoricTicketFromTicket($ticketId, $reserved, $start, $end){
+            $locations = $this->getHistoricLocationByTicketId($ticketId);
+            if(!empty($locations)){
+                $historicTicket = new HistoricTicketModel();
+
+                $historicTicket->setTicketId($ticketId);
+                $historicTicket->setReserved($reserved);
+                $historicTicket->setStartDateTime($start);
+                $historicTicket->setEndDateTime($end);
+                $historicTicket->setHistoricTicketLocation($locations);
+
+                return $historicTicket;
+            }
+            else{
+                return null;
+            }
         }
 
         // Get all the Historic content from the DAL

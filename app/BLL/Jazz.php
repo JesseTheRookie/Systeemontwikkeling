@@ -25,6 +25,10 @@ class Jazz extends Controller {
         return $tickets;
     }
 
+    public function getJazzLocationsFromTicket($ticketId){
+        return $this->jazzTicketDAO->getJazzTicketLocationsFromTicket($ticketId);
+    }
+
     public function getJazzArtistsFromTicket($ticketId){
         return $this->jazzTicketDAO->getArtistsFromTicket($ticketId);
     }
@@ -32,18 +36,27 @@ class Jazz extends Controller {
     public function getJazzTicketFromTicket($ticketId, $reserved, $start, $end){
         $locations = $this->getJazzLocationsFromTicket($ticketId);
         $artists = $this->getJazzArtistsFromTicket($ticketId);
+        if(!empty($locations)){
 
-        $jazzTicket = new JazzTicketModel();
+            $jazzTicket = new JazzTicketModel();
 
-        $jazzTicket->setTicketId($ticketId);
-        $jazzTicket->setReserved($reserved);
-        $jazzTicket->setStartDateTime($start);
-        $jazzTicket->setEndDateTime($end);
-        $jazzTicket->setArtists($artists);
-        $jazzTicket->setJazzTicketHall($locations['hall']);
-        $jazzTicket->setJazzTicketLocation($locations['city']);
+            $jazzTicket->setTicketId($ticketId);
+            $jazzTicket->setReserved($reserved);
+            $jazzTicket->setStartDateTime($start);
+            $jazzTicket->setEndDateTime($end);
+            $jazzTicket->setArtists($artists);
+            $jazzTicket->setJazzTicketHall($locations['hall']);
+            $jazzTicket->setJazzTicketLocation($locations['city']);
 
-        return $jazzTicket;
+            return $jazzTicket;
+         }
+        else{
+            return null;
+        }
+    }
+
+    public function getJazzTicketsFromDate($date){
+        return $this->jazzTicketDAO->getJazzTicketsFromDate($date);
     }
 
     public function getAllArtists(){

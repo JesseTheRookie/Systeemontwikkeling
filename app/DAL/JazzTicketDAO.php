@@ -62,6 +62,39 @@ class JazzTicketDAO{
         return $jazzTicketLocations;
     }
 
+    public function getJazzTicketsFromDate($date){
+        $jazzTicketArray = array();
+
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, jl.hall, l.stad
+                FROM tickets AS t
+                INNER JOIN jazzticket AS j
+                ON t.ticketId = j.ticketId
+                INNER JOIN jazzLocation AS jl
+                ON j.ticketId = jl.ticketId
+                INNER JOIN location AS l
+                ON jl.locationId = l.locationId
+                WHERE t.startDateTime LIKE '2020-07-27%'");
+
+        //$this->db->bind(':date', $date);
+
+        $jazzTickets = $this->db->resultSet();
+
+        foreach ($jazzTickets as $jazzTicket) {
+            $jazzTicketModel = new JazzTicketModel();
+
+            $jazzTicketModel->setTicketId($jazzTicket->ticketId);
+            $jazzTicketModel->setTicketQuantity($jazzTicket->ticketQuantity);
+            $jazzTicketModel->setStartDateTime($jazzTicket->startDateTime);
+            $jazzTicketModel->setEndDateTime($jazzTicket->endDateTime);
+            $jazzTicketModel->setJazzTicketLocation($jazzTicket->stad);
+            $jazzTicketModel->setJazzTicketHall($jazzTicket->hall);
+            $jazzTicketModel->setPrice($jazzTicket->price);
+
+            array_push($jazzTicketArray, $jazzTicketModel);
+        }
+        return $jazzTicketArray;
+    }
+
     public function getArtistsFromTicket($ticketId){
         $jazzTicketArtists = array();
 
@@ -78,7 +111,7 @@ class JazzTicketDAO{
         foreach ($artists as $artist) {
             $artistModel = new ArtistModel();
 
-            $artistModel->setTicketId($artist->JazzTicketId);
+            $artistModel->setTicketId($ticketId);
             $artistModel->setArtistName($artist->artistName);
             $artistModel->setArtistBio($artist->artistBio);
             $artistModel->setTicketId($ticketId);
