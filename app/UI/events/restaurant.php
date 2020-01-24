@@ -100,6 +100,17 @@
                     </select>
                 </article>
 
+                <article class="radio-buttons-food">
+                    <label for="reserving">
+                        Would you like to reserve?
+                    </label>
+                    <input
+                        type="checkbox"
+                        name="reserved"
+                        class="reserved-tickets"
+                        value="1">
+                </article>
+
                 <article>
                     <textarea name="comment" class="comment-food" id="comment"></textarea>
                 </article>

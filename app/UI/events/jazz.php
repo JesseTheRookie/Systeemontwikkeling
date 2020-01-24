@@ -132,7 +132,18 @@ if (isset($_POST['ticket-quantity'])) {
                                 </option>
                             <?php } ?>
                         </select>
-                    <td>
+                    </td>
+
+                <td>
+                    <input
+                        type="checkbox"
+                        name="reserved"
+                        class="reserved-tickets"
+                        value="1">
+                    <p class="p-checkbox">Check to reserve</p>
+                </td>
+
+                <td>
                         <button type="add" value="add" name="add" class="button-add-dance">
                             Add
                         </button>

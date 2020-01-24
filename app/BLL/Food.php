@@ -98,6 +98,7 @@ class Food Extends Controller{
                 'restaurantsError' => ''
                 ];
 
+                $data['restaurantsError'] = "Ticket has been added to your shopping cart, please proceed to checkout.";
 
             //Quantity select has three values; bought tickets, ticketId and event type
             //Exploding it because we need them seperate.
@@ -109,13 +110,20 @@ class Food Extends Controller{
 
             $oldGuests = 0;
 
+            if (isset($_GET['reserved']) && $_GET['reserved'] == '1') {
+                $reservedStatus = $_GET['reserved'];
+            } else {
+                $reservedStatus = 0;
+            }
+
             //Creating an array and passing the quantity
             $items = array(
                 'time' => $time,
                 'Event' => $eventType,
                 'ticketId' => $ticketId,
                 'Quantity' => $guests,
-                'comments' => trim($_GET['comment'])
+                'comments' => trim($_GET['comment']),
+                'status' => $reservedStatus
             );
 
             //If shoppingcart is not created (so empty), create one.

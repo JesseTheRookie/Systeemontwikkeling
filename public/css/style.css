@@ -2433,3 +2433,21 @@ padding: 400px;
 
     background-color: transparent !important;
 }
+
+
+.reserved-tickets
+{
+    border: none !important;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0px 0px 0px 0px;
+    vertical-align: middle;
+}
+
+.p-checkbox
+{
+    font-size: 12px;
+    vertical-align: middle;
+    margin-left: -34px;
+    margin-top: -36px;
+}

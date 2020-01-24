@@ -68,6 +68,7 @@
                   }
             }
         }
+
         $_SESSION['cartItems'] = $cartItems;
         //Return a array of cart items
         return $cartItems;
@@ -113,11 +114,37 @@
             'items' => $this->addToCart()
         ];
 
-        foreach ($data['items'] as $item) {
-              if ($id == $item['ticketId']) {
-                  $pricePerProd = $item['price'] * $this->getQuantity($id);
-                  return $pricePerProd;
+        //Creating price variable to return
+        $price = 0;
+
+        //Loop through the cart items array and shoppingcart
+        //If the product ID from the UI matches the ticketid in the SESSION, check for the status.
+        //If status == 0 (so ready for checkout), price stays the same.
+        //Else, the price needs to be set to 0 because a customer wants to reserve
+        foreach ($_SESSION['cartItems'] as $item) {
+            foreach ($_SESSION['shoppingCart'] as $cart) {
+              if ($id == $cart['ticketId']) {
+                  if ($cart['status'] == 0) {
+                      $price = $item['price'];
+                  } else {
+                    $price = 0;
+                  }
+                  return $price;
                }
+          }
+      }
+    }
+
+    //To check if status is 1 or 0, so a piece of text could be printed out.
+    public function getstatus($id) {
+        foreach ($_SESSION['shoppingCart'] as $status) {
+            if ($id == $status['ticketId']) {
+                if ($status['status'] == '1') {
+                    echo "Reserved";
+                } elseif($status['status'] == '0') {
+                    echo "Checkout";
+                }
+           }
         }
     }
 

@@ -15,7 +15,7 @@ class PaymentDAO {
         $this->db->bind(':ticketId', $data['ticketId']);
         $this->db->bind(':date', $data['date']);
         $this->db->bind(':quantity', $data['quantity']);
-        $this->db->bind(':gereserveerd', 0);
+        $this->db->bind(':gereserveerd', $data['status']);
         $this->db->bind(':comments', $data['comments']);
 
         //Execute function
