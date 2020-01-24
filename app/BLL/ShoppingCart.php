@@ -66,9 +66,13 @@
                     $cartItem = $this->shoppingCartDal->findfoodTicket($id);
                     $cartItems[] = $cartItem;
                   }
+                //Create cart item for food tickets
+                if (!empty($_SESSION['shoppingCart'][$id]['Event'] == 'kids')) {
+                    $cartItem = $this->shoppingCartDal->findKidsTicket($id);
+                    $cartItems[] = $cartItem;
+                  }
             }
         }
-
         $_SESSION['cartItems'] = $cartItems;
         //Return a array of cart items
         return $cartItems;

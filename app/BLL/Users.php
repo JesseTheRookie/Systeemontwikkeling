@@ -142,7 +142,7 @@
                     $subject = "Haarlem Festival User Verification";
 
                     // Send email
-                    //mail($user->getEmail(), $subject, $message);  
+                    //mail($user->getEmail(), $subject, $message);
 
                 } else {
                     //Load view with data
@@ -288,7 +288,7 @@
                         $subject = "Haarlem Festival password recovery";
 
                         // Send email
-                        //mail($email, $subject, $message);                                                
+                        //mail($email, $subject, $message);
 
                         redirect("users/pwemailsend");
 
@@ -307,25 +307,25 @@
             // Init data
             $data = [
                 'title' => 'Password recovery email has been send'
-            ];            
+            ];
 
             // Load UI
             $this->ui('users/pwemailsend', $data);
-        }        
+        }
 
-        public function newPassword(){   
+        public function newPassword(){
             // Sanitize the token if provided
             if(isset($_GET['token'])){
                 $token = trim(filter_var($_GET['token'], FILTER_SANITIZE_STRING));
             } else {
                 $token = "";
             }
-            
-            
+
+
             // Sanitize user input and declare password validation regex
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/"; 
-            
+            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
+
             // Init data
             $data = [
                 'title' => 'Enter new password',
@@ -342,7 +342,7 @@
 
                 // Validate Password not empty
                 if(!empty($password) && !empty($passwordConfirm)){
-                    
+
                     // Validate if password is 6 characters or longer
                     if(strlen($password < 6)) {
 
@@ -353,7 +353,7 @@
                             if($password == $passwordConfirm) {
                                 // Hash password
                                 $password = password_hash($password, PASSWORD_DEFAULT);
-                                
+
                                 // Update password in datebase
                                 $this->userDAO->newPassword($token, $password);
                                 $this->userDAO->deleteToken($token);
@@ -383,7 +383,7 @@
 
                     //Load UI
                     $this->ui('users/newpassword', $data);
-                }                           
+                }
             } else {
                 if($this->tokenHandler($token) == "forgot"){
                 } else {
@@ -392,22 +392,22 @@
                     //Load UI
                     $this->ui('users/newpassword', $data);
                 }
-                
+
             }
 
             //Load UI
             $this->ui('users/newpassword', $data);
         }
 
-        public function pwDone(){            
+        public function pwDone(){
             //sanitize user input and declare password validation regex
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/"; 
+            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
             //Init data
             $data = [
                 'title' => "You can now use  your new password",
                 'token' => $token,
-            ];           
+            ];
 
             //Load UI
             $this->ui('users/pwdone', $data);
@@ -419,7 +419,7 @@
 
              // Init data
              $data = [
-                'title' => '',                
+                'title' => '',
             ];
 
             // Give token to token handler for processing
@@ -505,11 +505,11 @@
             if($row = $this->userDAO->checkTokenType($token)){
                 // Return the tokenType
                 return $row->tokenType;
-            } 
+            }
             // If the token doesn't return a result
             else {
                 return false;
-            }            
+            }
         }
 
         public function newPasswordFormFactory($data, $token){
