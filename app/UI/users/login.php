@@ -24,7 +24,7 @@ require APPROOT . '/UI/inc/header.php';
 			name="email"
 			placeholder="Email"
 			<?php echo (!empty($data['emailError'])) ? 'is-invalid' : ''; ?>
-			value="<?php echo $data['email']; ?>">
+		>
 
 		<span
 			class="invalidFeedback">
@@ -37,17 +37,18 @@ require APPROOT . '/UI/inc/header.php';
 			name="password"
 			placeholder="Password"
 			<?php echo (!empty($data['passwordError'])) ? 'is-invalid' : ''; ?>
-			value="<?php echo $data['password']; ?>">
+		>
 
-			<span
-				class="invalidFeedback">
-				<?php echo $data['passwordError']; ?>
-			</span>
+		<span
+			class="invalidFeedback">
+			<?php echo $data['passwordError']; ?>
+		</span>
 
-			<input
-				id="submit"
-				type="submit"
-				value="SUBMIT">
+		<input
+			id="submit"
+			type="submit"
+			value="SUBMIT"
+		>
 		</form>
 
 		<p class="options">
