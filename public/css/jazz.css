@@ -1,4 +1,4 @@
-h1, p{
+#mainHeader h1, #mainHeader p, #artiesten p, #artiesten h1, #ticketOverzicht h1, #ticketOverzicht p{
     color: white;
 }
 h1 span{
@@ -11,7 +11,7 @@ h1 span{
 #mainHeader section:nth-child(2) h1{
     font-size: 100px;
     text-transform: uppercase;
-    margin: 50px 0 0 5%;
+    margin: 250px 0 0 5%;
 }
 #mainHeader section:nth-child(1){
     background-color: #551A75;
@@ -28,16 +28,17 @@ h1 span{
 }
 .overlay{
     position: absolute;
+    height: 100%;
     background-color: rgba(0,0,0,0.95);
 }
 #mainHeader section:nth-child(2) button{
-    margin: 150px 0 0 5%;
+    margin: 100px 0 0 5%;
     margin-left: 5%;
 }
 #artiesten{
     height: 500px;
     background: rgb(0,0,0);
-    background: linear-gradient(0deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%);  
+    background: linear-gradient(0deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%);
 }
 #artiesten article h1{
     text-align: center;
@@ -47,9 +48,9 @@ h1 span{
 }
 #artiesten article p{
     font-size: 40px;
-    text-align: center;  
-    width: 60%;  
-    text-transform: capitalize;  
+    text-align: center;
+    width: 60%;
+    text-transform: capitalize;
     margin-left: 20%;
     padding-top: 30px;
 }
@@ -70,7 +71,7 @@ h1 span{
     height: 1000px;
     width: 100%;
     background: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%); 
+    background: linear-gradient(180deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%);
 }
 #ticketOverzicht header{
     display: grid;

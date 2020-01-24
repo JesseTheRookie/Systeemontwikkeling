@@ -22,6 +22,7 @@ class Jazz extends Controller {
                     $ticket->addArtist($artist);
             }
         }
+        return $tickets;
     }
 
     public function getJazzLocationsFromTicket($ticketId){
@@ -35,18 +36,27 @@ class Jazz extends Controller {
     public function getJazzTicketFromTicket($ticketId, $reserved, $start, $end){
         $locations = $this->getJazzLocationsFromTicket($ticketId);
         $artists = $this->getJazzArtistsFromTicket($ticketId);
+        if(!empty($locations)){
 
-        $jazzTicket = new JazzTicketModel();
+            $jazzTicket = new JazzTicketModel();
 
-        $jazzTicket->setTicketId($ticketId);
-        $jazzTicket->setReserved($reserved);
-        $jazzTicket->setStartDateTime($start);
-        $jazzTicket->setEndDateTime($end);
-        $jazzTicket->setArtists($artists);
-        $jazzTicket->setJazzTicketHall($locations['hall']);
-        $jazzTicket->setJazzTicketLocation($locations['city']);
+            $jazzTicket->setTicketId($ticketId);
+            $jazzTicket->setReserved($reserved);
+            $jazzTicket->setStartDateTime($start);
+            $jazzTicket->setEndDateTime($end);
+            $jazzTicket->setArtists($artists);
+            $jazzTicket->setJazzTicketHall($locations['hall']);
+            $jazzTicket->setJazzTicketLocation($locations['city']);
 
-        return $jazzTicket;
+            return $jazzTicket;
+         }
+        else{
+            return null;
+        }
+    }
+
+    public function getJazzTicketsFromDate($date){
+        return $this->jazzTicketDAO->getJazzTicketsFromDate($date);
     }
 
     public function getAllArtists(){
@@ -80,24 +90,24 @@ class Jazz extends Controller {
 
     //'ADD' button will execute this
     public function orderJazzTickets() {
-        include APPROOT . '/BLL/ShoppingCart.php';
 
-        $content = $this->danceDal->getDanceContent();
-        $days = $this->getDifferentDays();
-        $performers = $this->danceDal->getPerformers();
+        $data = [
+            'title' => 'Jazz Page',
+            'days' =>  $this->getDifferentDays(),
+            'tickets' => $this->getAllJazzTickets(),
+            'artists' => $this->getAllArtists()
+        ];
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             // Sanitize GET data
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
-            $data = [
-                    'title' => 'Dance Page',
-                    'content' => $content,
-                    'days' => $this->getDifferentDays(),
-                    'tickets' => $this->getAllDanceTickets($_SESSION['ticketDate']),
-                    'artists' => $this->getAllArtists(),
-                    'performers' => $performers
-                ];
+             $data = [
+                'title' => 'Jazz Page',
+                'days' =>  $this->getDifferentDays(),
+                'tickets' => $this->getAllJazzTickets(),
+                'artists' => $this->getAllArtists()
+            ];
 
             //Quantity select has three values; bought tickets, ticketId and event type
             //Exploding it because we need them seperate.
@@ -110,7 +120,9 @@ class Jazz extends Controller {
             $items = array(
                 'Quantity' => $quantity,
                 'Event' => $eventType,
-                'ticketId' => $ticketId
+                'ticketId' => $ticketId,
+                'comments' => ''
+
             );
 
             //If shoppingcart is not created (so empty), create one.
@@ -125,7 +137,7 @@ class Jazz extends Controller {
             }
 
         //Load View
-        $this->ui('events/dance', $data);
+        $this->ui('events/jazz', $data);
         }
     }
 }

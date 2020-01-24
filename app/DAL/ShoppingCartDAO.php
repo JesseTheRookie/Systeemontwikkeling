@@ -31,7 +31,6 @@ class ShoppingCartDAO{
 
         return $ticket;
     }
-<<<<<<< HEAD
 
     public function findJazzTickets($ticketId) {
         $this->db->query("SELECT t.ticketId AS ticketId, t.startDateTime As startDateTime, t.price AS price, jl.hall AS name
@@ -59,6 +58,32 @@ class ShoppingCartDAO{
 
         return $ticket;
     }
-=======
->>>>>>> develop
+
+    public function findFoodTicket($ticketId) {
+        $this->db->query("SELECT t.ticketId AS ticketId, t.startDateTime AS startDateTime, t.price AS price, r.restaurantName AS name
+                          FROM Tickets AS t
+                          INNER JOIN FoodTicket AS f
+                          ON f.ticketId = t.ticketId
+                          INNER JOIN Restaurant as r
+                          ON f.restaurantId = r.restaurantId
+                          WHERE t.ticketId = :ticketId
+                        ");
+
+        $this->db->bind(':ticketId', $ticketId);
+
+        $result = $this->db->resultSet();
+        $ticket = array();
+
+        foreach ($result as $r) {
+          $ticket = array(
+          'ticketId' => $r->ticketId,
+          'startDateTime' => $r->startDateTime,
+          'price'=> $r->price,
+          'name' => $r->name
+          );
+        }
+
+        return $ticket;
+    }
+
 }

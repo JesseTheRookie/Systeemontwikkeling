@@ -1,11 +1,10 @@
 <?php
     require APPROOT . '/UI/inc/header.php';
-<<<<<<< HEAD
-   // require APPROOT . '/UI/inc/navigation.php';
-=======
     require APPROOT . '/UI/inc/navigation.php';
->>>>>>> develop
 ?>
+
+
+<?php print_r($_SESSION['shoppingCart'])  ?>
 <div id="layout-shoppingcart">
     <h1>
         Shopping Cart
@@ -69,7 +68,6 @@
                 Total
             </th>
         </tr>
-<<<<<<< HEAD
 
         <?php foreach ($data['items'] as $item): ?>
             <tr>
@@ -104,51 +102,6 @@
                 </td>
 
                 <td>
-=======
-         <?php foreach ($data['items'] as $item): ?>
-        <tr>
-            <td>
-                <?php
-                    echo $item['name'];
-                ?>
-            </td>
-
-            <td>
-                <?php
-                    foreach ($_SESSION['shoppingCart'] as $quantity => $total) {
-                        //Converting array ($Total) to a string by the implode function.
-                        if ($item['ticketId'] == $quantity) {
-                            $string_product = implode(',',$total);
-                            echo $string_product;
-                        }
-                    }
-                 ?>
-            </td>
-
-            <td>
-                <?php
-                   echo date("jS F H:i", strtotime($item['startDateTime']));
-                 ?>
-            </td>
-
-            <td>
-                <?php
-                    echo $item['price'];
-                ?>
-            </td>
-
-            <td>
-                <?php
-                    foreach ($_SESSION['shoppingCart'] as $quantity => $total) {
-                        if ($item['ticketId'] == $quantity) {
-                            echo $item['price'] * $total['Quantity'];
-                        }
-                    }
-                 ?>
-            </td>
-
-            <td>
->>>>>>> develop
                     <form
                         action="<?php echo URLROOT; ?>/shoppingcart/deleteFromCart"
                         method="POST"
@@ -158,7 +111,6 @@
                             type="submit"
                             name="delete"
                             value="<?php echo $item['ticketId']; ?>">
-<<<<<<< HEAD
 
                             <img
                                 src="<?php echo URLROOT; ?>/img/shopping-cart/delete.png"
@@ -169,17 +121,6 @@
                     </form>
                 </td>
             </tr>
-=======
-                        <img
-                            src="<?php echo URLROOT; ?>/img/shopping-cart/delete.png"
-                            alt="Trash button"
-                            title="Trash button"
-                        />
-                        </button>
-                    </form>
-            </td>
-        </tr>
->>>>>>> develop
         <?php endforeach; ?>
     </table>
 </div>
@@ -264,11 +205,7 @@
                 Go Party
             </h4>
             <img
-<<<<<<< HEAD
                 src="<?php echo URLROOT; ?>/img/dance/armin.png"
-=======
-                src="<?php echo URLROOT; ?>/img/food/fris.jpg"
->>>>>>> develop
                 alt="Cross selling"
                 title="Cross selling Item"
             />

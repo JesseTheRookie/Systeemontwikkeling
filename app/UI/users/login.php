@@ -1,5 +1,5 @@
 <?php
-require APPROOT . '/UI/inc/header.php';
+	require APPROOT . '/UI/inc/header.php';
 ?>
 
 <?php

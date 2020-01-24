@@ -17,15 +17,4 @@
 
       $this->ui('pdf/index', $data);
     }
-
-    //User ordered ticket with QR code
-    public function ticket(){
-      $orderInformation = $this->pdfDal->getOrderInformation();
-
-      $data = [
-        'orders' => $orderInformation
-      ];
-
-      $this->ui('pdf/ticket', $data);
-    }
   }

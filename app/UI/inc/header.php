@@ -28,6 +28,12 @@
     <link
             rel="stylesheet"
             type="text/css"
+            href="<?php echo URLROOT; ?>/css/tickets.css"
+    />
+
+    <link
+            rel="stylesheet"
+            type="text/css"
             href="<?php echo URLROOT; ?>/css/generic.css?version=3.2"
     />
 
@@ -96,6 +102,10 @@
 
     <script
         src="<?php echo URLROOT; ?>/js/contact.js">
+    </script>
+
+    <script
+            src="<?php echo URLROOT; ?>/js/functions.js">
     </script>
 </head>
 <body>
