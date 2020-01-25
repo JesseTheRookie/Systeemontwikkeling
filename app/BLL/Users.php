@@ -221,8 +221,8 @@
 
                         $this->createUserSession($loggedInUser);
 
-                        if($_SESSION['userId'] > 1){
-                            redirect('pages/cms');
+                        if($_SESSION['userType'] > 1){
+                            redirect('cms/dashboard');
                         } else {
                         redirect('index');
                         }
@@ -463,7 +463,7 @@
 
 
 
-                if($_SESSION['userType'] == 1){
+                if($_SESSION['userType'] == 1 OR $_SESSION['userType'] == 2){
                     redirect('cms/dashboard');
                 } else {
                 redirect('pages/index');
