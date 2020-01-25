@@ -65,7 +65,7 @@ class FoodTicketDAO{
     public function getRestaurantNameByTicketId($ticketId){
         $this->db->query("SELECT r.restaurantName
                                 FROM FoodTicket as f
-                                JOIN Restaurant as r
+                                JOIN Restaurant as r 
                                 ON f.restaurantId = r.restaurantId
                                 WHERE f.ticketId = :id");
 

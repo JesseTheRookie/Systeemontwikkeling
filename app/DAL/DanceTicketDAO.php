@@ -6,6 +6,31 @@ class DanceTicketDAO{
       $this->db = new Database;
     }
 
+    //Get the image, event name and buttons of top section Dance Page.
+    public function getDanceContent() {
+      $danceContentArray = array();
+
+      $this->db->query("SELECT elementName, description, content
+                        FROM Content as c
+                        WHERE contentType = :contentType
+                       ");
+
+      $this->db->bind(':contentType', 2);
+
+      $danceContent = $this->db->resultSet();
+
+      foreach ($danceContent as $content) {
+            $danceContentModel = new HomeModel();
+
+            $danceContentModel->setElementName($content->elementName);
+            $danceContentModel->setDescription($content->description);
+            $danceContentModel->setContent($content->content);
+
+            array_push($danceContentArray, $danceContentModel);
+        }
+        return $danceContentArray;
+    }
+
     public function getDanceTicketLocationsFromTicket($ticketId){
         $danceTicketLocations = array();
 
@@ -13,8 +38,7 @@ class DanceTicketDAO{
                                 FROM DanceLocation AS d
                                 JOIN Location AS l
                                 ON d.locationId = l.locationId
-                                WHERE d.ticketId = :id
-                        ");
+                                WHERE d.ticketId = :id");
 
         $this->db->bind(':id', $ticketId);
 
@@ -38,8 +62,7 @@ class DanceTicketDAO{
                                 FROM PerformanceDance as p
                                 JOIN Artist as a
                                 ON p.danceArtistId = a.artistId
-                                WHERE p.ticketId = :id
-                        ");
+                                WHERE p.ticketId = :id");
 
         $this->db->bind(':id', $ticketId);
 
@@ -56,32 +79,6 @@ class DanceTicketDAO{
             array_push($artistArray, $artistModel);
         }
         return $danceTicketArtists;
-    }
-
-
-    //Get the image, event name and buttons of top section Dance Page.
-    public function getDanceContent() {
-      $danceContentArray = array();
-
-      $this->db->query("SELECT name, description, content
-                        FROM Content as c
-                        WHERE contentType = :contentType
-                       ");
-
-      $this->db->bind(':contentType', 2);
-
-      $danceContent = $this->db->resultSet();
-
-      foreach ($danceContent as $content) {
-            $danceContentModel = new HomeModel();
-
-            $danceContentModel->setName($content->name);
-            $danceContentModel->setDescription($content->description);
-            $danceContentModel->setContent($content->content);
-
-            array_push($danceContentArray, $danceContentModel);
-        }
-        return $danceContentArray;
     }
 
     //Get different days based on the date function, preventign redudancy because there are multiple tickets with the same date

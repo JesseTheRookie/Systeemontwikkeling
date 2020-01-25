@@ -16,12 +16,16 @@
 
             <div class="content-kids-right">
                 <h3>
-                    Haarlem <br>Kids.
+                    <?php
+                        echo $c->getElementName();
+                    ?>
                 </h3>
 
-                <a href="#section-artists-kids">
-                    Performers
-                </a>
+                <?php
+                  //To create a dynamic link, we need the button names(links), and we need the event name. In order to get the event name, we need to explode 'HAARLEM FOOD' because we only need 'FOOD'
+                  $links = explode(", ", $c->getDescription());
+                  $eventName = explode(" ", $c->getElementName());
+                ?>
 
                 <a href="#layout-header-kids">
                     Tickets
