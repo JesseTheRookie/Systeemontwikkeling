@@ -3,6 +3,8 @@
     require APPROOT . '/UI/inc/navigation.php';
 ?>
 
+
+<?php print_r($_SESSION['shoppingCart'])  ?>
 <div id="layout-shoppingcart">
     <h1>
         Shopping Cart
@@ -65,9 +67,6 @@
             <th>
                 Total
             </th>
-            <th>
-                Reserving
-            </th>
         </tr>
 
         <?php foreach ($data['items'] as $item): ?>
@@ -99,12 +98,6 @@
                 <td class="totalpp">
                     <?php
                          echo "€ " . $this->calculateTotalPricePerProd($item['ticketId']);
-                     ?>
-                </td>
-
-                <td>
-                    <?php
-                        $this->getStatus($item['ticketId']);
                      ?>
                 </td>
 

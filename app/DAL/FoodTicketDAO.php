@@ -10,7 +10,7 @@ class FoodTicketDAO{
     public function getFoodContent() {
       $foodContentArray = array();
 
-      $this->db->query("SELECT name, description, content
+      $this->db->query("SELECT elementName, description, content
                         FROM Content as c
                         WHERE contentType = 3
                       ");
@@ -20,7 +20,7 @@ class FoodTicketDAO{
       foreach ($foodContent as $content) {
             $foodContentModel = new HomeModel();
 
-            $foodContentModel->setName($content->name);
+            $foodContentModel->setElementName($content->elementName);
             $foodContentModel->setDescription($content->description);
             $foodContentModel->setContent($content->content);
 

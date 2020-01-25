@@ -5,74 +5,73 @@
     require APPROOT . '/UI/inc/navigation.php';
 ?>
 
-<section id="section-kids-header">
-    <article class="content-kids-header">
-        <?php foreach($data['content'] as $c) : ?>
-            <article>
-                <img src="<?php echo URLROOT; ?>/<?php echo $c->getContent(); ?>"
-                    alt="Banner header dance page"
-                    title="Banner header dance page"
+    <div id="section-kids-header">
+        <div class="content-kids-header">
+            <div>
+                <img src="./img/kids/kids_banner_1.jpg"
+                    alt="Banner header kids page"
+                    title="Banner header kids page"
                 />
-            </article>
+            </div>
 
-            <article class="content-kids-right">
+            <div class="content-kids-right">
                 <h3>
-                    <?php
-                        echo $c->getName();
-                    ?>
+                    Haarlem <br>Kids.
                 </h3>
 
-                <?php
-                  //To create a dynamic link, we need the button names(links), and we need the event name. In order to get the event name, we need to explode 'HAARLEM FOOD' because we only need 'FOOD'
-                  $links = explode(", ", $c->getDescription());
-                  $eventName = explode(" ", $c->getName());
-                ?>
+                <a href="#section-artists-kids">
+                    Performers
+                </a>
 
-                <?php foreach($links as $link) : ?>
-                  <a href="<?php echo URLROOT; ?>/<?php echo end($eventName); ?>#<?php echo $link ?>">
-                        <?php
-                            echo $link;
-                        ?>
-                    </a>
-                <?php endforeach; ?>
-            </article>
-        <?php endforeach; ?>
-    </article>
-</section>
+                <a href="#layout-header-kids">
+                    Tickets
+                </a>
+            </div>
+        </div>
+    </div>
 
-<section id="section-artists-kids">
+
+<div id="section-artists-kids">
     <h2>
         Performers
     </h2>
 
     <hr>
 
-    <article class="content-artists-kids" id="performance">
-        <?php foreach ($data['performers'] as $performer) : ?>
-            <article>
+    <div class="content-artists-kids">
+        <?php foreach($data['artists'] as $artist) : ?>
+            <div>
                 <img
+<<<<<<< HEAD
                     src="<?php echo URLROOT; echo $performer->content; ?>"
-                    alt="Performer Dance Artist"
-                    title="Performer Dance Artist"
+                    alt="Performer dance Artist"
+                    title="Performer dance Artist"
+=======
+                    src="<?php echo URLROOT; ?>/<?php echo $artist->getContent(); ?>"
+                    alt="Performer Kids Artist"
+                    title="Performer Kids Artist"
+>>>>>>> develop
                 />
                 <button class="myBtnKids">
-                    <?php echo $performer->name ?>
+                    <?php echo $artist->getArtistName(); ?>
                 </button>
-            </article>
+            </div>
         <?php endforeach; ?>
-    </article>
-</section>
+    </div>
+</div>
 
-<section id="layout-header-kids">
+<div id="layout-header-kids">
   <h1>
     Tickets
   </h1>
 
   <hr>
 
-  <article class="content-header-kids" id="tickets">
+  <div class="content-header-kids">
         <?php foreach ($data['days'] as $day) : ?>
-                <article>
+
+            <?php if ($day->startDateTime > date('Y-m-d H:i:s')): ?>
+                <div>
                     <h2>
                         <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
                     </h2>
@@ -80,92 +79,103 @@
                     <p>
                         <?php echo date("jS F", strtotime($day->startDateTime)); ?>
                     </p>
+                <form
+                    action="<?php echo URLROOT; ?>/kids"
+                    method="POST"
+                    role="form">
 
-                    <form
-                        action="<?php echo URLROOT; ?>/kids"
-                        method="GET"
-                        role="form">
-
-                        <button
-                            type="submit"
-                            class="ticket-date"
-                            name="ticketDate"
-                            value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
-                            TICKETS
-                        </button>
-                    </form>
-                </article>
+                    <button
+                        type="submit"
+                        class="ticket-date"
+                        name="ticketDate"
+                        value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
+                        TICKETS
+                    </button>
+                </form>
+            </div>
+            <?php endif; ?>
         <?php endforeach; ?>
-    </article>
+    </div>
 
-    <?php foreach($data['tickets'] as $ticket) : ?>
-        <form
-            action="<?php echo URLROOT; ?>/kids/order"
-            method="GET"
-            role="form">
+<?php foreach($data['tickets'] as $ticket) : ?>
+    <table class="table-tickets-kids">
+        <tr>
+            <td>
+                <?php foreach($data['artists'] as $artist) : ?>
+                    <?php echo $artist->getArtistName(); ?>
+                <?php endforeach; ?>
+            </td>
 
-        <table class="table-tickets-kids">
-            <tr>
-                <td>
-                    <?php
-                        foreach($data['artists'] as $artist) :
-                            if ($artist->ticketId == $ticket->getTicketId()) {
-                                echo $artist->artistName . "<br>";
-                            }
-                        endforeach;
-                    ?>
-                </td>
 
-                <td>
-                    <?php
-                        $time = explode(" ", $ticket->getstartDateTime());
-                        echo end($time);
-                     ?>
-                </td>
-
-                <td>
-                    <?php echo $ticket->getKidsTicketSession(); ?>
-                </td>
-
+<<<<<<< HEAD
                 <td>
                     € <?php echo $ticket->getPrice(); ?>
                 </td>
 
                 <td>
-                    <select name="quantity" class="select-dance">
-                        <?php
-                            $i = 1;
-                            while ($i <= 10){ ?>
-                                <option value="<?php echo "kids" . "|" . $i . "|" . $ticket->getTicketId() ?>">
-                                    <?php
-                                        echo $i;
-                                        $i++;
-                                    ?>
-                                </option>
-                        <?php } ?>
-                    </select>
-                </td>
+                    <select class="select-dance">
+                        <option value="">
+                            SELECT
+                        </option>
 
-                <td class="reserved-tickets">
-                    <input
-                        type="checkbox"
-                        name="reserved"
-                        class="checkbox-reserved"
-                        value="1">
-                    <p class="p-checkbox">Check to reserve</p>
+                        <?php
+                        $i = 1;
+                        while ($i <= 10): ?>
+                                <option value="<?php echo "jazz" . "|" . $i . "|" . $ticket->getTicketId() ?>">
+                                <?php echo $i;
+                                $i++;
+                                 ?>
+                            </option>
+                        <?php endwhile; ?>
                 </td>
+=======
+            <td>
+                <?php
+                    $time = explode(" ", $ticket->getstartDateTime());
+                    echo end($time);
+                 ?>
+            </td>
+
+            <td>
+                <?php echo $ticket->getKidsTicketSession(); ?>
+            </td>
+
+            <td>
+                € <?php echo $ticket->getPrice(); ?>
+            </td>
+
+            <td>
+                <select class="select-kids">
+                    <option value="Quantity">
+                        Quantity
+                    </option>
+                    <option value="1">
+                        1
+                    </option>
+                    <option value="2">
+                        2
+                    </option>
+                    <option value="3">
+                        3
+                    </option>
+                    <option value="4">
+                        4
+                    </option>
+                </select>
+            </td>
+>>>>>>> develop
 
                 <td>
-                    <button type="add" value="add" name="add" class="button-add-dance">
+                    <a href="" class="button-add-dance">
                         Add
-                    </button>
-                    </form>
+                    </a>
                 </td>
-            </tr>
-        </table>
-    <?php endforeach; ?>
-</section>
+        </tr>
+    </table>
+<?php endforeach; ?>
+</div>
 
 <?php
     require APPROOT . '/ui/inc/footer.php';
 ?>
+

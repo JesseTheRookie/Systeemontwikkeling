@@ -13,9 +13,7 @@
 
 <body>
   <header class="header">
-  <form class="dropdown" action="<?php echo URLROOT; ?>/Cms/LogoutUser" method="GET">
-    <input type="submit" value="Logout" class="logoutlink"></input>
-  </form>
+  <a class="logoutlink" href="<?php echo URLROOT; ?>/users/logout" class="link">Logout</a>
   </header>
 
   <nav class="nav">
@@ -25,7 +23,6 @@
     </div>
     <ul class="list list-2 w-list-unstyled">
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/dashboard" class="link">Dashboard</a></li>
-      <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/createuser" class="link">Register User</a></li>
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/editcontent" class="link">Edit Content</a></li>
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/changeprogram" class="link">Change Program</a></li>
     </ul>
@@ -55,11 +52,8 @@
                 echo '<option value=' . $event->event . '>' . $event->event . '</option>';
                 }
               ?>  
-            </select><input type="submit" value="Search" id="submitbuttonSelector">
-            <h2 id="dateeventtekst"><?php echo ucfirst($data['SelectedEvent']) . ' - ' . DateTime::createFromFormat('Y-m-d', $data['SelectedDate'])->format('D d-m-Y'); ?></h2>
-          </form>
-        <table class="fixed_header" border="1px">
-        <thead>
+            </select><input type="submit" value="Search" id="submitbutton"></form>
+        <table border="1px">
         <?php
           echo "<tr>";
             echo "<th></th>";
@@ -70,9 +64,7 @@
             echo "<th>Extra</th>";
           echo "</tr>";
         ?>
-        </thead>
           <form action="<?php echo URLROOT; ?>/Cms/changeprogram" method="POST">
-          <tbody>
           <?php
             foreach ($data['TableResult'] as $program)
             {
@@ -92,7 +84,6 @@
               echo "</tr>";
             }
           ?>
-          </tbody>
         </table>
         </div>
         <div class="textfields">
@@ -101,16 +92,14 @@
 
             foreach($data['TableColumns'] as $column)
             {       
-              echo '<h3 class= text' . $number . '>' . $column . '</h3>';
+              echo '<span class= text' . $number . '>' . $column . '</span>';
               echo '<input type="text" name=' . $column . ' value="" class="textfield" id= field' . $number . '>';
               $number++;
             }
-
-            echo '<h3 class= text' . $number . '>Extra</h3>';
-            echo '<input type="text" name="extra" value="" class="textfield" id= field' . $number . '>';
-            
-          ?>     
-          <input id="submitbuttonUpdate" type="submit" value="Submit">
+          ?> 
+          <span class="textextra">Extra</span>
+          <input type="text" name="extra" value="" class="textfield" id="fieldextra">        
+          <input class="submitbutton" type="submit" value="Submit">
           </form>
         </div>
         

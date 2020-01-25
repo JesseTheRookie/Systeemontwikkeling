@@ -39,13 +39,12 @@
          $data = [
               'userId' => $_SESSION['userId'],
               'ticketId' => $item['ticketId'],
-              'date' => date('Y-m-d H:i:s'),
+              'date' => $_SESSION['ticketDate'],
               'quantity' => $item['Quantity'],
-              'comments' => $item['comments'],
-              'status' => $item['status']
+              'comments' => $item['comments']
           ];
 
-          //Insert sold ticket information in database with information above
+            //Insert sold ticket information in database with information above
           //Inside loop because you want to add more than one ticket
           $this->paymentDal->soldTickets($data);
         }
@@ -119,44 +118,24 @@
       $pdf->Ln();
 
       //Header table or order information
-      $pdf->SetFont('helvetica', 'B', 10);
-      $pdf->Cell(40, 10, 'Name', 1, 0, 'C');
-      $pdf->Cell(15, 10, 'Price', 1, 0, 'C');
-      $pdf->Cell(25, 10, 'Time', 1, 0, 'C');
-      $pdf->Cell(20, 10, 'Quantity', 1, 0, 'C');
+      $pdf->SetFont('helvetica', 'B', 12);
+      $pdf->Cell(60, 10, 'Name', 1, 0, 'C');
+      $pdf->Cell(20, 10, 'Price', 1, 0, 'C');
+      $pdf->Cell(30, 10, 'Quantity', 1, 0, 'C');
       $pdf->Cell(20, 10, 'Total', 1, 0, 'C');
-      $pdf->Cell(20, 10, 'Status', 1, 0, 'C');
-      $pdf->Cell(40, 10, 'Comment', 1, 0, 'C');
+      $pdf->Cell(60, 10, 'Comment', 1, 0, 'C');
       $pdf->Ln();
 
       //Loop through cart items and shopping cart to get information about items
       foreach ($_SESSION['cartItems'] as $item) {
         foreach ($_SESSION['shoppingCart'] as $c) {
           if ($item['ticketId'] == $c['ticketId']) {
-              $pdf->SetFont('helvetica', '', 8);
-              $pdf->Cell(40,10, ' ' . $item['name'], 1, 0, 'C');
-              $pdf->Cell(15,10, ' ' . $item['price'], 1, 0, 'C');
-              $pdf->Cell(25,10, ' ' . date("jS F", strtotime($item['startDateTime'])) . ' ' . date("H:i", strtotime($item['startDateTime'])), 1, 0, 'C');
-              $pdf->Cell(20,10, ' ' . $c['Quantity'], 1, 0, 'C');
-
-              if ($item['ticketId'] == $c['ticketId']) {
-                  if ($c['status'] == 0) {
-                      $price = $item['price'];
-                      $pdf->Cell(20,10, '' . $price . '', 1, 0, 'C');
-                  } else {
-                      $price = 0;
-                      $pdf->Cell(20,10, '' . $price . '', 1, 0, 'C');
-                  }
-               }
-
-              if ($c['status'] == '1') {
-                  $pdf->Cell(20,10, 'Reserved', 1, 0, 'C');
-              } elseif($c['status'] == '0') {
-                  $pdf->Cell(20,10, 'Paid', 1, 0, 'C');
-              } else {
-                  $pdf->Cell(20,10, ' ', 1, 0, 'C');
-              }
-              $pdf->Cell(40,10, ' ' . $c['comments'], 1, 0, 'C');
+              $pdf->SetFont('helvetica', '', 10);
+              $pdf->Cell(60,10, ' ' . $item['name'], 1, 0, 'C');
+              $pdf->Cell(20,10, ' ' . $item['price'], 1, 0, 'C');
+              $pdf->Cell(30,10, ' ' . $c['Quantity'], 1, 0, 'C');
+              $pdf->Cell(20,10, ' ' . $c['Quantity'] * $item['price'], 1, 0, 'C');
+              $pdf->Cell(60,10, ' ' . $c['comments'], 1, 0, 'C');
               $pdf->Ln();
           }
       }

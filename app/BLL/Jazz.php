@@ -116,19 +116,13 @@ class Jazz extends Controller {
             $quantity = $info[1];
             $ticketId = $info[2];
 
-            if (isset($_GET['reserved']) && $_GET['reserved'] == '1') {
-                $reservedStatus = $_GET['reserved'];
-            } else {
-                $reservedStatus = 0;
-            }
-
             //Creating an array and passing the quantity
             $items = array(
                 'Quantity' => $quantity,
                 'Event' => $eventType,
                 'ticketId' => $ticketId,
-                'status' => $reservedStatus,
                 'comments' => ''
+
             );
 
             //If shoppingcart is not created (so empty), create one.

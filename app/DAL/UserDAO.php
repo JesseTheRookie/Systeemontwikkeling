@@ -60,41 +60,7 @@ class UserDAO{
         } else {
             return false;
         }
-    }
-
-    public function insertToken($email, $token, $type){
-        // Prepare query
-        $this->db->query('  INSERT INTO tokens (token, email, tokenType)
-                            VALUES (:token, :email, :tokenType)');
-        
-        // Bind values
-        $this->db->bind(':token', $token);
-        $this->db->bind(':email', $email);
-        $this->db->bind(':tokenType', $type);
-
-        // Execute
-        if($this->db->execute()){
-            return true;
-        } else {
-            die('Query failed to execute!');
-        }
-    }
-
-    public function checkTokenType($token){
-        // Prepare query
-        $this->db->query('  SELECT (tokenType) FROM Tokens
-                            WHERE token = :token');
-        
-        // Bind values
-        $this->db->bind(':token', $token);
-
-        // Execute
-        if($row = $this->db->single()){   
-            return $row;
-        } else {
-            return false;
-        }
-    }
+    }       
 
     public function newPassword($token, $password){
         // Prepare query
@@ -133,21 +99,5 @@ class UserDAO{
         } else {
             die('Query failed to execute!');
         }
-    }
-
-    public function deleteToken($token){
-        // Prepare query
-        $this->db->query('  DELETE FROM Tokens
-                            WHERE token = :token');
-        
-        // Bind values
-        $this->db->bind(':token', $token);
-
-        // Execute
-        if($this->db->execute()){
-            return true;
-        } else {
-            die('Query failed to execute!');
-        }
-    }
+    }    
 }

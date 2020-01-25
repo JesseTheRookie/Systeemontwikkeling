@@ -8,7 +8,7 @@ class ContentModel extends HomeModel {
     private $totalEvents;
     private $eventStartDate;
     private $eventEndDate;
-    private $name;
+    private $elementName;
     private $description;
     private $content;
 
@@ -66,12 +66,12 @@ class ContentModel extends HomeModel {
     }
 
     //Object for element content homepage
-    public function setName($names){
-        $this->name = $names;
+    public function setElementName($names){
+        $this->elementName = $names;
     }
 
-    public function getName(){
-        return $this->name;
+    public function getElementName(){
+        return $this->elementName;
     }
 
     //Object for description content homepage

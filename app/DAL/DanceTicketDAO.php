@@ -10,7 +10,7 @@ class DanceTicketDAO{
     public function getDanceContent() {
       $danceContentArray = array();
 
-      $this->db->query("SELECT name, description, content
+      $this->db->query("SELECT elementName, description, content
                         FROM Content as c
                         WHERE contentType = :contentType
                        ");
@@ -22,7 +22,7 @@ class DanceTicketDAO{
       foreach ($danceContent as $content) {
             $danceContentModel = new HomeModel();
 
-            $danceContentModel->setName($content->name);
+            $danceContentModel->setElementName($content->elementName);
             $danceContentModel->setDescription($content->description);
             $danceContentModel->setContent($content->content);
 
@@ -46,12 +46,12 @@ class DanceTicketDAO{
         $result = $this->db->resultSet();
 
         foreach ($result as $location){
-            $jazzTicketLocation = array(
+            $danceTicketLocation = array(
                 'city' => $location->stad,
                 'venue' => $location->venue,
                 'ticketId' => $ticketId
             );
-            array_push($danceTicketLocations, $jazzTicketLocation);
+            array_push($danceTicketLocations, $danceTicketLocation);
         }
         return $danceTicketLocations;
     }
@@ -144,11 +144,10 @@ class DanceTicketDAO{
 
         $this->db->query("SELECT description, content, name
                           FROM Content
-                          WHERE EventType = :eventType AND Content IS NOT NULL AND contentType = :contentType
+                          WHERE EventType = :eventType AND Content IS NOT NULL
                         ");
 
         $this->db->bind(':eventType', 1);
-        $this->db->bind(':contentType', 1);
         //Fetching results
         return $this->db->resultSet();
     }

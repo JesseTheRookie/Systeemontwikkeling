@@ -108,7 +108,7 @@
   <article class="content-events">
     <?php foreach($data['events'] as $event) : ?>
     <article class="eventContainer">
-        <a href="<?php echo URLROOT; ?>/ <?php echo $event->getName(); ?>">
+        <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
           <img
               src="<?php echo $event->getContent(); ?>"
               alt="Image event"
@@ -117,7 +117,7 @@
           <article class="centered">
             <h4>
                 <?php
-                  echo $event->getName();
+                  echo $event->getElementName();
                 ?>
             </h4>
 

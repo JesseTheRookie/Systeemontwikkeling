@@ -73,7 +73,6 @@ h1 span{
     background: rgb(0,0,0);
     background: linear-gradient(180deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%);
 }
-
 #ticketOverzicht header{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;

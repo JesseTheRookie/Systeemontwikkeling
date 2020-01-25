@@ -18,14 +18,14 @@
             <article class="content-dance-right">
                 <h3>
                     <?php
-                        echo $c->getName();
+                        echo $c->getElementName();
                     ?>
                 </h3>
 
                 <?php
                   //To create a dynamic link, we need the button names(links), and we need the event name. In order to get the event name, we need to explode 'HAARLEM FOOD' because we only need 'FOOD'
                   $links = explode(", ", $c->getDescription());
-                  $eventName = explode(" ", $c->getName());
+                  $eventName = explode(" ", $c->getElementName());
                 ?>
 
                 <?php foreach($links as $link) : ?>
@@ -70,31 +70,31 @@
 
   <hr>
 
-    <article class="content-header-dance" id="tickets">
+  <article class="content-header-dance" id="tickets">
         <?php foreach ($data['days'] as $day) : ?>
-            <article>
-                <h2>
-                    <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
-                </h2>
+                <article>
+                    <h2>
+                        <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
+                    </h2>
 
-                <p>
-                    <?php echo date("jS F", strtotime($day->startDateTime)); ?>
-                </p>
+                    <p>
+                        <?php echo date("jS F", strtotime($day->startDateTime)); ?>
+                    </p>
 
-                <form
-                    action="<?php echo URLROOT; ?>/dance"
-                    method="GET"
-                    role="form">
+                    <form
+                        action="<?php echo URLROOT; ?>/dance"
+                        method="GET"
+                        role="form">
 
-                    <button
-                        type="submit"
-                        class="ticket-date"
-                        name="ticketDate"
-                        value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
-                        TICKETS
-                    </button>
-                </form>
-            </article>
+                        <button
+                            type="submit"
+                            class="ticket-date"
+                            name="ticketDate"
+                            value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
+                            TICKETS
+                        </button>
+                    </form>
+                </article>
         <?php endforeach; ?>
     </article>
 
@@ -151,21 +151,11 @@
                                 </option>
                         <?php } ?>
                     </select>
-                </td>
-
-                <td class="reserved-tickets">
-                    <input
-                        type="checkbox"
-                        name="reserved"
-                        class="checkbox-reserved"
-                        value="1">
-                    <p class="p-checkbox">Check to reserve</p>
-                </td>
-
                 <td>
-                    <button type="add" value="add" name="add" class="button-add-dance">
-                        Add
-                    </button>
+
+                        <button type="add" value="add" name="add" class="button-add-dance">
+                            Add
+                        </button>
                     </form>
                 </td>
             </tr>
