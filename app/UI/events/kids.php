@@ -146,11 +146,11 @@
                     </select>
                 </td>
 
-                <td>
+                <td class="reserved-tickets">
                     <input
                         type="checkbox"
                         name="reserved"
-                        class="reserved-tickets"
+                        class="checkbox-reserved"
                         value="1">
                     <p class="p-checkbox">Check to reserve</p>
                 </td>

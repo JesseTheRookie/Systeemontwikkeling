@@ -107,7 +107,7 @@
                     <input
                         type="checkbox"
                         name="reserved"
-                        class="reserved-tickets"
+                        class="checkbox-reserved"
                         value="1">
                 </article>
 
