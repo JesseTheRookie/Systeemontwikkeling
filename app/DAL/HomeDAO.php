@@ -60,7 +60,7 @@ class HomeDAO {
     public function allEvents() {
         $eventsArray = array();
 
-        $this->db->query("SELECT elementName, description, content
+        $this->db->query("SELECT name, description, content
                             FROM Content
                             WHERE eventType = 2
                         ");
@@ -70,7 +70,7 @@ class HomeDAO {
         foreach($events as $event) {
             $homeModel = new HomeModel();
 
-            $homeModel->setElementName($event->elementName);
+            $homeModel->setName($event->name);
             $homeModel->setDescription($event->description);
             $homeModel->setContent($event->content);
 

@@ -21,7 +21,7 @@ class KidsTicketDAO{
       foreach ($kidsContent as $content) {
             $kidsContentModel = new HomeModel();
 
-            $kidsContentModel->setElementName($content->name);
+            $kidsContentModel->setName($content->name);
             $kidsContentModel->setDescription($content->description);
             $kidsContentModel->setContent($content->content);
 
