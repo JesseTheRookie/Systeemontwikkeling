@@ -7,6 +7,10 @@
     box-sizing: border-box;
 }
 
+#historicTicketContent{
+    background-color: black;
+}
+
 .headerGrid{
     display: grid;
     grid-template-columns: auto auto auto;
@@ -216,4 +220,30 @@
 
 .crumb{
     color: black;
+}
+
+#historicDays{
+    color:black;
+}
+
+.normalButton{
+    text-transform: uppercase;
+    color: black;
+    border: 1px solid black;
+    width: 135px;
+    height: 42px;
+    background-color:rgba(0, 0, 0, 0);
+}
+
+.bigButton{
+    text-transform: uppercase;
+    color: black;
+    border: 1px solid black;
+    width: 205px;
+    height: 50px;
+    background-color:rgba(0, 0, 0, 0);
+}
+
+#ticketContent{
+    background-color: red;
 }

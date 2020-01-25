@@ -45,12 +45,12 @@ class DanceTicketDAO{
         $result = $this->db->resultSet();
 
         foreach ($result as $location){
-            $jazzTicketLocation = array(
+            $danceTicketLocation = array(
                 'city' => $location->stad,
                 'venue' => $location->venue,
                 'ticketId' => $ticketId
             );
-            array_push($danceTicketLocations, $jazzTicketLocation);
+            array_push($danceTicketLocations, $danceTicketLocation);
         }
         return $danceTicketLocations;
     }

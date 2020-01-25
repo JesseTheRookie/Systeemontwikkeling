@@ -3,6 +3,7 @@
         public function __construct(){
             $this->userModel = $this->model('User');
             $this->userDAO = $this->dal('UserDAO');
+            $this->tokenDAO = $this->dal('TokenDAO');
         }
 
         public function register(){
@@ -121,29 +122,27 @@
 
                     // Register user
                     if($this->userDAO->register($user)){
+                        // Send verification email
+                        // Create token
+                        $this->createToken($user->getEmail(), "verification");
+
+                        // Message
+                        $message = "You have registered at Haarlem Festival. \n
+                        Click the link below to verificate your account! \n
+                        " . URLROOT . "?token=" . $token;
+
+                        // Use wordwrap() if lines are longer than 70 characters
+                        $message = wordwrap($message,70);
+
+                        // Subject
+                        $subject = "Haarlem Festival User Verification";
+
+                        // Send email
+                        //mail($user->getEmail(), $subject, $message);  
                         redirect('users/login');
                     } else {
                         die('Something went wrong');
-                    }
-
-                    // Send verification email
-                    // Create token
-                    $this->createToken($user->getEmail(), "verification");
-
-                    // Message
-                    $message = "You have registered at Haarlem Festival. \n
-                    Click the link below to verificate your account! \n
-                    " . URLROOT . "?token=" . $token;
-
-                    // Use wordwrap() if lines are longer than 70 characters
-                    $message = wordwrap($message,70);
-
-                    // Subject
-                    $subject = "Haarlem Festival User Verification";
-
-                    // Send email
-                    //mail($user->getEmail(), $subject, $message);  
-
+                    }             
                 } else {
                     //Load view with data
                     $this->ui('users/register', $data);
@@ -207,6 +206,7 @@
                     } else{
                         //User not found
                         $data['emailError'] = 'No user found!';
+                        $data['passwordError'] = '';
                     }
                 }
 
@@ -356,7 +356,7 @@
                                 
                                 // Update password in datebase
                                 $this->userDAO->newPassword($token, $password);
-                                $this->userDAO->deleteToken($token);
+                                $this->tokenDAO->deleteToken($token);
 
                                 // Redirect to login page
                                 redirect("users/login");
@@ -425,7 +425,7 @@
             // Give token to token handler for processing
             if($this->tokenHandler($token) == "verification"){
                 $this->userDAO->verificateUser($token);
-                $this->userDAO->deleteToken($token);
+                $this->tokenDAO->deleteToken($token);
                 $data['title'] = "You are now verified";
             } else {
                 $data['title'] = "Invalid request!";
@@ -496,13 +496,13 @@
 
         public function createToken($email, $type){
             $token = bin2hex(openssl_random_pseudo_bytes(50));
-            $this->userDAO->insertToken($email, $token, $type);
+            $this->tokenDAO->insertToken($email, $token, $type);
         }
 
         // Handles tokens
         public function tokenHandler($token){
             // Check if checkTokenType in the UserDAO returns a result
-            if($row = $this->userDAO->checkTokenType($token)){
+            if($row = $this->tokenDAO->checkTokenType($token)){
                 // Return the tokenType
                 return $row->tokenType;
             } 

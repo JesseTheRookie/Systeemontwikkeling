@@ -1,15 +1,14 @@
 <?php
 require_once('TicketModel.php');
-require_once('ArtistModel.php');
 
 class HistoricTicketModel extends TicketModel
 {
-    private $historicTicketLocation;
+    private $historicTicketLanguage;
 
-    public function setHistoricTicketLocation($location){
-        $this->historicTicketLocation = $location;
+    public function setHistoricTicketLanguage($language){
+        $this->historicTicketLanguage = $language;
     }
-    public function getHistoricTicketLocation(){
-        return $this->historicTicketLocation;
+    public function getHistoricTicketLanguage(){
+        return $this->historicTicketLanguage;
     }
 }
