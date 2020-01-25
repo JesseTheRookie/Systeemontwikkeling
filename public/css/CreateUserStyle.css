@@ -1,0 +1,189 @@
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: rgba(225, 211, 211, 0.85);
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+header {
+  position: relative;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: auto;
+  height: 40px;
+  width: 100%;
+  margin-left: 0px;
+  padding-left: 0px;
+  background: rgb(122,125,125);
+  background: linear-gradient(90deg, rgba(122,125,125,1) 15%, rgba(129,7,7,1) 75%);
+}
+
+nav {
+  position: fixed;
+  top: 0px;
+  width: 200px;
+  height: 100%;
+  background: rgb(55,51,51);
+  background: linear-gradient(0deg, rgba(55,51,51,1) 31%, rgba(122,125,125,1) 80%);
+}
+
+h1 {
+  position: relative;
+  top: 40px;
+  left: 6%;
+  font-size: 32px;
+  font-family: Lato, sans-serif;
+}
+
+#explanation {
+  position: relative;
+  top: 30px;
+  left: 6%;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+}
+
+.logoutlink {
+  position: relative;
+  top: 20%;
+  left: 93%;
+  font-size: 24px;
+  font-family: Lato, sans-serif;
+  color: #e1d9d9;
+}
+
+.list {
+  padding-left: 40px;
+  font-family: Lato, sans-serif;
+}
+
+.list-item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: Lato, sans-serif;
+}
+
+.link {
+  color: #e1d9d9;
+}
+
+.usercontainer {
+  height: 25%;
+  margin-top: 50px;
+  padding-top: 0px;
+}
+
+.nameAndFunction {
+  position: relative;
+  left: 0px;
+  bottom: 0px;
+  width: 200px;
+  height: auto;
+  padding-left: 0px;
+  background-color: transparent;
+  color: whitesmoke;
+  text-align: center;
+}
+
+.image {
+  position: relative;
+  left: 18%;
+  top: 0px;
+}
+
+.section {
+  position: relative;
+  top: -22px;
+  left: 200px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(225, 211, 211, 0.85);
+}
+
+.logoutlink {
+  position: relative;
+  margin-top: 4px;
+  left: 93%;
+  font-size: 24px;
+  font-family: Lato, sans-serif;
+  background-color: rgba(122,125,125,1);
+  border-color: black;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  color: black;
+}
+
+.tableblock {
+  margin-top: 80px;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: auto;
+}
+
+.tableandfields {
+  position: relative;
+  margin-left: 6%;
+  margin-bottom: 50px;
+  left: 0px;
+  top: 0px;
+  width: 750px;
+  height: 800px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #0f3719;
+  background-color: whitesmoke;
+}
+
+.textfieldText {
+  margin-bottom: 0%;
+  margin-left: 35%;
+}
+
+.input {
+  margin-left: 35%;
+  height: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  width: 22%;
+}
+
+.dropdowns {
+  margin-left: 35%;
+  height: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  width: 22%;
+}
+
+#genderText {
+  margin-top: 7%;
+}
+
+#submitbutton {
+  position: relative;
+  margin-left: 35%;
+  top: 25px;
+  width: 100px;
+  height: 25px;
+  left: 0px;
+  right: 0px;
+}
+
+#statusmessage {
+  margin-top: 0%;
+  margin-left: 50%;
+}

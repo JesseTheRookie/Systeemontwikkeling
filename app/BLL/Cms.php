@@ -23,22 +23,14 @@
 
         $userName = $_SESSION["userName"];
         $userLastName = $_SESSION["userLastName"];
-                
-        if($_SESSION["userType"] == 3)
-        {
-          $userType = "Super Admin";
-        }
-        else
-        {
-          $userType = "Admin";
-        }
+        
+        $userType = $this->CheckUserType();
         
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
           $tableResult = $this->GetActivityInfo($_POST['day'], $_POST['event']);
-          var_dump($tableResult);
           
           $data = [
             'title' => $title,
@@ -80,34 +72,265 @@
         $this->ui('cms/dashboard', $data);
       }
 
+      public function GetActivityInfo($date, $event)
+      {
+        $result = array();
+
+        switch ($event)
+        {
+          case "dance":
+            $result = $this->CmsDao->GetDanceActivityInfo($date);
+            break;
+          case "jazz":
+            $result = $this->CmsDao->GetJazzActivityInfo($date);
+            break;
+          case "food":
+            $result = $this->CmsDao->GetFoodActivityInfo($date);
+            break;
+          case "historic":
+            $result = $this->CmsDao->GetHistoricActivityInfo($date);
+            break;
+          case "kids":
+            $result = $this->CmsDao->GetKidsActivityInfo($date);
+            break;
+          default:
+            $result = $this->CmsDao->GetDanceActivityInfo($date);
+        }
+        return $result;
+      }
+
       public function editcontent()
       {
         $data = array();
 
         $title = "Edit content";
-        $explanation = "Click the checkbox next to the row you wish to change";
+        $explanation = "Change content and hit submit to confirm the changes";
 
         $userName = $_SESSION["userName"];
         $userLastName = $_SESSION["userLastName"];
-                
-        if($_SESSION["userType"] == 3)
-        {
-          $userType = "Super Admin";
-        }
-        else
-        {
-          $userType = "Admin";
-        }
+        
+        $userType = $this->CheckUserType();
 
-        $data = [
-          'title' => $title,
-          'explanation' => $explanation,
-          'UserName' => $userName,
-          'UserLastName' => $userLastName,
-          'UserType' => $userType
-        ];
+        $events = $this->CmsDao->GetEvents();
+        $events = array_column($events, 'event');
+
+        if($_SERVER['REQUEST_METHOD'] == 'GET')
+        {
+          $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+
+          if(isset($_GET['event']))
+          {
+            $_SESSION['event'] = $_GET['event'];
+            $rowInt = array_search($_GET['event'], $events);
+            unset($events[$rowInt]);
+            $events = array_values($events);
+            array_unshift($events, $_GET['event']);
+          }
+          else
+          {
+            $_SESSION['event'] = $events[0];
+          }
+
+          $data = [
+            'title' => $title,
+            'explanation' => $explanation,
+            'UserName' => $userName,
+            'UserLastName' => $userLastName,
+            'UserType' => $userType,
+            'Events' => $events,
+            'TitelElementStatus' => "",
+            'ArtistElementStatus' => "",
+            'ContentEvent' => $_SESSION['event']
+          ];
+
+          $data = $this->GetContentPerEvent($data, $_SESSION['event']);
+        }
+        else if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+          $rowInt = array_search($_SESSION['event'], $events);
+          unset($events[$rowInt]);  
+          $events = array_values($events);
+          array_unshift($events, $_SESSION['event']); 
+
+          $data = [
+            'title' => $title,
+            'explanation' => $explanation,
+            'UserName' => $userName,
+            'UserLastName' => $userLastName,
+            'UserType' => $userType,
+            'Events' => $events,
+            'TitelElementStatus' => "",
+            'ArtistElementStatus' => "",
+            'ContentEvent' => $_SESSION['event']
+          ];
+
+          if(isset($_POST['contentId']))
+          {
+            $toUpdateRow = $this->CmsDao->GetContentSinglePerId($_POST['contentId']); 
+            
+            if($toUpdateRow->contentType = "image")
+            {
+              $statusMessage = "";
+
+              if ($_FILES['content']['name'] != "")
+              {
+                $file = $_FILES['content'];
+                $name = $_FILES['content']['name']; //Find file name
+                $tmp_name = $_FILES['content']['tmp_name']; //Temp loc
+                $size = $_FILES['content']['size']; //Find file size
+                $error = $_FILES['content']['error']; //Find errors
+
+                //Explode from punctuation mark
+                $tempExtension = explode('.', $name);
+
+                $fileExtension = strtolower(end($tempExtension));
+
+                //Allowed extensions
+                $isAllowed = array('jpg', 'jpeg', 'png', 'pdf');
+
+                // 0 = no error - 1 = error
+                if (in_array($fileExtension, $isAllowed)) {
+                    if ($error === 0) {
+                        if ($size < 100000) {
+                            $newFileName = uniqid('', true) . "." . $fileExtension;
+                            $fileDestination = "./img/" . $newFileName;
+                            $content = $fileDestination;
+                            move_uploaded_file($tmp_name, $fileDestination);
+                            $statusMessage = "Succes! File uploaded";
+                        } else {
+                            $statusMessage = "file size is too big!";
+                        }
+                    } else {
+                      $statusMessage = "there was an error! Try it again";
+                    }
+                }
+                else
+                {
+                  $statusMessage = "your file type is not accepted";
+                }
+              }
+              else
+              {
+                $content = $toUpdateRow->content; 
+              }
+              $data['StatusMessage'] = $statusMessage; 
+            }
+            else if(!empty(trim($_POST['content'])))
+            {
+              $content = $_POST['content'];
+            }
+            else
+            {
+              $content = $toUpdateRow->content;
+            }
+
+            if(!empty(trim($_POST['contentNaam'])))
+            {
+              $naam = $_POST['contentNaam'];
+            }
+            else 
+            {
+              $naam = $toUpdateRow->naam;
+            }
+
+            if(!empty(trim($_POST['contentDescription'])))
+            {
+              $description = $_POST['contentDescription'];
+            }
+            else 
+            {
+              $description = $toUpdateRow->description;
+            }
+            $this->CmsDao->UpdateContentPerId($_POST['contentId'], $naam, $description, $content);
+          }
+          else
+          {
+            $statusMessage = "No row selected";
+          }
+          $data = $this->StatusMessagePerElementType($_POST['contentElementType'], $statusMessage, $data); 
+          $data = $this->GetContentPerEvent($data, $_SESSION['event']);
+        }
         
         $this->ui('cms/editcontent', $data);
+      }
+      
+      public function StatusMessagePerElementType($elementType, $statusMessage, $data)
+      {
+        switch ($elementType)
+        {
+          case "titelElement":
+            $data['TitelElementStatus'] = $statusMessage;
+            break;
+          case "artistElement":
+            $data['ArtistElementStatus'] = $statusMessage;
+            break;
+        }
+        return $data;
+      }
+
+      public function GetContentPerEvent($data, $event)
+      {
+        switch ($event)
+        {
+          case "dance":
+            $data['PageTitel'] = $this->CmsDao->GetContentSingle($event, "titelElement");
+            $data['PageArtists'] = $this->CmsDao->GetContent($event, "artistElement");
+            break;
+          case "jazz":
+            $data['PageTitel'] = $this->CmsDao->GetContent($event, 'titelElement');
+            $data['PageArtists'] = $this->CmsDao->GetContent($event, 'artistElement');
+            break;
+          case "food":
+            $data['PageTitel'] = $this->CmsDao->GetContentSingle($event, 'titelElement');
+            $data['PageRestaurants'] = $this->CmsDao->GetContent($event, 'restaurantElement');
+            if(isset($_GET['restautantSelect']))
+            {
+              $data['PageSelectedRestaurant'] = $this->CmsDao->GetContentSinglePerId($_GET['restautantSelect']);
+            }
+            else 
+            {
+              $data['PageSelectedRestaurant'] = $this->CmsDao->GetContentSinglePerId($data['PageRestaurants'][0]->id);
+            }
+            break;
+          case "historic":
+            $data['PageHistoricImages'] = $this->CmsDao->getHistoricImages();
+            $data['PageHistoricTexts'] = $this->CmsDao->getHistoricTexts();
+            $data['PageLocations'] = $this->CmsDao->GetContent('venues', 'locationElement');
+            if(isset($_GET['imageSelect']))
+            {
+              $data['PageSelectedImage'] = $this->CmsDao->GetContentSinglePerId($_GET['imageSelect']);
+            }
+            else 
+            {
+              $data['PageSelectedImage'] = $this->CmsDao->GetContentSinglePerId($data['PageHistoricImages'][0]->id);
+            }
+            if(isset($_GET['textSelect']))
+            {
+              $data['PageSelectedText'] = $this->CmsDao->GetContentSinglePerId($_GET['textSelect']);
+            }
+            else 
+            {
+              $data['PageSelectedText'] = $this->CmsDao->GetContentSinglePerId($data['PageHistoricTexts'][0]->id);
+            }
+            if(isset($_GET['locationSelect']))
+            {
+              $data['PageSelectedlocation'] = $this->CmsDao->GetContentSinglePerId($_GET['locationSelect']);
+            }
+            else 
+            {
+              $data['PageSelectedlocation'] = $this->CmsDao->GetContentSinglePerId($data['PageLocations'][0]->id);
+            }
+            break;
+          case "kids":
+            $data['PageTitel'] = $this->CmsDao->GetContentSingle($event, 'titelElement');
+            $data['PageArtists'] = $this->CmsDao->GetContent($event, 'artistElement');
+            break;
+          default:
+        }
+
+        return $data;
       }
 
       public function changeprogram()
@@ -119,20 +342,13 @@
         $title = "Change program";
         $explanation = "Click the checkbox next to the row you wish to change";
 
+        $userType = $this->CheckUserType();
+
         $dates = $this->CmsDao->getDates();
         $events = $this->CmsDao->GetEvents();
 
         $userName = $_SESSION["userName"];
         $userLastName = $_SESSION["userLastName"];
-                
-        if($_SESSION["userType"] == 3)
-        {
-          $userType = "Super Admin";
-        }
-        else
-        {
-          $userType = "Admin";
-        }
 
         if($_SERVER['REQUEST_METHOD'] == 'GET')
         {
@@ -167,6 +383,8 @@
             'extra' => '',
             'Dates' => $dates,
             'Events' => $events,
+            'SelectedDate' => $_SESSION['day'],
+            'SelectedEvent' => $_SESSION['event'],
             'TableColumns' => $TableColumns,
             'TableResult' => $tableResult
           ];
@@ -195,6 +413,8 @@
             'extra' => '',
             'Dates' => $dates,
             'Events' => $events,
+            'SelectedDate' => $_SESSION['day'],
+            'SelectedEvent' => $_SESSION['event'],
             'ErrorInput' => $errorInput,
             'TableColumns' => $TableColumns,
             'TableResult' => $tableResult
@@ -232,7 +452,6 @@
                 }
               }
             }
-          
             $this->UpdateProgram($_SESSION['event'], $id, $updateFields);
             $returnArray = $this->GetProgramInfo($_SESSION['day'], $_SESSION['event']);
             $data['TableResult'] = $returnArray[0];
@@ -247,34 +466,6 @@
         $this->ui('cms/changeprogram', $data);
       }
 
-      public function GetActivityInfo($date, $event)
-      {
-        $result = array();
-
-        switch ($event)
-        {
-          case "dance":
-            $result = $this->CmsDao->GetDanceActivityInfo($date);
-            break;
-          case "jazz":
-            $result = $this->CmsDao->GetJazzActivityInfo($date);
-            break;
-          case "food":
-            $result = $this->CmsDao->GetHistoricActivityInfo($date);
-            break;
-          case "historic":
-            $result = $this->CmsDao->GetFoodActivityInfo($date);
-            break;
-          case "kids":
-            $result = $this->CmsDao->GetFoodActivityInfo($date);
-            break;
-          default:
-            $result = $this->CmsDao->GetDanceActivityInfo($date);
-        }
-
-        return $result;
-      }
-
       public function GetProgramInfo($date, $event)
       {
         $result = array();
@@ -284,6 +475,12 @@
         {
         case "dance":
           $result = $this->CmsDao->GetDanceProgramInfo($date);
+          
+          foreach($result as $row)
+          {
+            $row->id = $row->id . '|' . $row->idArtist;
+          }
+          
           $TableColumns = ['Time', 'Venue', 'Session', 'Performer'];
           break;
         case "jazz":
@@ -296,10 +493,11 @@
           break;
         case "historic":
           $result = $this->CmsDao->GetHistoricProgramInfo($date);
+          $TableColumns = ['id', 'Time', 'Language'];
           break;
         case "kids":
           $result = $this->CmsDao->GetKidsProgramInfo($date);
-          $TableColumns = ['Time', 'Venue', 'Session', 'Performer'];
+          $TableColumns = ['Time', 'Session', 'Performer'];
           break;
         }
 
@@ -311,7 +509,10 @@
         switch ($event)
         {
           case "dance":
-            $this->CmsDao->UpdateDanceProgram($event, $id, $columns);
+            $result = explode("|", $id);
+            $id = $result[0];
+            $idArtist = $result[1];
+            $this->CmsDao->UpdateDanceProgram($event, $id, $idArtist, $columns);
             break;
           case "jazz":
             $this->CmsDao->UpdateJazzProgram($event, $id, $columns);
@@ -326,6 +527,110 @@
             $this->CmsDao->UpdateKidsProgram($event, $id, $columns);
             break;
         }
+      }
+
+      public function createuser()
+      {
+        $data = array();
+
+        $title = 'Register User';
+        $explanation = 'Fill in the fields and hit submit';
+        $userName = $_SESSION["userName"];
+        $userLastName = $_SESSION["userLastName"];
+        
+        $userType = $this->CheckUserType();
+
+        if($userType == "Super Admin")
+        {
+          $userTypes = ['1'=>'user', '2'=>'admin'];
+        }
+        else
+        {
+          $userTypes = ['1'=>'user'];
+        }       
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+          $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
+          $phoneValidation = "/^[-0-9]*$/";
+          
+          $data = [
+            'title' => $title,
+            'explanation' => $explanation,
+            'UserName' => $userName,
+            'UserLastName' => $userLastName,
+            'UserType' => $userType,
+            'UserTypes' => $userTypes,
+            'StatusMessage' => ''
+
+          ];  
+
+          foreach($_POST as $field)
+          {
+            if(empty($field))
+            {
+              $data['StatusMessage'] = 'Fill out all the fields!';
+              break;
+            }
+          }
+
+          if(!preg_match($phoneValidation, $_POST['phonenumber'] AND $data['StatusMessage'] == ""))
+          {
+            $data['StatusMessage'] = 'Phone number has only numbers';  
+          }
+
+          if(!preg_match($passwordValidation, $_POST['password']) AND $data['StatusMessage'] == "")
+          {
+            $data['StatusMessage'] = '1 uppercase and 1 special character';
+          }
+
+          if($_POST['password'] != $_POST['confirmpassword'] AND $data['StatusMessage'] == "")
+            {
+              $data['StatusMessage'] = 'Passwords dont match!';
+            }
+
+          if($data['StatusMessage'] == "")
+          {
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+            $this->CmsDao->registerAsAdmin($_POST['gender'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phonenumber'], $_POST['street'], $_POST['housenumber'], $_POST['type'], $password);
+          }
+        }
+        else
+        {
+          $data = [
+            'title' => $title,
+            'explanation' => $explanation,
+            'UserName' => $userName,
+            'UserLastName' => $userLastName,
+            'UserType' => $userType,
+            'UserTypes' => $userTypes,
+            'StatusMessage' => ''
+          ];  
+        }
+        $this->ui('cms/createuser', $data);
+      }
+
+      public function CheckUserType()
+      {
+      if($_SESSION["userType"] == 3)
+        {
+          $userType = "Super Admin";
+        }
+        else
+        {
+          $userType = "Admin";
+        }
+
+      return $userType;
+      }
+
+      public function LogoutUser()
+      {
+        session_destroy();
+        redirect('Pages/index');
       }
 
     }
