@@ -137,12 +137,12 @@
                         // Subject
                         $subject = "Haarlem Festival User Verification";
 
-                        // Send email
-                        //mail($user->getEmail(), $subject, $message);  
-                        redirect('users/login');
-                    } else {
-                        die('Something went wrong');
-                    }             
+                    // Subject
+                    $subject = "Haarlem Festival User Verification";
+
+                    // Send email
+                    //mail($user->getEmail(), $subject, $message);  
+
                 } else {
                     //Load view with data
                     $this->ui('users/register', $data);

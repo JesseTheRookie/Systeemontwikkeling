@@ -68,6 +68,7 @@
                   }
             }
         }
+
         $_SESSION['cartItems'] = $cartItems;
         //Return a array of cart items
         return $cartItems;
