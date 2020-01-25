@@ -7,12 +7,14 @@
         $this->CmsDao = $this->dal('CmsDAO');
       }
 
+      //Dashboard page
       public function dashboard()
       {
         $data = array();
 
         $title = 'Dashboard';
 
+        //haal data op uit model
         $totalRev = $this->CmsDao->GetTotalRev();
         $totalTicketSold = $this->CmsDao->GetTotalTicketsSold();
         $totalReservations = $this->CmsDao->GetTotalTicketsReserved();
@@ -21,15 +23,18 @@
         $dates = $this->CmsDao->getDates();
         $events = $this->CmsDao->GetEvents();
 
+        //haal naam en functie gebruiker uit session
         $userName = $_SESSION["userName"];
         $userLastName = $_SESSION["userLastName"];
         
+        //checkt functie van gebruiker
         $userType = $this->CheckUserType();
         
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
+          //haal data uit db per dag en event als op een knop gedrukt wordt
           $tableResult = $this->GetActivityInfo($_POST['day'], $_POST['event']);
           
           $data = [
@@ -51,6 +56,7 @@
         }
         else
         {
+          //eerste keer, haal data van eerste event en eerste dag
           $tableResult = $this->GetActivityInfo($dates[0]->date, $events[0]->event);
 
           $data = [
@@ -72,6 +78,7 @@
         $this->ui('cms/dashboard', $data);
       }
 
+      //verschillende functies per event in de model
       public function GetActivityInfo($date, $event)
       {
         $result = array();
@@ -99,6 +106,7 @@
         return $result;
       }
 
+      //edit content page
       public function editcontent()
       {
         $data = array();
@@ -111,6 +119,7 @@
         
         $userType = $this->CheckUserType();
 
+        //haal events op en haal columns uit de array
         $events = $this->CmsDao->GetEvents();
         $events = array_column($events, 'event');
 
@@ -118,13 +127,14 @@
         {
           $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
+          //kijkt of op een search knop gedrukt is of niet
           if(isset($_GET['event']))
           {
-            $_SESSION['event'] = $_GET['event'];
-            $rowInt = array_search($_GET['event'], $events);
-            unset($events[$rowInt]);
-            $events = array_values($events);
-            array_unshift($events, $_GET['event']);
+            $_SESSION['event'] = $_GET['event']; //zet geselecteerde event in session
+            $rowInt = array_search($_GET['event'], $events); //pak key van geselecteerde event
+            unset($events[$rowInt]); //haal geselcteerde event uit de array
+            $events = array_values($events); //restructure array
+            array_unshift($events, $_GET['event']); //zet geselecteerde event als eerste in array
           }
           else
           {
@@ -149,7 +159,8 @@
         {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-          $rowInt = array_search($_SESSION['event'], $events);
+          //zet geselecteerde event als eerste in array, maar de van de session
+          $rowInt = array_search($_SESSION['event'], $events); 
           unset($events[$rowInt]);  
           $events = array_values($events);
           array_unshift($events, $_SESSION['event']); 
@@ -166,14 +177,18 @@
             'ContentEvent' => $_SESSION['event']
           ];
 
+          //checkt of row geselecteerd is
           if(isset($_POST['contentId']))
           {
+            //haalt de geselecteerde row op uit de db
             $toUpdateRow = $this->CmsDao->GetContentSinglePerId($_POST['contentId']); 
             
+            //als row een image heeft
             if($toUpdateRow->contentType = "image")
             {
               $statusMessage = "";
 
+              //als een image is ingevuld
               if ($_FILES['content']['name'] != "")
               {
                 $file = $_FILES['content'];
@@ -194,10 +209,10 @@
                 if (in_array($fileExtension, $isAllowed)) {
                     if ($error === 0) {
                         if ($size < 100000) {
-                            $newFileName = uniqid('', true) . "." . $fileExtension;
-                            $fileDestination = "./img/" . $newFileName;
-                            $content = $fileDestination;
-                            move_uploaded_file($tmp_name, $fileDestination);
+                            $newFileName = uniqid('', true) . "." . $fileExtension; //maakt unieke file name
+                            $fileDestination = "./img/" . $newFileName; //maakt path naar de file
+                            $content = $fileDestination; //zet path in content var
+                            move_uploaded_file($tmp_name, $fileDestination); //zet file op zijn plek
                             $statusMessage = "Succes! File uploaded";
                         } else {
                             $statusMessage = "file size is too big!";
@@ -211,12 +226,14 @@
                   $statusMessage = "your file type is not accepted";
                 }
               }
+              //als geen image meegegeven is
               else
               {
                 $content = $toUpdateRow->content; 
               }
               $data['StatusMessage'] = $statusMessage; 
             }
+            //als row geen image heeft, zet oude data in veld als post leeg is
             else if(!empty(trim($_POST['content'])))
             {
               $content = $_POST['content'];
@@ -243,6 +260,7 @@
             {
               $description = $toUpdateRow->description;
             }
+            //update row in de db
             $this->CmsDao->UpdateContentPerId($_POST['contentId'], $naam, $description, $content);
           }
           else
@@ -255,7 +273,8 @@
         
         $this->ui('cms/editcontent', $data);
       }
-      
+
+      //zet status message in element
       public function StatusMessagePerElementType($elementType, $statusMessage, $data)
       {
         switch ($elementType)
@@ -270,6 +289,7 @@
         return $data;
       }
 
+      //haalt data op uit content per event en per element
       public function GetContentPerEvent($data, $event)
       {
         switch ($event)
@@ -333,6 +353,7 @@
         return $data;
       }
 
+      //change program page
       public function changeprogram()
       {
         $data = array();
@@ -354,8 +375,10 @@
         {
           $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
           
+          //als op knop gedrukt is
           if(isset($_GET['day']))
           {
+            //haal data en columns uit de db per day en event
             $returnArray = $this->GetProgramInfo($_GET['day'], $_GET['event']);
             $_SESSION['day'] = $_GET['day'];
             $_SESSION['event'] = $_GET['event'];
@@ -367,6 +390,7 @@
             $_SESSION['event'] = $events[0]->event;
           }
 
+          //zet data in result en columns in columns
           $tableResult = $returnArray[0];
           $TableColumns = $returnArray[1];
 
@@ -420,19 +444,22 @@
             'TableResult' => $tableResult
           ];
 
+          //als een radio geselecteerd is
           if(!empty($_POST['radio']))
           {
-            $id = trim($_POST['radio']);
-            $rowInt = array_search($id, array_column($tableResult, 'id'));
+            $id = trim($_POST['radio']);  //haal ticketId uit value van de radio button
+            $rowInt = array_search($id, array_column($tableResult, 'id')); //haal row op van verkregen ticketId
           
             for($i = 0; $i < count($TableColumns); $i++)
             {
               $column = $TableColumns[$i];
 
+              //als het de time column is, maakt er datetime van
               if($column == "Time")
               {
                 if(!empty(trim($_POST[$column])))
                 {
+                  //zet value in de updateFields array
                  array_push($updateFields, $_SESSION['day'] . " " . trim($_POST[$column]));
                 }
                 else 
@@ -452,17 +479,18 @@
                 }
               }
             }
+            //update row van event per ticketId
             $this->UpdateProgram($_SESSION['event'], $id, $updateFields);
             $returnArray = $this->GetProgramInfo($_SESSION['day'], $_SESSION['event']);
             $data['TableResult'] = $returnArray[0];
           }
+          //als geen radio button geselecteerd is
           else
           {
           $data['ErrorInput'] = 'No row selected!';
-          $this->ui('cms/changeprogram', $data);
           }
         }
-                
+         
         $this->ui('cms/changeprogram', $data);
       }
 
@@ -471,11 +499,13 @@
         $result = array();
         $TableColumns;
 
+        //haal rows en columns op per event
         switch ($event)
         {
         case "dance":
           $result = $this->CmsDao->GetDanceProgramInfo($date);
           
+          //zet artistId achter ticketId, dance heeft meerdere artists per ticketId
           foreach($result as $row)
           {
             $row->id = $row->id . '|' . $row->idArtist;
@@ -500,15 +530,17 @@
           $TableColumns = ['Time', 'Session', 'Performer'];
           break;
         }
-
+        //php kan maar 1 ding returnen, daarom wordt het in een array gezet
         return $array = [$result, $TableColumns];
       }
 
       public function UpdateProgram($event, $id, $columns)
       {
+        //kijkt welk event geupdate moet worden per ticketId
         switch ($event)
         {
           case "dance":
+            //haalt ticketId en artistId uit elkaar
             $result = explode("|", $id);
             $id = $result[0];
             $idArtist = $result[1];
@@ -540,6 +572,7 @@
         
         $userType = $this->CheckUserType();
 
+        //zet user type opties in array, admin mag alleen users maken, super admin mag ook admins maken
         if($userType == "Super Admin")
         {
           $userTypes = ['1'=>'user', '2'=>'admin'];
@@ -553,6 +586,7 @@
         {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+          //validation strings
           $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
           $phoneValidation = "/^[-0-9]*$/";
           
@@ -567,6 +601,7 @@
 
           ];  
 
+          //kijkt of geen row leeg is
           foreach($_POST as $field)
           {
             if(empty($field))
@@ -576,23 +611,28 @@
             }
           }
 
+          //kijkt of er een error is en of phonenumber overeenkomt met de validation string
           if(!preg_match($phoneValidation, $_POST['phonenumber'] AND $data['StatusMessage'] == ""))
           {
             $data['StatusMessage'] = 'Phone number has only numbers';  
           }
 
+          //kijkt of er een error is en of password overeenkomt met de validation string
           if(!preg_match($passwordValidation, $_POST['password']) AND $data['StatusMessage'] == "")
           {
             $data['StatusMessage'] = '1 uppercase and 1 special character';
           }
 
+          //kijkt of passwords overeenkomen en of er geen error message is
           if($_POST['password'] != $_POST['confirmpassword'] AND $data['StatusMessage'] == "")
             {
               $data['StatusMessage'] = 'Passwords dont match!';
             }
 
+          //als er geen error is, maak user en zet in db
           if($data['StatusMessage'] == "")
           {
+            //hash password
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
             $this->CmsDao->registerAsAdmin($_POST['gender'], $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phonenumber'], $_POST['street'], $_POST['housenumber'], $_POST['type'], $password);
@@ -613,6 +653,7 @@
         $this->ui('cms/createuser', $data);
       }
 
+      //checkt userType
       public function CheckUserType()
       {
       if($_SESSION["userType"] == 3)
@@ -627,6 +668,7 @@
       return $userType;
       }
 
+      //destroyed session als op de logout knop gedrukt wordt
       public function LogoutUser()
       {
         session_destroy();
