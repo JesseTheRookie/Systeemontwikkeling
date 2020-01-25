@@ -6,6 +6,31 @@ class DanceTicketDAO{
       $this->db = new Database;
     }
 
+    //Get the image, event name and buttons of top section Dance Page.
+    public function getDanceContent() {
+      $danceContentArray = array();
+
+      $this->db->query("SELECT name, description, content
+                        FROM Content as c
+                        WHERE contentType = :contentType
+                       ");
+
+      $this->db->bind(':contentType', 2);
+
+      $danceContent = $this->db->resultSet();
+
+      foreach ($danceContent as $content) {
+            $danceContentModel = new HomeModel();
+
+            $danceContentModel->setName($content->name);
+            $danceContentModel->setDescription($content->description);
+            $danceContentModel->setContent($content->content);
+
+            array_push($danceContentArray, $danceContentModel);
+        }
+        return $danceContentArray;
+    }
+
     public function getDanceTicketLocationsFromTicket($ticketId){
         $danceTicketLocations = array();
 
@@ -119,10 +144,11 @@ class DanceTicketDAO{
 
         $this->db->query("SELECT description, content, name
                           FROM Content
-                          WHERE EventType = :eventType AND Content IS NOT NULL
+                          WHERE EventType = :eventType AND Content IS NOT NULL AND contentType = :contentType
                         ");
 
         $this->db->bind(':eventType', 1);
+        $this->db->bind(':contentType', 1);
         //Fetching results
         return $this->db->resultSet();
     }

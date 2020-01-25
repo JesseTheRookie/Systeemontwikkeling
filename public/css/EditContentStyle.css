@@ -36,6 +36,22 @@ nav {
 }
 
 h1 {
+  font-size: 32px;
+  font-family: Lato, sans-serif;
+}
+
+h2 {
+  font-size: 18px;
+  font-family: Lato, sans-serif;
+}
+
+h3 {
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+}
+
+#title
+{
   position: relative;
   top: 40px;
   left: 6%;
@@ -43,7 +59,8 @@ h1 {
   font-family: Lato, sans-serif;
 }
 
-h3 {
+#description
+{
   position: relative;
   top: 30px;
   left: 6%;
@@ -53,11 +70,26 @@ h3 {
 
 .logoutlink {
   position: relative;
-  top: 20%;
+  margin-top: 4px;
   left: 93%;
   font-size: 24px;
   font-family: Lato, sans-serif;
-  color: #e1d9d9;
+  background-color: rgba(122,125,125,1);
+  border-color: black;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  color: black;
+}
+
+#previewlink {
+  position: relative;
+  top: -25px;
+  left: 40%;
+  font-size: 24px;
+  font-family: Lato, sans-serif;
+  color: black;
 }
 
 .link {
@@ -131,5 +163,211 @@ h3 {
   margin-top: 50px;
   width: 100px;
   height: 30px;
+}
+
+.heading {
+  position: relative;
+  margin-left: 5%;
+  margin-top: 3%;
+  top: 0px;
+  font-size: 18px;
+  font-family: Lato, sans-serif;
+}
+
+.subheading {
+  position: relative;
+  margin-left: 5%;
+  margin-top: 3%;
+  top: 0px;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+}
+
+.textfield {
+  position: relative;
+  margin-left: 5%;
+  margin-top: 0%;
+  top: -5px;
+}
+
+.fileToUpload {
+  position: relative;
+  margin-left: 5%;
+  margin-top: 0%;
+  top:  -5px;
+}
+
+#submitArtistTitel {
+  position: relative;
+  margin-left: 0%;
+  margin-top: 0%;
+  top:  55px;
+  left: -255px;
+}
+
+#submitArtistsContent {
+  position: relative;
+  margin-left: 0%;
+  margin-top: 0%;
+  top:  55px;
+  left: -255px;
+}
+
+.radio {
+  position: relative;
+  margin-left: 0%;
+  margin-top: 3%;
+}
+
+.artists {
+  position: relative;
+  margin-left: 3%;
+  margin-top: 5%;
+}
+
+.contents {
+  position: relative;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.titelElement {
+  position: relative;
+  height: 375px;
+  width: 50%;
+  margin-left: 6%;
+  margin-top: 3%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #0f3719;
+  background-color: whitesmoke;
+}
+
+.artistElement {
+  position: relative;
+  height: 580px;
+  width: 50%;
+  margin-left: 6%;
+  margin-top: 3%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #0f3719;
+  background-color: whitesmoke;
+}
+
+.restaurantElement {
+  position: relative;
+  height: 545px;
+  width: 50%;
+  margin-left: 6%;
+  margin-top: 3%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #0f3719;
+  background-color: whitesmoke;
+}
+
+.historicElement {
+  position: relative;
+  height: 490px;
+  width: 50%;
+  margin-left: 6%;
+  margin-top: 3%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #0f3719;
+  background-color: whitesmoke;
+}
+
+.subheading2 {
+  position: relative;
+  margin-left: 40%;
+  margin-top: 2%;
+  top: -224px;
+  font-size: 16px;
+  font-family: Lato, sans-serif;
+}
+
+.textfield2 {
+  position: relative;
+  margin-left: 5%;
+  margin-top: 0%;
+  top: -5px;
+  width: 250px;
+}
+
+#submitHistoric {
+  position: relative;
+  margin-left: 0%;
+  margin-top: 0%;
+  top:  -170px;
+  left: -415px;
+}
+
+#locationElement {
+  position: relative;
+  height: 520px;
+  width: 50%;
+  margin-left: 6%;
+  margin-top: 3%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #0f3719;
+  background-color: whitesmoke;
+}
+
+#restaurantDropdown {
+  position: relative;
+  margin-left: 5%;
+  margin-bottom: 3%;
+  top: 0px;
+  width: 210px;
+  height: 30px;
+}
+
+.historicDropdown {
+  position: relative;
+  margin-left: 5%;
+  margin-bottom: 3%;
+  top: 0px;
+  width: 210px;
+  height: 30px;
+}
+
+#restaurantSubmitButton {
+  position: relative;
+  margin-left: 5%;
+  margin-top: -30;
+  width: 100px;
+  height: 30px;
+}
+
+#restaurantSubmitButton {
+  position: relative;
+  margin-left: 5%;
+  margin-top: -30;
+  width: 100px;
+  height: 30px;
+}
+
+#restaurantDescription {
+  position: relative;
+  margin-left: 5%;
+  
+}
+
+.status {
+  position: relative;
+  width: 50px;
+  margin-left: -30%;
+  top: 55px;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: left;
+  margin-top: 3%;
+  margin-left: 5%;
+  width: 85%;
 }
   
