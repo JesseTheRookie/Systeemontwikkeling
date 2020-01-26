@@ -10,16 +10,16 @@ class HistoricTicketDAO{
         public function getHistoricTickets($ticketDate){
             $historicTicketArray = array();
 
-            $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, l.language
-                            FROM Tickets AS t
-                            INNER JOIN HistoricTicket AS h
-                            ON t.ticketId = h.ticketId
-                            INNER JOIN HistoricLanguage AS hl
-                            ON h.ticketId = hl.historicTicketId
-                            INNER JOIN Language AS l
-                            ON hl.languageId = l.languageId
-                            WHERE t.startDateTime LIKE '%$ticketDate%'
-                            ORDER BY t.startDateTime ASC
+            $this->db->query("  SELECT Tickets.ticketId, Tickets.startDateTime, Tickets.endDateTime, Tickets.ticketQuantity, Tickets.price, Language.language
+                                FROM Tickets
+                                INNER JOIN HistoricTicket
+                                ON Tickets.ticketId = HistoricTicket.ticketId
+                                INNER JOIN HistoricLanguage
+                                ON HistoricTicket.ticketId = HistoricLanguage.historicTicketId
+                                INNER JOIN Language
+                                ON HistoricLanguage.languageId = Language.languageId
+                                WHERE Tickets.startDateTime LIKE '%:ticketDate%'
+                                ORDER BY Tickets.startDateTime ASC
                             ");
 
             $this->db->bind(':ticketDate', $ticketDate);
@@ -44,11 +44,11 @@ class HistoricTicketDAO{
         }
 
         public function getDifferentDays() {
-            $this->db->query("SELECT DISTINCT(DATE(t.startDateTime)) as startDateTime
-                            FROM Tickets as t
-                            INNER JOIN HistoricTicket as d
-                            ON d.ticketId = t.ticketId
-                            WHERE startDateTime >=  DATE(NOW())
+            $this->db->query("  SELECT DISTINCT(DATE(Tickets.startDateTime)) as startDateTime
+                                FROM Tickets
+                                INNER JOIN HistoricTicket
+                                ON HistoricTicket.ticketId = Tickets.ticketId
+                                WHERE startDateTime >=  DATE(NOW())
                             ");
             $results = $this->db->resultSet();
 
@@ -58,11 +58,12 @@ class HistoricTicketDAO{
         public function getTicketLanguages($ticketId){
             $historicTicketLanguages = array();
     
-            $this->db->query("SELECT h.venue, l.language
-                                    FROM HistoricLanguage AS h
-                                    JOIN Language AS l
-                                    ON h.languageId = l.languageId
-                                    WHERE h.ticketId = :id");
+            $this->db->query("  SELECT HistoricLanguage.languageId, Language.language
+                                FROM HistoricLanguage
+                                JOIN Language
+                                ON HistoricLanguage.languageId = Language.languageId
+                                WHERE HistoricLanguage.historicTicketId = :id
+                            ");
     
             $this->db->bind(':id', $ticketId);
     

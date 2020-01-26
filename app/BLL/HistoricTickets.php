@@ -1,12 +1,14 @@
 <?php 
     class HistoricTickets EXTENDS Controller{
 
+        // Create object for DAO and Model layer
         public function __construct() {
             $this->historicTicketDAO = $this->dal('HistoricTicketDAO');
             $this->historicTicketModel = $this->model('HistoricTicketModel');
         }
 
         public function index(){
+
             $days = $this->getDifferentDays();
 
             if($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -71,6 +73,5 @@
             $historicTicket->setTicketLanguage($ticketId);
     
             return $historicTicket;
-        }
-    
+        }    
     }
