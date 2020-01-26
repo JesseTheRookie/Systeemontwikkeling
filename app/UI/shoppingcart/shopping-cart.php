@@ -2,7 +2,7 @@
     require APPROOT . '/UI/inc/header.php';
     require APPROOT . '/UI/inc/navigation.php';
 ?>
-<?php var_dump($_SESSION['cartItems']); ?>
+
 <div id="layout-shoppingcart">
     <h1>
         Shopping Cart

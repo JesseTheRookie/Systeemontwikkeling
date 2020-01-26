@@ -70,31 +70,31 @@
 
   <hr>
 
-  <article class="content-header-dance" id="tickets">
+    <article class="content-header-dance" id="tickets">
         <?php foreach ($data['days'] as $day) : ?>
-                <article>
-                    <h2>
-                        <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
-                    </h2>
+            <article>
+                <h2>
+                    <?php echo date("D", strtotime($day->startDateTime)) . "."; ?>
+                </h2>
 
-                    <p>
-                        <?php echo date("jS F", strtotime($day->startDateTime)); ?>
-                    </p>
+                <p>
+                    <?php echo date("jS F", strtotime($day->startDateTime)); ?>
+                </p>
 
-                    <form
-                        action="<?php echo URLROOT; ?>/dance"
-                        method="GET"
-                        role="form">
+                <form
+                    action="<?php echo URLROOT; ?>/dance"
+                    method="GET"
+                    role="form">
 
-                        <button
-                            type="submit"
-                            class="ticket-date"
-                            name="ticketDate"
-                            value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
-                            TICKETS
-                        </button>
-                    </form>
-                </article>
+                    <button
+                        type="submit"
+                        class="ticket-date"
+                        name="ticketDate"
+                        value="<?php echo date("Y-m-d", strtotime($day->startDateTime)); ?>">
+                        TICKETS
+                    </button>
+                </form>
+            </article>
         <?php endforeach; ?>
     </article>
 
@@ -153,11 +153,11 @@
                     </select>
                 </td>
 
-                <td>
+                <td class="reserved-tickets">
                     <input
                         type="checkbox"
                         name="reserved"
-                        class="reserved-tickets"
+                        class="checkbox-reserved"
                         value="1">
                     <p class="p-checkbox">Check to reserve</p>
                 </td>

@@ -3,7 +3,6 @@
         public function __construct(){
             $this->userModel = $this->model('User');
             $this->userDAO = $this->dal('UserDAO');
-            $this->tokenDAO = $this->dal('TokenDAO');
         }
 
         public function register(){
@@ -122,27 +121,29 @@
 
                     // Register user
                     if($this->userDAO->register($user)){
-                        // Send verification email
-                        // Create token
-                        $this->createToken($user->getEmail(), "verification");
-
-                        // Message
-                        $message = "You have registered at Haarlem Festival. \n
-                        Click the link below to verificate your account! \n
-                        " . URLROOT . "?token=" . $token;
-
-                        // Use wordwrap() if lines are longer than 70 characters
-                        $message = wordwrap($message,70);
-
-                        // Subject
-                        $subject = "Haarlem Festival User Verification";
-
-                        // Send email
-                        //mail($user->getEmail(), $subject, $message);  
                         redirect('users/login');
                     } else {
                         die('Something went wrong');
-                    }             
+                    }
+
+                    // Send verification email
+                    // Create token
+                    $this->createToken($user->getEmail(), "verification");
+
+                    // Message
+                    $message = "You have registered at Haarlem Festival. \n
+                    Click the link below to verificate your account! \n
+                    " . URLROOT . "?token=" . $token;
+
+                    // Use wordwrap() if lines are longer than 70 characters
+                    $message = wordwrap($message,70);
+
+                    // Subject
+                    $subject = "Haarlem Festival User Verification";
+
+                    // Send email
+                    //mail($user->getEmail(), $subject, $message);
+
                 } else {
                     //Load view with data
                     $this->ui('users/register', $data);
@@ -206,7 +207,6 @@
                     } else{
                         //User not found
                         $data['emailError'] = 'No user found!';
-                        $data['passwordError'] = '';
                     }
                 }
 
@@ -215,14 +215,14 @@
                     // Validated
                     // Check and login
                     $loggedInUser = $this->userDAO->login($user);
-
+                    var_dump[$_SESSION];
                     if($loggedInUser){
                         // Create Session
 
                         $this->createUserSession($loggedInUser);
 
-                        if($_SESSION['userId'] > 1){
-                            redirect('pages/cms');
+                        if($_SESSION['userType'] > 1){
+                            redirect('cms/dashboard');
                         } else {
                         redirect('index');
                         }
@@ -288,7 +288,7 @@
                         $subject = "Haarlem Festival password recovery";
 
                         // Send email
-                        //mail($email, $subject, $message);                                                
+                        //mail($email, $subject, $message);
 
                         redirect("users/pwemailsend");
 
@@ -307,25 +307,25 @@
             // Init data
             $data = [
                 'title' => 'Password recovery email has been send'
-            ];            
+            ];
 
             // Load UI
             $this->ui('users/pwemailsend', $data);
-        }        
+        }
 
-        public function newPassword(){   
+        public function newPassword(){
             // Sanitize the token if provided
             if(isset($_GET['token'])){
                 $token = trim(filter_var($_GET['token'], FILTER_SANITIZE_STRING));
             } else {
                 $token = "";
             }
-            
-            
+
+
             // Sanitize user input and declare password validation regex
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/"; 
-            
+            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
+
             // Init data
             $data = [
                 'title' => 'Enter new password',
@@ -342,7 +342,7 @@
 
                 // Validate Password not empty
                 if(!empty($password) && !empty($passwordConfirm)){
-                    
+
                     // Validate if password is 6 characters or longer
                     if(strlen($password < 6)) {
 
@@ -353,10 +353,10 @@
                             if($password == $passwordConfirm) {
                                 // Hash password
                                 $password = password_hash($password, PASSWORD_DEFAULT);
-                                
+
                                 // Update password in datebase
                                 $this->userDAO->newPassword($token, $password);
-                                $this->tokenDAO->deleteToken($token);
+                                $this->userDAO->deleteToken($token);
 
                                 // Redirect to login page
                                 redirect("users/login");
@@ -383,7 +383,7 @@
 
                     //Load UI
                     $this->ui('users/newpassword', $data);
-                }                           
+                }
             } else {
                 if($this->tokenHandler($token) == "forgot"){
                 } else {
@@ -392,22 +392,22 @@
                     //Load UI
                     $this->ui('users/newpassword', $data);
                 }
-                
+
             }
 
             //Load UI
             $this->ui('users/newpassword', $data);
         }
 
-        public function pwDone(){            
+        public function pwDone(){
             //sanitize user input and declare password validation regex
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/"; 
+            $passwordValidation = "/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
             //Init data
             $data = [
                 'title' => "You can now use  your new password",
                 'token' => $token,
-            ];           
+            ];
 
             //Load UI
             $this->ui('users/pwdone', $data);
@@ -419,13 +419,13 @@
 
              // Init data
              $data = [
-                'title' => '',                
+                'title' => '',
             ];
 
             // Give token to token handler for processing
             if($this->tokenHandler($token) == "verification"){
                 $this->userDAO->verificateUser($token);
-                $this->tokenDAO->deleteToken($token);
+                $this->userDAO->deleteToken($token);
                 $data['title'] = "You are now verified";
             } else {
                 $data['title'] = "Invalid request!";
@@ -447,7 +447,7 @@
                 $_SESSION['userPhone'] = $loggedInUser->userPhone;
                 $_SESSION['userGender'] = $loggedInUser->userGender;
                 $_SESSION['userVerified'] = $loggedInUser->verified;
-
+                
             }
             catch(Exception $e) {
                 die('f');
@@ -461,11 +461,10 @@
                 $_SESSION['userPhone'] = $loggedInUser->userPhoneStreet;
                 $_SESSION['userGender'] = $loggedInUser->userGender;
 
-
-
-                if($_SESSION['userType'] == 1){
+                if($_SESSION['userType'] == 1 OR $_SESSION['userType'] == 2){
                     redirect('cms/dashboard');
                 } else {
+                    
                 redirect('pages/index');
                 }
             }
@@ -496,20 +495,20 @@
 
         public function createToken($email, $type){
             $token = bin2hex(openssl_random_pseudo_bytes(50));
-            $this->tokenDAO->insertToken($email, $token, $type);
+            $this->userDAO->insertToken($email, $token, $type);
         }
 
         // Handles tokens
         public function tokenHandler($token){
             // Check if checkTokenType in the UserDAO returns a result
-            if($row = $this->tokenDAO->checkTokenType($token)){
+            if($row = $this->userDAO->checkTokenType($token)){
                 // Return the tokenType
                 return $row->tokenType;
-            } 
+            }
             // If the token doesn't return a result
             else {
                 return false;
-            }            
+            }
         }
 
         public function newPasswordFormFactory($data, $token){

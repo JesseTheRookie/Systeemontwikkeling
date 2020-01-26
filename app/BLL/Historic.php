@@ -21,7 +21,6 @@
 
             $this->ui('events/historic', $data);
         }
-
         public function getHistoricLocationByTicketId($ticketId)
         {
             return $this->historicDAO->getHistoricLocationByTicketId($ticketId);
@@ -71,7 +70,7 @@
                 
                     <br>
                 
-                    <a href="'.URLROOT.'/historictickets" class="button">
+                    <a href="'.URLROOT.'/ticketpagina" class="button">
                     '.$content[0]->getButton().'
                     </a>
                 </div>

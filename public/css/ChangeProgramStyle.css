@@ -130,7 +130,7 @@ span {
   left: 0px;
   top: 0px;
   width: 1138px;
-  height: 500px;
+  height: 600px;
   border-style: solid;
   border-width: 2px;
   border-color: #0f3719;
@@ -143,7 +143,7 @@ span {
   left: 0px;
   right: 0px;
   width: 100%;
-  height: 65%;
+  height: 50%;
 }
 
 .textfields {
@@ -152,7 +152,11 @@ span {
   left: 0px;
   right: 0px;
   width: 100%;
-  height: 35%;
+  height: 45%;
+}
+
+.float_left span {
+  display: block;
 }
 
 .textfield {
@@ -165,87 +169,97 @@ span {
 
 .text1 {
   position: relative;
+  margin-left: 5%;
   top: 0px;
-  left: 50px;
+  left: 0px;
   right: 0px;
 }
 
 #field1 {
   position: relative;
-  top: 20px;
-  left: 8px;
+  margin-left: 5%;
+  top: -10px;
+  left: 0px;
   right: 0px;
 }
 
 .text2 {
   position: relative;
+  margin-left: 5%;
   top: 0px;
-  left: 80px;
+  left: 0px;
   right: 0px;
 }
 
 #field2 {
   position: relative;
-  top: 20px;
-  left: 39px;
+  margin-left: 5%;
+  top: -10px;
+  left: 0px;
   right: 0px;
 }
 
 .text3 {
   position: relative;
-  top: 70px;
-  left: -450px;
+  margin-left: 5%;
+  top: 0px;
+  left: 0px;
   right: 0px;
 }
 
 #field3 {
   position: relative;
-  top: 90px;
-  left: -491px;
+  margin-left: 5%;
+  top: -10px;
+  left: 0px;
   right: 0px;
 }
 
 .text4 {
   position: relative;
-  top: 70px;
-  left: -420px;
+  margin-left: 30%;
+  top: -219px;
+  left: 0px;
   right: 0px;
 }
 
 #field4 {
   position: relative;
-  top: 90px;
-  left: -461px;
+  margin-left: 30%;
+  top: -229px;
+  left: 0px;
   right: 0px;
 }
 
-.textextra {
+.text5 {
   position: relative;
-  top: -1.5px;
-  left: -400px;
+  margin-left: 30%;
+  top: -219px;
+  left: 0px;
   right: 0px;
 }
 
-#fieldextra {
+#field5 {
   position: relative;
-  top: -1.5px;
-  left: 600px;
+  margin-left: 30%;
+  top: -229px;
+  left: 0px;
   right: 0px;
 }
 
-.submitbutton {
-  position: relative;
-  top: 110px;
-  left: -160px;
+#submitbuttonUpdate {
+  position: absolute;
+  margin-left: 5%;
+  top: 225px;
+  left: 0px;
   right: 0px;
 }
 
 table {
   border-collapse: collapse;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 5%;
-  width: 85%;
 }
 
 th {
@@ -273,11 +287,85 @@ tr {
   height: 30px;
 }
 
-#submitbutton {
+#submitbuttonSelector {
   position: relative;
   left: 15%;
   top: 25px;
   width: 100px;
   height: 30px;
+}
+
+.fixed_header{
+  width: 85%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.fixed_header tbody{
+display:block;
+width: 100%;
+overflow: auto;
+height: 175px;
+}
+
+.fixed_header thead tr {
+ display: block;
+}
+
+.fixed_header thead {
+background: black;
+color:#fff;
+}
+
+.fixed_header th, .fixed_header td {
+  text-align: left;
+  height: 30px;
+  width: 200px;
+}
+
+.fixed_header td:first-child, th:first-child {
+  width: 50px;
+}
+
+.fixed_header td:nth-child(2) {
+  width: 100px;
+
+}
+
+.fixed_header th:nth-child(2) {
+  width: 100px;
+}
+
+.fixed_header td:nth-child(5) {
+  width: 150px;
+  text-align: center;
+}
+
+.fixed_header th:nth-child(5) {
+  width: 150px;
+}
+
+#dateeventtekst {
+  position: relative;
+  top: -10px;
+  margin-left: 70%;
+  font-size: 20px;
+  font-family: Lato, sans-serif;
+
+}
+
+.logoutlink {
+  position: relative;
+  margin-top: 4px;
+  left: 93%;
+  font-size: 24px;
+  font-family: Lato, sans-serif;
+  background-color: rgba(122,125,125,1);
+  border-color: black;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  color: black;
 }
 

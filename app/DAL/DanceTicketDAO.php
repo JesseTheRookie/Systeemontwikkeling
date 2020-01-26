@@ -45,12 +45,12 @@ class DanceTicketDAO{
         $result = $this->db->resultSet();
 
         foreach ($result as $location){
-            $danceTicketLocation = array(
+            $jazzTicketLocation = array(
                 'city' => $location->stad,
                 'venue' => $location->venue,
                 'ticketId' => $ticketId
             );
-            array_push($danceTicketLocations, $danceTicketLocation);
+            array_push($danceTicketLocations, $jazzTicketLocation);
         }
         return $danceTicketLocations;
     }
@@ -87,6 +87,7 @@ class DanceTicketDAO{
                           FROM Tickets as t
                           INNER JOIN DanceTicket as d
                           ON d.ticketId = t.ticketId
+                          WHERE startDateTime >=  DATE(NOW())
                         ");
 
         $results = $this->db->resultSet();
@@ -115,10 +116,11 @@ class DanceTicketDAO{
 
         $this->db->query("SELECT description, content, name
                           FROM Content
-                          WHERE EventType = :eventType AND Content IS NOT NULL
+                          WHERE EventType = :eventType AND Content IS NOT NULL AND contentType = :contentType
                         ");
 
         $this->db->bind(':eventType', 1);
+        $this->db->bind(':contentType', 1);
         //Fetching results
         return $this->db->resultSet();
     }

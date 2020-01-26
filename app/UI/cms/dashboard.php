@@ -18,11 +18,15 @@
   <title>Project</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="<?php echo URLROOT; ?>/css/DashboardStyle.css" rel="stylesheet" type="text/css">
+  <script src="https://unpkg.com/tlx/browser/tlx.js"></script>
+  <script src="https://unpkg.com/tlx-chart/browser/tlx-chart.js"></script>
 </head>
 
 <body>
   <header class="header">
-    <a class="logoutlink" href="<?php echo URLROOT; ?>/users/logout" class="link">Logout</a>
+  <form class="dropdown" action="<?php echo URLROOT; ?>/Cms/LogoutUser" method="GET">
+    <input type="submit" value="Logout" class="logoutlink"></input>
+  </form>
   </header>
 
   <nav class="nav">
@@ -32,6 +36,7 @@
     </div>
     <ul class="list list-2 w-list-unstyled">
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/dashboard" class="link">Dashboard</a></li>
+      <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/createuser" class="link">Register User</a></li>
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/editcontent" class="link">Edit Content</a></li>
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/changeprogram" class="link">Change Program</a></li>
     </ul>
@@ -59,12 +64,32 @@
     </div>
     <div class="generatedblocks">
       <div class="graph">
-      <!-- <img src="images/line_graph.png" alt=""> -->
-        <h1 class="weekly">Weekly sales: 0</h1>
-        <h1 class="monthly">Monthly sales: 0</h1>
-        <h1 class="trend">Trend: =</h1>
+      <form id="dropdowns" action="<?php echo URLROOT; ?>/Cms/dashboard" method="POST">
+      <select id="eventGraph" name="eventGraph" data-name="event">
+              <?php
+                foreach($data['Events'] as $event)
+                {
+                echo '<option value=' . $event->event . '>' . $event->event . '</option>';
+                }
+              ?>  
+            </select><input type="submit" value="Search" id="submitGraph">
+              </form>
+      <tlx-chart chart-type="LineChart" 
+        chart-options="${{width:600,height:205}}"
+        chart-columns="${['Element','Percentage']}" 
+        chart-data="${[['<?php echo date("Y-m",strtotime("-2 month")); ?>',<?php echo $data['ChartArray'][2]->totaltickets ?>],['<?php echo date("Y-m",strtotime("-1 month")); ?>',<?php echo $data['ChartArray'][1]->totaltickets ?>],['<?php echo date("Y-m"); ?>',<?php echo $data['ChartArray'][0]->totaltickets ?>]]}">
+      </tlx-chart>
+        <h1 class="weekly"><?php echo 'Weekly sales: ' . $data['WeeklySales']; ?></h1>
+        <h1 class="monthly"><?php echo 'Monthly sales: ' . $data['WeeklySales']; ?></h1>
+        <h1 class="trend"><?php echo 'Trend: ' . $data['Trend']; ?></h1>
       </div>
-      <div class="circlediagram"></div>
+      <div class="circlediagram">
+      <tlx-chart chart-type="PieChart" 
+        chart-options="${{width:459,height:350}}"
+	      chart-columns="${['Element','Percentage']}" 
+	      chart-data="${[['Dance',<?php echo $data['CircleDiagram'][0]->totaltickets ?>],['Jazz',<?php echo $data['CircleDiagram'][1]->totaltickets ?>],['Kids',<?php echo $data['CircleDiagram'][2]->totaltickets ?>], ['Historic',<?php echo $data['CircleDiagram'][3]->totaltickets ?>], ['Food',<?php echo $data['CircleDiagram'][4]->totaltickets ?>]]}">
+      </tlx-chart>
+      </div>
     </div>
     <div class="tableblock">
         <div class="table">

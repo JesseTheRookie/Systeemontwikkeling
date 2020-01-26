@@ -4,6 +4,7 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
+
 <section id="section-hero">
     <article class="content-hero">
       <h1>
