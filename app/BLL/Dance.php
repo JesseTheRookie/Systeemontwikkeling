@@ -89,7 +89,7 @@ class Dance Extends Controller{
             ];
     }
     //Load View
-    $this->ui('events/dance', $data);
+    $this->ui('dance/index', $data);
     }
 
     //'ADD' button will execute this
@@ -160,7 +160,7 @@ class Dance Extends Controller{
             }
 
         //Load View
-        $this->ui('events/dance', $data);
+        $this->ui('dance/index', $data);
         }
     }
 }
