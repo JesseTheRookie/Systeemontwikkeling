@@ -66,7 +66,7 @@ class Dance Extends Controller{
                     $_SESSION['ticketDate'] = $days[0]->startDateTime;
                 }
 
-
+            //Show information whenever a request is done
             $data = [
                 'title' => 'Dance Page',
                 'content' => $content,
@@ -76,6 +76,7 @@ class Dance Extends Controller{
                 'performers' => $performers,
                 'message' => ''
             ];
+
         } else {
             //Init Data
             $data = [
@@ -87,7 +88,6 @@ class Dance Extends Controller{
                 'performers' => ''
             ];
     }
-
     //Load View
     $this->ui('events/dance', $data);
     }
@@ -104,6 +104,7 @@ class Dance Extends Controller{
             // Sanitize GET data
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
+            //Show information that is also been shown on the landing page
             $data = [
                     'title' => 'Dance Page',
                     'content' => $content,
@@ -120,17 +121,28 @@ class Dance Extends Controller{
             //Quantity select has three values; bought tickets, ticketId and event type
             //Exploding it because we need them seperate.
             $info = explode("|", $_GET['quantity']);
-            $eventType = $info[0];
-            $quantity = $info[1];
-            $ticketId = $info[2];
 
-            $oldQuantity = 0;
+            $eventType = $info[0];     // Event type has been added in loop
+            $quantity = $info[1];      // Quantity of the tickets from the loop
+            $ticketId = $info[2];      // Ticket id of the ticket that has been added
+            $oldQuantity = 0;          // In order to keep the old quantity is the same ticket is added
+
+            // Checking for GET request to check for the status.
+            // 1 == Reserved - 0 == Check out for cash
+            // Setting an variable equal to the value and passing it in the $items array
+            if (isset($_GET['reserved']) && $_GET['reserved'] == '1') {
+                $reservedStatus = $_GET['reserved'];
+            } else {
+                $reservedStatus = 0;
+            }
 
             //Creating an array and passing the quantity
             $items = array(
                 'Quantity' => $quantity,
                 'Event' => $eventType,
-                'ticketId' => $ticketId
+                'ticketId' => $ticketId,
+                'comments' => '',
+                'status' => $reservedStatus
             );
 
             //If shoppingcart is not created (so empty), create one.
@@ -152,3 +164,5 @@ class Dance Extends Controller{
         }
     }
 }
+
+

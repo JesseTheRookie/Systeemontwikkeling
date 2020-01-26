@@ -2,7 +2,7 @@
     require APPROOT . '/UI/inc/header.php';
     require APPROOT . '/UI/inc/navigation.php';
 ?>
-
+<?php var_dump($_SESSION['cartItems']); ?>
 <div id="layout-shoppingcart">
     <h1>
         Shopping Cart
@@ -65,6 +65,9 @@
             <th>
                 Total
             </th>
+            <th>
+                Reserving
+            </th>
         </tr>
 
         <?php foreach ($data['items'] as $item): ?>
@@ -96,6 +99,12 @@
                 <td class="totalpp">
                     <?php
                          echo "€ " . $this->calculateTotalPricePerProd($item['ticketId']);
+                     ?>
+                </td>
+
+                <td>
+                    <?php
+                        $this->getStatus($item['ticketId']);
                      ?>
                 </td>
 
