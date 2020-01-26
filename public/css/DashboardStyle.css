@@ -216,9 +216,26 @@ h1 {
   background-color: whitesmoke;
 }
 
+#eventGraph {
+  position: relative;
+  margin-bottom: 25px;
+  left: 10%;
+  top: 15px;
+  width: 125px;
+  height: 30px;
+}
+
+#submitGraph {
+  position: relative;
+  left: 15%;
+  top: 15px;
+  width: 100px;
+  height: 30px;
+}
+
 .weekly {
   position: relative;
-  top: 280px;
+  top: 23px;
   left: 60px;
   width: 150px;
   font-size: 18px;
@@ -227,7 +244,7 @@ h1 {
 
 .trend {
   position: relative;
-  top: 216px;
+  top: -40px;
   left: 460px;
   width: 120px;
   font-size: 18px;
@@ -235,7 +252,7 @@ h1 {
 
 .monthly {
   position: relative;
-  top: 247px;
+  top: -8px;
   left: 260px;
   width: 150px;
   font-size: 18px;
@@ -320,5 +337,20 @@ tr {
   position: relative;
   left: 72%;
   top: -15px;
+}
+
+.logoutlink {
+  position: relative;
+  margin-top: 4px;
+  left: 93%;
+  font-size: 24px;
+  font-family: Lato, sans-serif;
+  background-color: rgba(122,125,125,1);
+  border-color: black;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  color: black;
 }
 

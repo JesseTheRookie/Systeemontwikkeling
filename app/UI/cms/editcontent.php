@@ -13,7 +13,9 @@
 
 <body>
   <header class="header">
-    <a class="logoutlink" href="<?php echo URLROOT; ?>/users/logout" class="link">Logout</a>
+  <form class="dropdown" action="<?php echo URLROOT; ?>/Cms/LogoutUser" method="GET">
+    <input type="submit" value="Logout" class="logoutlink"></input>
+  </form>
   </header>
 
   <nav class="nav">
@@ -23,6 +25,7 @@
     </div>
     <ul class="list list-2 w-list-unstyled">
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/dashboard" class="link">Dashboard</a></li>
+      <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/createuser" class="link">Register User</a></li>
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/editcontent" class="link">Edit Content</a></li>
       <li class="list-item"><a href="<?php echo URLROOT; ?>/cms/changeprogram" class="link">Change Program</a></li>
     </ul>
@@ -30,22 +33,27 @@
 
   <div class="section">
 
-    <h1><u><?php echo $data['title']; ?></u></h1>
-    <h3><?php echo $data['explanation'] ?></h3>
+    <h1 id="title"><u><?php echo $data['title']; ?></u></h1>
+    <h3 id="description"><?php echo $data['explanation'] ?></h3>
 
     <div class="dropdowns">    
-      <form id="dropdowns" action="<?php echo URLROOT; ?>/Cms/editcontent" method="GET">
+      <form class="dropdown" action="<?php echo URLROOT; ?>/Cms/editcontent" method="GET">
         <select id="event" name="event" data-name="event">
         <?php
           foreach($data['Events'] as $event)
           {
-            echo '<option value=' . $event->event . '>' . $event->event . '</option>';
+            echo '<option value=' . $event . '>' . $event . '</option>';
           }
         ?>  
         </select><input type="submit" value="Search" id="submitbutton"></form>
+
+        <a id="previewlink" href="<?php echo URLROOT . '/' . $data['ContentEvent'] . '/index'; ?>" class="link" target="_blank"><?php echo "Preview " . $data['ContentEvent'] . " Page"; ?></a>
     </div>
-      
-  </div>
+    
+    <?php
+      require APPROOT . '/UI/CMS/ContentEvents/content' . $data['ContentEvent'] . '.php';
+    ?>
+
 </body>
 
 </html>
