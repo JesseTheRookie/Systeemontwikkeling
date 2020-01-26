@@ -1,8 +1,8 @@
 <?php
-    require APPROOT . '/ui/inc/header.php';
+    require APPROOT . '/UI/inc/header.php';
 ?>
 <?php
-    require APPROOT . '/ui/inc/navigation.php';
+    require APPROOT . '/UI/inc/navigation.php';
 ?>
 
     <section id="content">
@@ -21,5 +21,5 @@
     </section>
 
 <?php
-	require APPROOT . '/ui/inc/footer.php';
+	require APPROOT . '/UI/inc/footer.php';
 ?>

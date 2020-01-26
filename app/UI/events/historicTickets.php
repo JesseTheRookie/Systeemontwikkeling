@@ -1,8 +1,8 @@
 <?php
-    require APPROOT . '/ui/inc/header.php';
+    require APPROOT . '/UI/inc/header.php';
 ?>
 <?php
-    require APPROOT . '/ui/inc/navigation.php';
+    require APPROOT . '/UI/inc/navigation.php';
 ?>
 
 <h1 id="historicHeader">
@@ -106,5 +106,5 @@
 
 
 <?php
-	require APPROOT . '/ui/inc/footer.php';
+	require APPROOT . '/UI/inc/footer.php';
 ?>

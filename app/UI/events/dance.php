@@ -174,5 +174,5 @@
 </section>
 
 <?php
-    require APPROOT . '/ui/inc/footer.php';
+    require APPROOT . '/UI/inc/footer.php';
 ?>
