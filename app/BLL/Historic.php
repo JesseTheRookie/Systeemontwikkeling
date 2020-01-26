@@ -20,30 +20,7 @@
             ];
 
             $this->ui('events/historic', $data);
-        }
-
-        public function getHistoricLocationByTicketId($ticketId)
-        {
-            return $this->historicDAO->getHistoricLocationByTicketId($ticketId);
-        }
-
-        public function getHistoricTicketFromTicket($ticketId, $reserved, $start, $end){
-            $locations = $this->getHistoricLocationByTicketId($ticketId);
-            if(!empty($locations)){
-                $historicTicket = new HistoricTicketModel();
-
-                $historicTicket->setTicketId($ticketId);
-                $historicTicket->setReserved($reserved);
-                $historicTicket->setStartDateTime($start);
-                $historicTicket->setEndDateTime($end);
-                $historicTicket->setHistoricTicketLocation($locations);
-
-                return $historicTicket;
-            }
-            else{
-                return null;
-            }
-        }
+        }       
 
         // Get all the Historic content from the DAL
         public function getHistoricContent(){
@@ -66,13 +43,13 @@
                     </h2>
                 
                     <p class="contentText">
-                    '.$content[0]->getDescription().'
+                        '.$content[0]->getDescription().'
                     </p>
                 
                     <br>
                 
                     <a href="'.URLROOT.'/historictickets" class="button">
-                    '.$content[0]->getButton().'
+                        '.$content[0]->getButton().'
                     </a>
                 </div>
             ';
