@@ -8,7 +8,7 @@ class UserDAO{
 
     public function register($user){
         // Insert into table user
-        $this->db->query('INSERT INTO user (userName, userLastName, userMail, userPassword, userPhone, userGender, userStreet, userHouse) 
+        $this->db->query('INSERT INTO User (userName, userLastName, userMail, userPassword, userPhone, userGender, userStreet, userHouse)
                           VALUES (:name, :lastName, :email, :password, :phone, :gender, :street, :house)');
         // Bind values
         $this->db->bind(':name', $user->getUserName());
@@ -60,13 +60,13 @@ class UserDAO{
         } else {
             return false;
         }
-    }       
+    }
 
     public function newPassword($token, $password){
         // Prepare query
         $this->db->query('  UPDATE User
-                            INNER JOIN Tokens 
-                                ON User.userMail = Tokens.email 
+                            INNER JOIN Tokens
+                                ON User.userMail = Tokens.email
                             SET User.userPassword = :password
                             WHERE Tokens.token = :token');
 
@@ -85,8 +85,8 @@ class UserDAO{
     public function verificateUser($token){
         // Prepare query
         $this->db->query('  UPDATE User
-                            INNER JOIN Tokens 
-                                ON User.userMail = Tokens.email 
+                            INNER JOIN Tokens
+                                ON User.userMail = Tokens.email
                             SET User.verified = "1"
                             WHERE Tokens.token = :token');
 
@@ -99,5 +99,5 @@ class UserDAO{
         } else {
             die('Query failed to execute!');
         }
-    }    
+    }
 }

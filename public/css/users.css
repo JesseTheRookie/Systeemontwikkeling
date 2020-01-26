@@ -34,8 +34,10 @@
 }
 
 .cleanForm {
-	width: 60%;
+	width: 400px;
 	margin: auto;
+	height: 7900px;
+	display: block;
 }
 
 .inputHeader 
