@@ -4,6 +4,12 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL); ?>
+
 
 <section id="section-dance-header">
     <article class="content-dance-header">
@@ -174,5 +180,5 @@
 </section>
 
 <?php
-    require APPROOT . '/UI/inc/footer.php';
+    require APPROOT . '/ui/inc/footer.php';
 ?>

@@ -4,7 +4,11 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
+<?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL); ?>
 <?php foreach($data['content'] as $c) : ?>
   <section id="section-restaurant-header">
       <article class="content-restaurant-header">
