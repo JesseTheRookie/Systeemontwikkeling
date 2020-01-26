@@ -152,7 +152,7 @@
         <img id="image3" src="./img/dance/afrojack.jpg">
     </article>
   </article>
-</article>
+</section>
 
 <?php
     require APPROOT . '/UI/inc/footer.php';
