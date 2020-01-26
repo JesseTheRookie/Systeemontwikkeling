@@ -14,6 +14,19 @@
 
         $title = 'Dashboard';
 
+        $circleDiagramArray = $this->CmsDao->GetTicketsSoldPerEvent();
+        for($i = 0; $i < count($circleDiagramArray); $i++)
+        {
+          if($circleDiagramArray[$i]->totaltickets == null)
+          {
+            $circleDiagramArray[$i]->totaltickets = 0;
+          }
+        }
+
+        $monthlyTicketsSold = $this->CmsDao->GetTicketsSold30days();
+        $weeklyTicketsSold = $this->CmsDao->GetTicketsSold7days();
+        $trend = $this->CmsDao->GetTicketsSoldTrend();
+
         //haal data op uit model
         $totalRev = $this->CmsDao->GetTotalRev();
         $totalTicketSold = $this->CmsDao->GetTotalTicketsSold();
@@ -34,8 +47,37 @@
         {
           $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
           
-          //haal data uit db per dag en event als op een knop gedrukt wordt
-          $tableResult = $this->GetActivityInfo($_POST['day'], $_POST['event']);
+          if(isset($_POST['day']))
+          {
+            //haal data en columns uit de db per day en event
+            $tableResult = $this->GetActivityInfo($_POST['day'], $_POST['event']);
+            $selectedDate = $_POST['day'];
+            $selectedEvent = $_POST['event'];
+          }
+          else
+          {
+            $tableResult = $this->GetActivityInfo($dates[0]->date, $events[0]->event);
+            $selectedDate = $dates[0]->date;
+            $selectedEvent = $events[0]->event;
+          }
+
+          if(isset($_POST['eventGraph']))
+          {
+            //haal data en columns uit de db per day en event
+            $chartArray = $this->GetChartData($_POST['eventGraph']);
+          }
+          else
+          {
+            $chartArray = $this->GetChartData($events[0]->event);
+          }
+
+          for($i = 0; $i < count($chartArray); $i++)
+          {
+            if($chartArray[$i]->totaltickets == null)
+            {
+              $chartArray[$i]->totaltickets = 0;
+            }
+          }
           
           $data = [
             'title' => $title,
@@ -48,16 +90,29 @@
             'TotalUsers' => $totalUsers->totalusers,
             'Dates' => $dates,
             'Events' => $events,
-            'SelectedDate' => $_POST['day'],
-            'SelectedEvent' => $_POST['event'],
+            'SelectedDate' => $selectedDate,
+            'SelectedEvent' => $selectedEvent,
+            'MonthlySales' => $monthlyTicketsSold->ticketsSold,
+            'WeeklySales' => $weeklyTicketsSold->ticketsSold,
+            'Trend' => $trend,
+            'CircleDiagram' => $circleDiagramArray,
+            'ChartArray' => $chartArray,
             'TableResult' => $tableResult
           ];  
-          
         }
         else
         {
           //eerste keer, haal data van eerste event en eerste dag
           $tableResult = $this->GetActivityInfo($dates[0]->date, $events[0]->event);
+          $chartArray = $this->GetChartData($events[0]->event);
+
+          for($i = 0; $i < count($chartArray); $i++)
+          {
+            if($chartArray[$i]->totaltickets == null)
+            {
+              $chartArray[$i]->totaltickets = 0;
+            }
+          }
 
           $data = [
             'title' => $title,
@@ -72,6 +127,11 @@
             'Events' => $events,
             'SelectedDate' => $dates[0]->date,
             'SelectedEvent' => $events[0]->event,
+            'MonthlySales' => $monthlyTicketsSold->ticketsSold,
+            'WeeklySales' => $weeklyTicketsSold->ticketsSold,
+            'Trend' => $trend,
+            'CircleDiagram' => $circleDiagramArray,
+            'ChartArray' => $chartArray,
             'TableResult' => $tableResult
           ];  
         }
@@ -102,6 +162,31 @@
             break;
           default:
             $result = $this->CmsDao->GetDanceActivityInfo($date);
+        }
+        return $result;
+      }
+
+      public function GetChartData($event)
+      {
+        $result = array();
+
+        switch ($event)
+        {
+          case "dance":
+            $result = $this->CmsDao->GetDanceChartData();
+            break;
+          case "jazz":
+            $result = $this->CmsDao->GetJazzChartData();
+            break;
+          case "food":
+            $result = $this->CmsDao->GetFoodChartData();
+            break;
+          case "historic":
+            $result = $this->CmsDao->GetHistoricChartData();
+            break;
+          case "kids":
+            $result = $this->CmsDao->GetKidsChartData();
+            break;
         }
         return $result;
       }

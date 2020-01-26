@@ -25,6 +25,246 @@
       return $this->DB->single();
     }
 
+    public function GetTotalTicketsSoldDance()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN DanceTicket
+        ON SoldTickets.ticketId = DanceTicket.ticketId");
+
+      return $this->DB->single();
+    }
+
+    public function GetDanceChartData30()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN DanceTicket
+        ON SoldTickets.ticketId = DanceTicket.ticketId
+        WHERE DATE(date) >= date(now()-interval 30 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetDanceChartData60()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN DanceTicket
+        ON SoldTickets.ticketId = DanceTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 30 day) AND DATE(now()-interval 60 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetDanceChartData90()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN DanceTicket
+        ON SoldTickets.ticketId = DanceTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 60 day) AND DATE(now()-interval 90 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetDanceChartData()
+    {
+      return [$this->GetDanceChartData30(), $this->GetDanceChartData60(), $this->GetDanceChartData90()];
+    }
+    
+    public function GetJazzChartData30()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN JazzTicket
+        ON SoldTickets.ticketId = JazzTicket.ticketId
+        WHERE DATE(date) >= date(now()-interval 30 day)");
+        
+      return $this->DB->single();
+    }
+
+    public function GetJazzChartData60()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN JazzTicket
+        ON SoldTickets.ticketId = JazzTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 30 day) AND DATE(now()-interval 60 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetJazzChartData90()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN JazzTicket
+        ON SoldTickets.ticketId = JazzTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 60 day) AND DATE(now()-interval 90 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetJazzChartData()
+    {
+      return [$this->GetJazzChartData30(), $this->GetJazzChartData60(), $this->GetJazzChartData90()];
+    }
+
+    public function GetKidsChartData30()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN KidsTicket
+        ON SoldTickets.ticketId = KidsTicket.ticketId
+        WHERE DATE(date) >= date(now()-interval 30 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetKidsChartData60()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN KidsTicket
+        ON SoldTickets.ticketId = KidsTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 30 day) AND DATE(now()-interval 60 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetKidsChartData90()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN KidsTicket
+        ON SoldTickets.ticketId = KidsTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 60 day) AND DATE(now()-interval 90 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetKidsChartData()
+    {
+      return [$this->GetKidsChartData30(), $this->GetKidsChartData60(), $this->GetKidsChartData90()];
+    }
+
+    public function GetHistoricChartData30()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN HistoricTicket
+        ON SoldTickets.ticketId = HistoricTicket.ticketId
+        WHERE DATE(date) >= date(now()-interval 30 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetHistoricChartData60()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN HistoricTicket
+        ON SoldTickets.ticketId = HistoricTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 30 day) AND DATE(now()-interval 60 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetHistoricChartData90()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN HistoricTicket
+        ON SoldTickets.ticketId = HistoricTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 60 day) AND DATE(now()-interval 90 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetHistoricChartData()
+    {
+      return [$this->GetHistoricChartData30(), $this->GetHistoricChartData60(), $this->GetHistoricChartData90()];
+    }
+
+    public function GetFoodChartData30()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN FoodTicket
+        ON SoldTickets.ticketId = FoodTicket.ticketId
+        WHERE DATE(date) >= date(now()-interval 30 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetFoodChartData60()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN FoodTicket
+        ON SoldTickets.ticketId = FoodTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 30 day) AND DATE(now()-interval 60 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetFoodChartData90()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN FoodTicket
+        ON SoldTickets.ticketId = FoodTicket.ticketId
+        WHERE DATE(date) between DATE(now()-interval 60 day) AND DATE(now()-interval 90 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetFoodChartData()
+    {
+      return [$this->GetFoodChartData30(), $this->GetFoodChartData60(), $this->GetFoodChartData90()];
+    }
+
+    public function GetTotalTicketsSoldJazz()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN JazzTicket
+        ON SoldTickets.ticketId = JazzTicket.ticketId");
+
+      return $this->DB->single();
+    }
+
+    public function GetTotalTicketsSoldKids()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN KidsTicket
+        ON SoldTickets.ticketId = KidsTicket.ticketId");
+
+      return $this->DB->single();
+    }
+
+    public function GetTotalTicketsSoldHistoric()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN HistoricTicket
+        ON SoldTickets.ticketId = HistoricTicket.ticketId");
+
+      return $this->DB->single();
+    }
+
+    public function GetTotalTicketsSoldFood()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS totaltickets
+        FROM SoldTickets
+        INNER JOIN FoodTicket
+        ON SoldTickets.ticketId = FoodTicket.ticketId");
+
+      return $this->DB->single();
+    }
+
     public function GetTotalUniqueUsers()
     {
       $this->DB->query("SELECT COUNT(*) AS totalusers
@@ -67,6 +307,56 @@
         WHERE eventType != 'home' AND eventType != 'venues'");
 
       return $this->DB->resultSet();
+    }
+
+    public function GetTicketsSold30days()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS ticketsSold
+        FROM SoldTickets
+        WHERE DATE(date) >= date(now()-interval 30 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetTicketsSold7days()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS ticketsSold
+        FROM SoldTickets
+        WHERE DATE(date) >= date(now()-interval 7 day)");
+
+      return $this->DB->single();
+    }
+
+    public function GetTicketsSoldTrend()
+    {
+      $this->DB->query("SELECT SUM(quantity) AS ticketsSold
+        FROM SoldTickets
+        WHERE DATE(date) between DATE(now()-interval 30 day) AND DATE(now()-interval 60 day)");
+      
+      $twoMonths = $this->DB->single();
+      $oneMonth = $this->GetTicketsSold30days();
+      
+      if($oneMonth > $twoMonths)
+      {
+        return '>';
+      } 
+      else if($oneMonth < $twoMonths)
+      {
+        return '<';
+      }
+      else 
+      {
+        return '=';
+      }
+    }
+
+    public function GetTicketsSoldPerEvent()
+    {
+      $ticketsPerEvent = 
+      $ticketsPerEvent = [$this->GetTotalTicketsSoldDance(), $this->GetTotalTicketsSoldJazz(), $this->GetTotalTicketsSoldKids(), $this->GetTotalTicketsSoldHistoric(), $this->GetTotalTicketsSoldFood()] ;
+      
+      return $ticketsPerEvent;
+      
     }
 
     public function GetDanceActivityInfo($date)
@@ -139,22 +429,56 @@
 
     public function GetHistoricActivityInfo($date)
     {
-      $this->DB->query("SELECT language AS identifier, TIME(startDateTime) AS identifier2, SUM(quantity) AS soldtickets, SUM(gereserveerd) AS reservedtickets, ticketQuantity AS ticketsleft
+      $this->DB->query("SELECT TIME(startDateTime) AS identifier, SUM(quantity) AS soldtickets, SUM(gereserveerd) AS reservedtickets, SUM(ticketQuantity) AS ticketsleft
         FROM Tickets
         INNER JOIN HistoricTicket
         ON Tickets.ticketId = HistoricTicket.ticketId
         LEFT JOIN HistoricLanguage
-        ON tickets.ticketId = HistoricLanguage.historicTicketId
+        ON HistoricTicket.ticketId = HistoricLanguage.historicTicketId
         LEFT JOIN Language
         ON HistoricLanguage.languageId = Language.languageId
         LEFT JOIN SoldTickets
         ON Tickets.ticketId = SoldTickets.ticketId
-        WHERE date = :date
-        GROUP BY language");
+        WHERE DATE(startDateTime) = :date
+        GROUP BY TIME(startDateTime)");
 
       $this->DB->bind(':date', $date);
 
+      $result = $this->DB->resultSet();
+
+      for($i = 0; $i < count($result); $i++)
+      {
+        $languages = $this->getLanguagesHistoric($date, $result[$i]->identifier);
+        $identifier2='';
+
+        foreach($languages AS $language)
+        {
+          $identifier2 = $identifier2 . ' ' . $language->language;
+        }     
+        $result[$i]->{'identifier2'} = $identifier2;  
+      }
+      return $result;
+    }
+
+    public function getLanguagesHistoric($date, $time)
+    {
+      $this->DB->query("SELECT DISTINCT(language)
+        FROM Tickets
+        INNER JOIN HistoricTicket
+        ON Tickets.ticketId = HistoricTicket.ticketId
+        LEFT JOIN HistoricLanguage
+        ON HistoricTicket.ticketId = HistoricLanguage.historicTicketId
+        LEFT JOIN Language
+        ON HistoricLanguage.languageId = Language.languageId
+        LEFT JOIN SoldTickets
+        ON Tickets.ticketId = SoldTickets.ticketId
+        WHERE DATE(startDateTime) = :date AND TIME(startDateTime) = :time");
+      
+      $this->DB->bind(':date', $date);
+      $this->DB->bind(':time', $time);
+
       return $this->DB->resultSet();
+
     }
 
     public function GetFoodActivityInfo($date)
