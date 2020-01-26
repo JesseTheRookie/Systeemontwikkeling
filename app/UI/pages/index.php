@@ -4,14 +4,6 @@
 <?php
     require APPROOT . '/UI/inc/navigation.php';
 ?>
-<?php
-
-
-print_r($_SESSION);
-
-
-
-?>
 <section id="section-hero">
     <article class="content-hero">
       <h1>
@@ -115,7 +107,7 @@ print_r($_SESSION);
   <article class="content-events">
     <?php foreach($data['events'] as $event) : ?>
     <article class="eventContainer">
-        <a href="<?php echo URLROOT; ?>/ <?php echo $event->getElementName(); ?>">
+        <a href="<?php echo URLROOT; ?>/ <?php echo $event->getName(); ?>">
           <img
               src="<?php echo $event->getContent(); ?>"
               alt="Image event"
@@ -124,7 +116,7 @@ print_r($_SESSION);
           <article class="centered">
             <h4>
                 <?php
-                  echo $event->getElementName();
+                  echo $event->getName();
                 ?>
             </h4>
 

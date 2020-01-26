@@ -21,7 +21,7 @@ class KidsTicketDAO{
       foreach ($kidsContent as $content) {
             $kidsContentModel = new HomeModel();
 
-            $kidsContentModel->setElementName($content->name);
+            $kidsContentModel->setName($content->name);
             $kidsContentModel->setDescription($content->description);
             $kidsContentModel->setContent($content->content);
 
@@ -48,19 +48,11 @@ class KidsTicketDAO{
       $this->db->query("SELECT a.artistName, dt.ticketId
                         FROM PerformanceKids AS d
                         INNER JOIN Artist AS a
-<<<<<<< HEAD
-                        ON k.kidsTicketArtist = a.artistId
-                        INNER JOIN Content as c
-                        ON a.artistName = c.name
-                        INNER JOIN KidsTicket as dt
-                        ON k.kidsTicketId = dt.ticketId
-=======
-                        ON d.kidsArtistId = a.artistId
+                        ON d.kidsTicketArtist = a.artistId
                         INNER JOIN Content as c
                         ON a.artistName = c.name
                         INNER JOIN KidsTicket as dt
                         ON d.kidsTicketId = dt.ticketId
->>>>>>> develop
                        ");
 
       return $this->db->resultSet();
@@ -86,21 +78,14 @@ class KidsTicketDAO{
     public function getKidsTickets($ticketDate){
         $kidsTicketArray = array();
 
-        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, k.kidsTicketsession
+        $this->db->query("SELECT t.ticketId, t.startDateTime, t.endDateTime, t.ticketQuantity, t.price, k.kidsTicketSession
                           FROM Tickets AS t
-<<<<<<< HEAD
                           INNER JOIN KidsTicket AS k
                           ON t.ticketId = k.ticketId
-                          INNER JOIN KidsLocation AS kl
-                          ON t.ticketId = kl.ticketId
-=======
-                          INNER JOIN KidsTicket AS d
-                          ON t.ticketId = d.ticketId
-                          INNER JOIN kidsLocation AS dl
-                          ON d.ticketId = dl.ticketId
->>>>>>> develop
+                          INNER JOIN kidsLocation AS kl
+                          ON k.ticketId = kl.ticketId
                           INNER JOIN Location AS l
-                          ON d.locationId = l.locationId
+                          ON k.locationId = l.locationId
                           WHERE t.startDateTime LIKE '%$ticketDate%'
                           ORDER BY t.price DESC
                         ");
@@ -118,7 +103,7 @@ class KidsTicketDAO{
             $kidsTicketModel->setEndDateTime($kidsTicket->endDateTime);
             $kidsTicketModel->setTicketQuantity($kidsTicket->ticketQuantity);
             $kidsTicketModel->setPrice($kidsTicket->price);
-            $kidsTicketModel->setKidsTicketSession($kidsTicket->kidsTicketsession);
+            $kidsTicketModel->setKidsTicketSession($kidsTicket->kidsTicketSession);
 
             //Add objects into array
             array_push($kidsTicketArray, $kidsTicketModel);

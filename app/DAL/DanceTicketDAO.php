@@ -10,7 +10,7 @@ class DanceTicketDAO{
     public function getDanceContent() {
       $danceContentArray = array();
 
-      $this->db->query("SELECT elementName, description, content
+      $this->db->query("SELECT name, description, content
                         FROM Content as c
                         WHERE contentType = :contentType
                        ");
@@ -22,7 +22,7 @@ class DanceTicketDAO{
       foreach ($danceContent as $content) {
             $danceContentModel = new HomeModel();
 
-            $danceContentModel->setElementName($content->elementName);
+            $danceContentModel->setName($content->name);
             $danceContentModel->setDescription($content->description);
             $danceContentModel->setContent($content->content);
 
@@ -35,8 +35,8 @@ class DanceTicketDAO{
         $danceTicketLocations = array();
 
         $this->db->query("SELECT d.venue, l.stad
-                                FROM DanceLocation AS d 
-                                JOIN Location AS l 
+                                FROM DanceLocation AS d
+                                JOIN Location AS l
                                 ON d.locationId = l.locationId
                                 WHERE d.ticketId = :id");
 
@@ -59,8 +59,8 @@ class DanceTicketDAO{
         $danceTicketArtists = array();
 
         $this->db->query("SELECT a.artistname, a.artistBio, a.artistId
-                                FROM PerformanceDance as p 
-                                JOIN Artist as a 
+                                FROM PerformanceDance as p
+                                JOIN Artist as a
                                 ON p.danceArtistId = a.artistId
                                 WHERE p.ticketId = :id");
 

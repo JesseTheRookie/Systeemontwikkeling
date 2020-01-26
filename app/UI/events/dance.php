@@ -18,14 +18,14 @@
             <article class="content-dance-right">
                 <h3>
                     <?php
-                        echo $c->getElementName();
+                        echo $c->getName();
                     ?>
                 </h3>
 
                 <?php
                   //To create a dynamic link, we need the button names(links), and we need the event name. In order to get the event name, we need to explode 'HAARLEM FOOD' because we only need 'FOOD'
                   $links = explode(", ", $c->getDescription());
-                  $eventName = explode(" ", $c->getElementName());
+                  $eventName = explode(" ", $c->getName());
                 ?>
 
                 <?php foreach($links as $link) : ?>
