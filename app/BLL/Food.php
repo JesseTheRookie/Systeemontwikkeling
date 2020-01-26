@@ -77,5 +77,73 @@ class Food Extends Controller{
         }
       $this->ui('events/food', $data);
     }
+
+    //'ADD' button will execute this
+    public function orderFoodTicket() {
+        $restaurantType = '';
+        $restaurants = $this->foodDal->getRestaurants($restaurantType);
+        $content = $this->foodDal->getFoodContent();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $restaurants = $this->foodDal->getRestaurants($restaurantType);
+
+            // Sanitize GET data
+            $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'title' => 'Restaurant Page',
+                'content' => $content,
+                'restaurants' => $restaurants,
+                'restaurantType' => $restaurantType,
+                'restaurantsError' => ''
+                ];
+
+                $data['restaurantsError'] = "Ticket has been added to your shopping cart, please proceed to checkout.";
+
+            //Quantity select has three values; bought tickets, ticketId and event type
+            //Exploding it because we need them seperate.
+            $info = explode("|", $_GET['time']);
+            $eventType = $info[0];
+            $time = $info[1];
+            $ticketId = $info[2];
+            $guests =  trim($_GET['guests']);
+
+            $oldGuests = 0;
+
+            if (isset($_GET['reserved']) && $_GET['reserved'] == '1') {
+                $reservedStatus = $_GET['reserved'];
+            } else {
+                $reservedStatus = 0;
+            }
+
+            //Creating an array and passing the quantity
+            $items = array(
+                'time' => $time,
+                'Event' => $eventType,
+                'ticketId' => $ticketId,
+                'Quantity' => $guests,
+                'comments' => trim($_GET['comment']),
+                'status' => $reservedStatus
+            );
+
+            //If shoppingcart is not created (so empty), create one.
+            if (!isset($_SESSION['shoppingCart'])) {
+                $_SESSION['shoppingCart'] = array();
+            }
+
+            //If ticketId already exists in shopping cart, add it and do not create a new one
+            if (!array_key_exists($ticketId, $_SESSION['shoppingCart'])) {
+                $_SESSION['shoppingCart'][$ticketId] = $items;
+                $_SESSION['oldQuantity'] = $guests;
+            } else {
+                $oldQuantity = $guests + $oldGuests;
+                $_SESSION['shoppingCart'][$ticketId] = $items;
+            }
+
+        //Load View
+        $this->ui('events/food', $data);
+        }
+    }
 }
+
 

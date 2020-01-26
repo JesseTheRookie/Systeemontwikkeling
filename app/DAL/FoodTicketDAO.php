@@ -10,7 +10,7 @@ class FoodTicketDAO{
     public function getFoodContent() {
       $foodContentArray = array();
 
-      $this->db->query("SELECT elementName, description, content
+      $this->db->query("SELECT name, description, content
                         FROM Content as c
                         WHERE contentType = 3
                       ");
@@ -20,7 +20,7 @@ class FoodTicketDAO{
       foreach ($foodContent as $content) {
             $foodContentModel = new HomeModel();
 
-            $foodContentModel->setElementName($content->elementName);
+            $foodContentModel->setName($content->name);
             $foodContentModel->setDescription($content->description);
             $foodContentModel->setContent($content->content);
 
@@ -65,7 +65,7 @@ class FoodTicketDAO{
     public function getRestaurantNameByTicketId($ticketId){
         $this->db->query("SELECT r.restaurantName
                                 FROM FoodTicket as f
-                                JOIN Restaurant as r 
+                                JOIN Restaurant as r
                                 ON f.restaurantId = r.restaurantId
                                 WHERE f.ticketId = :id");
 
