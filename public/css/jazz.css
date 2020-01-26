@@ -1,0 +1,141 @@
+#mainHeader h1, #mainHeader p, #artiesten p, #artiesten h1, #ticketOverzicht h1, #ticketOverzicht p{
+    color: white;
+}
+h1 span{
+    color: #2CD398;
+}
+#mainHeader{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+#mainHeader section:nth-child(2) h1{
+    font-size: 100px;
+    text-transform: uppercase;
+    margin: 250px 0 0 5%;
+}
+#mainHeader section:nth-child(1){
+    background-color: #551A75;
+    background-image: url("../img/purplebb.png");
+}
+#mainHeader section:nth-child(2){
+    background-color: black;
+    position: relative;
+    display: block;
+}
+#mainHeader section:nth-child(2) p{
+    font-size: 57px;
+    text-transform: capitalize;
+}
+.overlay{
+    position: absolute;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+}
+#mainHeader section:nth-child(2) button{
+    margin: 100px 0 0 5%;
+    margin-left: 5%;
+}
+#artiesten{
+    height: 500px;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%);
+}
+#artiesten article h1{
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 80px;
+    margin: 35px;
+}
+#artiesten article p{
+    font-size: 40px;
+    text-align: center;
+    width: 60%;
+    text-transform: capitalize;
+    margin-left: 20%;
+    padding-top: 30px;
+}
+#artiesten article p span{
+    color:#2CD398;
+}
+#artiesten button{
+    margin: 80px 0 0 45%;
+}
+#allPerformers{
+    display: none;
+}
+#lineup{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+#ticketOverzicht{
+    height: 1000px;
+    width: 100%;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 35%, rgba(85,26,117,1) 100%);
+}
+#ticketOverzicht header{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-bottom: 90px;
+}
+#ticketOverzicht header section h1{
+    text-transform: capitalize;
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+#ticketOverzicht header section p{
+    color: #2CD398;
+    font-size: 20px;
+    font-style: bold;
+    margin-bottom: 15px;
+}
+#ticketOverzicht section{
+    margin: 0 auto;
+}
+#ticketItems article{
+    display: grid;
+    grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
+    margin-top: 20px;
+    margin-left: 10%;
+}
+#ticketItems article p{
+    text-align: center;
+}
+#ticketItems article input[type=text]{
+    width: 50px;
+    height: 35px;
+    text-align: center;
+}
+#ticketItems article div p span{
+    color: #2CD398;
+}
+.smallButton{
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid white;
+    width: 84px;
+    height: 35px;
+    background-color:rgba(0, 0, 0, 0);
+}
+.normalButton{
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid white;
+    width: 135px;
+    height: 42px;
+    background-color:rgba(0, 0, 0, 0);
+}
+.bigButton{
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid white;
+    width: 205px;
+    height: 50px;
+    background-color:rgba(0, 0, 0, 0);
+}
+button:hover{
+    border: 1px solid #2CD398;
+    color: #2CD398;
+    cursor: pointer;
+}
+
